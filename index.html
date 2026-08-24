@@ -160,6 +160,8 @@
         .dym-intro .nri-left { justify-self: end; text-align: right; }
         .dym-intro .nri-right { justify-self: start; text-align: left; }
         .dym-intro .nri-term { display: inline-flex; align-items: center; }
+        .dym-intro.centered-combo { display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .dym-intro.centered-combo .nri-left { display: none; }
         .dym-intro .dym-term { font-family: 'Noto Naskh Arabic', serif; font-size: 34px; font-weight: 700; color: var(--tok-bordo); line-height: 1; position: relative; top: 2px; }
         /* Kelime Çözücü sekmesinde aranan şey desen (حا٭ر): kelime yerine kompakt desen pili */
         .dym-term-pattern { display: none; align-items: center; background: #fff8f9; border: 1.5px solid #fecdd3; border-radius: 999px; direction: rtl; padding: 3px 15px 6px; vertical-align: middle; margin: 0 3px; }
@@ -3368,6 +3370,12 @@
                 const val = (lang === 'tr' && I18N_TR[key] !== undefined) ? I18N_TR[key] : i18nOriginals[key];
                 if (asHtml) el.innerHTML = val; else el.textContent = val;
             });
+            const dymIntro = document.querySelector('.dym-intro');
+            if (dymIntro) {
+                const leftSpan = dymIntro.querySelector('.nri-left');
+                const hasLeftText = !!(leftSpan && leftSpan.textContent.trim().length > 0);
+                dymIntro.classList.toggle('centered-combo', !hasLeftText);
+            }
             document.querySelectorAll('[data-i18n-title]').forEach(el => {
                 const key = el.dataset.i18nTitle;
                 const oKey = key + '__title';
