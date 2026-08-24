@@ -1749,6 +1749,7 @@
             padding: 14px 16px 14px 16px;
             box-shadow: 0 12px 40px -8px rgba(0,0,0,0.18);
             width: max-content;
+            max-height: calc(100vh - 16px); overflow-y: auto;
         }
         .grid-kbd.open { display: flex; }
         /* Topbar: sol = yeşil butonlar, sağ = ⌫ ✕ */
@@ -3099,6 +3100,12 @@
             setTimeout(fitSlogan, 600);
         });
         window.addEventListener('resize', function() { clearTimeout(window._slgT); window._slgT = setTimeout(fitSlogan, 120); });
+        window.addEventListener('resize', function() {
+            clearTimeout(window._gkT);
+            window._gkT = setTimeout(function() {
+                if (typeof activeCharInput !== 'undefined' && activeCharInput && typeof gridKbdPositionNear === 'function') gridKbdPositionNear(activeCharInput);
+            }, 100);
+        });
         function setViewState(s) {
             currentViewState = s;
             if (typeof fitSlogan === 'function') { setTimeout(fitSlogan, 0); setTimeout(fitSlogan, 400); }
@@ -5626,6 +5633,7 @@
         if (!gridKbd.classList.contains('open')) return;
 
         var kw = gridKbd.offsetWidth || 460;
+        var kh = gridKbd.offsetHeight || 340;
 
         // X: engineCore'un ortası (Ara butonu hariç)
         var engineCoreEl = document.getElementById('engineCore');
@@ -5634,11 +5642,22 @@
         var left = Math.max(8, Math.min(centerX - kw / 2, window.innerWidth - kw - 8));
         gridKbd.style.left = left + 'px';
 
-        // Y: search-container'ın içine, zincirlerin (~30px) biraz altına
-        var searchContainer = document.querySelector('.search-container');
-        var yRef = searchContainer ? searchContainer.getBoundingClientRect() : el.getBoundingClientRect();
-        // engineCore'un bottom'u = kutu satırının altı = zincirlerin hizası
-        var topY = xRef.bottom + 2;
+        // Y: kutunun altı, zincirlerin hizasından hemen sonra.
+        // Aşağıda klavyeye yetecek yer yoksa KUTUYU ÜSTE ATMAK YERİNE sayfayı yukarı kaydırıp
+        // arama kutusunu üst tarafa taşıyoruz; kutu her zaman görünür kalır, sadece konumu değişir.
+        var belowY = xRef.bottom + 2;
+        var overflow = (belowY + kh) - (window.innerHeight - 8);
+        if (overflow > 0) {
+            var maxScrollTop = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+            var scrollRoom = Math.max(0, maxScrollTop - window.scrollY);
+            var scrollAmount = Math.min(overflow, scrollRoom);
+            if (scrollAmount > 0) {
+                window.scrollBy(0, scrollAmount);
+                xRef = engineCoreEl ? engineCoreEl.getBoundingClientRect() : el.getBoundingClientRect();
+                belowY = xRef.bottom + 2;
+            }
+        }
+        var topY = Math.max(8, Math.min(belowY, window.innerHeight - kh - 8));
         gridKbd.style.top = topY + 'px';
         gridKbd.style.transform = 'none';
     }
