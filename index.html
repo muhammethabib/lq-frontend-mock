@@ -5643,19 +5643,26 @@
         gridKbd.style.left = left + 'px';
 
         // Y: kutunun altı, zincirlerin hizasından hemen sonra.
-        // Aşağıda klavyeye yetecek yer yoksa KUTUYU ÜSTE ATMAK YERİNE sayfayı yukarı kaydırıp
-        // arama kutusunu üst tarafa taşıyoruz; kutu her zaman görünür kalır, sadece konumu değişir.
+        // Aşağıda klavyeye yetecek yer yoksa: kutuyu ekranın üst kenarına yasla (logo vb. kaybolabilir),
+        // klavye tamamen sığsın. Sayfanın doğal kaydırma alanı yetmezse görünmez bir "spacer" ile
+        // kaydırma alanını genişletiyoruz — fixed konumlu klavye sayfa yüksekliğine katkı yapmadığı için
+        // bu adım olmadan tarayıcı istenen kadar aşağı kaydırmayı reddedebilir.
         var belowY = xRef.bottom + 2;
         var overflow = (belowY + kh) - (window.innerHeight - 8);
         if (overflow > 0) {
-            var maxScrollTop = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-            var scrollRoom = Math.max(0, maxScrollTop - window.scrollY);
-            var scrollAmount = Math.min(overflow, scrollRoom);
-            if (scrollAmount > 0) {
-                window.scrollBy(0, scrollAmount);
-                xRef = engineCoreEl ? engineCoreEl.getBoundingClientRect() : el.getBoundingClientRect();
-                belowY = xRef.bottom + 2;
+            var topMargin = 14;
+            var boxTopAbs = window.scrollY + xRef.top;
+            var desiredScrollY = Math.max(0, boxTopAbs - topMargin);
+            var naturalMax = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+            var spacer = document.getElementById('gridKbdSpacer');
+            if (desiredScrollY > naturalMax && spacer) {
+                spacer.style.height = (desiredScrollY - naturalMax + 24) + 'px';
             }
+            if (desiredScrollY > window.scrollY) {
+                window.scrollTo(0, desiredScrollY);
+            }
+            xRef = engineCoreEl ? engineCoreEl.getBoundingClientRect() : el.getBoundingClientRect();
+            belowY = xRef.bottom + 2;
         }
         var topY = Math.max(8, Math.min(belowY, window.innerHeight - kh - 8));
         gridKbd.style.top = topY + 'px';
@@ -5679,6 +5686,8 @@
     window.gridKbdHide = function() {
         gridKbd.classList.remove('open');
         activeCharInput = null;
+        var _gkSpacer = document.getElementById('gridKbdSpacer');
+        if (_gkSpacer) _gkSpacer.style.height = '0px';
         // Paneli sıfırla
         if (panelBasic) panelBasic.classList.remove('gk-panel-hidden-right');
         if (panelAdv) panelAdv.classList.add('gk-panel-hidden-left');
@@ -10561,5 +10570,6 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeEquival
 </html>
 
 </script>
+<div id="gridKbdSpacer" style="height:0;width:1px;"></div>
 </body>
 </html>
