@@ -939,6 +939,26 @@
         .show-more-btn:hover { background-color: #e2e8f0; color: var(--brand-sapphire); border-color: #cbd5e1; }
 
         .fuzzy-container { width: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 32px; padding-bottom: 8px; margin-top: 20px; position: relative; }
+        .dml-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: #f9eff3;
+            border: 1.5px solid var(--brand-claret);
+            border-radius: 10px;
+            color: var(--brand-claret);
+            font-family: 'Inter', sans-serif;
+            font-size: 15px; font-weight: 700;
+            padding: 12px 24px;
+            cursor: pointer; white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .dml-btn:hover { background: #f3dde6; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(157,28,81,0.12); }
+        .dml-btn:active { transform: scale(0.98); }
+        /* Results sayfalarında: turuncu buton ortada kalır, DML sağ uçta */
+        .fuzzy-container .dml-btn { position: absolute; right: 0; top: 50%; transform: translateY(calc(-50% + 14px)); }
+        .fuzzy-container .dml-btn:hover { transform: translateY(calc(-50% + 13px)); }
+        .fuzzy-container .dml-btn:active { transform: translateY(calc(-50% + 14px)) scale(0.98); }
+        /* No-results sayfasında: tek başına, ortada */
+        .dml-center { display: flex; justify-content: center; margin-top: 28px; }
         .fuzzy-container::before { content: ''; display: block; width: 100%; height: 1px; background: linear-gradient(to right, transparent, #cbd5e1 20%, #cbd5e1 80%, transparent); margin-bottom: 28px; }
         .fuzzy-trigger-btn { display: inline-flex; align-items: center; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 99px; cursor: pointer; transition: all 0.2s; padding: 0; overflow: hidden; }
         .fuzzy-trigger-btn:hover { background: #ffedd5; box-shadow: 0 4px 14px rgba(234,88,12,0.15); transform: translateY(-1px); }
@@ -2133,12 +2153,8 @@
         <li class="did-you-mean-row"><span class="did-you-mean-number">12.</span><div class="did-you-mean-pair"><div class="did-you-mean-side osm"><span class="did-you-mean-value osm" lang="ota" dir="rtl" onclick="this.classList.toggle('selected')">تناظر</span></div><div class="did-you-mean-side lat"><span class="did-you-mean-value lat" onclick="this.classList.toggle('selected')">tenâzur</span></div></div></li>
         </ol>
     </section>
-    <div class="dym-more">
-        <button class="fuzzy-trigger-btn" style="margin:0;">
-            <span class="fuzzy-icon-wrap"><svg class="fuzzy-icon" viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line><path d="M11 8a3 3 0 0 0-3 3" stroke-opacity="0.5"></path></svg></span>
-            <div class="fuzzy-sep"></div>
-            <span class="fuzzy-text"><span class="fuzzy-hint" data-i18n="nrFuzzyHint">Still can't find it?</span><span class="fuzzy-main" data-i18n="nrFuzzyMain">Expand the Search Further</span></span>
-        </button>
+    <div class="dml-center">
+        <button class="dml-btn" data-i18n="dmlBtn">Does My Library Subscribe?</button>
     </div>
 </div>
 </div>
@@ -2315,6 +2331,7 @@
                         <span class="fuzzy-main" data-i18n="fuzzyMain">Scan for Similar Matches</span>
                     </div>
                 </button>
+                <button class="dml-btn" data-i18n="dmlBtn">Does My Library Subscribe?</button>
             </div>
 
         </div>
@@ -2438,6 +2455,7 @@
 <span class="fuzzy-main" data-i18n="fuzzyMain">Scan for Similar Matches</span>
 </div>
 </button>
+<button class="dml-btn" data-i18n="dmlBtn">Does My Library Subscribe?</button>
 </div>
 </div>
 </div>
@@ -3309,6 +3327,7 @@
             /* Sonuç bulunamadı durumu */
             nrIntro: '<span class="nri-left"></span><span class="nri-term"><b class="dym-term dym-term-word">نظر</b><span class="dym-term-pattern"><span class="p-slot">حا</span></span></span><span class="nri-right">için sonuç bulunamadı.</span>',
             dymHeader: 'Şunlardan birini mi aradınız?',
+            dmlBtn: 'Kütüphanem Abone mi?',
             nrFuzzyHint: 'Hâlâ bulamadınız mı?',
             nrFuzzyMain: 'Aramayı Daha da Genişlet',
             /* Satır bölgesi tooltipleri */
