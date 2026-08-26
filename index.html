@@ -3157,6 +3157,10 @@
                 if (sticky) sticky.style.display = 'none';
                 if (typeof temizleMotor === 'function') temizleMotor(false); // henüz arama yok: 5 boş kutu, odak/klavye kapalı
                 setSearchBarTerm('');
+                // Önceki durumdan (ör. Results) kalma odak rengi (kırmızı/mavi çerçeve) burada temizlenir:
+                // Home'da hiçbir taraf gerçekten odaklı değilken renkli çerçeve kalmamalı.
+                if (typeof searchWrapper !== 'undefined' && searchWrapper) searchWrapper.classList.remove('focus-osm', 'focus-lat');
+                try { activeSide = null; } catch (e) {}
             } else if (s === 'noresults') {
                 if (std) std.style.display = 'none';
                 if (kc) kc.style.display = 'none';
