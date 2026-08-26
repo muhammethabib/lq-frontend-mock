@@ -376,13 +376,14 @@
         }
 
         /* ---- TABS + SEARCH FRAME (ported from MainPage_NoResults) ---- */
-        .nav-tabs { display: flex; justify-content: center; margin-bottom: -1px; z-index: 10; width: 100%; position: relative; }
+        .nav-tabs { display: flex; justify-content: center; margin-bottom: 0; z-index: 10; width: 100%; position: relative; }
         /* Ana sayfa: arama bloğu ekranın dikey ortasına insin (draft kompozisyonu) */
         body.vs-home .nav-tabs { margin-top: 16vh; }
         body.vs-home .logo-wrapper, body.vs-home .logo-subtitle { transition: none; }
         .tab { width: 160px; padding: 12px 0; font-size: 15px; cursor: pointer; border: 1px solid transparent; border-bottom: none; border-radius: 12px 12px 0 0; color: var(--text-muted); font-weight: 600; background: rgba(233,239,245,0.6); margin: 0 4px; transition: background 0.2s, color 0.2s; text-align: center; }
         .tab:not(.active):hover { background: #e2e8f0; color: var(--sapphire); }
-        .tab.active { background: var(--white); border: 1px solid var(--border-color); border-bottom: 1px solid var(--white); color: var(--sapphire); position: relative; box-shadow: 0 -4px 10px rgba(0,0,0,0.03); font-weight: 700; cursor: default; clip-path: inset(-14px -14px 0 -14px); }
+        .tab.active { background: var(--white); border: 1px solid var(--border-color); border-bottom: none; color: var(--sapphire); position: relative; box-shadow: 0 -4px 10px rgba(0,0,0,0.03); font-weight: 700; cursor: default; clip-path: inset(-14px -14px -1px -14px); }
+        .tab.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--white); }
 
         .search-container {
             background: var(--white); border: 1px solid var(--border-color); border-radius: 20px;
