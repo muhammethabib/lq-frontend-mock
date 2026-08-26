@@ -392,30 +392,30 @@
         .tab.active { background: var(--white); border: 1px solid var(--border-color); border-bottom: none; color: var(--sapphire); position: relative; box-shadow: 0 -4px 10px rgba(0,0,0,0.03); font-weight: 700; cursor: default; clip-path: inset(-14px -14px -1px -14px); }
         .tab.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--white); }
 
-        /* --- Hesap oluşturma daveti: kenarda yüzen, ana yapıya dokunmayan bir rozet --- */
-        .acct-fab { position: fixed; top: 168px; right: 22px; z-index: 400;
-            display: flex; align-items: center; gap: 10px;
-            background: linear-gradient(135deg, #082567 0%, #0f3a8f 100%); color: #fff;
-            padding: 10px 18px 10px 10px; border-radius: 999px; cursor: pointer; border: none;
-            box-shadow: 0 10px 24px -8px rgba(8,37,103,0.45); transition: transform 0.2s, box-shadow 0.2s; }
-        .acct-fab:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 14px 30px -8px rgba(8,37,103,0.55); }
-        .acct-fab:active { transform: translateY(0) scale(0.98); }
-        body:not(.vs-home) .acct-fab-wrap, body:not(.first-entry) .acct-fab-wrap { display: none !important; }
-        .acct-fab-wrap.dismissed { display: none !important; }
-        .acct-fab-icon { position: relative; flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
-            background: rgba(255,255,255,0.16); display: flex; align-items: center; justify-content: center; }
-        .acct-fab-icon svg { width: 17px; height: 17px; stroke: #fff; fill: none; stroke-width: 2.2; position: relative; z-index: 1; }
-        .acct-fab-icon::after { content: ''; position: absolute; inset: -5px; border-radius: 50%;
-            border: 1.5px solid rgba(255,255,255,0.55); animation: acctFabPulse 2.4s ease-out infinite; }
-        @keyframes acctFabPulse { 0% { transform: scale(0.82); opacity: 0.9; } 70% { transform: scale(1.45); opacity: 0; } 100% { opacity: 0; } }
-        .acct-fab-label { font-size: 12.5px; font-weight: 800; white-space: nowrap; letter-spacing: 0.1px; }
-        .acct-fab-wrap { position: fixed; top: 168px; right: 22px; z-index: 400; }
-        .acct-fab-close { position: absolute; top: -6px; right: -6px; width: 19px; height: 19px; border-radius: 50%;
-            background: #fff; color: #64748b; border: none; font-size: 11px; line-height: 1; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.22);
-            transition: all 0.15s; z-index: 401; }
-        .acct-fab-close:hover { background: #fee2e2; color: #ef4444; }
-        @media (max-width: 900px) { .acct-fab-wrap { display: none !important; } }
+        /* --- Hesap oluşturma daveti: sola yaslı, akış içinde, logo ile sekmeler arasında --- */
+        .acct-invite-row { display: none; align-items: flex-start; gap: 14px; margin: 4px 0 14px; position: relative; width: fit-content; }
+        body.vs-home.first-entry .acct-invite-row { display: flex; }
+        .acct-invite-row.dismissed { display: none !important; }
+        .acct-invite-icon2 { flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; margin-top: 2px;
+            background: var(--brand-sapphire); display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 14px -4px rgba(8,37,103,0.4); }
+        .acct-invite-icon2 svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; }
+        .acct-invite-col2 { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+        .acct-invite-btn2 { display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+            background: var(--brand-sapphire); color: #fff; border: none; border-radius: 11px;
+            padding: 9px 20px; cursor: pointer; transition: all 0.15s; text-align: left; }
+        .acct-invite-btn2:hover { background: #0a3080; transform: translateY(-1px); box-shadow: 0 8px 18px -6px rgba(8,37,103,0.45); }
+        .acct-invite-btn2:active { transform: translateY(0); }
+        .acct-invite-btn2 .l1 { font-size: 14px; font-weight: 800; letter-spacing: 0.1px; }
+        .acct-invite-btn2 .l2 { font-size: 10.5px; font-weight: 500; color: rgba(255,255,255,0.75); }
+        .acct-invite-sub2 { font-size: 11.5px; color: #64748b; max-width: 420px; line-height: 1.4; }
+        .acct-invite-btnwrap { position: relative; display: inline-block; }
+        .acct-invite-close2 { position: absolute; top: -8px; right: -8px; width: 20px; height: 20px; border-radius: 50%;
+            background: #fff; color: #94a3b8; border: 1px solid #e2e8f0; font-size: 11px; line-height: 1; cursor: pointer;
+            display: none; align-items: center; justify-content: center; transition: all 0.15s; }
+        .acct-invite-row:hover .acct-invite-close2 { display: flex; }
+        .acct-invite-close2:hover { background: #fee2e2; color: #ef4444; border-color: #fca5a5; }
+        @media (max-width: 640px) { .acct-invite-sub2 { display: none; } }
 
         .search-container {
             background: var(--white); border: 1px solid var(--border-color); border-radius: 20px;
@@ -2058,13 +2058,6 @@
 </div>
 </div>
 <div class="max-w-[1140px] mx-auto page-container">
-<div class="acct-fab-wrap" id="acctFabWrap">
-<button class="acct-fab" id="acctFab" title="One-time sign-up with your .edu.tr email or campus network — no VPN required." data-i18n-title="acctInviteSub">
-<span class="acct-fab-icon"><svg viewbox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
-<span class="acct-fab-label" data-i18n="acctInviteCta">Create Account</span>
-</button>
-<button class="acct-fab-close" aria-label="Dismiss" onclick="event.stopPropagation(); document.getElementById('acctFabWrap').classList.add('dismissed')">&times;</button>
-</div>
 <div class="lang-switch" id="langSwitch">
     <span class="lang-thumb"></span>
     <button class="lang-btn active" data-lang="en" onclick="toggleLang(this)">EN</button>
@@ -2092,6 +2085,19 @@
 <span class="v3-badge">3.0 <small>Beta</small></span>
 </div>
 <div class="logo-subtitle" data-i18n="subtitle">OTTOMAN TURKISH LINGUISTIC ANALYSIS TOOL</div>
+</div>
+<div class="acct-invite-row" id="acctInviteRow">
+<div class="acct-invite-icon2"><svg viewbox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+<div class="acct-invite-col2">
+<div class="acct-invite-btnwrap">
+<button class="acct-invite-btn2">
+<span class="l1" data-i18n="acctInviteCta">Create Free Account</span>
+<span class="l2" data-i18n="acctInviteCta2">(One-time sign-up with .edu.tr)</span>
+</button>
+<button class="acct-invite-close2" aria-label="Dismiss" onclick="document.getElementById('acctInviteRow').classList.add('dismissed')">&times;</button>
+</div>
+<div class="acct-invite-sub2" data-i18n="acctInviteSub">Sign up once with your university email for unlimited off-campus access — no VPN needed.</div>
+</div>
 </div>
 <div class="nav-tabs">
 <div class="tab" onclick="switchMode(0)" data-i18n="tabDecoder">Word Decoder</div>
@@ -3238,8 +3244,9 @@
         const I18N_TR = {
             subtitle: 'OSMANLI TÜRKÇESİ DİLBİLİMSEL ANALİZ ARACI',
             acctInviteTitle: 'Sınırsız erişim için ücretsiz hesap oluşturun',
-            acctInviteSub: '.edu.tr e-postanızla ya da kampüs ağınızla tek seferlik kayıt — VPN gerekmez.',
-            acctInviteCta: 'Hesap Oluştur',
+            acctInviteSub: 'Kurum dışından VPN\'siz sınırsız erişim için üniversite e-postanızla bir kez kaydolun.',
+            acctInviteCta: 'Ücretsiz Hesap Oluştur',
+            acctInviteCta2: '(.edu.tr ile tek seferlik kayıt)',
             tabDecoder: 'Kelime Çözücü',
             tabSearch: 'Ara',
             btnSearch: 'Ara',
