@@ -5649,13 +5649,14 @@
     var activeCharInput = null; // şu an odaklanan char-input
 
     /* ---- Konumlandır ---- */
+    var _kbdScrollLocked = false; // bu açılış oturumunda sayfa kaydırma kararı zaten verildiyse tekrar tetiklenmez
     function gridKbdPositionNear(el) {
         if (!gridKbd.classList.contains('open')) return;
 
         var kw = gridKbd.offsetWidth || 460;
         var kh = gridKbd.offsetHeight || 340;
 
-        // X: engineCore'un ortası (Ara butonu hariç)
+        // X: engineCore'un ortası (Ara butonu hariç) — kutular arası her geçişte güncellenir
         var engineCoreEl = document.getElementById('engineCore');
         var xRef = engineCoreEl ? engineCoreEl.getBoundingClientRect() : el.getBoundingClientRect();
         var centerX = xRef.left + xRef.width / 2;
@@ -5663,26 +5664,29 @@
         gridKbd.style.left = left + 'px';
 
         // Y: kutunun altı, zincirlerin hizasından hemen sonra.
-        // Aşağıda klavyeye yetecek yer yoksa: kutuyu ekranın üst kenarına yasla (logo vb. kaybolabilir),
-        // klavye tamamen sığsın. Sayfanın doğal kaydırma alanı yetmezse görünmez bir "spacer" ile
-        // kaydırma alanını genişletiyoruz — fixed konumlu klavye sayfa yüksekliğine katkı yapmadığı için
-        // bu adım olmadan tarayıcı istenen kadar aşağı kaydırmayı reddedebilir.
+        // Sayfa kaydırma/spacer kararı SADECE bu oturumun İLK konumlandırmasında verilir.
+        // Aynı satırdaki başka bir kutuya geçişte (klavye zaten açıkken) bu karar TEKRARLANMAZ;
+        // aksi halde her geçişte yeniden ölçüp yeniden kaydırmak, küçük geometri farklarıyla
+        // birikimli/salınımlı bir kaymaya (kutu 1 iyi, 2 kötü, 3 iyi, 4 kötü gibi) yol açabiliyordu.
         var belowY = xRef.bottom + 2;
-        var overflow = (belowY + kh) - (window.innerHeight - 8);
-        if (overflow > 0) {
-            var topMargin = 14;
-            var boxTopAbs = window.scrollY + xRef.top;
-            var desiredScrollY = Math.max(0, boxTopAbs - topMargin);
-            var naturalMax = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-            var spacer = document.getElementById('gridKbdSpacer');
-            if (desiredScrollY > naturalMax && spacer) {
-                spacer.style.height = (desiredScrollY - naturalMax + 24) + 'px';
+        if (!_kbdScrollLocked) {
+            var overflow = (belowY + kh) - (window.innerHeight - 8);
+            if (overflow > 0) {
+                var topMargin = 14;
+                var boxTopAbs = window.scrollY + xRef.top;
+                var desiredScrollY = Math.max(0, boxTopAbs - topMargin);
+                var naturalMax = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+                var spacer = document.getElementById('gridKbdSpacer');
+                if (desiredScrollY > naturalMax && spacer) {
+                    spacer.style.height = (desiredScrollY - naturalMax + 24) + 'px';
+                }
+                if (desiredScrollY > window.scrollY) {
+                    window.scrollTo(0, desiredScrollY);
+                }
+                xRef = engineCoreEl ? engineCoreEl.getBoundingClientRect() : el.getBoundingClientRect();
+                belowY = xRef.bottom + 2;
             }
-            if (desiredScrollY > window.scrollY) {
-                window.scrollTo(0, desiredScrollY);
-            }
-            xRef = engineCoreEl ? engineCoreEl.getBoundingClientRect() : el.getBoundingClientRect();
-            belowY = xRef.bottom + 2;
+            _kbdScrollLocked = true;
         }
         var topY = Math.max(8, Math.min(belowY, window.innerHeight - kh - 8));
         gridKbd.style.top = topY + 'px';
@@ -5706,6 +5710,7 @@
     window.gridKbdHide = function() {
         gridKbd.classList.remove('open');
         activeCharInput = null;
+        _kbdScrollLocked = false;
         var _gkSpacer = document.getElementById('gridKbdSpacer');
         if (_gkSpacer) _gkSpacer.style.height = '0px';
         // Paneli sıfırla
