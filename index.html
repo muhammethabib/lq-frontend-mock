@@ -395,15 +395,14 @@
         /* --- Hesap oluşturma daveti (New Visitor > Home): çerçevesiz, sola yaslı, logo ile sekmeler arasında dikey ortalı --- */
         .acct-invite-row { display: none; position: absolute; left: 0; top: 0; z-index: 5; }
         body.vs-home.first-entry .acct-invite-row { display: block; }
-        .acct-invite-row.dismissed { display: none !important; }
         .acct-card { position: relative; width: fit-content; font-family: 'Inter', sans-serif;
-            display: flex; flex-direction: column; align-items: center; }
+            display: flex; flex-direction: column; align-items: flex-start; }
         .acct-btnwrap { position: relative; display: inline-block; }
-        .acct-btn { display: inline-flex; align-items: center; gap: 14px; padding: 11px 28px 11px 11px;
-            background: var(--brand-sapphire); color: #fff; border: none; border-radius: 15px; cursor: pointer;
+        .acct-btn { display: inline-flex; align-items: center; gap: 14px; padding: 14px 24px;
+            background: #123a8c; color: #fff; border: none; border-radius: 15px; cursor: pointer;
             font-family: inherit; text-align: left; white-space: nowrap;
-            box-shadow: 0 9px 20px -8px rgba(8,37,103,0.65); transition: background .15s, transform .15s, box-shadow .15s; }
-        .acct-btn:hover { background: #0c3486; transform: translateY(-1px); box-shadow: 0 12px 22px -8px rgba(8,37,103,0.65); }
+            transition: background .15s, transform .15s; }
+        .acct-btn:hover { background: #164aad; transform: translateY(-1px); }
         .acct-btn:active { transform: translateY(0); }
         .acct-btn-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.16);
             display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -415,22 +414,16 @@
         .acct-access { display: flex; align-items: center; gap: 11px; margin-top: 11px; padding-left: 4px; }
         .acct-uni { position: relative; flex-shrink: 0; width: 32px; height: 32px; border-radius: 10px;
             background: #eef3ff; border: 1px solid #d9e3fb; display: flex; align-items: center; justify-content: center; }
-        .acct-uni svg.uni { width: 18px; height: 18px; stroke: var(--brand-sapphire); fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+        .acct-uni svg.uni { width: 18px; height: 18px; stroke: #123a8c; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
         .acct-uni-lock { position: absolute; right: -7px; bottom: -7px; width: 17px; height: 17px; border-radius: 50%;
             background: #10b981; border: 2px solid #f1f5f9; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 2px 5px rgba(16,185,129,0.4); transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
         .acct-uni-lock svg { width: 9px; height: 9px; stroke: #fff; fill: none; stroke-width: 2.6; stroke-linecap: round; }
         .acct-card:hover .acct-uni-lock { transform: translateY(-3px) rotate(-10deg); }
         .acct-access-text { font-size: 12.5px; color: #475569; line-height: 1.35; white-space: nowrap; }
-        .acct-access-text .hl { color: var(--brand-sapphire); font-weight: 600; }
-        .acct-close { position: absolute; top: -7px; right: -7px; width: 20px; height: 20px; border-radius: 50%;
-            background: #fff; color: #94a3b8; border: 1px solid #e2e8f0; font-size: 11px; line-height: 1; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .15s, background .15s, color .15s;
-            box-shadow: 0 2px 6px rgba(15,23,42,0.12); }
-        .acct-card:hover .acct-close { opacity: 1; }
-        .acct-close:hover { background: #fee2e2; color: #ef4444; border-color: #fca5a5; }
+        .acct-access-text .hl { color: #123a8c; font-weight: 600; }
         @media (max-height: 760px) {
-            .acct-btn { padding: 9px 22px 9px 9px; gap: 12px; }
+            .acct-btn { padding: 11px 20px; gap: 12px; }
             .acct-btn-avatar { width: 32px; height: 32px; }
             .acct-btn-text .l1 { font-size: 14px; }
             .acct-access { margin-top: 8px; }
@@ -2114,14 +2107,13 @@
 <span class="acct-btn-avatar"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
 <span class="acct-btn-text"><span class="l1" data-i18n="acctInviteCta">Create Account</span><span class="l2" data-i18n="acctInviteCta2" data-i18n-html="1">One-time sign-up with <b>.edu.tr</b></span></span>
 </button>
-<button class="acct-close" aria-label="Dismiss" onclick="document.getElementById('acctInviteRow').classList.add('dismissed')">&times;</button>
 </div>
 <div class="acct-access">
 <span class="acct-uni">
 <svg class="uni" viewBox="0 0 24 24"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg>
 <span class="acct-uni-lock"><svg viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg></span>
 </span>
-<div class="acct-access-text" data-i18n="acctInviteSub" data-i18n-html="1">Unlimited off-campus access — <span class="hl">no VPN needed.</span></div>
+<div class="acct-access-text" data-i18n="acctInviteSub" data-i18n-html="1">Off-campus, <span class="hl">VPN-free</span> unlimited access.</div>
 </div>
 </div>
 </div>
