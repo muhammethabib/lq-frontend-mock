@@ -946,29 +946,30 @@
             border-radius: 10px;
             color: var(--brand-claret);
             font-family: 'Inter', sans-serif;
-            font-size: 15px; font-weight: 700;
-            padding: 12px 24px;
+            font-size: 13px; font-weight: 700;
+            padding: 10px 20px;
             cursor: pointer; white-space: nowrap;
             transition: all 0.2s;
         }
         .dml-btn:hover { background: #f3dde6; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(157,28,81,0.12); }
         .dml-btn:active { transform: scale(0.98); }
-        /* Results sayfalarında: turuncu buton ortada kalır, DML sağ uçta */
-        .fuzzy-container .dml-btn { position: absolute; right: 0; top: 50%; transform: translateY(calc(-50% + 14px)); }
-        .fuzzy-container .dml-btn:hover { transform: translateY(calc(-50% + 13px)); }
-        .fuzzy-container .dml-btn:active { transform: translateY(calc(-50% + 14px)) scale(0.98); }
+        /* Results sayfalarında: turuncu buton ortada, DML aynı satırda sağ uçta; ikisi aynı dikey eksende */
+        .fuzzy-row { position: relative; width: 100%; display: flex; justify-content: center; align-items: center; }
+        .fuzzy-row .dml-btn { position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+        .fuzzy-row .dml-btn:hover { transform: translateY(calc(-50% - 1px)); }
+        .fuzzy-row .dml-btn:active { transform: translateY(-50%) scale(0.98); }
         /* No-results sayfasında: tek başına, ortada */
         .dml-center { display: flex; justify-content: center; margin-top: 28px; }
         .fuzzy-container::before { content: ''; display: block; width: 100%; height: 1px; background: linear-gradient(to right, transparent, #cbd5e1 20%, #cbd5e1 80%, transparent); margin-bottom: 28px; }
-        .fuzzy-trigger-btn { display: inline-flex; align-items: center; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 99px; cursor: pointer; transition: all 0.2s; padding: 0; overflow: hidden; }
-        .fuzzy-trigger-btn:hover { background: #ffedd5; box-shadow: 0 4px 14px rgba(234,88,12,0.15); transform: translateY(-1px); }
+        .fuzzy-trigger-btn { display: inline-flex; align-items: center; background: #ffedd5; border: 1px solid #fdba74; border-radius: 99px; cursor: pointer; transition: all 0.2s; padding: 0; overflow: hidden; }
+        .fuzzy-trigger-btn:hover { background: #fed7aa; box-shadow: 0 4px 14px rgba(234,88,12,0.22); transform: translateY(-1px); }
         .fuzzy-trigger-btn:active { transform: scale(0.98); }
-        .fuzzy-icon-wrap { padding: 12px 14px 12px 18px; color: #ea580c; opacity: 0.6; display: flex; align-items: center; }
+        .fuzzy-icon-wrap { padding: 12px 14px 12px 18px; color: #ea580c; opacity: 0.9; display: flex; align-items: center; }
         .fuzzy-icon { width: 26px; height: 26px; stroke: currentColor; stroke-width: 2; fill: none; display: block; }
-        .fuzzy-sep { width: 1px; height: 40px; background: #fed7aa; flex-shrink: 0; }
+        .fuzzy-sep { width: 1px; height: 40px; background: #fdba74; flex-shrink: 0; }
         .fuzzy-text { padding: 12px 20px; display: flex; flex-direction: column; align-items: center; gap: 3px; }
-        .fuzzy-hint { font-size: 10px; color: #c2410c; font-weight: 500; opacity: 0.75; }
-        .fuzzy-main { font-size: 12px; font-weight: 700; color: #ea580c; }
+        .fuzzy-hint { font-size: 10px; color: #c2410c; font-weight: 500; opacity: 0.9; }
+        .fuzzy-main { font-size: 12px; font-weight: 700; color: #c2410c; }
 
         .word-box { display: inline-flex; align-items: center; justify-content: center; min-width: 90px; padding: 6px 16px; border-radius: 8px; font-weight: 600; border: 1px solid transparent; cursor: pointer; transition: all 0.2s; position: relative; }
         .word-box:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 500 !important; }
@@ -2323,6 +2324,7 @@
             </div>
 
             <div class="fuzzy-container">
+                <div class="fuzzy-row">
                 <button class="fuzzy-trigger-btn" onclick="kcScanFuzzy()">
                     <span class="fuzzy-icon-wrap"><svg class="fuzzy-icon" viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line><path d="M11 8a3 3 0 0 0-3 3" stroke-opacity="0.5"></path></svg></span>
                     <div class="fuzzy-sep"></div>
@@ -2332,6 +2334,7 @@
                     </div>
                 </button>
                 <button class="dml-btn" data-i18n="dmlBtn">Does My Library Subscribe?</button>
+                </div>
             </div>
 
         </div>
@@ -2447,6 +2450,7 @@
 <div class="section-content" id="content-partial"></div>
 </div>
 <div class="fuzzy-container">
+<div class="fuzzy-row">
 <button class="fuzzy-trigger-btn">
 <span class="fuzzy-icon-wrap"><svg class="fuzzy-icon" viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line><path d="M11 8a3 3 0 0 0-3 3" stroke-opacity="0.5"></path></svg></span>
 <div class="fuzzy-sep"></div>
@@ -2456,6 +2460,7 @@
 </div>
 </button>
 <button class="dml-btn" data-i18n="dmlBtn">Does My Library Subscribe?</button>
+</div>
 </div>
 </div>
 </div>
@@ -3327,7 +3332,7 @@
             /* Sonuç bulunamadı durumu */
             nrIntro: '<span class="nri-left"></span><span class="nri-term"><b class="dym-term dym-term-word">نظر</b><span class="dym-term-pattern"><span class="p-slot">حا</span></span></span><span class="nri-right">için sonuç bulunamadı.</span>',
             dymHeader: 'Şunlardan birini mi aradınız?',
-            dmlBtn: 'Kütüphanem Abone mi?',
+            dmlBtn: 'Kütüphaneniz LexiQamus\'a üye mi?',
             nrFuzzyHint: 'Hâlâ bulamadınız mı?',
             nrFuzzyMain: 'Aramayı Daha da Genişlet',
             /* Satır bölgesi tooltipleri */
