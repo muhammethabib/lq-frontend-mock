@@ -393,7 +393,7 @@
         .tab.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--white); }
 
         /* --- Hesap oluşturma daveti: sola yaslı, akış içinde, logo ile sekmeler arasında --- */
-        .acct-invite-row { display: none; align-items: flex-start; gap: 14px; margin: 4px 0 14px; position: relative; width: fit-content; }
+        .acct-invite-row { display: none; align-items: flex-start; gap: 14px; position: absolute; left: 0; top: 0; width: fit-content; z-index: 5; }
         body.vs-home.first-entry .acct-invite-row { display: flex; }
         .acct-invite-row.dismissed { display: none !important; }
         .acct-invite-icon2 { flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; margin-top: 2px;
@@ -3173,12 +3173,28 @@
             var sp = (target - natural) / (len - 1);
             el.style.letterSpacing = sp + 'px';
         }
+        function positionAcctInvite() {
+            var row = document.getElementById('acctInviteRow');
+            if (!row) return;
+            if (!document.body.classList.contains('vs-home') || !document.body.classList.contains('first-entry')) return;
+            var subtitle = document.querySelector('.logo-subtitle');
+            var tabs = document.querySelector('.nav-tabs');
+            var container = document.querySelector('.page-container');
+            if (!subtitle || !tabs || !container) return;
+            var sRect = subtitle.getBoundingClientRect();
+            var tRect = tabs.getBoundingClientRect();
+            var cRect = container.getBoundingClientRect();
+            // Logonun altı ile sekmelerin üstü arasındaki boşluğun tam ortasına, akıştan bağımsız (absolute) hizala
+            var midY = (sRect.bottom + tRect.top) / 2;
+            row.style.top = (midY - cRect.top - row.offsetHeight / 2) + 'px';
+        }
         window.addEventListener('load', function() {
             fitSlogan();
-            if (document.fonts && document.fonts.ready) document.fonts.ready.then(function() { fitSlogan(); });
-            setTimeout(fitSlogan, 600);
+            positionAcctInvite();
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(function() { fitSlogan(); positionAcctInvite(); });
+            setTimeout(function() { fitSlogan(); positionAcctInvite(); }, 600);
         });
-        window.addEventListener('resize', function() { clearTimeout(window._slgT); window._slgT = setTimeout(fitSlogan, 120); });
+        window.addEventListener('resize', function() { clearTimeout(window._slgT); window._slgT = setTimeout(function() { fitSlogan(); positionAcctInvite(); }, 120); });
         window.addEventListener('resize', function() {
             clearTimeout(window._gkT);
             window._gkT = setTimeout(function() {
@@ -3191,6 +3207,7 @@
             currentViewState = s;
             document.body.classList.toggle('first-entry', isFirstEntry);
             if (typeof fitSlogan === 'function') { setTimeout(fitSlogan, 0); setTimeout(fitSlogan, 400); }
+            if (typeof positionAcctInvite === 'function') { setTimeout(positionAcctInvite, 0); setTimeout(positionAcctInvite, 400); }
             document.querySelectorAll('.dev-state-btn').forEach(b => {
                 const isParentBtn = b.classList.contains('dev-state-parent');
                 b.classList.toggle('active', isParentBtn ? isFirstEntry : b.dataset.state === sRaw);
@@ -3494,6 +3511,8 @@
                     if (c && c._allData) renderSection(id, c._allData, sectionShownCount[id] || 25, true);
                 });
             }
+            // Dil değişince metin genişliği/satır sayısı değişebilir; hesap daveti konumunu yeniden hesapla
+            if (typeof positionAcctInvite === 'function') { setTimeout(positionAcctInvite, 0); setTimeout(positionAcctInvite, 200); }
         }
 
 
