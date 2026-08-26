@@ -396,20 +396,21 @@
         .acct-invite-row { display: none; position: absolute; left: 0; top: 0; z-index: 5; }
         body.vs-home.first-entry .acct-invite-row { display: block; }
         .acct-invite-row.dismissed { display: none !important; }
-        .acct-card { position: relative; width: fit-content; font-family: 'Inter', sans-serif; }
+        .acct-card { position: relative; width: fit-content; font-family: 'Inter', sans-serif;
+            display: flex; flex-direction: column; align-items: center; }
         .acct-btnwrap { position: relative; display: inline-block; }
-        .acct-btn { display: inline-flex; align-items: center; gap: 12px; padding: 7px 20px 7px 8px;
-            background: var(--brand-sapphire); color: #fff; border: none; border-radius: 13px; cursor: pointer;
+        .acct-btn { display: inline-flex; align-items: center; gap: 14px; padding: 11px 28px 11px 11px;
+            background: var(--brand-sapphire); color: #fff; border: none; border-radius: 15px; cursor: pointer;
             font-family: inherit; text-align: left; white-space: nowrap;
-            box-shadow: 0 8px 18px -8px rgba(8,37,103,0.65); transition: background .15s, transform .15s, box-shadow .15s; }
+            box-shadow: 0 9px 20px -8px rgba(8,37,103,0.65); transition: background .15s, transform .15s, box-shadow .15s; }
         .acct-btn:hover { background: #0c3486; transform: translateY(-1px); box-shadow: 0 12px 22px -8px rgba(8,37,103,0.65); }
         .acct-btn:active { transform: translateY(0); }
-        .acct-btn-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.16);
+        .acct-btn-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.16);
             display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .acct-btn-avatar svg { width: 17px; height: 17px; stroke: #fff; fill: none; stroke-width: 2.2; }
+        .acct-btn-avatar svg { width: 19px; height: 19px; stroke: #fff; fill: none; stroke-width: 2.2; }
         .acct-btn-text { display: flex; flex-direction: column; gap: 2px; }
-        .acct-btn-text .l1 { font-size: 14px; font-weight: 700; letter-spacing: 0.1px; line-height: 1.15; }
-        .acct-btn-text .l2 { font-size: 10.5px; font-weight: 500; color: rgba(255,255,255,0.72); line-height: 1.15; }
+        .acct-btn-text .l1 { font-size: 15px; font-weight: 700; letter-spacing: 0.1px; line-height: 1.2; }
+        .acct-btn-text .l2 { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.72); line-height: 1.2; }
         .acct-btn-text .l2 b { color: #fff; font-weight: 700; }
         .acct-access { display: flex; align-items: center; gap: 11px; margin-top: 11px; padding-left: 4px; }
         .acct-uni { position: relative; flex-shrink: 0; width: 32px; height: 32px; border-radius: 10px;
@@ -429,9 +430,9 @@
         .acct-card:hover .acct-close { opacity: 1; }
         .acct-close:hover { background: #fee2e2; color: #ef4444; border-color: #fca5a5; }
         @media (max-height: 760px) {
-            .acct-btn { padding: 6px 18px 6px 7px; }
-            .acct-btn-avatar { width: 29px; height: 29px; }
-            .acct-btn-text .l1 { font-size: 13.5px; }
+            .acct-btn { padding: 9px 22px 9px 9px; gap: 12px; }
+            .acct-btn-avatar { width: 32px; height: 32px; }
+            .acct-btn-text .l1 { font-size: 14px; }
             .acct-access { margin-top: 8px; }
             .acct-uni { width: 28px; height: 28px; }
             .acct-access-text { font-size: 12px; }
