@@ -385,30 +385,30 @@
         .tab.active { background: var(--white); border: 1px solid var(--border-color); border-bottom: none; color: var(--sapphire); position: relative; box-shadow: 0 -4px 10px rgba(0,0,0,0.03); font-weight: 700; cursor: default; clip-path: inset(-14px -14px -1px -14px); }
         .tab.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--white); }
 
-        /* --- Hesap oluşturma daveti (yalnızca Home görünümünde) --- */
-        .acct-invite { display: flex; align-items: center; gap: 16px; width: 100%; box-sizing: border-box;
-            background: linear-gradient(135deg, #082567 0%, #0f3a8f 100%); border-radius: 16px;
-            padding: 16px 22px; margin-bottom: 18px; position: relative; overflow: hidden;
-            box-shadow: 0 12px 28px -10px rgba(8,37,103,0.35); }
-        .acct-invite::before { content: ''; position: absolute; top: -40%; right: -8%; width: 220px; height: 220px;
-            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%); pointer-events: none; }
-        body:not(.vs-home) .acct-invite { display: none !important; }
-        .acct-invite-icon { flex-shrink: 0; width: 38px; height: 38px; border-radius: 10px;
-            background: rgba(255,255,255,0.14); display: flex; align-items: center; justify-content: center; }
-        .acct-invite-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
-        .acct-invite-text { flex: 1; min-width: 0; }
-        .acct-invite-title { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.1px; }
-        .acct-invite-sub { font-size: 12px; color: rgba(255,255,255,0.72); margin-top: 2px; }
-        .acct-invite-cta { flex-shrink: 0; background: #fff; color: var(--brand-sapphire); font-size: 13px; font-weight: 800;
-            padding: 10px 20px; border-radius: 9px; white-space: nowrap; cursor: pointer; transition: all 0.15s;
-            border: none; }
-        .acct-invite-cta:hover { background: #eef2ff; transform: translateY(-1px); box-shadow: 0 6px 14px rgba(0,0,0,0.18); }
-        .acct-invite-close { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; border: none;
-            background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.75); cursor: pointer;
-            display: flex; align-items: center; justify-content: center; transition: all 0.15s; font-size: 15px; line-height: 1; }
-        .acct-invite-close:hover { background: rgba(255,255,255,0.22); color: #fff; }
-        .acct-invite.dismissed { display: none !important; }
-        @media (max-width: 720px) { .acct-invite-sub { display: none; } }
+        /* --- Hesap oluşturma daveti: kenarda yüzen, ana yapıya dokunmayan bir rozet --- */
+        .acct-fab { position: fixed; top: 168px; right: 22px; z-index: 400;
+            display: flex; align-items: center; gap: 10px;
+            background: linear-gradient(135deg, #082567 0%, #0f3a8f 100%); color: #fff;
+            padding: 10px 18px 10px 10px; border-radius: 999px; cursor: pointer; border: none;
+            box-shadow: 0 10px 24px -8px rgba(8,37,103,0.45); transition: transform 0.2s, box-shadow 0.2s; }
+        .acct-fab:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 14px 30px -8px rgba(8,37,103,0.55); }
+        .acct-fab:active { transform: translateY(0) scale(0.98); }
+        body:not(.vs-home) .acct-fab-wrap { display: none !important; }
+        .acct-fab-wrap.dismissed { display: none !important; }
+        .acct-fab-icon { position: relative; flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+            background: rgba(255,255,255,0.16); display: flex; align-items: center; justify-content: center; }
+        .acct-fab-icon svg { width: 17px; height: 17px; stroke: #fff; fill: none; stroke-width: 2.2; position: relative; z-index: 1; }
+        .acct-fab-icon::after { content: ''; position: absolute; inset: -5px; border-radius: 50%;
+            border: 1.5px solid rgba(255,255,255,0.55); animation: acctFabPulse 2.4s ease-out infinite; }
+        @keyframes acctFabPulse { 0% { transform: scale(0.82); opacity: 0.9; } 70% { transform: scale(1.45); opacity: 0; } 100% { opacity: 0; } }
+        .acct-fab-label { font-size: 12.5px; font-weight: 800; white-space: nowrap; letter-spacing: 0.1px; }
+        .acct-fab-wrap { position: fixed; top: 168px; right: 22px; z-index: 400; }
+        .acct-fab-close { position: absolute; top: -6px; right: -6px; width: 19px; height: 19px; border-radius: 50%;
+            background: #fff; color: #64748b; border: none; font-size: 11px; line-height: 1; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.22);
+            transition: all 0.15s; z-index: 401; }
+        .acct-fab-close:hover { background: #fee2e2; color: #ef4444; }
+        @media (max-width: 900px) { .acct-fab-wrap { display: none !important; } }
 
         .search-container {
             background: var(--white); border: 1px solid var(--border-color); border-radius: 20px;
@@ -2041,6 +2041,13 @@
 </div>
 </div>
 <div class="max-w-[1140px] mx-auto page-container">
+<div class="acct-fab-wrap" id="acctFabWrap">
+<button class="acct-fab" id="acctFab" title="One-time sign-up with your .edu.tr email or campus network — no VPN required." data-i18n-title="acctInviteSub">
+<span class="acct-fab-icon"><svg viewbox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+<span class="acct-fab-label" data-i18n="acctInviteCta">Create Account</span>
+</button>
+<button class="acct-fab-close" aria-label="Dismiss" onclick="event.stopPropagation(); document.getElementById('acctFabWrap').classList.add('dismissed')">&times;</button>
+</div>
 <div class="lang-switch" id="langSwitch">
     <span class="lang-thumb"></span>
     <button class="lang-btn active" data-lang="en" onclick="toggleLang(this)">EN</button>
@@ -2072,15 +2079,6 @@
 <div class="nav-tabs">
 <div class="tab" onclick="switchMode(0)" data-i18n="tabDecoder">Word Decoder</div>
 <div class="tab active" onclick="switchMode(1)" data-i18n="tabSearch">Search</div>
-</div>
-<div class="acct-invite" id="acctInvite">
-<div class="acct-invite-icon"><svg viewbox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
-<div class="acct-invite-text">
-<div class="acct-invite-title" data-i18n="acctInviteTitle">Create a free account for unlimited access</div>
-<div class="acct-invite-sub" data-i18n="acctInviteSub">One-time sign-up with your .edu.tr email or campus network &mdash; no VPN required.</div>
-</div>
-<button class="acct-invite-cta" data-i18n="acctInviteCta">Create Account</button>
-<button class="acct-invite-close" aria-label="Dismiss" onclick="document.getElementById('acctInvite').classList.add('dismissed')">&times;</button>
 </div>
 <div class="search-container">
 <div class="search-mode mode-engine" id="mode-0">
