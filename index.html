@@ -5346,7 +5346,11 @@
     function osmKbdShow() {
         var r = searchWrapper.getBoundingClientRect();
         var kbd = document.getElementById('osmKbd');
-        kbd.style.left = (r.left + r.width/2) + 'px';
+        // Klavyeyi kutunun tam ortasına değil, yanıp sönen imlecin durduğu Osmanlıca
+        // yazı alanının ortasına hizala: soldaki OTT/ENG anahtarı (100px) bu alana dahil değil,
+        // sağda da 20px iç boşluk var; imleç bu aralığın sağ ucunda başlar.
+        var textAreaLeft = r.left + 100, textAreaRight = r.right - 20;
+        kbd.style.left = ((textAreaLeft + textAreaRight) / 2) + 'px';
         kbd.style.top  = (r.bottom + 10) + 'px';
         kbd.style.transform = 'translateX(-50%)';
         kbd.classList.add('open');
