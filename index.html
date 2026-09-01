@@ -109,7 +109,7 @@
         .branding-area { display: flex; flex-direction: column; align-items: center; margin-bottom: 14px; }
         .logo-row { position: relative; display: flex; align-items: flex-end; justify-content: center; margin-bottom: 10px; }
         .logo-wrapper { display: inline-block; width: 220px; max-width: 100%; user-select: none; cursor: pointer; overflow: visible; }
-        .v3-badge { position: absolute; left: calc(95.3% + 4px); bottom: 3px; top: auto; font-size: 8.5px; font-weight: 800; letter-spacing: 0.4px; color: #fff; background: var(--brand-claret); padding: 2.5px 7px; border-radius: 999px; margin: 0; white-space: nowrap; }
+        .v3-badge { position: absolute; left: calc(95.3% + 4px); bottom: 3px; top: auto; font-size: 8.5px; font-weight: 800; letter-spacing: 0.4px; color: #fff; background: #671615; padding: 2.5px 7px; border-radius: 999px; margin: 0; white-space: nowrap; }
         .v3-badge small { font-size: 9px; font-weight: 700; letter-spacing: 1px; opacity: 0.85; margin-left: 2px; text-transform: uppercase; }
         /* Sağ üst yardımcı alan: dil anahtarının solunda, eski (kararlı) sürüme dönüş */
         .legacy-link { position: absolute; top: 0; right: 88px; z-index: 200; height: 30px; box-sizing: border-box;
@@ -1069,6 +1069,13 @@
 
         .word-box { display: inline-flex; align-items: center; justify-content: center; min-width: 90px; padding: 6px 16px; border-radius: 8px; font-weight: 600; border: 1px solid transparent; cursor: pointer; transition: all 0.2s; position: relative; }
         .word-box:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 500 !important; }
+        /* Aranan terimi sonuç kelimesinin içinde işaretle (TEMEL bölümü hariç) */
+        .term-hl { color: inherit; background: none; text-decoration: underline;
+            text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-skip-ink: none;
+            text-decoration-color: rgba(157,28,81,0.42); transition: text-decoration-color .15s; }
+        .latin-box .term-hl { text-underline-offset: 2.5px; text-decoration-color: rgba(8,37,103,0.38); }
+        .osm-box:hover .term-hl { text-decoration-color: rgba(157,28,81,0.75); }
+        .latin-box:hover .term-hl { text-decoration-color: rgba(8,37,103,0.7); }
         .osm-box { color: var(--brand-red); background: #fff1f2; border-color: #ffe4e6; font-size: 22px; line-height: 1.8; padding-bottom: 12px; }
         .osm-box:hover { background-color: var(--hover-bg-red) !important; color: var(--brand-red) !important; border-color: var(--hover-border-red) !important; }
         .osm-box.selected { background-color: var(--brand-red) !important; color: var(--white) !important; border-color: var(--brand-red) !important; transform: translateY(0) !important; box-shadow: none !important; }
@@ -2071,7 +2078,7 @@
 <div class="sticky-nav-inner">
 <span class="sticky-label" data-i18n="jumpTo">Jump To:</span>
 <div class="quick-link has-tooltip" data-target="sec-exact" onclick="scrollToSection('sec-exact', this)">
-                <span data-i18n="qlExact">Exact Matches</span>
+                <span data-i18n="qlExact">Base</span>
                 <div class="custom-tooltip-source">
 <span class="tooltip-desc" data-i18n="hidExactb">Results matching the search term exactly</span>
 <span class="tooltip-example" data-i18n="exExactb" data-i18n-html="1">Ex: <b>kalem</b> → <b>kalem</b></span>
@@ -2355,7 +2362,7 @@
                 <div class="section-header desc-open">
                     <div class="header-clickable hover-blue" onclick="toggleKCSection('content-kc-exact', this.closest('.section-header'))">
                         <div class="header-chevron"><svg fill="none" height="6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 10 6" width="10"><path d="M1 1L5 5L9 1"></path></svg></div>
-                        <div class="header-title" data-i18n="secExact">EXACT MATCHES</div>
+                        <div class="header-title" data-i18n="secExact">BASE</div>
                     </div>
                     <span class="header-count">9</span>
                     <span class="header-desc-pill"><span class="header-inline-desc"><span class="hid-text" data-i18n="hidExact">Results matching the search term exactly</span><span class="hid-example" data-i18n="exExact" data-i18n-html="1">Ex: <b>kalem</b> → <b>kalem</b></span></span>
@@ -3352,14 +3359,14 @@
             expandLabel: 'Aramayı Genişlet',
             soundsLike: 'Benzer Sesler',
             jumpTo: 'GİT:',
-            qlExact: 'Tam Eşleşmeler',
+            qlExact: 'Temel',
             qlInflected: 'Çekimli Biçimler',
             qlLexInfl: 'Sözl. Çekimli Formlar',
             qlDerived: 'Türemiş Biçimler',
             qlPhrases: 'İbareler',
             qlCompounds: 'Birleşik Kelimeler',
             qlPartial: 'Kısmi Eşleşmeler',
-            secExact: 'TAM EŞLEŞMELER',
+            secExact: 'TEMEL',
             secInflected: 'ÇEKİMLİ BİÇİMLER',
             secLexInfl: 'SÖZLÜKSELLEŞMİŞ ÇEKİMLİ FORMLAR',
             secDerived: 'TÜREMİŞ BİÇİMLER',
@@ -3403,7 +3410,7 @@
             catEntry: 'Maddebaşı',
             catSubentry: 'Alt Madde',
             catRelated: 'İlişkili',
-            chipExact: 'Tam Eşleşmeler',
+            chipExact: 'Temel',
             chipInflected: 'Çekimli Biçimler',
             chipLexInfl: 'Sözlükselleşmiş Çekimli Formlar',
             chipDerived: 'Türemiş Biçimler',
@@ -3958,6 +3965,13 @@
                 headerAccent.style.backgroundColor = "var(--theme-lat-primary)";
             }
             mainTitle.textContent = word;
+            // Yazılış değişince işaretlemeler de yeni terime göre yenilensin
+            if (typeof renderSection === 'function' && typeof sectionShownCount !== 'undefined') {
+                ['content-exact','content-inflected','content-lexicalized-inflected','content-derived','content-compounds','content-phrases','content-partial'].forEach(id => {
+                    const c = document.getElementById(id);
+                    if (c && c._allData) renderSection(id, c._allData, sectionShownCount[id] || 25, true);
+                });
+            }
         }
 
         function toggleHeaderDesc(btn, evt) {
@@ -4742,7 +4756,7 @@
             {name:"Related",  i18n:"catRelated",  type:"wordtype", value:"RELATED",  desc:"Important concepts and expressions associated with the entry."}
         ];
         const matchCategories = [
-            {name:"Exact Matches",       i18n:"chipExact",     type:"section", value:"sec-exact",     desc:"Results that exactly match the search term."},
+            {name:"Base",       i18n:"chipExact",     type:"section", value:"sec-exact",     desc:"Results that exactly match the search term."},
             {name:"Inflected Forms",     i18n:"chipInflected", type:"section", value:"sec-inflected", desc:"Inflected forms of the searched word."},
             {name:"Lexicalized Inflected Forms", i18n:"chipLexInfl", type:"section", value:"sec-lexicalized-inflected", desc:"Inflected forms given a distinct meaning of their own in the dictionary."},
             {name:"Derived Forms",       i18n:"chipDerived",   type:"section", value:"sec-derived",   desc:"Words derived from the searched word."},
@@ -4838,7 +4852,26 @@
             const key = ty === 'ENTRY' ? 'catEntry' : (ty === 'SUBENTRY' ? 'catSubentry' : 'catRelated');
             return t(key, ty);
         }
-        function renderRow(w, isHidden) {
+        // Sonuç kelimesinin içinde aranan terimin geçtiği yeri işaretler.
+        // hl=false ise (TEMEL bölümü) kelimenin tamamı zaten terim olduğu için işaretlenmez.
+        function activeTerms() {
+            const row = document.querySelector('#stdResultSurface .spelling-btns-row');
+            if (!row) return {osm: '', lat: ''};
+            const pick = (cls) => {
+                const el = row.querySelector('.script-btn.' + cls + '.active') || row.querySelector('.script-btn.' + cls);
+                return el ? el.textContent.trim() : '';
+            };
+            return {osm: pick('osm'), lat: pick('lat')};
+        }
+        function hlTerm(text, script, hl) {
+            if (!hl || !text) return text;
+            const term = (activeTerms()[script] || '').trim();
+            if (!term || String(text).trim() === term) return text;
+            const i = String(text).indexOf(term);
+            if (i < 0) return text;
+            return String(text).slice(0, i) + '<span class="term-hl">' + term + '</span>' + String(text).slice(i + term.length);
+        }
+        function renderRow(w, isHidden, hl) {
             const hoverClass = `hover-${w.type.toLowerCase()}`;
             const styleClass = w.type === 'ENTRY' ? 'style-ENTRY' : (w.type === 'SUBENTRY' ? 'style-SUBENTRY' : 'style-RELATED');
             const hiddenClass = isHidden ? 'hidden-row' : '';
@@ -4889,9 +4922,9 @@
                 <div class="col-span-5 zone-interactive ${hoverClass} flex items-center py-4">
                     <div class="flex-1 px-4">
                         <div class="word-pair-unit">
-                            <div class="col-osm"><div class="word-box osm-box ottoman text-2xl pb-1 relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${w.r_o2}</div></div>
+                            <div class="col-osm"><div class="word-box osm-box ottoman text-2xl pb-1 relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_o2, 'osm', hl)}</div></div>
                             <div class="col-gap"></div>
-                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${w.r_l2}</div></div>
+                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_l2, 'lat', hl)}</div></div>
                         </div>
                     </div>
                     <div class="w-[100px] flex justify-center items-center"><span class="category-pill shadow-sm">${catLabel(w.type)}</span></div>
@@ -4903,12 +4936,12 @@
                         <div class="word-pair-unit">
                             <div class="col-osm">
                                 <div class="word-box osm-box ottoman text-2xl pb-1 relative group ${misspelledClass}" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" ${clickEvent}>
-                                    ${w.e_o2}
+                                    ${hlTerm(w.e_o2, 'osm', hl)}
                                     ${misspelledHTML}
                                 </div>
                             </div>
                             <div class="col-gap"></div>
-                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" onclick="handleWordClick(event, this)">${w.e_l2}</div></div>
+                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.e_l2, 'lat', hl)}</div></div>
                         </div>
                     </div>
                     <div class="col-span-3 flex justify-end items-center pl-4">
@@ -4959,9 +4992,10 @@
             }
 
             let html = '';
+            const hl = sectionId !== 'content-exact';   // TEMEL bölümünde işaretleme yok
             sortedData.forEach((w, index) => {
                 const isHidden = index >= shown;
-                html += renderRow(w, isHidden);
+                html += renderRow(w, isHidden, hl);
             });
 
             if (shown < total) {
