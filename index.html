@@ -1070,12 +1070,11 @@
         .word-box { display: inline-flex; align-items: center; justify-content: center; min-width: 90px; padding: 6px 16px; border-radius: 8px; font-weight: 600; border: 1px solid transparent; cursor: pointer; transition: all 0.2s; position: relative; }
         .word-box:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 500 !important; }
         /* Aranan terimi sonuç kelimesinin içinde işaretle (TEMEL bölümü hariç) */
-        .term-hl { color: inherit; background: none; text-decoration: underline;
-            text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-skip-ink: none;
-            text-decoration-color: rgba(157,28,81,0.42); transition: text-decoration-color .15s; }
-        .latin-box .term-hl { text-underline-offset: 2.5px; text-decoration-color: rgba(8,37,103,0.38); }
-        .osm-box:hover .term-hl { text-decoration-color: rgba(157,28,81,0.75); }
-        .latin-box:hover .term-hl { text-decoration-color: rgba(8,37,103,0.7); }
+        /* Aranan terim: yalnızca renkle vurgulanır — çizgi/zemin yok, iki alfabede de aynı renk */
+        .term-hl { color: #f43626; background: none; text-decoration: none; }
+        .latin-box .term-hl { color: #f43626; }
+        /* Vurgu yalnızca sol sütunda (sonuç); sağdaki madde başında hiç yok */
+        .col-span-7 .term-hl { color: inherit !important; }
         .osm-box { color: var(--brand-red); background: #fff1f2; border-color: #ffe4e6; font-size: 22px; line-height: 1.8; padding-bottom: 12px; }
         .osm-box:hover { background-color: var(--hover-bg-red) !important; color: var(--brand-red) !important; border-color: var(--hover-border-red) !important; }
         .osm-box.selected { background-color: var(--brand-red) !important; color: var(--white) !important; border-color: var(--brand-red) !important; transform: translateY(0) !important; box-shadow: none !important; }
@@ -1099,6 +1098,18 @@
         .typo-img-frame img { height: 60px; width: auto; display: block; transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); } 
         .typo-text { color: #cbd5e1; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-align: center; display: flex; flex-direction: column; gap: 3px; line-height: 1.2; background-color: #334155; border-radius: 8px; width: 100%; padding: 4px 0; margin-top: 2px; pointer-events: none; }
 
+        /* Sağ sütun (madde başı): dolgusuz kutu + bir tık küçük punto — hiyerarşi buradan geliyor */
+        .col-span-7 .word-box { background: transparent !important; border-color: transparent !important; box-shadow: none !important; min-width: 82px; padding: 5px 14px; }
+        .col-span-7 .osm-box { font-size: 20px !important; }
+        .col-span-7 .latin-box { font-size: 14px !important; color: #475569 !important; }
+        .col-span-7 .word-box:hover { transform: translateY(-1px) scale(1.02); background: rgba(15,23,42,0.035) !important; box-shadow: none !important; }
+        .col-span-7 .osm-box:hover { color: var(--brand-red) !important; }
+        .col-span-7 .word-box.misspelled { background: transparent !important; }
+        /* Sonuç ile madde başı aynıysa sağ tarafta kelimeyi tekrarlamak yerine kısa bir not */
+        .row-card.same-as-entry .col-span-7 .word-pair-unit { display: none; }
+        .row-card.same-as-entry .col-span-7 .self-note { display: inline-flex; }
+        .self-note { display: none; align-items: center; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+            letter-spacing: .2px; color: #94a3b8; padding: 4px 12px; border-radius: 999px; background: #f8fafc; border: 1px solid #f1f5f9; }
         .word-pair-unit { display: flex; align-items: stretch; justify-content: center; width: 100%; }
         .col-osm { width: 48%; display: flex; justify-content: flex-end; }
         .col-lat { width: 48%; display: flex; justify-content: flex-start; }
@@ -2671,7 +2682,7 @@
 <footer class="popup-footer">
 <div class="nav-container">
 <div class="nav-indicator" id="navIndicator"></div>
-<button class="nav-item active" onclick="updateNav(this, 0, 'Entry')"><span class="nav-text">Entry</span><span class="nav-divider"></span><span class="nav-count">5</span></button>
+<button class="nav-item active" onclick="updateNav(this, 0, 'Headword')"><span class="nav-text">Headword</span><span class="nav-divider"></span><span class="nav-count">5</span></button>
 <button class="nav-item" onclick="updateNav(this, 1, 'Column')"><span class="nav-text">Column</span><span class="nav-divider"></span><span class="nav-count">3</span></button>
 <button class="nav-item" onclick="updateNav(this, 2, 'Page')"><span class="nav-text">Page</span><span class="nav-divider"></span><span class="nav-count">1417</span></button>
 </div>
@@ -3407,7 +3418,7 @@
             colEntry: 'Madde Başı',
             colDict: 'Sözlük',
             pageLabel: 'Sayfa',
-            catEntry: 'Maddebaşı',
+            catEntry: 'Madde Başı',
             catSubentry: 'Alt Madde',
             catRelated: 'İlişkili',
             chipExact: 'Temel',
@@ -3590,6 +3601,7 @@
                     if (c && c._allData) renderSection(id, c._allData, sectionShownCount[id] || 25, true);
                 });
             }
+            if (window.lqDecorateSelfNotes) setTimeout(window.lqDecorateSelfNotes, 60);
             // Dil değişince metin genişliği/satır sayısı değişebilir; hesap daveti konumunu yeniden hesapla
             if (typeof positionAcctInvite === 'function') { setTimeout(positionAcctInvite, 0); setTimeout(positionAcctInvite, 200); }
         }
@@ -4668,7 +4680,7 @@
         function openVisualPopup(e) {
             e.stopPropagation(); 
             const activeItem = document.querySelector('.lex-popup .nav-item.active');
-            if(activeItem) updateNav(activeItem, 0, 'Entry');
+            if(activeItem) updateNav(activeItem, 0, 'Headword');
             document.getElementById('visualDictModal').classList.add('active');
         }
 
@@ -4678,7 +4690,7 @@
             }
         }
 
-        let currentNavType = 'Entry'; 
+        let currentNavType = 'Headword'; 
         function updateNav(element, index, type) {
             document.querySelectorAll('.lex-popup .nav-item').forEach(item => item.classList.remove('active'));
             element.classList.add('active');
@@ -4751,8 +4763,8 @@
 
         /* --- FILTERS DROPDOWN (source design logic, wired to this page's filtering) --- */
         const wordCategories = [
-            {name:"Entry",    i18n:"catEntry",    type:"wordtype", value:"ENTRY",    desc:"Results that appear as standalone dictionary entries."},
-            {name:"Subentry", i18n:"catSubentry", type:"wordtype", value:"SUBENTRY", desc:"Words or expressions listed under another entry but having a distinct meaning of their own."},
+            {name:"Headword",    i18n:"catEntry",    type:"wordtype", value:"ENTRY",    desc:"Results that appear as standalone dictionary headwords."},
+            {name:"Sub-entry", i18n:"catSubentry", type:"wordtype", value:"SUBENTRY", desc:"Words or expressions listed under another headword but having a distinct meaning of their own."},
             {name:"Related",  i18n:"catRelated",  type:"wordtype", value:"RELATED",  desc:"Important concepts and expressions associated with the entry."}
         ];
         const matchCategories = [
@@ -4850,7 +4862,8 @@
         
         function catLabel(ty) {
             const key = ty === 'ENTRY' ? 'catEntry' : (ty === 'SUBENTRY' ? 'catSubentry' : 'catRelated');
-            return t(key, ty);
+            const en = ty === 'ENTRY' ? 'HEADWORD' : (ty === 'SUBENTRY' ? 'SUB-ENTRY' : 'RELATED');
+            return t(key, en);
         }
         // Sonuç kelimesinin içinde aranan terimin geçtiği yeri işaretler.
         // hl=false ise (TEMEL bölümü) kelimenin tamamı zaten terim olduğu için işaretlenmez.
@@ -4936,12 +4949,12 @@
                         <div class="word-pair-unit">
                             <div class="col-osm">
                                 <div class="word-box osm-box ottoman text-2xl pb-1 relative group ${misspelledClass}" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" ${clickEvent}>
-                                    ${hlTerm(w.e_o2, 'osm', hl)}
+                                    ${w.e_o2}
                                     ${misspelledHTML}
                                 </div>
                             </div>
                             <div class="col-gap"></div>
-                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.e_l2, 'lat', hl)}</div></div>
+                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" onclick="handleWordClick(event, this)">${w.e_l2}</div></div>
                         </div>
                     </div>
                     <div class="col-span-3 flex justify-end items-center pl-4">
@@ -6854,6 +6867,38 @@
             if (document.body.classList.contains('first-entry') && typeof currentViewState !== 'undefined') window.lqTourOnState(currentViewState, true);
         });
 
+
+        // Sonuç ile madde başı birebir aynıysa, sağ tarafta kelimeyi tekrarlamak yerine kısa bir not göster
+        (function(){
+            function label() { return (typeof currentLang !== 'undefined' && currentLang === 'tr') ? 'Maddenin kendisi' : 'The headword itself'; }
+            function decorate() {
+                document.querySelectorAll('#stdResultSurface .row-card').forEach(function(row){
+                    var left = row.querySelector('.col-span-5 .osm-box');
+                    var cell = row.querySelector('.col-span-7 .col-span-6');
+                    var right = cell && cell.querySelector('.osm-box');
+                    if (!left || !right || !cell) return;
+                    var same = (left.dataset.wbOsm || '').trim() === (right.dataset.wbOsm || '').trim();
+                    row.classList.toggle('same-as-entry', same);
+                    var n = cell.querySelector('.self-note');
+                    if (!same) { if (n) n.remove(); return; }
+                    if (n) { n.textContent = label(); return; }
+                    n = document.createElement('div');
+                    n.className = 'self-note';
+                    n.textContent = label();
+                    cell.appendChild(n);
+                });
+            }
+            window.lqDecorateSelfNotes = decorate;
+            var obs = new MutationObserver(function(){ decorate(); });
+            document.addEventListener('DOMContentLoaded', function(){
+                ['content-exact','content-inflected','content-lexicalized-inflected','content-derived','content-compounds','content-phrases','content-partial'].forEach(function(id){
+                    var c = document.getElementById(id); if (c) obs.observe(c, {childList: true});
+                });
+                setTimeout(decorate, 300); setTimeout(decorate, 1200);
+            });
+            window.addEventListener('load', function(){ setTimeout(decorate, 400); });
+        })();
+
 </script>
 <!-- COGNATES POPUP OVERLAY -->
 <div id="cognatesOverlay" onclick="if(event.target===this) closeCognates()">
@@ -8140,8 +8185,8 @@
     <footer class="popup-footer">
         <div class="nav-container">
             <div id="navIndicator" class="nav-indicator"></div>
-            <button class="nav-item active" onclick="updateNav(this, 0, 'Entry')">
-                <span class="nav-text">Entry</span><span class="nav-divider"></span><span class="nav-count">5</span>
+            <button class="nav-item active" onclick="updateNav(this, 0, 'Headword')">
+                <span class="nav-text">Headword</span><span class="nav-divider"></span><span class="nav-count">5</span>
             </button>
             <button class="nav-item" onclick="updateNav(this, 1, 'Column')">
                 <span class="nav-text">Column</span><span class="nav-divider"></span><span class="nav-count">3</span>
@@ -8718,7 +8763,7 @@
     })();
 
     // --- NAV LOGIC ---
-    let currentNavType = 'Entry';
+    let currentNavType = 'Headword';
     function updateNav(element, index, type) {
         document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         element.classList.add('active');
@@ -8729,7 +8774,7 @@
         indicator.style.transform = `translateX(${index * itemWidth}px)`;
         currentNavType = type;
     }
-    window.onload = () => updateNav(document.querySelector('.nav-item.active'), 0, 'Entry');
+    window.onload = () => updateNav(document.querySelector('.nav-item.active'), 0, 'Headword');
 
     // --- NAV TOOLTIP LOGIC ---
     const navTooltip = document.getElementById('globalNavTooltip');
@@ -10086,7 +10131,7 @@
     <footer class="popup-footer">
         <div class="nav-container">
             <div id="navIndicator" class="nav-indicator"></div>
-            <button class="nav-item active" onclick="updateNav(this, 0, 'Entry')">
+            <button class="nav-item active" onclick="updateNav(this, 0, 'Headword')">
                 <span class="nav-text">Madde</span><span class="nav-divider"></span><span class="nav-count">5</span>
             </button>
             <button class="nav-item" onclick="updateNav(this, 1, 'Column')">
@@ -10664,7 +10709,7 @@
     })();
 
     // --- NAV LOGIC ---
-    let currentNavType = 'Entry';
+    let currentNavType = 'Headword';
     function updateNav(element, index, type) {
         document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         element.classList.add('active');
@@ -10675,7 +10720,7 @@
         indicator.style.transform = `translateX(${index * itemWidth}px)`;
         currentNavType = type;
     }
-    window.onload = () => updateNav(document.querySelector('.nav-item.active'), 0, 'Entry');
+    window.onload = () => updateNav(document.querySelector('.nav-item.active'), 0, 'Headword');
 
     // --- NAV TOOLTIP LOGIC ---
     const navTooltip = document.getElementById('globalNavTooltip');
