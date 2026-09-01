@@ -1121,7 +1121,8 @@
         /* Aranan terimi sonuç kelimesinin içinde işaretle (TEMEL bölümü hariç) */
         /* Aranan terim: yalnızca renkle vurgulanır — çizgi/zemin yok, iki alfabede de aynı renk */
         .term-hl { color: #f43626; background: none; text-decoration: none; }
-        .latin-box .term-hl { color: #f43626; }
+        /* Latin kutularda vurgu yok: kelime tek renk kalır */
+        .latin-box .term-hl { color: inherit; }
         /* Vurgu yalnızca sol sütunda (sonuç); sağdaki madde başında hiç yok */
         .col-span-7 .term-hl { color: inherit !important; }
         .osm-box { color: var(--brand-red); background: #fff1f2; border-color: #ffe4e6; font-size: 22px; line-height: 1.8; padding-bottom: 12px; }
