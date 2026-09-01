@@ -135,7 +135,7 @@
 
         /* ==== DEV STATE SWITCHER (üç durum: ana sayfa / sonuç yok / sonuçlar) ==== */
         .dev-state-bar {
-            position: fixed; top: 14px; left: 16px; z-index: 6000;
+            position: fixed; bottom: 14px; left: 16px; z-index: 6000;
             display: flex; flex-direction: column; align-items: stretch; gap: 2px;
             background: #fff; border: 1px solid #e2e8f0; border-radius: 14px;
             padding: 4px; box-shadow: 0 2px 10px rgba(15,23,42,0.08);
@@ -159,7 +159,7 @@
         .dev-state-item { position: relative; }
         .dev-state-item .dev-state-parent { display: flex; align-items: center; justify-content: space-between; gap: 6px; width: 100%; }
         .dev-state-item .dev-state-parent .dsp-arrow { font-size: 10px; opacity: 0.55; }
-        .dev-submenu { position: absolute; left: calc(100% + 6px); top: -4px; display: none; flex-direction: column;
+        .dev-submenu { position: absolute; left: calc(100% + 6px); bottom: -4px; top: auto; display: none; flex-direction: column;
             gap: 2px; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 4px;
             box-shadow: 0 6px 20px rgba(15,23,42,0.14); min-width: 132px; z-index: 6001; }
         .dev-state-item:hover .dev-submenu { display: flex; }
@@ -438,6 +438,55 @@
             .acct-access-text { font-size: 12px; }
         }
 
+        /* ===================== YAN MENÜ (hamburger) ===================== */
+        .menu-btn { position: absolute; top: 0; left: 0; z-index: 200; width: 38px; height: 38px; border-radius: 10px;
+            border: 1px solid #e2e8f0; background: #fff; cursor: pointer; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 4px; transition: background .15s, border-color .15s; }
+        .menu-btn:hover { background: #f1f5f9; border-color: #cbd5e1; }
+        .menu-btn span { display: block; width: 16px; height: 2px; border-radius: 2px; background: #475569; transition: transform .25s, opacity .2s; }
+        body.menu-open .menu-btn span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        body.menu-open .menu-btn span:nth-child(2) { opacity: 0; }
+        body.menu-open .menu-btn span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        .menu-scrim { position: fixed; inset: 0; background: rgba(15,23,42,0.45); opacity: 0; visibility: hidden;
+            transition: opacity .28s ease, visibility .28s; z-index: 6800; }
+        body.menu-open .menu-scrim { opacity: 1; visibility: visible; }
+        .side-menu { position: fixed; top: 0; left: 0; bottom: 0; width: 288px; max-width: 86vw; z-index: 6900;
+            background: #fff; border-right: 1px solid #e8edf5; box-shadow: 24px 0 60px -30px rgba(15,23,42,0.35);
+            transform: translateX(-100%); transition: transform .3s cubic-bezier(.4,0,.2,1);
+            display: flex; flex-direction: column; font-family: 'Inter', sans-serif; }
+        body.menu-open .side-menu { transform: none; }
+        .side-menu-top { padding: 22px 22px 18px; border-bottom: 1px solid #eef2f7; background: linear-gradient(170deg, #fff 0%, #f5f8fd 100%); }
+        .side-menu-brand { display: flex; align-items: baseline; gap: 7px; margin-bottom: 16px; }
+        .side-menu-brand .wm { font-size: 17px; font-weight: 800; letter-spacing: .4px; color: #082567; }
+        .side-menu-brand .wm b { color: #671615; }
+        .side-menu-brand .ver { font-size: 8.5px; font-weight: 800; letter-spacing: .5px; color: #fff; background: #671615;
+            padding: 2px 7px; border-radius: 999px; text-transform: uppercase; }
+        .side-auth { display: flex; flex-direction: column; gap: 8px; }
+        .side-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 38px; border-radius: 10px;
+            font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer; border: 1px solid transparent; transition: all .15s; }
+        .side-btn.primary { background: #123a8c; color: #fff; }
+        .side-btn.primary:hover { background: #164aad; }
+        .side-btn.ghost { background: #fff; color: #334155; border-color: #dbe3ee; }
+        .side-btn.ghost:hover { background: #f1f5f9; border-color: #cbd5e1; }
+        .side-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+        .side-nav { flex: 1; overflow-y: auto; padding: 12px 12px 8px; }
+        .side-nav-label { font-size: 9.5px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #94a3b8; padding: 8px 10px 6px; }
+        .side-link { display: flex; align-items: center; gap: 11px; padding: 9px 10px; border-radius: 9px; text-decoration: none;
+            color: #334155; font-size: 13.5px; font-weight: 600; transition: background .15s, color .15s; }
+        .side-link:hover { background: #f1f5f9; color: #082567; }
+        .side-link.active { background: #eef2fb; color: #082567; }
+        .side-link svg { width: 16px; height: 16px; flex: none; stroke: #94a3b8; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .side-link:hover svg, .side-link.active svg { stroke: #123a8c; }
+        .side-link .ext { margin-left: auto; width: 12px; height: 12px; stroke: #cbd5e1; }
+        .side-menu-foot { padding: 12px 16px 16px; border-top: 1px solid #eef2f7; display: flex; align-items: center; gap: 10px; }
+        .side-menu-foot .lang-mini { display: flex; background: #e2e8f0; border-radius: 8px; padding: 3px; }
+        .side-menu-foot .lang-mini button { border: 0; background: transparent; font: inherit; font-size: 11.5px; font-weight: 700;
+            color: #64748b; padding: 4px 11px; border-radius: 6px; cursor: pointer; }
+        .side-menu-foot .lang-mini button.on { background: #fff; color: #082567; box-shadow: 0 1px 4px rgba(15,23,42,.12); }
+        .side-menu-foot .classic { margin-left: auto; font-size: 11.5px; font-weight: 600; color: #64748b; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+        .side-menu-foot .classic:hover { color: #082567; }
+        .side-menu-foot .classic svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+        @media (max-width: 640px) { .side-menu { width: 82vw; } }
         /* ===================== NEW VISITOR TOUR ===================== */
         #lqTour { position: fixed; inset: 0; z-index: 7000; display: none; font-family: 'Inter', sans-serif; }
         #lqTour.on { display: block; }
@@ -475,7 +524,7 @@
         .lqt-close { position: absolute; top: 10px; right: 10px; width: 22px; height: 22px; border-radius: 50%; border: none; background: #f1f5f9; color: #94a3b8; font-size: 13px; line-height: 1; cursor: pointer; }
         .lqt-close:hover { background: #fee2e2; color: #ef4444; }
         /* restart chip: only in New Visitor views, bottom-left */
-        #lqTourChip { position: fixed; left: 22px; bottom: 22px; z-index: 6500; display: none; align-items: center; gap: 8px; height: 36px; padding: 0 14px 0 10px; border-radius: 999px;
+        #lqTourChip { position: fixed; right: 22px; bottom: 22px; z-index: 6500; display: none; align-items: center; gap: 8px; height: 36px; padding: 0 14px 0 10px; border-radius: 999px;
             background: #082567; color: #fff; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; border: none; cursor: pointer; box-shadow: 0 10px 24px -10px rgba(8,37,103,.6); }
         #lqTourChip svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
         body.first-entry #lqTourChip { display: inline-flex; }
@@ -2139,7 +2188,34 @@
 </div>
 </div>
 </div>
+<div class="menu-scrim" onclick="lqCloseMenu()"></div>
+<nav class="side-menu" id="sideMenu" aria-label="Menu">
+  <div class="side-menu-top">
+    <div class="side-menu-brand"><span class="wm"><b>L</b>EXIQAMUS</span><span class="ver">3.0 Beta</span></div>
+    <div class="side-auth">
+      <button class="side-btn primary"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span data-i18n="menuSignUp">Create Account</span></button>
+      <button class="side-btn ghost"><svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><path d="m10 17 5-5-5-5"></path><path d="M15 12H3"></path></svg><span data-i18n="menuSignIn">Sign in</span></button>
+    </div>
+  </div>
+  <div class="side-nav">
+    <div class="side-nav-label" data-i18n="menuLabelApp">LexiQamus</div>
+    <a class="side-link active" href="#" onclick="lqCloseMenu(); if(typeof setViewState==='function') setViewState('home'); return false;"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 10v10h14V10"></path></svg><span data-i18n="menuHome">Home</span></a>
+    <a class="side-link" href="#" onclick="lqCloseMenu(); return false;"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-2z"></path><path d="M8 3v18"></path></svg><span data-i18n="menuGuide">User Guide</span></a>
+    <a class="side-link" href="#" onclick="lqCloseMenu(); return false;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5"></path><path d="M12 8h.01"></path></svg><span data-i18n="menuAbout">About</span></a>
+    <div class="side-nav-label" data-i18n="menuLabelAccess">Access</div>
+    <a class="side-link" href="#" onclick="lqCloseMenu(); return false;"><svg viewBox="0 0 24 24"><path d="M3 21h18"></path><path d="M6 21V10"></path><path d="M10 21V10"></path><path d="M14 21V10"></path><path d="M18 21V10"></path><polygon points="12 3 21 8 3 8"></polygon></svg><span data-i18n="menuInstitutional">Institutional Subscribers</span></a>
+    <a class="side-link" href="#" onclick="lqCloseMenu(); return false;"><svg viewBox="0 0 24 24"><path d="M3 12V5a2 2 0 0 1 2-2h7l9 9-9 9z"></path><path d="M7.5 7.5h.01"></path></svg><span data-i18n="menuPricing">Pricing</span></a>
+    <div class="side-nav-label" data-i18n="menuLabelMore">More</div>
+    <a class="side-link" href="#" onclick="lqCloseMenu(); return false;"><svg viewBox="0 0 24 24"><path d="M12 3v4"></path><path d="M12 17v4"></path><path d="M3 12h4"></path><path d="M17 12h4"></path><path d="m6 6 2.5 2.5"></path><path d="M15.5 15.5 18 18"></path><path d="m18 6-2.5 2.5"></path><path d="M8.5 15.5 6 18"></path></svg><span data-i18n="menuUpdates">What's New</span></a>
+    <a class="side-link" href="#" onclick="lqCloseMenu(); return false;"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg><span data-i18n="menuContact">Contact</span></a>
+  </div>
+  <div class="side-menu-foot">
+    <div class="lang-mini"><button data-mlang="en" onclick="lqMenuLang('en')">EN</button><button data-mlang="tr" onclick="lqMenuLang('tr')">TR</button></div>
+    <a class="classic" href="https://www.lexiqamus.com/" target="_blank" rel="noopener"><span data-i18n="legacyLink">Classic version</span><svg viewBox="0 0 24 24"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg></a>
+  </div>
+</nav>
 <div class="max-w-[1140px] mx-auto page-container">
+<button class="menu-btn" id="menuBtn" aria-label="Menu" onclick="lqToggleMenu()"><span></span><span></span><span></span></button>
 <a class="legacy-link" href="https://www.lexiqamus.com/" target="_blank" rel="noopener" title="Open the previous stable version" data-i18n-title="legacyTitle"><span data-i18n="legacyLink">Classic version</span><svg viewBox="0 0 24 24"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg></a>
 <div class="lang-switch" id="langSwitch">
     <span class="lang-thumb"></span>
@@ -3352,6 +3428,18 @@
             acctInviteSub: 'Kurum dışından <span class="hl">VPN\'siz</span> sınırsız erişim',
             acctInviteCta: 'Hesap Oluştur',
             legacyLink: 'Klasik sürüm',
+            menuSignUp: 'Hesap Oluştur',
+            menuSignIn: 'Giriş Yap',
+            menuLabelApp: 'LexiQamus',
+            menuHome: 'Anasayfa',
+            menuGuide: 'Kullanım Kılavuzu',
+            menuAbout: 'Hakkında',
+            menuLabelAccess: 'Erişim',
+            menuInstitutional: 'Kurumsal Üyeler',
+            menuPricing: 'Ücretlendirme',
+            menuLabelMore: 'Diğer',
+            menuUpdates: 'Yenilikler',
+            menuContact: 'İletişim',
             legacyTitle: 'Önceki kararlı sürümü aç',
             acctInviteCta2: '<b>.edu.tr</b> ile tek seferlik kayıt',
             tabDecoder: 'Kelime Çözücü',
@@ -6898,6 +6986,19 @@
             });
             window.addEventListener('load', function(){ setTimeout(decorate, 400); });
         })();
+
+
+        // ===================== YAN MENÜ =====================
+        function lqToggleMenu() { document.body.classList.toggle('menu-open'); lqSyncMenuLang(); }
+        function lqCloseMenu() { document.body.classList.remove('menu-open'); }
+        function lqMenuLang(l) { if (typeof applyLanguage === 'function') applyLanguage(l);
+            document.querySelectorAll('#langSwitch .lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+            var sw = document.getElementById('langSwitch'); if (sw) sw.classList.toggle('tr-active', l === 'tr');
+            lqSyncMenuLang(); }
+        function lqSyncMenuLang() { var l = (typeof currentLang !== 'undefined') ? currentLang : 'en';
+            document.querySelectorAll('.side-menu-foot .lang-mini button').forEach(b => b.classList.toggle('on', b.dataset.mlang === l)); }
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lqCloseMenu(); });
+        document.addEventListener('DOMContentLoaded', lqSyncMenuLang);
 
 </script>
 <!-- COGNATES POPUP OVERLAY -->
