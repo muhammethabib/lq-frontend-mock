@@ -1123,9 +1123,10 @@
         .term-hl { color: #ef4444; background: none; text-decoration: none;
             font-weight: 700; -webkit-text-stroke: 0.3px #ef4444; }
         /* Latin kutularda vurgu yok: kelime tek renk kalır */
-        .latin-box .term-hl { color: inherit; }
+        /* Latin kutularda vurgu yok: renk, kalınlık ve kontur devre dışı */
+        .latin-box .term-hl { color: inherit; font-weight: inherit; -webkit-text-stroke: 0; }
         /* Vurgu yalnızca sol sütunda (sonuç); sağdaki madde başında hiç yok */
-        .col-span-7 .term-hl { color: inherit !important; }
+        .col-span-7 .term-hl { color: inherit !important; font-weight: inherit !important; -webkit-text-stroke: 0 !important; }
         .osm-box { color: var(--brand-red); background: #fff1f2; border-color: #ffe4e6; font-size: 22px; line-height: 1.8; padding-bottom: 12px; }
         .osm-box:hover { background-color: var(--hover-bg-red) !important; color: var(--brand-red) !important; border-color: var(--hover-border-red) !important; }
         .osm-box.selected { background-color: var(--brand-red) !important; color: var(--white) !important; border-color: var(--brand-red) !important; transform: translateY(0) !important; box-shadow: none !important; }
