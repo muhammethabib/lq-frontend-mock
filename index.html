@@ -1155,11 +1155,6 @@
         .col-span-7 .word-box:hover { transform: translateY(-1px) scale(1.02); background: rgba(15,23,42,0.035) !important; box-shadow: none !important; }
         .col-span-7 .osm-box:hover { color: var(--brand-red) !important; }
         .col-span-7 .word-box.misspelled { background: transparent !important; }
-        /* Sonuç ile madde başı aynıysa sağ tarafta kelimeyi tekrarlamak yerine kısa bir not */
-        .row-card.same-as-entry .col-span-7 .word-pair-unit { display: none; }
-        .row-card.same-as-entry .col-span-7 .self-note { display: inline-flex; }
-        .self-note { display: none; align-items: center; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
-            letter-spacing: .2px; color: #94a3b8; padding: 4px 12px; border-radius: 999px; background: #f8fafc; border: 1px solid #f1f5f9; }
         .word-pair-unit { display: flex; align-items: stretch; justify-content: center; width: 100%; }
         .col-osm { width: 48%; display: flex; justify-content: flex-end; }
         .col-lat { width: 48%; display: flex; justify-content: flex-start; }
@@ -3690,7 +3685,6 @@
                     if (c && c._allData) renderSection(id, c._allData, sectionShownCount[id] || 25, true);
                 });
             }
-            if (window.lqDecorateSelfNotes) setTimeout(window.lqDecorateSelfNotes, 60);
             // Dil değişince metin genişliği/satır sayısı değişebilir; hesap daveti konumunu yeniden hesapla
             if (typeof positionAcctInvite === 'function') { setTimeout(positionAcctInvite, 0); setTimeout(positionAcctInvite, 200); }
         }
@@ -6957,36 +6951,6 @@
         });
 
 
-        // Sonuç ile madde başı birebir aynıysa, sağ tarafta kelimeyi tekrarlamak yerine kısa bir not göster
-        (function(){
-            function label() { return (typeof currentLang !== 'undefined' && currentLang === 'tr') ? 'Maddenin kendisi' : 'The headword itself'; }
-            function decorate() {
-                document.querySelectorAll('#stdResultSurface .row-card').forEach(function(row){
-                    var left = row.querySelector('.col-span-5 .osm-box');
-                    var cell = row.querySelector('.col-span-7 .col-span-6');
-                    var right = cell && cell.querySelector('.osm-box');
-                    if (!left || !right || !cell) return;
-                    var same = (left.dataset.wbOsm || '').trim() === (right.dataset.wbOsm || '').trim();
-                    row.classList.toggle('same-as-entry', same);
-                    var n = cell.querySelector('.self-note');
-                    if (!same) { if (n) n.remove(); return; }
-                    if (n) { n.textContent = label(); return; }
-                    n = document.createElement('div');
-                    n.className = 'self-note';
-                    n.textContent = label();
-                    cell.appendChild(n);
-                });
-            }
-            window.lqDecorateSelfNotes = decorate;
-            var obs = new MutationObserver(function(){ decorate(); });
-            document.addEventListener('DOMContentLoaded', function(){
-                ['content-exact','content-inflected','content-lexicalized-inflected','content-derived','content-compounds','content-phrases','content-partial'].forEach(function(id){
-                    var c = document.getElementById(id); if (c) obs.observe(c, {childList: true});
-                });
-                setTimeout(decorate, 300); setTimeout(decorate, 1200);
-            });
-            window.addEventListener('load', function(){ setTimeout(decorate, 400); });
-        })();
 
 
         // ===================== YAN MENÜ =====================
