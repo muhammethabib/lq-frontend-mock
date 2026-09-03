@@ -1146,7 +1146,7 @@
 
         /* Sağ sütun (madde başı): dolgusuz kutu + bir tık küçük punto — hiyerarşi buradan geliyor */
         .col-span-7 .word-box { background: transparent !important; border-color: transparent !important; box-shadow: none !important; min-width: 82px; padding: 5px 14px; }
-        .col-span-7 .osm-box { font-size: 24px !important; }
+        .col-span-7 .osm-box { font-size: 22px !important; }
         /* Madde başı çifti sabit genişlikte ve bölgesinde ortalı: Osmanlıca kutunun sağ kenarı ile
            Latin kutunun sol kenarı bütün satırlarda aynı hizada kalır (soldaki sütunla aynı mantık),
            sütun başlığı da doğal olarak üstüne denk gelir. */
@@ -1161,7 +1161,7 @@
         .row-card .col-span-7 > .col-span-6 { grid-column: span 5 / span 5; }
         .row-card .col-span-7 > .col-span-3 { grid-column: span 4 / span 4; }
         .col-header-inner { grid-template-columns: 330px 100px 1.82fr 2.98fr 3.30fr; }
-        .col-span-7 .latin-box { font-size: 15px !important; color: #475569 !important; }
+        .col-span-7 .latin-box { font-size: 14.5px !important; color: #475569 !important; }
         .col-span-7 .word-box:hover { transform: translateY(-1px) scale(1.02); background: rgba(15,23,42,0.035) !important; box-shadow: none !important; }
         .col-span-7 .osm-box:hover { color: var(--brand-red) !important; }
         .col-span-7 .word-box.misspelled { background: transparent !important; }
@@ -1173,9 +1173,14 @@
         .style-ENTRY .category-pill { color: var(--col-entry-txt); background: rgba(20, 184, 166, 0.12); border: 1px solid var(--col-entry-bd); }
         .style-SUBENTRY .category-pill { color: var(--col-sub-txt); background: rgba(251, 191, 36, 0.12); border: 1px solid var(--col-sub-bd); }
         .style-RELATED .category-pill { color: var(--col-rel-txt); background: rgba(30, 58, 138, 0.12); border: 1px solid var(--col-rel-bd); }
-        .style-ENTRY.row-card { border-left: 4px solid var(--col-entry-acc); }
-        .style-SUBENTRY.row-card { border-left: 4px solid var(--col-sub-acc); }
-        .style-RELATED.row-card { border-left: 4px solid var(--col-rel-acc); }
+        /* Sol renk şeridi: border-left kartın 8px köşe yarıçapını miras aldığı için uçları fazla
+           yuvarlanıyordu. Artık kendi çubuğu olarak çiziliyor: tam yükseklik, 2px'lik keskin uçlar. */
+        .row-card.style-ENTRY, .row-card.style-SUBENTRY, .row-card.style-RELATED { border-left: none; padding-left: 4px; }
+        .row-card.style-ENTRY::before, .row-card.style-SUBENTRY::before, .row-card.style-RELATED::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: 2px; z-index: 2; }
+        .row-card.style-ENTRY::before { background: var(--col-entry-acc); }
+        .row-card.style-SUBENTRY::before { background: var(--col-sub-acc); }
+        .row-card.style-RELATED::before { background: var(--col-rel-acc); }
         .copy-btn { color: #94a3b8; background-color: #f8fafc; border: 1px solid #f1f5f9; transition: all 0.2s; cursor: pointer; padding: 8px; border-radius: 8px; display: flex; align-items: center; justify-content: center; opacity: 0.6; }
         .copy-btn:hover { color: var(--brand-sapphire) !important; background-color: #dbeafe !important; border-color: #bfdbfe !important; opacity: 1; transform: translateY(-2px); }
         .copy-btn.selected { background-color: var(--brand-sapphire) !important; color: var(--white) !important; border-color: var(--brand-sapphire) !important; opacity: 1 !important; transform: translateY(0) !important; }
@@ -4951,6 +4956,34 @@
             if (typeof refreshResults === 'function') refreshResults();
         }
         
+        // Sözlüklerin baskı yılları (künyede ve sonuç satırında gösterilir)
+        const DICT_YEARS = {
+            "Ahteri-i Kebir": 1826,
+            "Bianchi": 1846,
+            "Burhan-ı Katı": 1797,
+            "Hindoglu": 1838,
+            "Kamus-ı Alam": 1889,
+            "Kamus-ı Ebüssürur": 1884,
+            "Kamus-ı Fransevi": 1882,
+            "Kamus-ı Osmani": 1896,
+            "Kamus-ı Türki": 1899,
+            "Lehçe-i Osmani": 1888,
+            "Lehçetü'l-Lügat": 1802,
+            "Lugat-ı Cudi": 1913,
+            "Lugat-ı Ebuzziya": 1888,
+            "Lugat-ı Naci": 1901,
+            "Lügat-ı Remzi": 1888,
+            "Meninski": 1680,
+            "Müntahabat-ı Lügat-ı Osmaniye": 1852,
+            "Mütercim Asım": 1817,
+            "Redhouse": 1890,
+            "Resimli Kamus-ı Osmani": 1911,
+            "Tuhfe-i Vehbi": 1798,
+            "Tuhfe-i Şahidi": 1515,
+            "Vankulu": 1729,
+            "Şemseddin Sami": 1899,
+        };
+        function dictLabel(d) { const y = DICT_YEARS[d]; return y ? d + ', ' + y : d; }
         function catLabel(ty) {
             const key = ty === 'ENTRY' ? 'catEntry' : (ty === 'SUBENTRY' ? 'catSubentry' : 'catRelated');
             const en = ty === 'ENTRY' ? 'HEADWORD' : (ty === 'SUBENTRY' ? 'SUBHEADWORD' : 'RELATED');
@@ -5051,7 +5084,7 @@
                         </div>
                     </div>
                     <div class="col-span-3 flex justify-end items-center pl-4">
-                        <div class="text-right mr-3"><div class="text-[13px] font-bold text-slate-700 leading-tight">${w.dict}</div><div class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-widest text-right">${t('pageLabel', 'Page')} ${w.p}</div></div>
+                        <div class="text-right mr-3"><div class="text-[13px] font-bold text-slate-700 leading-tight">${dictLabel(w.dict)}</div><div class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-widest text-right">${t('pageLabel', 'Page')} ${w.p}</div></div>
                         <button class="copy-btn" data-tooltip="${t('citeTooltip', 'Cite')}" data-cite-osm="${w.e_o2}" data-cite-lat="${w.e_l2}" data-cite-dict="${w.dict}" data-cite-page="${w.p}" onclick="openCiteModal(event, this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
                     </div>
                 </div>
@@ -6632,7 +6665,7 @@
                         </div>
                     </div>
                     <div class="col-span-3 flex justify-end items-center pl-4">
-                        <div class="text-right mr-3"><div class="text-[13px] font-bold text-slate-700 leading-tight">${w.dict}</div><div class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-widest text-right">${t('pageLabel', 'Page')} ${w.p}</div></div>
+                        <div class="text-right mr-3"><div class="text-[13px] font-bold text-slate-700 leading-tight">${dictLabel(w.dict)}</div><div class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-widest text-right">${t('pageLabel', 'Page')} ${w.p}</div></div>
                         <button class="copy-btn" data-tooltip="${t('citeTooltip', 'Cite')}" data-cite-osm="${w.e_o2}" data-cite-lat="${w.e_l2}" data-cite-dict="${w.dict}" data-cite-page="${w.p}" onclick="openCiteModal(event, this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
                     </div>
                 </div>
