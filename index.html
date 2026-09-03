@@ -2134,10 +2134,10 @@
 <div class="sticky-nav-inner">
 <span class="sticky-label" data-i18n="jumpTo">Jump To:</span>
 <div class="quick-link has-tooltip" data-target="sec-exact" onclick="scrollToSection('sec-exact', this)">
-                <span data-i18n="qlExact">Base</span>
+                <span data-i18n="qlExact">Lemma</span>
                 <div class="custom-tooltip-source">
-<span class="tooltip-desc" data-i18n="hidExactb">Results matching the search term exactly</span>
-<span class="tooltip-example" data-i18n="exExactb" data-i18n-html="1">Ex: <b>kalem</b> → <b>kalem</b></span>
+<span class="tooltip-desc" data-i18n="hidExactb">Results without an affix, including the base or singular form of a value</span>
+<span class="tooltip-example" data-i18n="exExactb" data-i18n-html="1">Ex: <b>kalem</b>, <b>dost</b></span>
 </div>
 </div>
 <div class="quick-link has-tooltip" data-target="sec-inflected" onclick="scrollToSection('sec-inflected', this)">
@@ -2445,10 +2445,10 @@
                 <div class="section-header desc-open">
                     <div class="header-clickable hover-blue" onclick="toggleKCSection('content-kc-exact', this.closest('.section-header'))">
                         <div class="header-chevron"><svg fill="none" height="6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 10 6" width="10"><path d="M1 1L5 5L9 1"></path></svg></div>
-                        <div class="header-title" data-i18n="secExact">BASE</div>
+                        <div class="header-title" data-i18n="secExact">LEMMA</div>
                     </div>
                     <span class="header-count">9</span>
-                    <span class="header-desc-pill"><span class="header-inline-desc"><span class="hid-text" data-i18n="hidExact">Results matching the search term exactly</span><span class="hid-example" data-i18n="exExact" data-i18n-html="1">Ex: <b>kalem</b> → <b>kalem</b></span></span>
+                    <span class="header-desc-pill"><span class="header-inline-desc"><span class="hid-text" data-i18n="hidExact">Results without an affix, including the base or singular form of a value</span><span class="hid-example" data-i18n="exExact" data-i18n-html="1">Ex: <b>kalem</b>, <b>dost</b></span></span>
                         <button class="header-info-toggle active" onclick="toggleHeaderDesc(this, event)" aria-label="Toggle description"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="hid-toggle-label">✕</span></button>
                     </span>
                 </div>
@@ -2623,8 +2623,8 @@
 <div class="surface-list-area" id="word-list">
 <div class="section-wrapper" id="sec-exact">
 <div class="section-header desc-open"><div class="header-clickable hover-blue" onclick="toggleSection('content-exact', this.closest('.section-header'))"><div class="header-chevron"><svg fill="none" height="6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 10 6" width="10"><path d="M1 1L5 5L9 1"></path></svg></div><div class="header-title" data-i18n="secExact">
-                            BASE
-                        </div></div><span class="header-count">6</span><span class="header-desc-pill"><span class="header-inline-desc"><span class="hid-text" data-i18n="hidExact">Results matching the search term exactly</span><span class="hid-example" data-i18n="exExact" data-i18n-html="1">Ex: <b>kalem</b> → <b>kalem</b></span></span><button class="header-info-toggle active" onclick="toggleHeaderDesc(this, event)" aria-label="Toggle description"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="hid-toggle-label">✕</span></button></span></div>
+                            LEMMA
+                        </div></div><span class="header-count">6</span><span class="header-desc-pill"><span class="header-inline-desc"><span class="hid-text" data-i18n="hidExact">Results without an affix, including the base or singular form of a value</span><span class="hid-example" data-i18n="exExact" data-i18n-html="1">Ex: <b>kalem</b>, <b>dost</b></span></span><button class="header-info-toggle active" onclick="toggleHeaderDesc(this, event)" aria-label="Toggle description"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="hid-toggle-label">✕</span></button></span></div>
 <div class="section-content" id="content-exact"></div>
 </div>
 <div class="section-wrapper" id="sec-inflected">
@@ -3454,22 +3454,22 @@
             expandLabel: 'Aramayı Genişlet',
             soundsLike: 'Benzer Sesler',
             jumpTo: 'GİT:',
-            qlExact: 'Temel',
+            qlExact: 'Lemma',
             qlInflected: 'Çekimli Biçimler',
             qlLexInfl: 'Sözl. Çekimli Formlar',
             qlDerived: 'Türemiş Biçimler',
             qlPhrases: 'İbareler',
             qlCompounds: 'Birleşik Kelimeler',
             qlPartial: 'Kısmi Eşleşmeler',
-            secExact: 'TEMEL',
+            secExact: 'LEMMA',
             secInflected: 'ÇEKİMLİ BİÇİMLER',
             secLexInfl: 'SÖZLÜKSELLEŞMİŞ ÇEKİMLİ FORMLAR',
             secDerived: 'TÜREMİŞ BİÇİMLER',
             secPhrases: 'İBARELER',
             secCompounds: 'BİRLEŞİK KELİMELER',
             secPartial: 'KISMİ EŞLEŞMELER',
-            hidExact: 'Arama terimiyle tam olarak eşleşen sonuçlar',
-            hidExactb: 'Arama terimiyle tam olarak eşleşen sonuçlar',
+            hidExact: 'Ek almamış sonuçlar; bir değerin temel veya tekil biçimi',
+            hidExactb: 'Ek almamış sonuçlar; bir değerin temel veya tekil biçimi',
             hidInflected: 'Arama teriminin çekimli biçimlerini gösteren sonuçlar',
             hidInflectedb: 'Arama teriminin çekimli biçimlerini gösteren sonuçlar',
             hidLexInfl: 'Sözlükte kendine ait ayrı bir anlam kazanmış çekimli biçimler',
@@ -3482,8 +3482,8 @@
             hidCompoundsb: 'Arama terimini içeren birleşik kelimeler',
             hidPartial: 'Arama terimini anlam bakımından ilgisiz bir kelimenin içinde barındıran sonuçlar',
             hidPartialb: 'Arama terimini anlam bakımından ilgisiz bir kelimenin içinde barındıran sonuçlar',
-            exExact: 'Örnek: <b>kalem</b> → <b>kalem</b>',
-            exExactb: 'Örnek: <b>kalem</b> → <b>kalem</b>',
+            exExact: 'Örnekler: <b>kalem</b>, <b>dost</b>',
+            exExactb: 'Örnekler: <b>kalem</b>, <b>dost</b>',
             exInflected: 'Örnek: <b>kalem</b> → <b>kalem</b>i, <b>kalem</b>e, <b>kalem</b>de',
             exInflectedb: 'Örnek: <b>kalem</b> → <b>kalem</b>i, <b>kalem</b>e, <b>kalem</b>de',
             exDerived: 'Örnek: <b>kalem</b> → <b>kalem</b>lik, <b>kalem</b>ci',
@@ -3503,9 +3503,9 @@
             colDict: 'Sözlük',
             pageLabel: 'Sayfa',
             catEntry: 'Madde Başı',
-            catSubentry: 'Alt Madde',
+            catSubentry: 'Alt Madde Başı',
             catRelated: 'İlişkili',
-            chipExact: 'Temel',
+            chipExact: 'Lemma',
             chipInflected: 'Çekimli Biçimler',
             chipLexInfl: 'Sözlükselleşmiş Çekimli Formlar',
             chipDerived: 'Türemiş Biçimler',
@@ -3632,7 +3632,7 @@
             catEntryDesc: 'Sözlükte bağımsız maddebaşı olarak yer alan sonuçlar.',
             catSubentryDesc: 'Başka bir maddenin altında listelenen ancak kendine ait bir anlamı olan kelime ve ifadeler.',
             catRelatedDesc: 'Maddeyle ilişkili önemli kavram ve ifadeler.',
-            chipExactDesc: 'Arama terimiyle tam olarak eşleşen sonuçlar.',
+            chipExactDesc: 'Ek almamış sonuçlar; bir değerin temel veya tekil biçimi.',
             chipInflectedDesc: 'Aranan kelimenin çekimli biçimleri.',
             chipLexInflDesc: 'Sözlükte kendine ait ayrı bir anlam kazanmış çekimli biçimler.',
             chipDerivedDesc: 'Aranan kelimeden türemiş kelimeler.',
@@ -4847,11 +4847,11 @@
         /* --- FILTERS DROPDOWN (source design logic, wired to this page's filtering) --- */
         const wordCategories = [
             {name:"Headword",    i18n:"catEntry",    type:"wordtype", value:"ENTRY",    desc:"Results that appear as standalone dictionary headwords."},
-            {name:"Sub-entry", i18n:"catSubentry", type:"wordtype", value:"SUBENTRY", desc:"Words or expressions listed under another headword but having a distinct meaning of their own."},
+            {name:"Sub-headword", i18n:"catSubentry", type:"wordtype", value:"SUBENTRY", desc:"Words or expressions listed under another headword but having a distinct meaning of their own."},
             {name:"Related",  i18n:"catRelated",  type:"wordtype", value:"RELATED",  desc:"Important concepts and expressions associated with the entry."}
         ];
         const matchCategories = [
-            {name:"Base",       i18n:"chipExact",     type:"section", value:"sec-exact",     desc:"Results that exactly match the search term."},
+            {name:"Lemma",       i18n:"chipExact",     type:"section", value:"sec-exact",     desc:"Results without an affix, including the base or singular form of a value."},
             {name:"Inflected Forms",     i18n:"chipInflected", type:"section", value:"sec-inflected", desc:"Inflected forms of the searched word."},
             {name:"Lexicalized Inflected Forms", i18n:"chipLexInfl", type:"section", value:"sec-lexicalized-inflected", desc:"Inflected forms given a distinct meaning of their own in the dictionary."},
             {name:"Derived Forms",       i18n:"chipDerived",   type:"section", value:"sec-derived",   desc:"Words derived from the searched word."},
@@ -4945,7 +4945,7 @@
         
         function catLabel(ty) {
             const key = ty === 'ENTRY' ? 'catEntry' : (ty === 'SUBENTRY' ? 'catSubentry' : 'catRelated');
-            const en = ty === 'ENTRY' ? 'HEADWORD' : (ty === 'SUBENTRY' ? 'SUB-ENTRY' : 'RELATED');
+            const en = ty === 'ENTRY' ? 'HEADWORD' : (ty === 'SUBENTRY' ? 'SUB-HEADWORD' : 'RELATED');
             return t(key, en);
         }
         // Sonuç kelimesinin içinde aranan terimin geçtiği yeri işaretler.
