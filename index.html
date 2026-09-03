@@ -489,28 +489,19 @@
         @media (max-width: 640px) { .side-menu { width: 84vw; } }
 
         /* ===================== EKİP SAYFASI =====================
-           Menüden açılan tam ekran katman. Üstte kurucu ve koordinatör geniş kart,
-           altta proje asistanları daha küçük ızgarada. */
-        .team-overlay { position: fixed; inset: 0; z-index: 7200; background: rgba(15,23,42,0.5);
-            opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s;
-            display: flex; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 40px 20px; }
-        body.team-open .team-overlay { opacity: 1; visibility: visible; }
-        .team-sheet { width: 100%; max-width: 940px; background: #fff; border-radius: 16px;
-            box-shadow: 0 30px 70px -30px rgba(15,23,42,0.5); padding: 34px 38px 40px; position: relative;
-            transform: translateY(14px); transition: transform .28s cubic-bezier(.4,0,.2,1);
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-        body.team-open .team-sheet { transform: none; }
-        .team-close { position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; border-radius: 9px;
-            border: 1px solid #e2e8f0; background: #f8fafc; color: #475569; cursor: pointer; font-size: 20px;
-            line-height: 1; display: flex; align-items: center; justify-content: center; transition: all .15s; }
-        .team-close:hover { background: #eef2f7; color: var(--brand-sapphire); }
+           Ayrı bir katman değil; sayfa akışında normal bir bölüm. Açıldığında
+           arama alanı ve sonuç yüzeyleri gizlenir, marka bloğu üstte kalır. */
+        .team-page { max-width: 940px; margin: 8px auto 60px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        body.team-page-open .nav-tabs,
+        body.team-page-open .search-container,
+        body.team-page-open #stickyNav { display: none !important; }
         .team-head { text-align: center; margin-bottom: 30px; }
         .team-head h2 { font-size: 27px; font-weight: 800; color: var(--brand-sapphire); margin: 0 0 8px; letter-spacing: -0.3px; }
         .team-head p { font-size: 14.5px; color: #64748b; margin: 0; line-height: 1.6; }
 
         .team-lead { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 26px; }
         .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-        .team-card { display: flex; gap: 14px; align-items: flex-start; background: #f8fafc;
+        .team-card { display: flex; gap: 14px; align-items: flex-start; background: #fff;
             border: 1px solid #e8edf4; border-radius: 12px; padding: 16px; transition: box-shadow .15s, border-color .15s; }
         .team-card:hover { border-color: #cbd5e1; box-shadow: 0 3px 12px rgba(8,37,103,0.07); }
         .team-lead .team-card { padding: 20px; }
@@ -529,9 +520,8 @@
         .team-grid .team-bio { font-size: 12.5px; }
         @media (max-width: 860px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 640px) {
-            .team-overlay { padding: 16px 12px; }
-            .team-sheet { padding: 26px 20px 30px; }
             .team-lead, .team-grid { grid-template-columns: 1fr; }
+        }
         }
 
         /* Geniş ekranda üst köşe öğeleri sayfa sütununa değil pencere kenarına yaslanır */
@@ -2334,82 +2324,6 @@
     <a class="side-link" href="https://www.lexiqamus.com/lexiqamus/institutional-subscribers" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4.3 20.4V8.4L12 3.6l7.7 4.8v12z" fill="currentColor"></path><path d="M9.9 20.4v-4.2a2.1 2.1 0 0 1 4.2 0v4.2" fill="none" stroke="var(--cut)" stroke-width="1.7"></path><circle cx="9.2" cy="11" r="1.1" fill="var(--cut)"></circle><circle cx="14.8" cy="11" r="1.1" fill="var(--cut)"></circle><path d="M2.4 21h19.2" fill="none" stroke="currentColor" stroke-width="2.3"></path></svg><span data-i18n="menuInstitutional">Institutional Subscribers</span></a>
   </div>
 </nav>
-<div class="team-overlay" id="teamOverlay" onclick="if(event.target===this) lqCloseTeam()">
-  <div class="team-sheet" role="dialog" aria-modal="true" aria-labelledby="teamTitle">
-    <button class="team-close" onclick="lqCloseTeam()" aria-label="Close">&times;</button>
-    <div class="team-head">
-      <h2 id="teamTitle" data-i18n="teamTitle">Team</h2>
-      <p data-i18n="teamIntro">The people behind LexiQamus.</p>
-    </div>
-    <div class="team-lead">
-    <div class="team-card">
-      <div class="team-photo">AS</div>
-      <div class="team-info">
-        <div class="team-name">Ahmet Abdullah Saçmalı</div>
-        <div class="team-role" data-i18n="teamFounder">Founder</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderAS">Short biography to be added.</div>
-      </div>
-    </div>
-
-    <div class="team-card">
-      <div class="team-photo">HS</div>
-      <div class="team-info">
-        <div class="team-name">Habib Saçmalı</div>
-        <div class="team-role" data-i18n="teamCoordinator">Project Coordinator</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderHS">Short biography to be added.</div>
-      </div>
-    </div>
-
-    </div>
-    <div class="team-grid">
-    <div class="team-card">
-      <div class="team-photo">BB</div>
-      <div class="team-info">
-        <div class="team-name">Buse Büyükkeskin</div>
-        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderBB">Short biography to be added.</div>
-      </div>
-    </div>
-
-    <div class="team-card">
-      <div class="team-photo">SBK</div>
-      <div class="team-info">
-        <div class="team-name">Seher Bulut Köse</div>
-        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderSBK">Short biography to be added.</div>
-      </div>
-    </div>
-
-    <div class="team-card">
-      <div class="team-photo">ZO</div>
-      <div class="team-info">
-        <div class="team-name">Zeyneb Odabaş</div>
-        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderZO">Short biography to be added.</div>
-      </div>
-    </div>
-
-    <div class="team-card">
-      <div class="team-photo">HT</div>
-      <div class="team-info">
-        <div class="team-name">Hatice Tüfekçi</div>
-        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderHT">Short biography to be added.</div>
-      </div>
-    </div>
-
-    <div class="team-card">
-      <div class="team-photo">ET</div>
-      <div class="team-info">
-        <div class="team-name">Enis Tombul</div>
-        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderET">Short biography to be added.</div>
-      </div>
-    </div>
-
-    </div>
-  </div>
-</div>
 <div class="page-container">
 <button class="menu-btn" id="menuBtn" aria-label="Menu" onclick="lqToggleMenu()"><span></span><span></span><span></span></button>
 <a class="legacy-link" href="https://www.lexiqamus.com/" target="_blank" rel="noopener" title="Open the previous stable version" data-i18n-title="legacyTitle"><span data-i18n="legacyLink">Classic version</span><svg viewBox="0 0 24 24"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg></a>
@@ -2442,6 +2356,79 @@
 <div class="logo-subtitle" data-i18n="subtitle">OTTOMAN TURKISH LINGUISTIC ANALYSIS TOOL</div>
 </div>
 
+<section class="team-page" id="teamPage" hidden>
+  <div class="team-head">
+    <h2 id="teamTitle" data-i18n="teamTitle">Team</h2>
+    <p data-i18n="teamIntro">The people behind LexiQamus.</p>
+  </div>
+  <div class="team-lead">
+    <div class="team-card">
+      <div class="team-photo">AS</div>
+      <div class="team-info">
+        <div class="team-name">Ahmet Abdullah Saçmalı</div>
+        <div class="team-role" data-i18n="teamFounder">Founder</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderAS">Short biography to be added.</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">HS</div>
+      <div class="team-info">
+        <div class="team-name">Habib Saçmalı</div>
+        <div class="team-role" data-i18n="teamCoordinator">Project Coordinator</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderHS">Short biography to be added.</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-photo">BB</div>
+      <div class="team-info">
+        <div class="team-name">Buse Büyükkeskin</div>
+        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderBB">Short biography to be added.</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">ET</div>
+      <div class="team-info">
+        <div class="team-name">Enis Tombul</div>
+        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderET">Short biography to be added.</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">HT</div>
+      <div class="team-info">
+        <div class="team-name">Hatice Tüfekçi</div>
+        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderHT">Short biography to be added.</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">SBK</div>
+      <div class="team-info">
+        <div class="team-name">Seher Bulut Köse</div>
+        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderSBK">Short biography to be added.</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">ZO</div>
+      <div class="team-info">
+        <div class="team-name">Zeyneb Odabaş</div>
+        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderZO">Short biography to be added.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
 <div class="nav-tabs">
 <div class="tab" onclick="switchMode(0)" data-i18n="tabDecoder">Word Decoder</div>
 <div class="tab active" onclick="switchMode(1)" data-i18n="tabSearch">Search</div>
@@ -6986,16 +6973,27 @@
         // ===================== YAN MENÜ =====================
         function lqToggleMenu() { document.body.classList.toggle('menu-open'); lqSyncMenuLang(); }
         function lqCloseMenu() { document.body.classList.remove('menu-open'); }
-        function lqOpenTeam() { lqCloseMenu(); document.body.classList.add('team-open'); }
-        function lqCloseTeam() { document.body.classList.remove('team-open'); }
+        function lqOpenTeam() {
+            lqCloseMenu();
+            if (typeof setViewState === 'function') setViewState('home');
+            window.__teamOpening = true; document.body.classList.add('team-page-open'); window.__teamOpening = false;
+            var s = document.getElementById('teamPage'); if (s) s.hidden = false;
+            window.scrollTo({ top: 0 });
+        }
+        function lqCloseTeam() {
+            document.body.classList.remove('team-page-open');
+            var s = document.getElementById('teamPage'); if (s) s.hidden = true;
+        }
         function lqSetActive(el) { document.querySelectorAll('.side-nav .side-link').forEach(a => a.classList.remove('active')); el.classList.add('active'); }
+        // Ekip dışında bir görünüme geçilirse ekip sayfası kapanır
+        (function(){ var orig = window.setViewState; if (typeof orig === 'function') { window.setViewState = function(s){ if (document.body.classList.contains('team-page-open') && !window.__teamOpening) lqCloseTeam(); return orig.apply(this, arguments); }; } })();
         function lqToggleSub() {
             const sub = document.getElementById('lqSubmenu'), btn = document.getElementById('lqSubToggle');
             const open = sub.classList.toggle('open');
             btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         }
         function lqSyncMenuLang() { var l = (typeof currentLang !== 'undefined') ? currentLang : 'en'; syncLangSwitches(l); }
-        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { lqCloseTeam(); lqCloseMenu(); } });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lqCloseMenu(); });
         document.addEventListener('DOMContentLoaded', lqSyncMenuLang);
 
 
