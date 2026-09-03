@@ -507,7 +507,7 @@
         .ekual-badge { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
             color: #671615; background: #fdf2f4; border: 1px solid #f6dde2; padding: 4px 11px; border-radius: 999px; margin-bottom: 14px; }
         .ekual-title { font-size: 22px; font-weight: 800; letter-spacing: -.3px; color: var(--brand-sapphire); line-height: 1.25; margin-bottom: 10px; }
-        .ekual-body { font-size: 14px; line-height: 1.6; color: #475569; margin-bottom: 20px; }
+        .ekual-body { font-size: 15px; line-height: 1.65; color: #334155; margin-bottom: 20px; }
         .ekual-body b { color: #0f172a; font-weight: 700; }
         .ekual-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
         .ekual-mini { border-radius: 14px; padding: 14px 16px; border: 1px solid; }
@@ -520,13 +520,14 @@
         .ekual-uni-lock { position: absolute; right: -9px; bottom: -6px; width: 17px; height: 17px; border-radius: 50%;
             background: #10b981; border: 2px solid #f4f7fd; display: flex; align-items: center; justify-content: center; }
         .ekual-uni-lock svg { width: 11px; height: 11px; stroke: #fff; stroke-width: 2.5; }
-        .ekual-mini.off .ekual-mini-head svg { stroke: #123a8c; }
+        .ekual-mini.off .ekual-mini-head svg.uni { stroke: #123a8c; }
+        .ekual-mini.off .ekual-mini-head .ekual-uni-lock svg { stroke: #fff; }
         .ekual-mini.on .ekual-mini-head svg { stroke: var(--brand-claret); }
         .ekual-mini-title { font-size: 13px; font-weight: 800; letter-spacing: -.1px; }
         .ekual-mini.off .ekual-mini-title { color: #123a8c; }
         .ekual-mini.on .ekual-mini-title { color: var(--brand-claret); }
-        .ekual-mini-text { font-size: 12.5px; line-height: 1.5; color: #64748b; }
-        .ekual-mini-text b { color: #334155; font-weight: 700; }
+        .ekual-mini-text { font-size: 13px; line-height: 1.55; color: #475569; }
+        .ekual-mini-text b { color: #0f172a; font-weight: 700; }
         .ekual-pill { display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase;
             color: #fff; background: #123a8c; padding: 3px 8px; border-radius: 999px; margin-bottom: 9px; }
         .ekual-actions { display: flex; align-items: center; gap: 12px; }
@@ -538,49 +539,6 @@
         .ekual-later { background: none; border: none; font-family: inherit; font-size: 13px; font-weight: 600; color: #94a3b8; cursor: pointer; padding: 6px; }
         .ekual-later:hover { color: #475569; }
         @media (max-width: 620px) { .ekual-cards { grid-template-columns: 1fr; } .ekual-card { padding: 28px 22px 22px; } }
-        /* ===================== NEW VISITOR TOUR ===================== */
-        #lqTour { position: fixed; inset: 0; z-index: 7000; display: none; font-family: 'Inter', sans-serif; }
-        #lqTour.on { display: block; }
-        .lqt-catch { position: absolute; inset: 0; }
-        .lqt-spot { position: absolute; border-radius: 12px; box-shadow: 0 0 0 9999px rgba(15,23,42,0.58), 0 0 0 3px rgba(255,255,255,0.9), 0 0 0 6px rgba(157,28,81,0.45);
-            transition: top .32s cubic-bezier(.4,0,.2,1), left .32s cubic-bezier(.4,0,.2,1), width .32s cubic-bezier(.4,0,.2,1), height .32s cubic-bezier(.4,0,.2,1); pointer-events: none; }
-        .lqt-card { position: absolute; width: 340px; background: #fff; border-radius: 16px; padding: 16px 18px 14px; box-shadow: 0 24px 60px -20px rgba(15,23,42,0.5), 0 2px 8px rgba(15,23,42,0.12);
-            transition: top .32s cubic-bezier(.4,0,.2,1), left .32s cubic-bezier(.4,0,.2,1); }
-        .lqt-card::before { content: ''; position: absolute; width: 14px; height: 14px; background: #fff; transform: rotate(45deg); }
-        .lqt-card.p-bottom::before { top: -7px; left: var(--ax, 40px); }
-        .lqt-card.p-top::before { bottom: -7px; left: var(--ax, 40px); }
-        .lqt-card.p-right::before { left: -7px; top: var(--ay, 30px); }
-        .lqt-card.p-left::before { right: -7px; top: var(--ay, 30px); }
-        .lqt-card.p-inside::before { display: none; }
-        .lqt-count { white-space: nowrap; }
-        .lqt-kicker { font-size: 10px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #9d1c51; margin-bottom: 4px; }
-        .lqt-title { font-size: 15px; font-weight: 800; color: #082567; margin-bottom: 6px; letter-spacing: -.1px; }
-        .lqt-body { font-size: 13px; color: #334155; line-height: 1.5; }
-        .lqt-body b { color: #0f172a; }
-        .lqt-do { display: flex; gap: 9px; align-items: flex-start; margin-top: 10px; background: #eef2fb; border-radius: 10px; padding: 9px 11px; font-size: 12.5px; color: #1e3a8a; line-height: 1.45; }
-        .lqt-do svg { flex: none; width: 15px; height: 15px; stroke: #123a8c; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; margin-top: 2px; }
-        .lqt-do b { color: #082567; }
-        .lqt-foot { display: flex; align-items: center; gap: 8px; margin-top: 13px; }
-        .lqt-count { font-size: 11px; font-weight: 700; color: #94a3b8; letter-spacing: .3px; flex: 1; }
-        .lqt-dots { display: flex; gap: 4px; margin-right: 6px; }
-        .lqt-dots i { width: 6px; height: 6px; border-radius: 50%; background: #e2e8f0; }
-        .lqt-dots i.on { background: #9d1c51; }
-        .lqt-btn { border: none; font-family: inherit; font-size: 12.5px; font-weight: 700; padding: 8px 14px; border-radius: 9px; cursor: pointer; transition: all .15s; }
-        .lqt-btn.skip { background: transparent; color: #94a3b8; padding-left: 6px; padding-right: 6px; }
-        .lqt-btn.skip:hover { color: #475569; }
-        .lqt-btn.prev { background: #f1f5f9; color: #475569; }
-        .lqt-btn.prev:hover { background: #e2e8f0; }
-        .lqt-btn.next { background: #082567; color: #fff; }
-        .lqt-btn.next:hover { background: #123a8c; }
-        .lqt-close { position: absolute; top: 10px; right: 10px; width: 22px; height: 22px; border-radius: 50%; border: none; background: #f1f5f9; color: #94a3b8; font-size: 13px; line-height: 1; cursor: pointer; }
-        .lqt-close:hover { background: #fee2e2; color: #ef4444; }
-        /* restart chip: only in New Visitor views, bottom-left */
-        #lqTourChip { position: fixed; right: 22px; bottom: 22px; z-index: 6500; display: none; align-items: center; gap: 8px; height: 36px; padding: 0 14px 0 10px; border-radius: 999px;
-            background: #082567; color: #fff; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; border: none; cursor: pointer; box-shadow: 0 10px 24px -10px rgba(8,37,103,.6); }
-        #lqTourChip svg { width: 15px; height: 15px; stroke: #fff; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-        body.first-entry #lqTourChip { display: inline-flex; }
-        #lqTour.on ~ #lqTourChip { display: none; }
-
         .search-container {
             background: var(--white); border: 1px solid var(--border-color); border-radius: 20px;
             min-height: 140px; display: flex; flex-direction: column; justify-content: center;
@@ -3457,7 +3415,7 @@
                 if (embed) embed.style.display = 'block';
                 document.body.style.overflow = 'hidden';
                 if (typeof showEmbed === 'function') showEmbed(s);
-                if (window.lqTourOnState) window.lqTourOnState(s, isFirstEntry);
+                if (window.lqOnViewState) window.lqOnViewState(s, isFirstEntry);
                 return;
             }
             if (embed) embed.style.display = 'none';
@@ -3493,7 +3451,7 @@
                 setSearchBarTerm('نظر');
             }
             if (typeof switchMode === 'function' && typeof currentTabIdx !== 'undefined') switchMode(currentTabIdx);
-            if (window.lqTourOnState) window.lqTourOnState(s, isFirstEntry);
+            if (window.lqOnViewState) window.lqOnViewState(s, isFirstEntry);
         }
 
         /* --- I18N (EN/TR) --- */
@@ -6808,247 +6766,6 @@
         refreshResults();
         // Açılış durumu: ana sayfa (EN varsayılan dil)
         if (typeof setViewState === 'function') setViewState('home');
-        /* ===================== NEW VISITOR TOUR ===================== */
-        document.addEventListener('DOMContentLoaded', function(){
-            const S = (tr, en) => ({tr, en});
-            const L = () => (typeof currentLang !== 'undefined' && currentLang === 'tr') ? 'tr' : 'en';
-            const UI = {
-                kicker: S('Sayfa turu', 'Page tour'), skip: S('Turu atla', 'Skip tour'), prev: S('Geri', 'Back'), next: S('İleri', 'Next'), done: S('Bitti', 'Done'),
-                chip: S('Sayfayı tanıt', 'Show me around'), of: S('/', '/')
-            };
-            // ---- STEP DEFINITIONS ----
-            // target: CSS selector in main document, or {frame:'#embedFrame', sel:'...'} for the entry page iframe
-            const STEPS = {
-                home: [
-                    { target: '#searchWrapper', place: 'bottom',
-                      title: S('Arama kutusu', 'The search box'),
-                      body: S('Tek kutu, iki alfabe. <b>Sol yarısı</b> Latin harfleri (nazar), <b>sağ yarısı</b> Osmanlıca harfler (نظر) içindir. Transkripsiyon işaretlerine gerek yok.',
-                              'One box, two scripts. The <b>left half</b> is for Latin letters (nazar), the <b>right half</b> for Ottoman script (نظر). No transcription marks needed.'),
-                      do_: S('Sağ tarafa tıklayın: çerçeve bordoya döner ve Osmanlıca klavye açılır; kendi klavyenizden de yazabilirsiniz (n → ن, Shift+Z → ظ, r → ر).',
-                             'Click the right half: the frame turns claret and the Ottoman keyboard opens; you can also type on your own keyboard (n → ن, Shift+Z → ظ, r → ر).') },
-                    { target: '.source-switch-container', place: 'bottom',
-                      title: S('OSM / İNG', 'OTT / ENG'),
-                      body: S('<b>OSM</b> Osmanlıca sözlüklerde arar. <b>İNG</b>, Redhouse\'un İngilizce tanım metinlerinde arar: bir kavramın Osmanlıca karşılığını bulmak için.',
-                              '<b>OTT</b> searches the Ottoman dictionaries. <b>ENG</b> searches inside Redhouse\'s English definitions: for finding the Ottoman word for a concept.'),
-                      do_: S('İNG\'ye alıp "garden" yazın: tanımında "garden" geçen bütün maddeler listelenir.',
-                             'Switch to ENG and type "garden": every entry whose definition mentions "garden" is listed.') },
-                    { target: '#main-search-btn', place: 'bottom',
-                      title: S('Ara', 'Search'),
-                      body: S('Yazdığınızı arar. Enter tuşu da aynı işi görür.', 'Runs the search. The Enter key does the same.'),
-                      do_: S('Tıklayınca sonuç sayfası açılır: tam eşleşmeler, çekimli ve türemiş biçimler, ibareler ayrı bölümlerde gelir.',
-                             'Click it and the results page opens: exact matches, inflected and derived forms and phrases arrive in separate sections.') },
-                    { target: '#filterDropdown', place: 'bottom',
-                      title: S('Filtreler', 'Filters'),
-                      body: S('Sonuç sayfasında hangi grupların gösterileceğini seçersiniz: kelime türü (maddebaşı, alt madde, ilişkili) ve yedi sonuç kategorisi. Rozetteki sayı, açık olan filtre adedidir.',
-                              'Choose which groups the results page shows: word type (headword, sub-entry, related) and the seven result categories. The badge shows how many filters are on.'),
-                      do_: S('Tıklayıp "Kısmi Eşleşmeler"i kapatın: bukalemun gibi ilgisiz kelimeler listeden düşer.',
-                             'Open it and untick "Partial Matches": unrelated words such as bukalemun drop out of the list.') },
-                    { target: '.custom-dropdown-container', place: 'bottom',
-                      title: S('Sözlükler', 'Dictionaries'),
-                      body: S('Varsayılan olarak bütün sözlüklerde aranır. Buradan aramayı belirli sözlüklerle sınırlayabilirsiniz.',
-                              'By default every dictionary is searched. Here you can restrict the search to particular dictionaries.'),
-                      do_: S('Yalnızca Kamus-ı Türkî\'yi seçin: sonuçlar tek sözlükten gelir ve düğmede "1 sözlük seçili" yazar.',
-                             'Select only Kamus-ı Türkî: results come from that one dictionary and the button reads "1 dictionary selected".') },
-                    { target: '.nav-tabs .tab:first-child', place: 'bottom',
-                      title: S('Kelime Çözücü', 'Word Decoder'),
-                      body: S('Kelimeyi <b>okuyamıyorsanız</b> buraya geçin. Her kutu bir harf; okuduklarınızı girer, okuyamadıklarınızı <b>*</b> (bir harf) ya da <b>∞</b> (kaç harf bilinmiyor) ile işaretlersiniz.',
-                              'Switch here if you <b>cannot read</b> the word. Each box is one letter; enter what you can read and mark the rest with <b>*</b> (one letter) or <b>∞</b> (unknown count).'),
-                      do_: S('Sekmeye tıklayınca beş kutu ve özel karakterli bir klavye gelir; Ara deyince kalıba uyan bütün adaylar listelenir.',
-                             'Click the tab and five boxes plus a keyboard with special characters appear; press Search and every candidate that fits the pattern is listed.') },
-                    { target: '#acctInviteRow .acct-card', place: 'right',
-                      title: S('Hesap oluşturun', 'Create an account'),
-                      body: S('Kampüs ağındaysanız hesapsız da kullanabilirsiniz. .edu.tr e-postanızla <b>bir kez</b> kaydolursanız kurum dışından, VPN\'siz, sınırsız erişirsiniz.',
-                              'On campus you can use LexiQamus without an account. Sign up <b>once</b> with your .edu.tr e-mail and you get unlimited access off campus, no VPN.'),
-                      do_: S('Butona tıklayın, e-postanızı girin, gelen bağlantıyı onaylayın; bir daha sormaz.',
-                             'Click the button, enter your e-mail, confirm the link you receive; it will not ask again.') },
-                    { target: '#langSwitch', place: 'bottom',
-                      title: S('Dil ve Klasik sürüm', 'Language and Classic version'),
-                      body: S('Arayüz dilini buradan değiştirirsiniz. Yanındaki <b>Klasik sürüm</b> bağlantısı önceki kararlı sürümü yeni sekmede açar.',
-                              'Switch the interface language here. The <b>Classic version</b> link next to it opens the previous stable version in a new tab.'),
-                      do_: S('Bu tur sayfanın sol altındaki "Sayfayı tanıt" düğmesiyle istediğiniz zaman tekrar açılır.',
-                             'You can reopen this tour any time with the "Show me around" button at the bottom left.') },
-                ],
-                results: [
-                    { target: '#stdResultSurface .surface-header .flex.flex-col', place: 'right',
-                      title: S('Ne arandı, ne bulundu', 'What was searched, what was found'),
-                      body: S('Aranan terim, kaç sonuç bulunduğu ve kaç sözlüğün tarandığı.', 'The search term, how many results were found and how many dictionaries were scanned.'),
-                      do_: S('Sayılar, Filtreler ya da sözlük seçimi değiştikçe anında güncellenir.', 'The counters update instantly whenever Filters or the dictionary selection change.') },
-                    { target: '#stdResultSurface .spelling-btns-row', place: 'bottom',
-                      title: S('Yazılışa göre ara', 'Search by spelling'),
-                      body: S('Aynı kelimenin başka yazımları: bordo piller Osmanlıca (نظر / نزر), mavi piller Latin (nazar / nazır). Koyu olan seçilidir.',
-                              'Other spellings of the same word: claret pills are Ottoman (نظر / نزر), blue pills Latin (nazar / nazır). The solid one is selected.'),
-                      do_: S('Bir pile tıklayın: arama o yazımla tekrarlanır ve liste yenilenir.', 'Click a pill: the search reruns with that spelling and the list refreshes.') },
-                    { target: '#stdResultSurface #soundsLikeBtn', place: 'bottom',
-                      title: S('Benzer Sesler', 'Sounds Like'),
-                      body: S('Ses bakımından yakın harfleri de aramaya katar: ث ≈ س, ت ≈ ط.', 'Adds letters that sound alike to the search: ث ≈ س, ت ≈ ط.'),
-                      do_: S('Bir kez tıklayınca açılır, sayaçlar büyür; tekrar tıklayınca kapanır.', 'One click turns it on and the counters grow; a second click turns it off.') },
-                    { target: '#stdResultSurface .column-headers-bar', place: 'bottom',
-                      title: S('Sütunlar', 'Columns'),
-                      body: S('Her satırda solda <b>Sonuç</b> ve <b>Kategori</b>, sağda o sonucun ait olduğu <b>Madde Başı</b> ve <b>Sözlük</b> bulunur.',
-                              'Each row shows the <b>Result</b> and its <b>Category</b> on the left, and on the right the <b>Headword</b> it belongs to and the <b>Dictionary</b>.'),
-                      do_: S('Satırın sol yarısı sonuca, sağ yarısı madde başına gider; üzerine gelince hangisi olduğu yazar.', 'The left half of a row opens the result, the right half the headword; hover and the row tells you which.') },
-                    { target: '#sec-exact .section-header', place: 'bottom',
-                      title: S('Bölümler', 'Sections'),
-                      body: S('Sonuçlar yedi bölümde gelir: Tam Eşleşmeler, Çekimli Biçimler, Sözlükselleşmiş Çekimli Formlar, Türemiş Biçimler, Birleşik Kelimeler, İbareler, Kısmi Eşleşmeler. Gri pil ne olduğunu ve bir örneği söyler.',
-                              'Results come in seven sections: Exact Matches, Inflected Forms, Lexicalized Inflected Forms, Derived Forms, Compounds, Phrases, Partial Matches. The grey pill explains each with an example.'),
-                      do_: S('Başlığa tıklayınca bölüm katlanır; pildeki ✕ açıklamayı gizler, ⓘ geri getirir.', 'Click the header to collapse the section; ✕ on the pill hides the description, ⓘ brings it back.') },
-                    { target: '#content-exact .row-card', place: 'bottom',
-                      title: S('Bir sonuç satırı', 'A result row'),
-                      body: S('Kelimeler hep ikili: bordo kutu Osmanlıca, gri kutu Latin okunuşu. Soldaki renkli şerit sözlüğü temsil eder.',
-                              'Words always come in pairs: the claret box is the Ottoman spelling, the grey box its Latin reading. The coloured strip on the left stands for the dictionary.'),
-                      do_: S('Herhangi bir kelime kutusunun üzerine gelin: <b>Yeni sekmede ara</b>, <b>Aynı kökten kelimeler</b> ve <b>Morfolojik analiz</b> menüsü açılır. Satıra tıklayınca madde sayfası açılır.',
-                             'Hover any word box: a menu with <b>Search in a new tab</b>, <b>Words from the same root</b> and <b>Morphological analysis</b> opens. Click the row to open the entry page.') },
-                    { target: '#content-exact .row-card .copy-btn', place: 'left',
-                      title: S('Atıf yap', 'Cite'),
-                      body: S('Bu sonucun künyesi hazırdır: eser, yazar, yıl, cilt, sayfa.', 'The citation for this result is ready: title, author, year, volume, page.'),
-                      do_: S('Tıklayın, APA / Chicago / Harvard\'dan birini seçin, "Künyeyi kopyala" deyin.', 'Click, choose APA / Chicago / Harvard and press "Copy citation".') },
-                    { target: '#stdResultSurface .fuzzy-container', place: 'top',
-                      title: S('Yine de bulamadıysanız', 'Still not found?'),
-                      body: S('Sayfanın sonunda iki yardımcı var: <b>Benzer Eşleşmeleri Tara</b> aramayı gevşetip yakın yazımları getirir; <b>Kütüphaneniz LexiQamus\'a üye mi?</b> kurumsal erişimi anlatır.',
-                              'Two helpers at the end of the page: <b>Scan Similar Matches</b> loosens the search and brings in close spellings; <b>Does your library subscribe?</b> explains institutional access.'),
-                      do_: S('Turuncu butona tıklayın: gevşetilmiş arama sonuçları aynı sayfada listelenir.', 'Click the orange button: the loosened results are listed on the same page.') },
-                ],
-                popup: [
-                    { target: {frame: '#embedFrame', sel: '.header-top'}, place: 'bottom',
-                      title: S('Madde sayfası', 'The entry page'),
-                      body: S('Bir sonuca tıklayınca açılan pencere. Solda maddenin alındığı <b>sözlük</b>, yanında <b>ana madde › alt madde</b> yolu.',
-                              'The window that opens when you click a result. On the left the <b>dictionary</b> the entry comes from, beside it the <b>main entry › sub-entry</b> path.'),
-                      do_: S('Mavi ana maddeye tıklayınca o maddeye geçersiniz; sağ üstteki ✕ ya da Esc pencereyi kapatır.', 'Click the blue main entry to jump to it; ✕ at the top right or Esc closes the window.') },
-                    { target: {frame: '#embedFrame', sel: '.lang-tabs'}, place: 'bottom',
-                      title: S('Dil sekmeleri', 'Language tabs'),
-                      body: S('OTM orijinal görsel, TR Modern Türkçe, OCR tanınan metin, TRL dört sistemde transliterasyon; kalanlar on dile çeviri.',
-                              'OTM is the original image, TR modern Turkish, OCR the recognised text, TRL transliteration in four systems; the rest are translations into ten languages.'),
-                      do_: S('Bir sekmeye tıklayın: ilgili bölüm açılır ve sayfa oraya kayar. Sağdaki "Tümünü Aç" hepsini birden açar.', 'Click a tab: the matching section opens and the page scrolls to it. "Expand All" on the right opens everything at once.') },
-                    { target: {frame: '#embedFrame', sel: '#view-original .image-viewport'}, place: 'right',
-                      title: S('Orijinal görsel', 'The original image'),
-                      body: S('Sözlük sayfasının kendisi. <b>Yeşil</b> kutu açık madde, <b>mavi</b> kutu bağlı olduğu ana madde, <b>turuncu</b> kutular alt maddeler ve ibareler.',
-                              'The dictionary page itself. The <b>green</b> box is the open entry, the <b>blue</b> box its main entry, <b>orange</b> boxes are sub-entries and phrases.'),
-                      do_: S('Bir kutunun üzerine gelin: Osmanlıca yazımı ve Latin okunuşu bir kartta çıkar; karttaki ünlem ile hata bildirirsiniz. İki yandaki oklar önceki / sonraki maddeye geçer.',
-                             'Hover a box: its Ottoman spelling and Latin reading appear in a card; the exclamation mark in the card reports an error. The arrows on either side move to the previous / next entry.') },
-                    { target: {frame: '#embedFrame', sel: '#view-modern-tr .text-panel'}, place: 'top',
-                      title: S('Modern Türkçe transkripsiyon', 'Modern Turkish transcription'),
-                      body: S('Görselin Latin harfli okunuşu; renkler görseldekiyle aynı. Altı noktalı çizili kelimeler tıklanabilir. Görsel dışındaki her metin yapay zekâ üretimidir, o yüzden <b>düzeltilebilir</b>.',
-                              'The Latin-script reading of the image; colours match the image. Dotted-underlined words are clickable. Every text apart from the image is AI-generated, which is why it <b>can be corrected</b>.'),
-                      do_: S('Bir kelimeye tıklayın: OCR, dört transliterasyon ve on çevirideki karşılıkları yan panelde açılır. <b>Düzenle</b> ile metni yerinde düzeltip <b>Kaydet</b> deyin; "Kaynak" düğmeleri künyeyi kopyalar.',
-                             'Click a word: its equivalents in the OCR, four transliterations and ten translations open in a side panel. Use <b>Edit</b> to fix the text in place and <b>Save</b>; the "Source" buttons copy the citation.') },
-                    { target: {frame: '#embedFrame', sel: '.popup-footer .nav-container'}, place: 'top',
-                      title: S('Madde · Sütun · Sayfa', 'Entry · Column · Page'),
-                      body: S('Açık maddenin sözlükteki yeri: kaçıncı madde, hangi sütun, hangi sayfa.', 'Where the open entry sits in the dictionary: which entry, which column, which page.'),
-                      do_: S('Bir birime tıklayın: görselin yanındaki oklar artık madde madde değil sütun sütun ya da sayfa sayfa gezinir.', 'Click a unit: the arrows beside the image then move column by column or page by page instead of entry by entry.') },
-                ]
-            };
-            // ---- ENGINE ----
-            const root = document.getElementById('lqTour');
-            const spot = root.querySelector('.lqt-spot'), card = root.querySelector('.lqt-card');
-            const elK = document.getElementById('lqtKicker'), elT = document.getElementById('lqtTitle'), elB = document.getElementById('lqtBody'), elD = document.getElementById('lqtDoText');
-            const elC = document.getElementById('lqtCount'), elDots = document.getElementById('lqtDots');
-            const bSkip = document.getElementById('lqtSkip'), bPrev = document.getElementById('lqtPrev'), bNext = document.getElementById('lqtNext'), bClose = root.querySelector('.lqt-close');
-            const chip = document.getElementById('lqTourChip'), chipText = document.getElementById('lqTourChipText');
-            let page = null, idx = 0, steps = [], raf = null;
-            function frameDoc(sel) { const f = document.querySelector(sel); try { return f && f.contentDocument; } catch (e) { return null; } }
-            function resolve(step) {
-                if (typeof step.target === 'string') { const el = document.querySelector(step.target); return el ? {el, doc: document, frame: null} : null; }
-                const d = frameDoc(step.target.frame); if (!d) return null;
-                const el = d.querySelector(step.target.sel); return el ? {el, doc: d, frame: document.querySelector(step.target.frame)} : null;
-            }
-            function rectOf(r) {
-                const b = r.el.getBoundingClientRect();
-                if (!r.frame) return {x: b.left, y: b.top, w: b.width, h: b.height};
-                const f = r.frame.getBoundingClientRect();
-                return {x: f.left + b.left, y: f.top + b.top, w: b.width, h: b.height};
-            }
-            function scrollTo(r, cb) {
-                const isFrame = !!r.frame;
-                const b = r.el.getBoundingClientRect();
-                const vh = isFrame ? r.frame.clientHeight : window.innerHeight;
-                if (b.top < 90 || b.bottom > vh - 240) {
-                    r.el.scrollIntoView({behavior: 'smooth', block: 'center'});
-                    setTimeout(cb, 420);
-                } else cb();
-            }
-            function place(step, rr) {
-                const pad = 8, vw = window.innerWidth, vh = window.innerHeight;
-                const sx = rr.x - pad, sy = rr.y - pad, sw = rr.w + 2 * pad, sh = rr.h + 2 * pad;
-                spot.style.left = sx + 'px'; spot.style.top = sy + 'px'; spot.style.width = sw + 'px'; spot.style.height = sh + 'px';
-                // card placement
-                card.className = 'lqt-card';
-                const cw = card.offsetWidth, ch = card.offsetHeight, gap = 16;
-                let p = step.place || 'bottom';
-                if (p === 'bottom' && sy + sh + gap + ch > vh - 10) p = (sy - gap - ch > 10) ? 'top' : 'right';
-                if (p === 'top' && sy - gap - ch < 10) p = (sy + sh + gap + ch < vh - 10) ? 'bottom' : 'right';
-                if (p === 'right' && sx + sw + gap + cw > vw - 10) p = 'left';
-                if (p === 'left' && sx - gap - cw < 10) p = 'bottom';
-                // nothing fits around a large target: put the card inside its bottom-right corner
-                if ((p === 'bottom' && sy + sh + gap + ch > vh - 10) || (p === 'top' && sy - gap - ch < 10)) p = 'inside';
-                let cx, cy;
-                if (p === 'inside') {
-                    cx = Math.max(12, Math.min(vw - cw - 12, sx + sw - cw - 18));
-                    cy = Math.max(12, Math.min(vh - ch - 12, sy + sh - ch - 18));
-                } else if (p === 'bottom' || p === 'top') {
-                    cx = sx + sw / 2 - cw / 2; cx = Math.max(12, Math.min(vw - cw - 12, cx));
-                    cy = p === 'bottom' ? sy + sh + gap : sy - gap - ch;
-                    card.style.setProperty('--ax', Math.max(18, Math.min(cw - 32, sx + sw / 2 - cx - 7)) + 'px');
-                } else {
-                    cy = sy + sh / 2 - ch / 2; cy = Math.max(12, Math.min(vh - ch - 12, cy));
-                    cx = p === 'right' ? sx + sw + gap : sx - gap - cw;
-                    card.style.setProperty('--ay', Math.max(18, Math.min(ch - 32, sy + sh / 2 - cy - 7)) + 'px');
-                }
-                card.classList.add('p-' + p);
-                card.style.left = cx + 'px'; card.style.top = cy + 'px';
-            }
-            function render() {
-                const step = steps[idx]; if (!step) return end();
-                const r = resolve(step); if (!r) { return (idx < steps.length - 1) ? go(idx + 1) : end(); }
-                const l = L();
-                elK.textContent = UI.kicker[l]; elT.innerHTML = step.title[l]; elB.innerHTML = step.body[l]; elD.innerHTML = step.do_[l];
-                elC.textContent = (idx + 1) + ' / ' + steps.length;
-                elDots.innerHTML = steps.map((_, i) => '<i class="' + (i === idx ? 'on' : '') + '"></i>').join('');
-                bSkip.textContent = UI.skip[l]; bPrev.textContent = UI.prev[l]; bNext.textContent = (idx === steps.length - 1) ? UI.done[l] : UI.next[l];
-                bPrev.style.display = idx === 0 ? 'none' : '';
-                scrollTo(r, () => { place(step, rectOf(r)); });
-            }
-            function go(i) { idx = i; render(); }
-            function start(p) {
-                steps = STEPS[p] || []; if (!steps.length) return;
-                page = p; idx = 0; root.classList.add('on'); chipText.textContent = UI.chip[L()];
-                render();
-            }
-            function end() { root.classList.remove('on'); page = null; }
-            bNext.onclick = () => (idx < steps.length - 1) ? go(idx + 1) : end();
-            bPrev.onclick = () => idx > 0 && go(idx - 1);
-            bSkip.onclick = end; bClose.onclick = end;
-            root.querySelector('.lqt-catch').onclick = () => {}; // block clicks underneath
-            document.addEventListener('keydown', e => {
-                if (!root.classList.contains('on')) return;
-                if (e.key === 'Escape') end();
-                else if (e.key === 'ArrowRight' || e.key === 'Enter') bNext.click();
-                else if (e.key === 'ArrowLeft') bPrev.click();
-            });
-            function refresh() { if (!root.classList.contains('on')) return; const s = steps[idx], r = s && resolve(s); if (r) place(s, rectOf(r)); }
-            window.addEventListener('resize', refresh);
-            window.addEventListener('scroll', () => { if (raf) return; raf = requestAnimationFrame(() => { raf = null; refresh(); }); }, true);
-            chip.onclick = () => { const s = (typeof currentViewState !== 'undefined') ? currentViewState : 'home'; start(s); };
-            // public hook, called from setViewState
-            window.lqTourOnState = function(s, isFirstEntry) {
-                end();
-                chipText.textContent = UI.chip[L()];
-                if (!isFirstEntry) { if (typeof lqEkualClose === 'function') lqEkualClose(); return; }
-                if (s === 'home' && typeof lqEkualOpen === 'function') {
-                    window.lqEkualThen = () => start('home');
-                    setTimeout(lqEkualOpen, 350);
-                    return;
-                }
-                if (!STEPS[s]) return;
-                if (s === 'popup') {
-                    const f = document.getElementById('embedFrame');
-                    let tries = 0;
-                    const wait = () => { const d = frameDoc('#embedFrame'); if (d && d.querySelector('.lang-tabs') && ++tries > 3) start('popup'); else if (tries < 60) { tries++; setTimeout(wait, 150); } };
-                    setTimeout(wait, 500);
-                } else setTimeout(() => start(s), 500);
-            };
-            // if the initial state was set before this ran, re-check now
-            if (document.body.classList.contains('first-entry') && typeof currentViewState !== 'undefined') window.lqTourOnState(currentViewState, true);
-        });
 
 
 
@@ -7078,7 +6795,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             var ov = document.getElementById('ekualOverlay');
             if (ov) ov.addEventListener('click', function(e) { if (e.target === ov) lqEkualClose(); });
+            if (document.body.classList.contains('first-entry') && typeof currentViewState !== 'undefined') window.lqOnViewState(currentViewState, true);
         });
+        // Duyuru yalnızca New Visitor > Home'da, sayfa açılırken çıkar
+        window.lqOnViewState = function(s, isFirstEntry) {
+            if (!isFirstEntry) { lqEkualClose(); return; }
+            if (s === 'home') setTimeout(lqEkualOpen, 350);
+        };
 
 </script>
 <!-- COGNATES POPUP OVERLAY -->
@@ -11267,19 +10990,7 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeEquival
 
 </script>
 <div id="gridKbdSpacer" style="height:0;width:1px;"></div>
-<div id="lqTour">
-<div class="lqt-catch"></div>
-<div class="lqt-spot"></div>
-<div class="lqt-card p-bottom">
-<button class="lqt-close" aria-label="Close">&times;</button>
-<div class="lqt-kicker" id="lqtKicker"></div>
-<div class="lqt-title" id="lqtTitle"></div>
-<div class="lqt-body" id="lqtBody"></div>
-<div class="lqt-do" id="lqtDo"><svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg><span id="lqtDoText"></span></div>
-<div class="lqt-foot"><span class="lqt-count" id="lqtCount"></span><span class="lqt-dots" id="lqtDots"></span><button class="lqt-btn skip" id="lqtSkip"></button><button class="lqt-btn prev" id="lqtPrev"></button><button class="lqt-btn next" id="lqtNext"></button></div>
-</div>
-</div>
-<button id="lqTourChip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg><span id="lqTourChipText">Sayfayı tanıt</span></button>
+
 
 </body>
 </html>
