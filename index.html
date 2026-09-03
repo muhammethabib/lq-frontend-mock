@@ -1120,6 +1120,7 @@
         .word-box:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 500 !important; }
         /* Aranan terimi sonuç kelimesinin içinde işaretle (TEMEL bölümü hariç) */
         /* Aranan terim: yalnızca renkle vurgulanır — çizgi/zemin yok, iki alfabede de aynı renk */
+        .wb-word { display: inline; }
         .term-hl { color: #0284c7; background: none; text-decoration: none; }
         /* Latin kutularda vurgu yok: kelime tek renk kalır */
         /* Latin kutularda vurgu yok: renk, kalınlık ve kontur devre dışı */
@@ -1160,7 +1161,7 @@
         .col-osm { width: 48%; display: flex; justify-content: flex-end; }
         .col-lat { width: 48%; display: flex; justify-content: flex-start; }
         .col-gap { width: 4%; }
-        .category-pill { font-size: 9px; font-weight: 800; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.05em; display: inline-block; width: 85px; text-align: center; }
+        .category-pill { font-size: 9px; font-weight: 800; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.05em; display: inline-block; min-width: 85px; width: auto; text-align: center; white-space: nowrap; }
         .style-ENTRY .category-pill { color: var(--col-entry-txt); background: rgba(20, 184, 166, 0.12); border: 1px solid var(--col-entry-bd); }
         .style-SUBENTRY .category-pill { color: var(--col-sub-txt); background: rgba(251, 191, 36, 0.12); border: 1px solid var(--col-sub-bd); }
         .style-RELATED .category-pill { color: var(--col-rel-txt); background: rgba(30, 58, 138, 0.12); border: 1px solid var(--col-rel-bd); }
@@ -3504,7 +3505,7 @@
             colDict: 'Sözlük',
             pageLabel: 'Sayfa',
             catEntry: 'Madde Başı',
-            catSubentry: 'Alt Madde Başı',
+            catSubentry: 'Alt Maddebaşı',
             catRelated: 'İlişkili',
             chipExact: 'Lemma',
             chipInflected: 'Çekimli Biçimler',
@@ -4848,7 +4849,7 @@
         /* --- FILTERS DROPDOWN (source design logic, wired to this page's filtering) --- */
         const wordCategories = [
             {name:"Headword",    i18n:"catEntry",    type:"wordtype", value:"ENTRY",    desc:"Results that appear as standalone dictionary headwords."},
-            {name:"Sub-headword", i18n:"catSubentry", type:"wordtype", value:"SUBENTRY", desc:"Words or expressions listed under another headword but having a distinct meaning of their own."},
+            {name:"Subheadword", i18n:"catSubentry", type:"wordtype", value:"SUBENTRY", desc:"Words or expressions listed under another headword but having a distinct meaning of their own."},
             {name:"Related",  i18n:"catRelated",  type:"wordtype", value:"RELATED",  desc:"Important concepts and expressions associated with the entry."}
         ];
         const matchCategories = [
@@ -4946,7 +4947,7 @@
         
         function catLabel(ty) {
             const key = ty === 'ENTRY' ? 'catEntry' : (ty === 'SUBENTRY' ? 'catSubentry' : 'catRelated');
-            const en = ty === 'ENTRY' ? 'HEADWORD' : (ty === 'SUBENTRY' ? 'SUB-HEADWORD' : 'RELATED');
+            const en = ty === 'ENTRY' ? 'HEADWORD' : (ty === 'SUBENTRY' ? 'SUBHEADWORD' : 'RELATED');
             return t(key, en);
         }
         // Sonuç kelimesinin içinde aranan terimin geçtiği yeri işaretler.
@@ -4966,7 +4967,9 @@
             if (!term || String(text).trim() === term) return text;
             const i = String(text).indexOf(term);
             if (i < 0) return text;
-            return String(text).slice(0, i) + '<span class="term-hl">' + term + '</span>' + String(text).slice(i + term.length);
+            // Kutu flex düzeninde olduğu için parçalar ayrı flex öğesi olur ve Arap harflerinin
+            // bitişmesi bozulur; bu yüzden kelimenin tamamını tek bir satır içi kapsayıcıya alıyoruz.
+            return '<span class="wb-word">' + String(text).slice(0, i) + '<span class="term-hl">' + term + '</span>' + String(text).slice(i + term.length) + '</span>';
         }
         function renderRow(w, isHidden, hl) {
             const hoverClass = `hover-${w.type.toLowerCase()}`;
