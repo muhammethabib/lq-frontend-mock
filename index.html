@@ -265,6 +265,11 @@
         .chip-icon.icon-large { width: 18px; height: 18px; transform: scale(1.5); }
         .chip-icon.icon-speaker { width: 20px !important; height: 20px !important; opacity: 1; }
         .plus-indicator { color: var(--sapphire); font-weight: 800; font-size: 13px; line-height: 1; transition: color 0.2s; }
+        /* Genişletme düğmelerindeki sayı rozeti: kaç sonuç ekleneceğini önceden gösterir */
+        .sl-count, .chip-count { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 18px;
+            padding: 0 6px; margin-left: 2px; border-radius: 999px; background: #e2e8f0; color: #475569;
+            font-size: 10.5px; font-weight: 800; letter-spacing: .2px; transition: background .2s, color .2s; }
+        .sounds-like-btn.active .sl-count, .chip-btn.active .chip-count { background: rgba(255,255,255,0.22); color: #fff; }
 
         /* ==== v81 KELIME ÇÖZÜCÜ AKORDEON (verbatim) ==== */
         .kcx-surface-header { padding: 24px 40px 8px 40px; position: relative; z-index: 95; display: flex; flex-direction: column; align-items: stretch; gap: 4px; }
@@ -2418,8 +2423,9 @@
                 <div class="expand-pill-container">
                     <span class="expand-label" data-i18n="expandLabel">EXPAND SEARCH</span>
                     <button class="chip-btn has-tooltip" onclick="toggleChip(this)">
-                        <span class="plus-indicator">+</span> <span data-i18n="soundsLike">Sounds Like</span>
+                        <span data-i18n="soundsLike">Similar Pronunciation</span>
                         <svg class="chip-icon icon-speaker" viewBox="0 0 24 24"><path d="M12 2C7.03 2 3 6.03 3 11v4c0 1.1.9 2 2 2h2v-6H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-2v6h2c1.1 0 2-.9 2-2v-4c0-4.97-4.03-9-9-9z"/></svg>
+                        <span class="chip-count">14</span>
                         <div class="custom-tooltip-source">
                             <span class="tooltip-desc" data-i18n="chipSoundsDesc">Expand with phonetically similar letters</span>
                             <span class="tooltip-example" data-i18n="chipSoundsEx" data-i18n-html="1">Ex: <span class="pill-badge"><b class="osm">ث</b> ≈ <b class="osm">س</b></span> <span class="pill-badge"><b class="osm">ت</b> ≈ <b class="osm">ط</b></span></span>
@@ -2601,7 +2607,7 @@
 <div class="stats-accent-bar"></div>
 <div class="stats-rows">
 <div class="stats-row"><span class="s-num">30</span><span class="s-verb" data-i18n="recordsFound"> Records Found.</span></div>
-<div class="stats-row"><span class="s-num2">9</span><span class="s-label" data-i18n="dictsScanned"> Dictionaries Scanned.</span></div>
+<div class="stats-row"><span class="s-num2">9</span><span class="s-label" data-i18n="dictsScanned"> Dictionaries (17 Volumes) Scanned.</span></div>
 </div>
 </div>
 </div>
@@ -2617,9 +2623,9 @@
     <div class="expand-row">
         <span class="spelling-section-label" data-i18n="expandLabel">EXPAND SEARCH</span>
         <button class="sounds-like-btn has-tooltip" id="soundsLikeBtn" onclick="toggleSoundsLike(this)">
-            <span class="sl-plus">+</span>
-            <span data-i18n="soundsLike">Sounds Like</span>
+            <span data-i18n="soundsLike">Similar Pronunciation</span>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.03 2 3 6.03 3 11v4c0 1.1.9 2 2 2h2v-6H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-2v6h2c1.1 0 2-.9 2-2v-4c0-4.97-4.03-9-9-9z"></path></svg>
+            <span class="sl-count">38</span>
             <div class="custom-tooltip-source">
                 <span class="tooltip-desc">Include phonetically similar letters</span>
                 <span class="tooltip-example">Ex: <span class="pill-badge"><b class="osm">ث</b> ≈ <b class="osm">س</b></span> <span class="pill-badge"><b class="osm">ت</b> ≈ <b class="osm">ط</b></span></span>
@@ -3457,9 +3463,9 @@
             phEng: 'İngilizce tanımları arayın...',
             searchResultsLabel: 'Arama Sonuçları',
             recordsFound: ' Sonuç Bulundu.',
-            dictsScanned: ' Sözlük Tarandı.',
+            dictsScanned: ' Sözlük (17 Cilt) Tarandı.',
             expandLabel: 'Aramayı Genişlet',
-            soundsLike: 'Benzer Sesler',
+            soundsLike: 'Benzer Telaffuz',
             jumpTo: 'GİT:',
             qlExact: 'Lemma',
             qlInflected: 'Çekimli Biçimler',
@@ -3512,7 +3518,7 @@
             colDict: 'Sözlük',
             pageLabel: 'Sayfa',
             catEntry: 'Madde Başı',
-            catSubentry: 'Alt Maddebaşı',
+            catSubentry: 'Alt Madde',
             catRelated: 'İlişkili',
             chipExact: 'Lemma',
             chipInflected: 'Çekimli Biçimler',
@@ -5209,10 +5215,54 @@
             document.getElementById('morphModal').classList.add('active'); 
         }
         const citeDictMeta = {
-            'Lugat-ı Naci':   { title: 'Lugat-ı Naci',  author: 'Muallim Naci',   year: '1901', volume: '1', publisher: 'Matbaa-i Amire', city: 'İstanbul' },
-            'Lugat-ı Naci, 1901': { title: 'Lugat-ı Naci', author: 'Muallim Naci', year: '1901', volume: '1', publisher: 'Matbaa-i Amire', city: 'İstanbul' },
-            'Kamus-ı Türki':  { title: 'Kamus-ı Türki', author: 'Şemseddin Sami', year: '1901', volume: '1', publisher: 'İkdam Matbaası', city: 'İstanbul' },
-            'Kamus-ı Türki, 1899': { title: 'Kamus-ı Türki', author: 'Şemseddin Sami', year: '1901', volume: '1', publisher: 'İkdam Matbaası', city: 'İstanbul' }
+            'Ahteri-i Kebir': { title: 'Ahteri-i Kebir', author: 'Ahterî Mustafa Efendi', year: '1826', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Ahteri-i Kebir, 1826': { title: 'Ahteri-i Kebir', author: 'Ahterî Mustafa Efendi', year: '1826', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Bianchi': { title: 'Bianchi', author: 'Thomas-Xavier Bianchi', year: '1846', volume: '2', publisher: 'Imprimerie Royale', city: 'Paris' },
+            'Bianchi, 1846': { title: 'Bianchi', author: 'Thomas-Xavier Bianchi', year: '1846', volume: '2', publisher: 'Imprimerie Royale', city: 'Paris' },
+            'Burhan-ı Katı': { title: 'Burhan-ı Katı', author: 'Mütercim Âsım Efendi', year: '1797', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Burhan-ı Katı, 1797': { title: 'Burhan-ı Katı', author: 'Mütercim Âsım Efendi', year: '1797', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Hindoglu': { title: 'Hindoglu', author: 'Artin Hindoğlu', year: '1838', volume: '1', publisher: 'F. Beck', city: 'Viyana' },
+            'Hindoglu, 1838': { title: 'Hindoglu', author: 'Artin Hindoğlu', year: '1838', volume: '1', publisher: 'F. Beck', city: 'Viyana' },
+            'Kamus-ı Alam': { title: 'Kamus-ı Alam', author: 'Şemseddin Sami', year: '1889', volume: '6', publisher: 'Mihran Matbaası', city: 'İstanbul' },
+            'Kamus-ı Alam, 1889': { title: 'Kamus-ı Alam', author: 'Şemseddin Sami', year: '1889', volume: '6', publisher: 'Mihran Matbaası', city: 'İstanbul' },
+            'Kamus-ı Ebüssürur': { title: 'Kamus-ı Ebüssürur', author: 'Ebüssürur Efendi', year: '1884', volume: '1', publisher: 'Matbaa-i Osmaniye', city: 'İstanbul' },
+            'Kamus-ı Ebüssürur, 1884': { title: 'Kamus-ı Ebüssürur', author: 'Ebüssürur Efendi', year: '1884', volume: '1', publisher: 'Matbaa-i Osmaniye', city: 'İstanbul' },
+            'Kamus-ı Fransevi': { title: 'Kamus-ı Fransevi', author: 'Şemseddin Sami', year: '1882', volume: '2', publisher: 'Mihran Matbaası', city: 'İstanbul' },
+            'Kamus-ı Fransevi, 1882': { title: 'Kamus-ı Fransevi', author: 'Şemseddin Sami', year: '1882', volume: '2', publisher: 'Mihran Matbaası', city: 'İstanbul' },
+            'Kamus-ı Osmani': { title: 'Kamus-ı Osmani', author: 'Mehmed Salahi', year: '1896', volume: '4', publisher: 'Mahmud Bey Matbaası', city: 'İstanbul' },
+            'Kamus-ı Osmani, 1896': { title: 'Kamus-ı Osmani', author: 'Mehmed Salahi', year: '1896', volume: '4', publisher: 'Mahmud Bey Matbaası', city: 'İstanbul' },
+            'Kamus-ı Türki': { title: 'Kamus-ı Türki', author: 'Şemseddin Sami', year: '1899', volume: '1', publisher: 'İkdam Matbaası', city: 'İstanbul' },
+            'Kamus-ı Türki, 1899': { title: 'Kamus-ı Türki', author: 'Şemseddin Sami', year: '1899', volume: '1', publisher: 'İkdam Matbaası', city: 'İstanbul' },
+            'Lehçe-i Osmani': { title: 'Lehçe-i Osmani', author: 'Ahmed Vefik Paşa', year: '1888', volume: '1', publisher: 'Mahmud Bey Matbaası', city: 'İstanbul' },
+            'Lehçe-i Osmani, 1888': { title: 'Lehçe-i Osmani', author: 'Ahmed Vefik Paşa', year: '1888', volume: '1', publisher: 'Mahmud Bey Matbaası', city: 'İstanbul' },
+            'Lehçetü\'l-Lügat': { title: 'Lehçetü\'l-Lügat', author: 'Mehmed Esad Efendi', year: '1802', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Lehçetü\'l-Lügat, 1802': { title: 'Lehçetü\'l-Lügat', author: 'Mehmed Esad Efendi', year: '1802', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Lugat-ı Cudi': { title: 'Lugat-ı Cudi', author: 'İbrahim Cûdî Efendi', year: '1913', volume: '1', publisher: 'Karadeniz Matbaası', city: 'Trabzon' },
+            'Lugat-ı Cudi, 1913': { title: 'Lugat-ı Cudi', author: 'İbrahim Cûdî Efendi', year: '1913', volume: '1', publisher: 'Karadeniz Matbaası', city: 'Trabzon' },
+            'Lugat-ı Ebuzziya': { title: 'Lugat-ı Ebuzziya', author: 'Ebüzziya Tevfik', year: '1888', volume: '1', publisher: 'Matbaa-i Ebüzziya', city: 'İstanbul' },
+            'Lugat-ı Ebuzziya, 1888': { title: 'Lugat-ı Ebuzziya', author: 'Ebüzziya Tevfik', year: '1888', volume: '1', publisher: 'Matbaa-i Ebüzziya', city: 'İstanbul' },
+            'Lugat-ı Naci': { title: 'Lugat-ı Naci', author: 'Muallim Naci', year: '1901', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Lugat-ı Naci, 1901': { title: 'Lugat-ı Naci', author: 'Muallim Naci', year: '1901', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Lügat-ı Remzi': { title: 'Lügat-ı Remzi', author: 'Hüseyin Remzi', year: '1888', volume: '2', publisher: 'Hüseyin Remzi Matbaası', city: 'İstanbul' },
+            'Lügat-ı Remzi, 1888': { title: 'Lügat-ı Remzi', author: 'Hüseyin Remzi', year: '1888', volume: '2', publisher: 'Hüseyin Remzi Matbaası', city: 'İstanbul' },
+            'Meninski': { title: 'Meninski', author: 'Franciszek Meniński', year: '1680', volume: '3', publisher: 'Typographia Orientalis', city: 'Viyana' },
+            'Meninski, 1680': { title: 'Meninski', author: 'Franciszek Meniński', year: '1680', volume: '3', publisher: 'Typographia Orientalis', city: 'Viyana' },
+            'Müntahabat-ı Lügat-ı Osmaniye': { title: 'Müntahabat-ı Lügat-ı Osmaniye', author: 'Cemiyet-i İlmiye-i Osmaniye', year: '1852', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Müntahabat-ı Lügat-ı Osmaniye, 1852': { title: 'Müntahabat-ı Lügat-ı Osmaniye', author: 'Cemiyet-i İlmiye-i Osmaniye', year: '1852', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Mütercim Asım': { title: 'Mütercim Asım', author: 'Mütercim Âsım Efendi', year: '1817', volume: '3', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Mütercim Asım, 1817': { title: 'Mütercim Asım', author: 'Mütercim Âsım Efendi', year: '1817', volume: '3', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Redhouse': { title: 'Redhouse', author: 'James W. Redhouse', year: '1890', volume: '1', publisher: 'A. H. Boyajian', city: 'İstanbul' },
+            'Redhouse, 1890': { title: 'Redhouse', author: 'James W. Redhouse', year: '1890', volume: '1', publisher: 'A. H. Boyajian', city: 'İstanbul' },
+            'Resimli Kamus-ı Osmani': { title: 'Resimli Kamus-ı Osmani', author: 'Ali Seydi', year: '1911', volume: '2', publisher: 'Matbaa-i Kütübhane-i Cihan', city: 'İstanbul' },
+            'Resimli Kamus-ı Osmani, 1911': { title: 'Resimli Kamus-ı Osmani', author: 'Ali Seydi', year: '1911', volume: '2', publisher: 'Matbaa-i Kütübhane-i Cihan', city: 'İstanbul' },
+            'Tuhfe-i Vehbi': { title: 'Tuhfe-i Vehbi', author: 'Sünbülzade Vehbi', year: '1798', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Tuhfe-i Vehbi, 1798': { title: 'Tuhfe-i Vehbi', author: 'Sünbülzade Vehbi', year: '1798', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Tuhfe-i Şahidi': { title: 'Tuhfe-i Şahidi', author: 'İbrahim Şahidî', year: '1515', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Tuhfe-i Şahidi, 1515': { title: 'Tuhfe-i Şahidi', author: 'İbrahim Şahidî', year: '1515', volume: '1', publisher: 'Matbaa-i Âmire', city: 'İstanbul' },
+            'Vankulu': { title: 'Vankulu', author: 'Vankulu Mehmed Efendi', year: '1729', volume: '2', publisher: 'Darü\'t-Tıbaati\'l-Âmire', city: 'İstanbul' },
+            'Vankulu, 1729': { title: 'Vankulu', author: 'Vankulu Mehmed Efendi', year: '1729', volume: '2', publisher: 'Darü\'t-Tıbaati\'l-Âmire', city: 'İstanbul' },
+            'Şemseddin Sami': { title: 'Şemseddin Sami', author: 'Şemseddin Sami', year: '1899', volume: '1', publisher: 'İkdam Matbaası', city: 'İstanbul' },
+            'Şemseddin Sami, 1899': { title: 'Şemseddin Sami', author: 'Şemseddin Sami', year: '1899', volume: '1', publisher: 'İkdam Matbaası', city: 'İstanbul' },
         };
         let citeFormats = { apa: '', chicago: '', harvard: '' };
         function openCiteModal(e, btn) {
