@@ -491,7 +491,7 @@
         /* ===================== EKİP SAYFASI =====================
            Ayrı bir katman değil; sayfa akışında normal bir bölüm. Açıldığında
            arama alanı ve sonuç yüzeyleri gizlenir, marka bloğu üstte kalır. */
-        .team-page { max-width: 940px; margin: 8px auto 60px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        .team-page { max-width: 720px; margin: 8px auto 64px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
         body.team-page-open .nav-tabs,
         body.team-page-open .search-container,
         body.team-page-open #stickyNav { display: none !important; }
@@ -499,29 +499,30 @@
         .team-head h2 { font-size: 27px; font-weight: 800; color: var(--brand-sapphire); margin: 0 0 8px; letter-spacing: -0.3px; }
         .team-head p { font-size: 14.5px; color: #64748b; margin: 0; line-height: 1.6; }
 
-        .team-lead { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 26px; }
-        .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-        .team-card { display: flex; gap: 14px; align-items: flex-start; background: #fff;
-            border: 1px solid #e8edf4; border-radius: 12px; padding: 16px; transition: box-shadow .15s, border-color .15s; }
+        /* Herkes alt alta: tek sütun, biyografiye geniş yer */
+        .team-lead { display: flex; flex-direction: column; gap: 14px; margin-bottom: 14px; }
+        .team-grid { display: flex; flex-direction: column; gap: 14px; }
+        .team-card { display: flex; gap: 18px; align-items: flex-start; background: #fff;
+            border: 1px solid #e8edf4; border-radius: 12px; padding: 20px 22px; transition: box-shadow .15s, border-color .15s; }
         .team-card:hover { border-color: #cbd5e1; box-shadow: 0 3px 12px rgba(8,37,103,0.07); }
-        .team-lead .team-card { padding: 20px; }
+        .team-lead .team-card { padding: 22px 24px; }
         .team-photo { flex: none; width: 58px; height: 58px; border-radius: 50%; object-fit: cover;
             background: var(--brand-sapphire); color: #fff; display: flex; align-items: center; justify-content: center;
             font-size: 18px; font-weight: 700; letter-spacing: 0.5px; overflow: hidden; }
-        .team-lead .team-photo { width: 74px; height: 74px; font-size: 22px; }
-        .team-grid .team-photo { width: 48px; height: 48px; font-size: 15px; background: #64748b; }
+        .team-lead .team-photo { width: 72px; height: 72px; font-size: 21px; }
+        .team-grid .team-photo { width: 60px; height: 60px; font-size: 17px; background: #64748b; }
         .team-info { min-width: 0; }
         .team-name { font-size: 15px; font-weight: 700; color: #0f172a; line-height: 1.3; margin-bottom: 3px; }
         .team-lead .team-name { font-size: 17px; }
         .team-role { font-size: 11.5px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
             color: var(--brand-claret); margin-bottom: 8px; }
         .team-grid .team-role { color: #94a3b8; margin-bottom: 6px; }
-        .team-bio { font-size: 13px; color: #64748b; line-height: 1.6; }
-        .team-grid .team-bio { font-size: 12.5px; }
-        @media (max-width: 860px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+        .team-bio { font-size: 13.5px; color: #64748b; line-height: 1.75; }
+        .team-grid .team-bio { font-size: 13px; }
         @media (max-width: 640px) {
-            .team-lead, .team-grid { grid-template-columns: 1fr; }
-        }
+            .team-card, .team-lead .team-card { padding: 16px; gap: 14px; }
+            .team-lead .team-photo { width: 58px; height: 58px; font-size: 18px; }
+            .team-grid .team-photo { width: 50px; height: 50px; font-size: 15px; }
         }
 
         /* Geniş ekranda üst köşe öğeleri sayfa sütununa değil pencere kenarına yaslanır */
@@ -2367,7 +2368,7 @@
       <div class="team-info">
         <div class="team-name">Ahmet Abdullah Saçmalı</div>
         <div class="team-role" data-i18n="teamFounder">Founder</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderAS">Short biography to be added.</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderAS">Biography to be added. This placeholder shows roughly how much room a three or four sentence biography takes in this layout, so the spacing can be judged before the real text arrives. It can cover academic background, the person's role in the project and their main areas of work.</div>
       </div>
     </div>
 
@@ -2376,7 +2377,7 @@
       <div class="team-info">
         <div class="team-name">Habib Saçmalı</div>
         <div class="team-role" data-i18n="teamCoordinator">Project Coordinator</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderHS">Short biography to be added.</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderHS">Biography to be added. This placeholder shows roughly how much room a three or four sentence biography takes in this layout, so the spacing can be judged before the real text arrives. It can cover academic background, the person's role in the project and their main areas of work.</div>
       </div>
     </div>
 
@@ -2387,7 +2388,7 @@
       <div class="team-info">
         <div class="team-name">Buse Büyükkeskin</div>
         <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderBB">Short biography to be added.</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderBB">Biography to be added. This placeholder shows roughly how much room a three or four sentence biography takes in this layout, so the spacing can be judged before the real text arrives. It can cover academic background, the person's role in the project and their main areas of work.</div>
       </div>
     </div>
 
@@ -2396,7 +2397,7 @@
       <div class="team-info">
         <div class="team-name">Enis Tombul</div>
         <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderET">Short biography to be added.</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderET">Biography to be added. This placeholder shows roughly how much room a three or four sentence biography takes in this layout, so the spacing can be judged before the real text arrives. It can cover academic background, the person's role in the project and their main areas of work.</div>
       </div>
     </div>
 
@@ -2405,7 +2406,7 @@
       <div class="team-info">
         <div class="team-name">Hatice Tüfekçi</div>
         <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderHT">Short biography to be added.</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderHT">Biography to be added. This placeholder shows roughly how much room a three or four sentence biography takes in this layout, so the spacing can be judged before the real text arrives. It can cover academic background, the person's role in the project and their main areas of work.</div>
       </div>
     </div>
 
@@ -2414,7 +2415,7 @@
       <div class="team-info">
         <div class="team-name">Seher Bulut Köse</div>
         <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderSBK">Short biography to be added.</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderSBK">Biography to be added. This placeholder shows roughly how much room a three or four sentence biography takes in this layout, so the spacing can be judged before the real text arrives. It can cover academic background, the person's role in the project and their main areas of work.</div>
       </div>
     </div>
 
@@ -2423,7 +2424,7 @@
       <div class="team-info">
         <div class="team-name">Zeyneb Odabaş</div>
         <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
-        <div class="team-bio" data-i18n="teamBioPlaceholderZO">Short biography to be added.</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderZO">Biography to be added. This placeholder shows roughly how much room a three or four sentence biography takes in this layout, so the spacing can be judged before the real text arrives. It can cover academic background, the person's role in the project and their main areas of work.</div>
       </div>
     </div>
 
@@ -3596,13 +3597,13 @@
             teamFounder: 'Kurucu',
             teamCoordinator: 'Proje Koordinatörü',
             teamAssistant: 'Proje Asistanı',
-            teamBioPlaceholderAS: 'Kısa biyografi eklenecek.',
-            teamBioPlaceholderHS: 'Kısa biyografi eklenecek.',
-            teamBioPlaceholderBB: 'Kısa biyografi eklenecek.',
-            teamBioPlaceholderSBK: 'Kısa biyografi eklenecek.',
-            teamBioPlaceholderZO: 'Kısa biyografi eklenecek.',
-            teamBioPlaceholderHT: 'Kısa biyografi eklenecek.',
-            teamBioPlaceholderET: 'Kısa biyografi eklenecek.',
+            teamBioPlaceholderAS: 'Biyografi eklenecek. Bu yer tutucu, üç dört cümlelik bir biyografinin bu düzende ne kadar yer kapladığını göstermek için duruyor; gerçek metin gelmeden boşlukların nasıl durduğu görülebilsin diye. Akademik geçmiş, kişinin projedeki rolü ve başlıca çalışma alanları burada anlatılabilir.',
+            teamBioPlaceholderHS: 'Biyografi eklenecek. Bu yer tutucu, üç dört cümlelik bir biyografinin bu düzende ne kadar yer kapladığını göstermek için duruyor; gerçek metin gelmeden boşlukların nasıl durduğu görülebilsin diye. Akademik geçmiş, kişinin projedeki rolü ve başlıca çalışma alanları burada anlatılabilir.',
+            teamBioPlaceholderBB: 'Biyografi eklenecek. Bu yer tutucu, üç dört cümlelik bir biyografinin bu düzende ne kadar yer kapladığını göstermek için duruyor; gerçek metin gelmeden boşlukların nasıl durduğu görülebilsin diye. Akademik geçmiş, kişinin projedeki rolü ve başlıca çalışma alanları burada anlatılabilir.',
+            teamBioPlaceholderSBK: 'Biyografi eklenecek. Bu yer tutucu, üç dört cümlelik bir biyografinin bu düzende ne kadar yer kapladığını göstermek için duruyor; gerçek metin gelmeden boşlukların nasıl durduğu görülebilsin diye. Akademik geçmiş, kişinin projedeki rolü ve başlıca çalışma alanları burada anlatılabilir.',
+            teamBioPlaceholderZO: 'Biyografi eklenecek. Bu yer tutucu, üç dört cümlelik bir biyografinin bu düzende ne kadar yer kapladığını göstermek için duruyor; gerçek metin gelmeden boşlukların nasıl durduğu görülebilsin diye. Akademik geçmiş, kişinin projedeki rolü ve başlıca çalışma alanları burada anlatılabilir.',
+            teamBioPlaceholderHT: 'Biyografi eklenecek. Bu yer tutucu, üç dört cümlelik bir biyografinin bu düzende ne kadar yer kapladığını göstermek için duruyor; gerçek metin gelmeden boşlukların nasıl durduğu görülebilsin diye. Akademik geçmiş, kişinin projedeki rolü ve başlıca çalışma alanları burada anlatılabilir.',
+            teamBioPlaceholderET: 'Biyografi eklenecek. Bu yer tutucu, üç dört cümlelik bir biyografinin bu düzende ne kadar yer kapladığını göstermek için duruyor; gerçek metin gelmeden boşlukların nasıl durduğu görülebilsin diye. Akademik geçmiş, kişinin projedeki rolü ve başlıca çalışma alanları burada anlatılabilir.',
 
             menuWhat: 'LexiQamus Nedir?',
             menuGuide: 'Kullanım Kılavuzu',
