@@ -487,6 +487,53 @@
         .side-sublink:hover { background: #fff; color: #082567; font-weight: 600; }
 
         @media (max-width: 640px) { .side-menu { width: 84vw; } }
+
+        /* ===================== EKİP SAYFASI =====================
+           Menüden açılan tam ekran katman. Üstte kurucu ve koordinatör geniş kart,
+           altta proje asistanları daha küçük ızgarada. */
+        .team-overlay { position: fixed; inset: 0; z-index: 7200; background: rgba(15,23,42,0.5);
+            opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s;
+            display: flex; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 40px 20px; }
+        body.team-open .team-overlay { opacity: 1; visibility: visible; }
+        .team-sheet { width: 100%; max-width: 940px; background: #fff; border-radius: 16px;
+            box-shadow: 0 30px 70px -30px rgba(15,23,42,0.5); padding: 34px 38px 40px; position: relative;
+            transform: translateY(14px); transition: transform .28s cubic-bezier(.4,0,.2,1);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        body.team-open .team-sheet { transform: none; }
+        .team-close { position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; border-radius: 9px;
+            border: 1px solid #e2e8f0; background: #f8fafc; color: #475569; cursor: pointer; font-size: 20px;
+            line-height: 1; display: flex; align-items: center; justify-content: center; transition: all .15s; }
+        .team-close:hover { background: #eef2f7; color: var(--brand-sapphire); }
+        .team-head { text-align: center; margin-bottom: 30px; }
+        .team-head h2 { font-size: 27px; font-weight: 800; color: var(--brand-sapphire); margin: 0 0 8px; letter-spacing: -0.3px; }
+        .team-head p { font-size: 14.5px; color: #64748b; margin: 0; line-height: 1.6; }
+
+        .team-lead { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 26px; }
+        .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .team-card { display: flex; gap: 14px; align-items: flex-start; background: #f8fafc;
+            border: 1px solid #e8edf4; border-radius: 12px; padding: 16px; transition: box-shadow .15s, border-color .15s; }
+        .team-card:hover { border-color: #cbd5e1; box-shadow: 0 3px 12px rgba(8,37,103,0.07); }
+        .team-lead .team-card { padding: 20px; }
+        .team-photo { flex: none; width: 58px; height: 58px; border-radius: 50%; object-fit: cover;
+            background: var(--brand-sapphire); color: #fff; display: flex; align-items: center; justify-content: center;
+            font-size: 18px; font-weight: 700; letter-spacing: 0.5px; overflow: hidden; }
+        .team-lead .team-photo { width: 74px; height: 74px; font-size: 22px; }
+        .team-grid .team-photo { width: 48px; height: 48px; font-size: 15px; background: #64748b; }
+        .team-info { min-width: 0; }
+        .team-name { font-size: 15px; font-weight: 700; color: #0f172a; line-height: 1.3; margin-bottom: 3px; }
+        .team-lead .team-name { font-size: 17px; }
+        .team-role { font-size: 11.5px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+            color: var(--brand-claret); margin-bottom: 8px; }
+        .team-grid .team-role { color: #94a3b8; margin-bottom: 6px; }
+        .team-bio { font-size: 13px; color: #64748b; line-height: 1.6; }
+        .team-grid .team-bio { font-size: 12.5px; }
+        @media (max-width: 860px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) {
+            .team-overlay { padding: 16px 12px; }
+            .team-sheet { padding: 26px 20px 30px; }
+            .team-lead, .team-grid { grid-template-columns: 1fr; }
+        }
+
         /* Geniş ekranda üst köşe öğeleri sayfa sütununa değil pencere kenarına yaslanır */
         @media (min-width: 1200px) {
             button.menu-btn { position: fixed; top: 14px; left: 16px; }
@@ -2271,6 +2318,7 @@
   </div>
   <div class="side-nav">
     <a class="side-link" href="https://www.lexiqamus.com/lexiqamus/about" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><circle cx="12" cy="7.6" r="1.5" fill="var(--cut)"></circle><path d="M12 11.2v6" fill="none" stroke="var(--cut)" stroke-width="2.4"></path></svg><span data-i18n="menuAbout">About</span></a>
+    <a class="side-link" href="#" onclick="lqSetActive(this); lqOpenTeam(); return false;"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.2" r="3.6" fill="currentColor"></circle><path d="M2.4 20.2c0-3.4 2.9-5.6 6.6-5.6s6.6 2.2 6.6 5.6z" fill="currentColor"></path><circle cx="17.4" cy="7.4" r="2.7" fill="currentColor" opacity="0.55"></circle><path d="M17.4 12.6c2.9 0 4.7 1.8 4.7 4.4h-4.2" fill="currentColor" opacity="0.55"></path></svg><span data-i18n="menuTeam">Team</span></a>
     <a class="side-link" href="https://www.lexiqamus.com/lexiqamus/what-is-lexiqamus" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M9.3 9.1a2.8 2.8 0 0 1 5.4.9c0 1.9-2.7 2.3-2.7 4" fill="none" stroke="var(--cut)" stroke-width="2.1"></path><circle cx="12" cy="17.3" r="1.4" fill="var(--cut)"></circle></svg><span data-i18n="menuWhat">What is LexiQamus?</span></a>
     <a class="side-link" href="https://www.lexiqamus.com/lexiqamus/instructions" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M5.5 3.8A1.8 1.8 0 0 1 7.3 2h6.9l4.3 4.3V20a1.8 1.8 0 0 1-1.8 1.8H7.3A1.8 1.8 0 0 1 5.5 20z" fill="currentColor"></path><path d="M14 2.4V7h4.4" fill="none" stroke="var(--cut)" stroke-width="1.5"></path><path d="M9 12.5h6M9 16h6" fill="none" stroke="var(--cut)" stroke-width="1.8"></path></svg><span data-i18n="menuGuide">Instructions</span></a>
     <a class="side-link" href="https://www.lexiqamus.com/lexiqamus/updates" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M3 21l1.2-4.8L15.4 5l3.6 3.6L7.8 19.8 3 21z" fill="currentColor"></path><path d="M16.6 3.8l1-1a1.9 1.9 0 0 1 2.7 0l.9.9a1.9 1.9 0 0 1 0 2.7l-1 1z" fill="currentColor"></path><path d="M14.2 6.2l3.6 3.6" fill="none" stroke="var(--cut)" stroke-width="1.5"></path></svg><span data-i18n="menuUpdates">Updates</span></a>
@@ -2286,6 +2334,82 @@
     <a class="side-link" href="https://www.lexiqamus.com/lexiqamus/institutional-subscribers" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M4.3 20.4V8.4L12 3.6l7.7 4.8v12z" fill="currentColor"></path><path d="M9.9 20.4v-4.2a2.1 2.1 0 0 1 4.2 0v4.2" fill="none" stroke="var(--cut)" stroke-width="1.7"></path><circle cx="9.2" cy="11" r="1.1" fill="var(--cut)"></circle><circle cx="14.8" cy="11" r="1.1" fill="var(--cut)"></circle><path d="M2.4 21h19.2" fill="none" stroke="currentColor" stroke-width="2.3"></path></svg><span data-i18n="menuInstitutional">Institutional Subscribers</span></a>
   </div>
 </nav>
+<div class="team-overlay" id="teamOverlay" onclick="if(event.target===this) lqCloseTeam()">
+  <div class="team-sheet" role="dialog" aria-modal="true" aria-labelledby="teamTitle">
+    <button class="team-close" onclick="lqCloseTeam()" aria-label="Close">&times;</button>
+    <div class="team-head">
+      <h2 id="teamTitle" data-i18n="teamTitle">Team</h2>
+      <p data-i18n="teamIntro">The people behind LexiQamus.</p>
+    </div>
+    <div class="team-lead">
+    <div class="team-card">
+      <div class="team-photo">AS</div>
+      <div class="team-info">
+        <div class="team-name">Ahmet Abdullah Saçmalı</div>
+        <div class="team-role" data-i18n="teamFounder">Founder</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderAS">Short biography to be added.</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">HS</div>
+      <div class="team-info">
+        <div class="team-name">Habib Saçmalı</div>
+        <div class="team-role" data-i18n="teamCoordinator">Project Coordinator</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderHS">Short biography to be added.</div>
+      </div>
+    </div>
+
+    </div>
+    <div class="team-grid">
+    <div class="team-card">
+      <div class="team-photo">BB</div>
+      <div class="team-info">
+        <div class="team-name">Buse Büyükkeskin</div>
+        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderBB">Short biography to be added.</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">SBK</div>
+      <div class="team-info">
+        <div class="team-name">Seher Bulut Köse</div>
+        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderSBK">Short biography to be added.</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">ZO</div>
+      <div class="team-info">
+        <div class="team-name">Zeyneb Odabaş</div>
+        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderZO">Short biography to be added.</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">HT</div>
+      <div class="team-info">
+        <div class="team-name">Hatice Tüfekçi</div>
+        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderHT">Short biography to be added.</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo">ET</div>
+      <div class="team-info">
+        <div class="team-name">Enis Tombul</div>
+        <div class="team-role" data-i18n="teamAssistant">Project Assistant</div>
+        <div class="team-bio" data-i18n="teamBioPlaceholderET">Short biography to be added.</div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
 <div class="page-container">
 <button class="menu-btn" id="menuBtn" aria-label="Menu" onclick="lqToggleMenu()"><span></span><span></span><span></span></button>
 <a class="legacy-link" href="https://www.lexiqamus.com/" target="_blank" rel="noopener" title="Open the previous stable version" data-i18n-title="legacyTitle"><span data-i18n="legacyLink">Classic version</span><svg viewBox="0 0 24 24"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg></a>
@@ -3479,6 +3603,20 @@
             menuSignUp: 'Kaydol',
             menuSignIn: 'Giriş Yap',
             menuAbout: 'Hakkımızda',
+            menuTeam: 'Ekip',
+            teamTitle: 'Ekip',
+            teamIntro: 'LexiQamus\'u hazırlayan ekip.',
+            teamFounder: 'Kurucu',
+            teamCoordinator: 'Proje Koordinatörü',
+            teamAssistant: 'Proje Asistanı',
+            teamBioPlaceholderAS: 'Kısa biyografi eklenecek.',
+            teamBioPlaceholderHS: 'Kısa biyografi eklenecek.',
+            teamBioPlaceholderBB: 'Kısa biyografi eklenecek.',
+            teamBioPlaceholderSBK: 'Kısa biyografi eklenecek.',
+            teamBioPlaceholderZO: 'Kısa biyografi eklenecek.',
+            teamBioPlaceholderHT: 'Kısa biyografi eklenecek.',
+            teamBioPlaceholderET: 'Kısa biyografi eklenecek.',
+
             menuWhat: 'LexiQamus Nedir?',
             menuGuide: 'Kullanım Kılavuzu',
             menuUpdates: 'Güncellemeler',
@@ -6848,6 +6986,8 @@
         // ===================== YAN MENÜ =====================
         function lqToggleMenu() { document.body.classList.toggle('menu-open'); lqSyncMenuLang(); }
         function lqCloseMenu() { document.body.classList.remove('menu-open'); }
+        function lqOpenTeam() { lqCloseMenu(); document.body.classList.add('team-open'); }
+        function lqCloseTeam() { document.body.classList.remove('team-open'); }
         function lqSetActive(el) { document.querySelectorAll('.side-nav .side-link').forEach(a => a.classList.remove('active')); el.classList.add('active'); }
         function lqToggleSub() {
             const sub = document.getElementById('lqSubmenu'), btn = document.getElementById('lqSubToggle');
@@ -6855,7 +6995,7 @@
             btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         }
         function lqSyncMenuLang() { var l = (typeof currentLang !== 'undefined') ? currentLang : 'en'; syncLangSwitches(l); }
-        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lqCloseMenu(); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { lqCloseTeam(); lqCloseMenu(); } });
         document.addEventListener('DOMContentLoaded', lqSyncMenuLang);
 
 
