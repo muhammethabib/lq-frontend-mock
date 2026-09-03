@@ -515,6 +515,11 @@
         .ekual-mini.on { background: #fdf5f8; border-color: #f2dde4; }
         .ekual-mini-head { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
         .ekual-mini-head svg { width: 17px; height: 17px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .ekual-uni { position: relative; flex-shrink: 0; width: 22px; height: 20px; display: flex; align-items: center; justify-content: center; margin-right: 6px; }
+        .ekual-uni svg.uni { width: 20px; height: 20px; stroke: #123a8c; stroke-width: 1.8; }
+        .ekual-uni-lock { position: absolute; right: -9px; bottom: -6px; width: 17px; height: 17px; border-radius: 50%;
+            background: #10b981; border: 2px solid #f4f7fd; display: flex; align-items: center; justify-content: center; }
+        .ekual-uni-lock svg { width: 11px; height: 11px; stroke: #fff; stroke-width: 2.5; }
         .ekual-mini.off .ekual-mini-head svg { stroke: #123a8c; }
         .ekual-mini.on .ekual-mini-head svg { stroke: var(--brand-claret); }
         .ekual-mini-title { font-size: 13px; font-weight: 800; letter-spacing: -.1px; }
@@ -2240,12 +2245,12 @@
   <div class="ekual-card" role="dialog" aria-modal="true" aria-labelledby="ekualTitle">
     <button class="ekual-close" aria-label="Kapat" onclick="lqEkualClose()">&times;</button>
     <span class="ekual-badge" data-i18n="ekBadge">TÜBİTAK ULAKBİM · EKUAL</span>
-    <div class="ekual-title" id="ekualTitle" data-i18n="ekTitle">Free access for every university in Türkiye</div>
+    <div class="ekual-title" id="ekualTitle" data-i18n="ekTitle">Great News: Full Access for All Universities in Türkiye and TRNC!</div>
     <div class="ekual-body" data-i18n="ekBody" data-i18n-html="1">LexiQamus has been open to all universities in Türkiye and the TRNC since the beginning of 2026, under the <b>TÜBİTAK ULAKBİM EKUAL Project</b>. From deciphering hard-to-read words to their meanings across different dictionaries, you have unlimited access to all content.</div>
     <div class="ekual-cards">
       <div class="ekual-mini off">
         <span class="ekual-pill" data-i18n="ekPill">No VPN or proxy</span>
-        <div class="ekual-mini-head"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg><span class="ekual-mini-title" data-i18n="ekOffTitle">Off campus</span></div>
+        <div class="ekual-mini-head"><span class="ekual-uni"><svg class="uni" viewBox="0 0 24 24"><path d="M3 21h18"></path><path d="M6 21V10"></path><path d="M10 21V10"></path><path d="M14 21V10"></path><path d="M18 21V10"></path><polygon points="12 3 21 8 3 8"></polygon></svg><span class="ekual-uni-lock"><svg viewBox="0 0 24 24"><rect width="15" height="10" x="4.5" y="12" rx="2.5"></rect><path d="M8 12V7.6a4.3 4.3 0 0 1 8.4-1.3"></path><circle cx="12" cy="17" r="1.35" fill="#fff" stroke="none"></circle></svg></span></span><span class="ekual-mini-title" data-i18n="ekOffTitle">Off campus</span></div>
         <div class="ekual-mini-text" data-i18n="ekOffText" data-i18n-html="1">Sign up once with your <b>.edu.tr</b> e-mail, no institutional authorization needed.</div>
       </div>
       <div class="ekual-mini on">
@@ -2327,7 +2332,7 @@
 <div class="acct-access">
 <span class="acct-uni">
 <svg class="uni" viewBox="0 0 24 24"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg>
-<span class="acct-uni-lock"><svg viewBox="0 0 24 24"><rect width="16" height="10" x="4" y="12" rx="2.5"></rect><path d="M8 12V8a4 4 0 0 1 7.6-1.7"></path><circle cx="12" cy="17" r="1.3" fill="#fff" stroke="none"></circle></svg></span>
+<span class="acct-uni-lock"><svg viewBox="0 0 24 24"><rect width="15" height="10" x="4.5" y="12" rx="2.5"></rect><path d="M8 12V7.6a4.3 4.3 0 0 1 8.4-1.3"></path><circle cx="12" cy="17" r="1.35" fill="#fff" stroke="none"></circle></svg></span>
 </span>
 <div class="acct-access-text" data-i18n="acctInviteSub" data-i18n-html="1">Off-campus, <span class="hl">VPN-free</span> unlimited access.</div>
 </div>
@@ -3500,7 +3505,7 @@
             acctInviteCta: 'Hesap Oluştur',
             legacyLink: 'Klasik sürüm',
             ekBadge: 'TÜBİTAK ULAKBİM · EKUAL',
-            ekTitle: 'Türkiye\'deki tüm üniversitelerin erişimine açık',
+            ekTitle: 'Müjde: Türkiye ve KKTC\'deki Tüm Üniversiteler için Tam Erişim!',
             ekBody: 'LexiQamus, 2026 yılı başından itibaren <b>TÜBİTAK ULAKBİM EKUAL Projesi</b> kapsamında Türkiye ve KKTC\'deki tüm üniversitelerin erişimine açılmıştır. Okunması zor kelimelerin çözümünden farklı sözlüklerdeki anlamlarına kadar tüm içeriklerden sınırsız olarak yararlanabilirsiniz.',
             ekPill: 'VPN ve proxy gerekmez',
             ekOffTitle: 'Kurum dışından',
