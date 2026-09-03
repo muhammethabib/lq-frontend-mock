@@ -1177,11 +1177,10 @@
         /* Sağ sütun (madde başı): dolgusuz kutu + bir tık küçük punto — hiyerarşi buradan geliyor */
         .col-span-7 .word-box { background: transparent !important; border-color: transparent !important; box-shadow: none !important; min-width: 82px; padding: 5px 14px; }
         .col-span-7 .osm-box { font-size: 20px !important; }
-        /* Madde başı, oktan hemen sonra başlasın: geniş kapta ok ile kelime arasındaki boşluk açılmasın */
-        .head-cell { padding-left: 6px !important; }
-        /* Sütun başlığı da içerikle aynı hizada başlasın */
-        .column-headers-bar .col-header-item.col-entry { justify-content: flex-start; text-align: left; padding-left: 14px; }
-        .head-cell .word-pair-unit { width: auto; }
+        /* Madde başı çifti sabit genişlikte ve bölgesinde ortalı: Osmanlıca kutunun sağ kenarı ile
+           Latin kutunun sol kenarı bütün satırlarda aynı hizada kalır (soldaki sütunla aynı mantık),
+           sütun başlığı da doğal olarak üstüne denk gelir. */
+        .head-cell .word-pair-unit { width: 320px; }
         .col-span-7 .latin-box { font-size: 14px !important; color: #475569 !important; }
         .col-span-7 .word-box:hover { transform: translateY(-1px) scale(1.02); background: rgba(15,23,42,0.035) !important; box-shadow: none !important; }
         .col-span-7 .osm-box:hover { color: var(--brand-red) !important; }
@@ -5096,7 +5095,7 @@
                 
                 <div class="col-span-7 grid grid-cols-10 zone-interactive hover-entry pr-6">
                     <div class="col-span-1 flex justify-center items-center"><svg class="arrow-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
-                    <div class="col-span-6 flex justify-start items-center py-4 px-2 head-cell">
+                    <div class="col-span-6 flex justify-center items-center py-4 px-2 head-cell">
                         <div class="word-pair-unit">
                             <div class="col-osm">
                                 <div class="word-box osm-box ottoman text-2xl pb-1 relative group ${misspelledClass}" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" ${clickEvent}>
@@ -6682,7 +6681,7 @@
                 </div>
                 <div class="col-span-7 grid grid-cols-10 zone-interactive hover-entry pr-6">
                     <div class="col-span-1 flex justify-center items-center"><svg class="arrow-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
-                    <div class="col-span-6 flex justify-start items-center py-4 px-2 head-cell">
+                    <div class="col-span-6 flex justify-center items-center py-4 px-2 head-cell">
                         <div class="word-pair-unit">
                             <div class="col-osm"><div class="word-box osm-box ottoman text-2xl pb-1 relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" onclick="handleWordClick(event, this)">${w.e_o2}</div></div>
                             <div class="col-gap"></div>
