@@ -730,10 +730,17 @@
         .page-container { position: relative; width: 100%; max-width: var(--lq-max); margin-left: auto; margin-right: auto; }
         /* Sonuç tablosu kabı genişlese de satır içeriği belli bir noktadan sonra yayılmasın:
            kart tam genişlikte kalır, satırlar en fazla 1240px'e kadar açılır ve ortalanır. */
-        /* Ek yan boşluk, her bloğun kendi iç boşluğuna EKLENİR (ezmez). */
-        .unified-result-surface .surface-header { padding-inline: calc(40px + max(0px, (100% - 1320px) / 2)); }
-        .unified-result-surface .surface-list-area { padding-inline: calc(16px + max(0px, (100% - 1272px) / 2)); }
-        .unified-result-surface .column-headers-bar { padding-inline: calc(16px + max(0px, (100% - 1272px) / 2)); }
+        /* --- KART İÇİ YAN BOŞLUKLAR ---
+           İçerik en fazla 1240px; artan pay sola 1/3, sağa 2/3 dağıtılır (sol kenardaki renkli şerit
+           güçlü bir çapa olduğu için sol boşluk daha dar olunca denge kuruluyor). Dar ekranlarda taban 24px. */
+        .unified-result-surface .surface-header,
+        .unified-result-surface .surface-list-area,
+        .unified-result-surface .column-headers-bar,
+        .kcx-surface-header,
+        .search-container {
+            padding-left: max(24px, (100% - 1240px) * 0.34);
+            padding-right: max(24px, (100% - 1240px) * 0.66);
+        }
         body.p-4 { padding-left: var(--lq-gutter); padding-right: var(--lq-gutter); }
         @media (max-width: 640px) { :root { --lq-gutter: 16px; } }
 
