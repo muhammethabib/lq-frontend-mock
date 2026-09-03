@@ -322,8 +322,12 @@
         /* Variant 2 chevron: ghost circle — light, not heavy; leads the meta cluster */
         /* Akordeon açacı satırın başında, sonuç kelimesinin solundaki boşlukta durur; kelime hizası bozulmaz.
            Bölüm başlığındaki chevrondan ayrışsın diye: bordo tonlu daire + çift chevron (birden çok kayıt anlamı). */
-        .kc-cand-chevron { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 9px; background: #f7e3ec; color: var(--brand-claret); border: 1px solid #edcfdd; display: flex; align-items: center; justify-content: center; transition: transform 0.25s ease, background 0.2s, color 0.2s; flex-shrink: 0; }
+        .kc-cand-chevron { position: absolute; left: 2px; top: 50%; transform: translateY(-50%); width: 21px; height: 27px; border-radius: 0 8px 8px 0; background: #f7e3ec; color: var(--brand-claret); border: 1px solid #edcfdd; display: flex; align-items: center; justify-content: center; transition: transform 0.25s ease, background 0.2s, color 0.2s; flex-shrink: 0; }
         .kc-cand-header:hover .kc-cand-chevron { background: #f0d4e1; color: #7a1338; }
+        /* Uzun sonuçlar sola doğru büyüyüp açacın üstüne binmesin diye kutuya sınır:
+           taşarsa satır kaymak yerine kelime alt satıra iner. */
+        .kc-cand-header .col-osm .word-box { max-width: 146px; }
+        .kc-cand-header .col-lat .word-box { max-width: 190px; }
         .kc-candidate.open .kc-cand-chevron { transform: translateY(-50%) rotate(180deg); background: var(--brand-claret); color: #fff; border-color: var(--brand-claret); }
 
         /* Single peeking "sheet" under a closed accordion header — signals contents before hover */
