@@ -704,6 +704,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            letter-spacing: 0.6px;
             padding: 7px 16px;
             border-radius: 99px;
             border: 1px solid #cbd5e1;
@@ -2423,8 +2424,8 @@
                 <div class="expand-pill-container">
                     <span class="expand-label" data-i18n="expandLabel">EXPAND SEARCH</span>
                     <button class="chip-btn has-tooltip" onclick="toggleChip(this)">
-                        <span data-i18n="soundsLike">Similar Pronunciation</span>
                         <svg class="chip-icon icon-speaker" viewBox="0 0 24 24"><path d="M12 2C7.03 2 3 6.03 3 11v4c0 1.1.9 2 2 2h2v-6H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-2v6h2c1.1 0 2-.9 2-2v-4c0-4.97-4.03-9-9-9z"/></svg>
+                        <span data-i18n="soundsLike">SIMILAR PRONUNCIATION</span>
                         <span class="chip-count">14</span>
                         <div class="custom-tooltip-source">
                             <span class="tooltip-desc" data-i18n="chipSoundsDesc">Expand with phonetically similar letters</span>
@@ -2623,12 +2624,12 @@
     <div class="expand-row">
         <span class="spelling-section-label" data-i18n="expandLabel">EXPAND SEARCH</span>
         <button class="sounds-like-btn has-tooltip" id="soundsLikeBtn" onclick="toggleSoundsLike(this)">
-            <span data-i18n="soundsLike">Similar Pronunciation</span>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.03 2 3 6.03 3 11v4c0 1.1.9 2 2 2h2v-6H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-2v6h2c1.1 0 2-.9 2-2v-4c0-4.97-4.03-9-9-9z"></path></svg>
+            <span data-i18n="soundsLike">SIMILAR PRONUNCIATION</span>
             <span class="sl-count">38</span>
             <div class="custom-tooltip-source">
-                <span class="tooltip-desc">Include phonetically similar letters</span>
-                <span class="tooltip-example">Ex: <span class="pill-badge"><b class="osm">ث</b> ≈ <b class="osm">س</b></span> <span class="pill-badge"><b class="osm">ت</b> ≈ <b class="osm">ط</b></span></span>
+                <span class="tooltip-desc" data-i18n="chipSoundsDesc">Expand with phonetically similar letters</span>
+                <span class="tooltip-example" data-i18n="chipSoundsEx" data-i18n-html="1">Ex: <span class="pill-badge"><b class="osm">ث</b> ≈ <b class="osm">س</b></span> <span class="pill-badge"><b class="osm">ت</b> ≈ <b class="osm">ط</b></span></span>
             </div>
         </button>
     </div>
@@ -3465,7 +3466,7 @@
             recordsFound: ' Sonuç Bulundu.',
             dictsScanned: ' Sözlük (17 Cilt) Tarandı.',
             expandLabel: 'Aramayı Genişlet',
-            soundsLike: 'Benzer Telaffuz',
+            soundsLike: 'BENZER TELAFFUZ',
             jumpTo: 'GİT:',
             qlExact: 'Lemma',
             qlInflected: 'Çekimli Biçimler',
