@@ -770,7 +770,7 @@
         /* Ek yan boşluk, her bloğun kendi iç boşluğuna EKLENİR (ezmez). */
         .unified-result-surface .surface-header { padding-inline: calc(40px + max(0px, (100% - 1320px) / 2)); }
         .unified-result-surface .surface-list-area { padding-inline: calc(16px + max(0px, (100% - 1272px) / 2)); }
-        .unified-result-surface .column-headers-bar { padding-inline: max(0px, (100% - 1240px) / 2); }
+        .unified-result-surface .column-headers-bar { padding-inline: calc(16px + max(0px, (100% - 1272px) / 2)); }
         body.p-4 { padding-left: var(--lq-gutter); padding-right: var(--lq-gutter); }
         @media (max-width: 640px) { :root { --lq-gutter: 16px; } }
 
@@ -1030,9 +1030,9 @@
         }
         .col-header-inner { 
             display: grid; 
-            grid-template-columns: 3.607fr 100px 0.614fr 3.686fr 2.091fr;
+            grid-template-columns: 330px 100px 0.614fr 3.35fr 2.42fr;
             align-items: stretch; 
-            padding: 0 16px;
+            padding: 0;
             position: relative; z-index: 1; 
         }
         .col-header-item { 
@@ -1180,7 +1180,17 @@
         /* Madde başı çifti sabit genişlikte ve bölgesinde ortalı: Osmanlıca kutunun sağ kenarı ile
            Latin kutunun sol kenarı bütün satırlarda aynı hizada kalır (soldaki sütunla aynı mantık),
            sütun başlığı da doğal olarak üstüne denk gelir. */
-        .head-cell .word-pair-unit { width: 320px; }
+        .head-cell .word-pair-unit { width: 100%; max-width: 320px; }
+        /* --- SATIR İÇİ BOŞLUK DAĞILIMI ---
+           Sol kenardaki boş koridor fazlaydı: sonuç çifti sabit genişliğe alınıp sola yaslandı.
+           Madde başı bölgesi daraltıldı, sözlük bölgesi genişletildi; böylece ok ile madde başı
+           ve madde başı ile sözlük arasındaki boşluklar küçüldü. Kalan pay, iki yarıyı ayıran
+           okun soluna toplanıyor (orada boşluk "ayrım" olarak okunuyor). */
+        .row-card .col-span-5 > .flex-1 { flex: 0 1 330px; padding-left: 10px; padding-right: 0; }
+        .row-card .col-span-5 .word-pair-unit { width: 100%; max-width: 300px; margin-right: auto; }
+        .row-card .col-span-7 > .col-span-6 { grid-column: span 5 / span 5; }
+        .row-card .col-span-7 > .col-span-3 { grid-column: span 4 / span 4; }
+        .col-header-inner { grid-template-columns: 330px 100px 1.82fr 2.98fr 3.30fr; }
         .col-span-7 .latin-box { font-size: 14px !important; color: #475569 !important; }
         .col-span-7 .word-box:hover { transform: translateY(-1px) scale(1.02); background: rgba(15,23,42,0.035) !important; box-shadow: none !important; }
         .col-span-7 .osm-box:hover { color: var(--brand-red) !important; }
