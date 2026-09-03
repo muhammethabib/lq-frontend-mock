@@ -493,6 +493,46 @@
         .side-menu-foot .classic:hover { color: #082567; }
         .side-menu-foot .classic svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
         @media (max-width: 640px) { .side-menu { width: 82vw; } }
+        /* ===================== EKUAL AÇILIŞ DUYURUSU ===================== */
+        #ekualOverlay { position: fixed; inset: 0; z-index: 7200; display: none; align-items: center; justify-content: center;
+            padding: 24px; background: rgba(15,23,42,0.55); backdrop-filter: blur(2px); font-family: 'Inter', sans-serif; }
+        #ekualOverlay.open { display: flex; }
+        .ekual-card { position: relative; width: 560px; max-width: 100%; max-height: 90vh; overflow-y: auto; background: #fff;
+            border-radius: 20px; padding: 34px 38px 28px; box-shadow: 0 40px 90px -30px rgba(15,23,42,0.55);
+            animation: ekualIn .28s cubic-bezier(.34,1.4,.64,1); }
+        @keyframes ekualIn { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+        .ekual-close { position: absolute; top: 14px; right: 14px; width: 30px; height: 30px; border-radius: 50%; border: none;
+            background: #f1f5f9; color: #94a3b8; font-size: 16px; line-height: 1; cursor: pointer; transition: all .15s; }
+        .ekual-close:hover { background: #fee2e2; color: #ef4444; }
+        .ekual-badge { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+            color: #671615; background: #fdf2f4; border: 1px solid #f6dde2; padding: 4px 11px; border-radius: 999px; margin-bottom: 14px; }
+        .ekual-title { font-size: 22px; font-weight: 800; letter-spacing: -.3px; color: var(--brand-sapphire); line-height: 1.25; margin-bottom: 10px; }
+        .ekual-body { font-size: 14px; line-height: 1.6; color: #475569; margin-bottom: 20px; }
+        .ekual-body b { color: #0f172a; font-weight: 700; }
+        .ekual-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
+        .ekual-mini { border-radius: 14px; padding: 14px 16px; border: 1px solid; }
+        .ekual-mini.off { background: #f4f7fd; border-color: #dbe4f5; }
+        .ekual-mini.on { background: #fdf5f8; border-color: #f2dde4; }
+        .ekual-mini-head { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+        .ekual-mini-head svg { width: 17px; height: 17px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .ekual-mini.off .ekual-mini-head svg { stroke: #123a8c; }
+        .ekual-mini.on .ekual-mini-head svg { stroke: var(--brand-claret); }
+        .ekual-mini-title { font-size: 13px; font-weight: 800; letter-spacing: -.1px; }
+        .ekual-mini.off .ekual-mini-title { color: #123a8c; }
+        .ekual-mini.on .ekual-mini-title { color: var(--brand-claret); }
+        .ekual-mini-text { font-size: 12.5px; line-height: 1.5; color: #64748b; }
+        .ekual-mini-text b { color: #334155; font-weight: 700; }
+        .ekual-pill { display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase;
+            color: #fff; background: #123a8c; padding: 3px 8px; border-radius: 999px; margin-bottom: 9px; }
+        .ekual-actions { display: flex; align-items: center; gap: 12px; }
+        .ekual-cta { display: inline-flex; align-items: center; gap: 10px; background: #123a8c; color: #fff; border: none;
+            border-radius: 12px; padding: 12px 22px 12px 14px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: all .15s; }
+        .ekual-cta:hover { background: #164aad; transform: translateY(-1px); }
+        .ekual-cta .av { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.16); display: flex; align-items: center; justify-content: center; }
+        .ekual-cta svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+        .ekual-later { background: none; border: none; font-family: inherit; font-size: 13px; font-weight: 600; color: #94a3b8; cursor: pointer; padding: 6px; }
+        .ekual-later:hover { color: #475569; }
+        @media (max-width: 620px) { .ekual-cards { grid-template-columns: 1fr; } .ekual-card { padding: 28px 22px 22px; } }
         /* ===================== NEW VISITOR TOUR ===================== */
         #lqTour { position: fixed; inset: 0; z-index: 7000; display: none; font-family: 'Inter', sans-serif; }
         #lqTour.on { display: block; }
@@ -2196,6 +2236,29 @@
 </div>
 </div>
 </div>
+<div id="ekualOverlay">
+  <div class="ekual-card" role="dialog" aria-modal="true" aria-labelledby="ekualTitle">
+    <button class="ekual-close" aria-label="Kapat" onclick="lqEkualClose()">&times;</button>
+    <span class="ekual-badge" data-i18n="ekBadge">TÜBİTAK ULAKBİM · EKUAL</span>
+    <div class="ekual-title" id="ekualTitle" data-i18n="ekTitle">Free access for every university in Türkiye</div>
+    <div class="ekual-body" data-i18n="ekBody" data-i18n-html="1">LexiQamus has been open to all universities in Türkiye and the TRNC since the beginning of 2026, under the <b>TÜBİTAK ULAKBİM EKUAL Project</b>. From deciphering hard-to-read words to their meanings across different dictionaries, you have unlimited access to all content.</div>
+    <div class="ekual-cards">
+      <div class="ekual-mini off">
+        <span class="ekual-pill" data-i18n="ekPill">No VPN or proxy</span>
+        <div class="ekual-mini-head"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg><span class="ekual-mini-title" data-i18n="ekOffTitle">Off campus</span></div>
+        <div class="ekual-mini-text" data-i18n="ekOffText" data-i18n-html="1">Sign up once with your <b>.edu.tr</b> e-mail, no institutional authorization needed.</div>
+      </div>
+      <div class="ekual-mini on">
+        <div class="ekual-mini-head"><svg viewBox="0 0 24 24"><path d="M3 21h18"></path><path d="M6 21V10"></path><path d="M10 21V10"></path><path d="M14 21V10"></path><path d="M18 21V10"></path><polygon points="12 3 21 8 3 8"></polygon></svg><span class="ekual-mini-title" data-i18n="ekOnTitle">On campus</span></div>
+        <div class="ekual-mini-text" data-i18n="ekOnText">On the campus network you can reach everything directly, without even creating an account.</div>
+      </div>
+    </div>
+    <div class="ekual-actions">
+      <button class="ekual-cta" onclick="lqEkualClose()"><span class="av"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span><span data-i18n="ekCta">Create your account</span></button>
+      <button class="ekual-later" onclick="lqEkualClose()" data-i18n="ekLater">Later</button>
+    </div>
+  </div>
+</div>
 <div class="menu-scrim" onclick="lqCloseMenu()"></div>
 <nav class="side-menu" id="sideMenu" aria-label="Menu">
   <div class="side-menu-top">
@@ -3436,6 +3499,16 @@
             acctInviteSub: 'Kurum dışından <span class="hl">VPN\'siz</span> sınırsız erişim',
             acctInviteCta: 'Hesap Oluştur',
             legacyLink: 'Klasik sürüm',
+            ekBadge: 'TÜBİTAK ULAKBİM · EKUAL',
+            ekTitle: 'Türkiye\'deki tüm üniversitelerin erişimine açık',
+            ekBody: 'LexiQamus, 2026 yılı başından itibaren <b>TÜBİTAK ULAKBİM EKUAL Projesi</b> kapsamında Türkiye ve KKTC\'deki tüm üniversitelerin erişimine açılmıştır. Okunması zor kelimelerin çözümünden farklı sözlüklerdeki anlamlarına kadar tüm içeriklerden sınırsız olarak yararlanabilirsiniz.',
+            ekPill: 'VPN ve proxy gerekmez',
+            ekOffTitle: 'Kurum dışından',
+            ekOffText: 'Kurumsal yetkilendirmeyle uğraşmadan <b>.edu.tr</b> e-posta adresinizle bir kez kaydolun.',
+            ekOnTitle: 'Kampüs ağından',
+            ekOnText: 'Kampüs ağı üzerinden bağlandığınızda hesap dahi açmadan tüm içeriklere doğrudan erişebilirsiniz.',
+            ekCta: 'Hesabınızı Oluşturun',
+            ekLater: 'Daha sonra',
             menuSignUp: 'Hesap Oluştur',
             menuSignIn: 'Giriş Yap',
             menuLabelApp: 'LexiQamus',
@@ -6954,7 +7027,13 @@
             window.lqTourOnState = function(s, isFirstEntry) {
                 end();
                 chipText.textContent = UI.chip[L()];
-                if (!isFirstEntry || !STEPS[s]) return;
+                if (!isFirstEntry) { if (typeof lqEkualClose === 'function') lqEkualClose(); return; }
+                if (s === 'home' && typeof lqEkualOpen === 'function') {
+                    window.lqEkualThen = () => start('home');
+                    setTimeout(lqEkualOpen, 350);
+                    return;
+                }
+                if (!STEPS[s]) return;
                 if (s === 'popup') {
                     const f = document.getElementById('embedFrame');
                     let tries = 0;
@@ -6980,6 +7059,21 @@
             document.querySelectorAll('.side-menu-foot .lang-mini button').forEach(b => b.classList.toggle('on', b.dataset.mlang === l)); }
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lqCloseMenu(); });
         document.addEventListener('DOMContentLoaded', lqSyncMenuLang);
+
+
+        // ===================== EKUAL AÇILIŞ DUYURUSU =====================
+        function lqEkualOpen() { document.getElementById('ekualOverlay').classList.add('open'); }
+        function lqEkualClose() {
+            document.getElementById('ekualOverlay').classList.remove('open');
+            if (window.lqEkualThen) { const f = window.lqEkualThen; window.lqEkualThen = null; setTimeout(f, 250); }
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('ekualOverlay').classList.contains('open')) lqEkualClose();
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            var ov = document.getElementById('ekualOverlay');
+            if (ov) ov.addEventListener('click', function(e) { if (e.target === ov) lqEkualClose(); });
+        });
 
 </script>
 <!-- COGNATES POPUP OVERLAY -->
