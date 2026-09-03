@@ -306,7 +306,7 @@
            up EXACTLY where it sits in every other row. Bordo left border + a resting blue-tinted fill
            mark it as "full / expandable" even before hover. Badge + chevron sit right after the RESULT
            column (not pushed to the far right) so the reader's eye doesn't have to travel far. */
-        .kc-cand-header { display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); align-items: stretch; background: #fdf7fa; border: 1px solid transparent; border-bottom: 1px solid #f6eaf0; border-left: 4px solid var(--brand-claret); border-radius: 8px; cursor: pointer; transition: all 0.2s ease; user-select: none; position: relative; z-index: 2; }
+        .kc-cand-header { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); align-items: stretch; background: #fdf7fa; border: 1px solid transparent; border-bottom: 1px solid #f6eaf0; border-left: 4px solid var(--brand-claret); border-radius: 8px; cursor: pointer; transition: all 0.2s ease; user-select: none; position: relative; z-index: 2; }
         .kc-cand-header:hover { background-color: #faeff5; box-shadow: 0 8px 20px -8px rgba(0,0,0,0.1); border-color: #e3c9d6; }
         .kc-candidate.open .kc-cand-header { background-color: #f7e8f0; border-color: #ecd3e0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
         .kc-cand-word { grid-column: span 5 / span 5; display: flex; align-items: center; padding-top: 1rem; padding-bottom: 1rem; min-width: 0; }
@@ -320,9 +320,11 @@
         .kc-candidate.open .kc-cand-badge { color: #8f7a86; }
         .kc-candidate.open .kc-cand-badge b { color: var(--brand-claret); }
         /* Variant 2 chevron: ghost circle — light, not heavy; leads the meta cluster */
-        .kc-cand-chevron { width: 30px; height: 30px; border-radius: 50%; background: #eef2f7; color: #64748b; display: flex; align-items: center; justify-content: center; transition: transform 0.25s ease, background 0.2s, color 0.2s; flex-shrink: 0; }
-        .kc-cand-header:hover .kc-cand-chevron { background: #e2e8f0; color: #334155; }
-        .kc-candidate.open .kc-cand-chevron { transform: rotate(180deg); background: #cbd5e1; color: #1e293b; }
+        /* Akordeon açacı satırın başında, sonuç kelimesinin solundaki boşlukta durur; kelime hizası bozulmaz.
+           Bölüm başlığındaki chevrondan ayrışsın diye: bordo tonlu daire + çift chevron (birden çok kayıt anlamı). */
+        .kc-cand-chevron { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 9px; background: #f7e3ec; color: var(--brand-claret); border: 1px solid #edcfdd; display: flex; align-items: center; justify-content: center; transition: transform 0.25s ease, background 0.2s, color 0.2s; flex-shrink: 0; }
+        .kc-cand-header:hover .kc-cand-chevron { background: #f0d4e1; color: #7a1338; }
+        .kc-candidate.open .kc-cand-chevron { transform: translateY(-50%) rotate(180deg); background: var(--brand-claret); color: #fff; border-color: var(--brand-claret); }
 
         /* Single peeking "sheet" under a closed accordion header — signals contents before hover */
         .kc-stack-hint { position: relative; height: 0; z-index: 1; transition: opacity 0.18s; }
@@ -6650,6 +6652,7 @@
         return `
         <div class="kc-candidate" id="${id}">
             <div class="kc-cand-header" onclick="kcToggleCandidate('${id}')">
+                <div class="kc-cand-chevron"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 7 12 13 18 7"></polyline><polyline points="6 13 12 19 18 13"></polyline></svg></div>
                 <div class="kc-cand-word">
                     <div class="flex-1 px-4">
                         <div class="word-pair-unit">
@@ -6661,7 +6664,6 @@
                     <div class="w-[100px] flex-shrink-0"></div>
                 </div>
                 <div class="kc-cand-meta">
-                    <div class="kc-cand-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
                     <span class="kc-cand-badge"><b>${sorted.length}</b> ${t('kcRecords', 'Records')}&nbsp;&nbsp;·&nbsp;&nbsp;<b>${dictCount}</b> ${t('kcDicts', 'Dictionaries')}</span>
                 </div>
             </div>
