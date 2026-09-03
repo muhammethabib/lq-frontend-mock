@@ -1173,13 +1173,16 @@
         .style-ENTRY .category-pill { color: var(--col-entry-txt); background: rgba(20, 184, 166, 0.12); border: 1px solid var(--col-entry-bd); }
         .style-SUBENTRY .category-pill { color: var(--col-sub-txt); background: rgba(251, 191, 36, 0.12); border: 1px solid var(--col-sub-bd); }
         .style-RELATED .category-pill { color: var(--col-rel-txt); background: rgba(30, 58, 138, 0.12); border: 1px solid var(--col-rel-bd); }
-        /* Sol renk şeridi: kartın sol kenarlığı olarak çizilir; sol köşelerin eliptik yarıçapı
-           (yatay 8px, dikey --acc-ry) hilalin uçlarını uzun ve sivri yapar. */
-        .row-card.style-ENTRY, .row-card.style-SUBENTRY, .row-card.style-RELATED {
-            border-radius: 8px 8px 8px 8px / 20px 8px 8px 20px; }
-        .row-card.style-ENTRY { border-left: 4px solid var(--col-entry-acc); }
-        .row-card.style-SUBENTRY { border-left: 4px solid var(--col-sub-acc); }
-        .row-card.style-RELATED { border-left: 4px solid var(--col-rel-acc); }
+        /* Sol renk şeridi (hilal): kartın kendi border-left'i olsaydı 1px'lik üst/alt kenarlıkla birleşip
+           uçları pahlı (divit ucu gibi) kesiliyordu. Bu yüzden hilal, üst/alt kenarlığı olmayan bir
+           sözde elemanın border-left'i olarak çizilir: 8px yarıçap kartınkiyle aynı, uçlar tam sivri. */
+        .row-card.style-ENTRY, .row-card.style-SUBENTRY, .row-card.style-RELATED { padding-left: 3px; }
+        .row-card.style-ENTRY::before, .row-card.style-SUBENTRY::before, .row-card.style-RELATED::before {
+            content: ''; position: absolute; left: -1px; top: -1px; bottom: -1px; width: 0;
+            border-left: 4px solid; border-radius: 8px 0 0 8px; pointer-events: none; z-index: 2; }
+        .row-card.style-ENTRY::before { border-left-color: var(--col-entry-acc); }
+        .row-card.style-SUBENTRY::before { border-left-color: var(--col-sub-acc); }
+        .row-card.style-RELATED::before { border-left-color: var(--col-rel-acc); }
         .copy-btn { color: #94a3b8; background-color: #f8fafc; border: 1px solid #f1f5f9; transition: all 0.2s; cursor: pointer; padding: 8px; border-radius: 8px; display: flex; align-items: center; justify-content: center; opacity: 0.6; }
         .copy-btn:hover { color: var(--brand-sapphire) !important; background-color: #dbeafe !important; border-color: #bfdbfe !important; opacity: 1; transform: translateY(-2px); }
         .copy-btn.selected { background-color: var(--brand-sapphire) !important; color: var(--white) !important; border-color: var(--brand-sapphire) !important; opacity: 1 !important; transform: translateY(0) !important; }
