@@ -767,9 +767,10 @@
         .page-container { position: relative; width: 100%; max-width: var(--lq-max); margin-left: auto; margin-right: auto; }
         /* Sonuç tablosu kabı genişlese de satır içeriği belli bir noktadan sonra yayılmasın:
            kart tam genişlikte kalır, satırlar en fazla 1240px'e kadar açılır ve ortalanır. */
-        .unified-result-surface .column-headers-bar,
-        .unified-result-surface .surface-header,
-        .unified-result-surface .surface-list-area { padding-inline: max(0px, (100% - 1240px) / 2); }
+        /* Ek yan boşluk, her bloğun kendi iç boşluğuna EKLENİR (ezmez). */
+        .unified-result-surface .surface-header { padding-inline: calc(40px + max(0px, (100% - 1320px) / 2)); }
+        .unified-result-surface .surface-list-area { padding-inline: calc(16px + max(0px, (100% - 1272px) / 2)); }
+        .unified-result-surface .column-headers-bar { padding-inline: max(0px, (100% - 1240px) / 2); }
         body.p-4 { padding-left: var(--lq-gutter); padding-right: var(--lq-gutter); }
         @media (max-width: 640px) { :root { --lq-gutter: 16px; } }
 
