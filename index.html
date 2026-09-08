@@ -493,7 +493,7 @@
         /* ===================== EKİP SAYFASI =====================
            Ayrı bir katman değil; sayfa akışında normal bir bölüm. Açıldığında
            arama alanı ve sonuç yüzeyleri gizlenir, marka bloğu üstte kalır. */
-        .team-page { max-width: 720px; margin: 8px auto 64px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        .team-page { max-width: 760px; margin: 26px auto 72px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
         body.team-page-open .nav-tabs,
         body.team-page-open .search-container,
         body.team-page-open #stickyNav { display: none !important; }
@@ -512,8 +512,8 @@
             background: var(--brand-sapphire); color: #fff; display: flex; align-items: center; justify-content: center;
             font-size: 18px; font-weight: 700; letter-spacing: 0.5px; overflow: hidden; }
         /* Yalnızca kurucu kartı ayrışır; koordinatör dahil diğer herkesin görseli aynı */
-        .team-photo { width: 60px; height: 60px; font-size: 17px; background: #64748b; }
-        .is-founder .team-photo { width: 72px; height: 72px; font-size: 21px; background: var(--brand-sapphire); }
+        .team-photo { width: 86px; height: 86px; font-size: 21px; background: #64748b; }
+        .is-founder .team-photo { width: 112px; height: 112px; font-size: 26px; background: var(--brand-sapphire); }
         .team-info { min-width: 0; }
         .team-name { font-size: 15px; font-weight: 700; color: #0f172a; line-height: 1.3; margin-bottom: 3px; }
         .is-founder .team-name { font-size: 17px; }
@@ -527,8 +527,8 @@
         .team-grid .team-bio { font-size: 13px; }
         @media (max-width: 640px) {
             .team-card, .is-founder { padding: 16px !important; gap: 14px; }
-            .team-photo { width: 50px; height: 50px; font-size: 15px; }
-            .is-founder .team-photo { width: 58px; height: 58px; font-size: 18px; }
+            .team-photo { width: 66px; height: 66px; font-size: 17px; }
+            .is-founder .team-photo { width: 82px; height: 82px; font-size: 20px; }
         }
 
         /* Geniş ekranda üst köşe öğeleri sayfa sütununa değil pencere kenarına yaslanır */
@@ -3047,9 +3047,7 @@
 </div>
 
 <section class="team-page" id="teamPage" hidden>
-  <div class="team-head">
-    <h2 id="teamTitle" data-i18n="teamTitle">Team</h2>
-  </div>
+
   <div class="team-lead">
     <div class="team-card is-founder">
       <img class="team-photo" src="assets/team/ahmet.jpg" alt="">
