@@ -797,6 +797,23 @@
             visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0);
         }
 
+        /* Arama çubuğu ipucu: yalnızca ana sayfada, iki imlecin tam ortasında durur */
+        .bidi-hint { position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(-4px);
+            z-index: 40; display: none; align-items: center; gap: 12px; white-space: nowrap;
+            background: #1e293b; color: #fff; border-radius: 10px; padding: 8px 14px;
+            font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; line-height: 1;
+            box-shadow: 0 8px 22px rgba(15,23,42,0.28); opacity: 0; transition: opacity .18s ease, transform .18s ease;
+            pointer-events: none; }
+        .bidi-hint.show { display: flex; opacity: 1; transform: translateX(-50%) translateY(0); }
+        .bidi-hint-tip { position: absolute; top: -5px; left: 50%; width: 10px; height: 10px; margin-left: -5px;
+            background: #1e293b; transform: rotate(45deg); border-radius: 2px; }
+        .bidi-side { display: inline-flex; align-items: center; gap: 7px; }
+        .bidi-side svg { width: 15px; height: 15px; flex: none; opacity: .75; }
+        .bidi-hint-mid { font-size: 10.5px; font-weight: 600; letter-spacing: .3px; text-transform: uppercase;
+            color: #94a3b8; padding: 0 12px; border-left: 1px solid rgba(255,255,255,.16);
+            border-right: 1px solid rgba(255,255,255,.16); }
+        @media (max-width: 720px) { .bidi-hint-mid { display: none; } .bidi-hint { gap: 14px; font-size: 11.5px; } }
+
         .main-input { width: 100%; height: 100%; border: none; outline: none; background: transparent; padding: 0 20px 0 100px; font-size: 18px; color: var(--text-main); font-weight: 500; z-index: 2; border-radius: 12px; transition: text-align 0.1s; }
         .main-input[dir="rtl"] { font-family: 'Noto Naskh Arabic', serif; font-weight: 700; font-size: 22px; }
         .ana20-input-wrapper.mode-eng .main-input { padding-left: 100px; }
@@ -2787,6 +2804,18 @@
 <span class="placeholder-text placeholder-osm" id="ph-right">عثمانلی حرفلریلە آرە...</span>
 </div>
 <input class="main-input" id="mainInput" onblur="handleBlur(this)" oninput="handleInput(this)" type="text"/>
+<div class="bidi-hint" id="bidiHint" aria-hidden="true">
+  <span class="bidi-hint-tip"></span>
+  <span class="bidi-side">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 5 5 12 12 19"></polyline></svg>
+    <span data-i18n="hintLat">Latin script</span>
+  </span>
+  <span class="bidi-hint-mid" data-i18n="hintMid">one bar, two directions</span>
+  <span class="bidi-side">
+    <span data-i18n="hintOsm">Ottoman script</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+  </span>
+</div>
 </div>
 <button class="btn-search-main" id="main-search-btn" data-i18n="btnSearch">Search</button>
 </div>
@@ -4014,6 +4043,9 @@
             swEngTooltip: "Redhouse'ta İngilizce tanımlar içinde ara",
             selectAll: 'Tümünü Seç',
             allDicts: 'Tüm Sözlükler',
+            hintLat: 'Latin harfleriyle',
+            hintOsm: 'Osmanlı harfleriyle',
+            hintMid: 'tek çubuk, iki yön',
             phLat: 'Latin harfleriyle ara...',
             phEng: 'İngilizce tanımları arayın...',
             searchResultsLabel: 'Arama Sonuçları',
@@ -7382,6 +7414,47 @@
             document.body.classList.remove('team-page-open');
             var s = document.getElementById('teamPage'); if (s) s.hidden = true;
         }
+        // ===================== ARAMA ÇUBUĞU İPUCU =====================
+        function lqHintPlace() {
+            var hint = document.getElementById('bidiHint'), wrap = document.getElementById('searchWrapper');
+            var l = document.getElementById('ph-left'), r = document.getElementById('ph-right');
+            if (!hint || !wrap || !l || !r) return;
+            var w = wrap.getBoundingClientRect();
+            var lb = l.getBoundingClientRect(), rb = r.getBoundingClientRect();
+            // Latin imleci sol metnin başında, Osmanlıca imleci sağ metnin sonunda durur
+            var mid = ((lb.left - w.left) + (rb.right - w.left)) / 2;
+            if (getComputedStyle(r).display === 'none') mid = w.width / 2;
+            hint.style.left = Math.round(mid) + 'px';
+        }
+        function lqHintCanShow() {
+            var inp = document.getElementById('mainInput');
+            var onHome = !document.body.classList.contains('team-page-open')
+                && !document.body.classList.contains('v3-page-open')
+                && document.body.getAttribute('data-view') !== 'results';
+            var mode1 = document.getElementById('mode-1');
+            return onHome && mode1 && mode1.classList.contains('active') && inp && !inp.value;
+        }
+        function lqHintShow() {
+            var hint = document.getElementById('bidiHint');
+            if (!hint || !lqHintCanShow()) return;
+            lqHintPlace(); hint.classList.add('show');
+        }
+        function lqHintHide() {
+            var hint = document.getElementById('bidiHint'); if (hint) hint.classList.remove('show');
+        }
+        (function () {
+            var wrap = document.getElementById('searchWrapper');
+            if (!wrap) return;
+            wrap.addEventListener('mouseenter', lqHintShow);
+            wrap.addEventListener('mouseleave', function () { if (document.activeElement !== document.getElementById('mainInput')) lqHintHide(); });
+            var inp = document.getElementById('mainInput');
+            if (inp) {
+                inp.addEventListener('focus', lqHintShow);
+                inp.addEventListener('blur', lqHintHide);
+                inp.addEventListener('input', function () { if (this.value) lqHintHide(); });
+            }
+            window.addEventListener('resize', function () { if (document.getElementById('bidiHint').classList.contains('show')) lqHintPlace(); });
+        })();
         function lqSetActive(el) { document.querySelectorAll('.side-nav .side-link').forEach(a => a.classList.remove('active')); el.classList.add('active'); }
         // Ekip dışında bir görünüme geçilirse ekip sayfası kapanır
         (function(){ var orig = window.setViewState; if (typeof orig === 'function') { window.setViewState = function(s){ if (document.body.classList.contains('team-page-open') && !window.__teamOpening) lqCloseTeam(); return orig.apply(this, arguments); }; } })();
