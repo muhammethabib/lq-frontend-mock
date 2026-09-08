@@ -603,6 +603,78 @@
             .v3-band { padding: 18px 18px; }
         }
 
+        /* ---- Taslak tanıtım yazısı ---- */
+        .v3-draft-flag { display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: 1.2px;
+            text-transform: uppercase; color: #92400e; background: #fef3c7; border: 1px solid #fde68a;
+            padding: 5px 12px; border-radius: 999px; margin-bottom: 18px; }
+        .v3-article p { font-size: 15px; color: #475569; line-height: 1.85; margin: 0 0 16px; }
+        .v3-article { margin-bottom: 30px; }
+
+        /* ---- Broşür sayfası ---- */
+        .brochure { max-width: 900px; }
+        .br-hero { display: grid; grid-template-columns: minmax(0,1.35fr) minmax(0,1fr); gap: 26px; margin-bottom: 28px; align-items: start; }
+        .br-title { font-size: 27px; font-weight: 800; color: var(--brand-sapphire); line-height: 1.25;
+            letter-spacing: -0.4px; margin: 0 0 14px; }
+        .br-lead { font-size: 14.5px; color: #475569; line-height: 1.75; margin: 0 0 20px; }
+        .br-lead b { color: #0f172a; font-weight: 700; }
+        .br-cols { display: grid; grid-template-columns: 130px minmax(0,1fr); gap: 20px; }
+        .br-vlabel { font-size: 9.5px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase;
+            color: #94a3b8; margin-bottom: 10px; }
+        .br-vrow { display: flex; justify-content: space-between; align-items: baseline;
+            padding: 8px 0; border-bottom: 2px solid #e2e8f0; }
+        .br-vrow span { font-size: 14px; font-weight: 700; color: #0f172a; }
+        .br-vrow b { font-size: 13px; font-weight: 600; color: #94a3b8; }
+        .br-vrow.is-now { border-bottom-color: var(--brand-claret); }
+        .br-vrow.is-now b { color: var(--brand-claret); font-weight: 800; }
+        .br-fig { margin-bottom: 16px; }
+        .br-fig-num { font-size: 17px; font-weight: 800; color: var(--brand-sapphire); line-height: 1.3; margin-bottom: 4px; }
+        .br-fig-lbl { font-size: 12.5px; color: #64748b; line-height: 1.6; }
+
+        .br-unis { position: relative; background: #f4f7fd; border: 1px solid #dbe4f5; border-radius: 14px;
+            padding: 24px 22px 20px; }
+        .br-unis-badge { position: absolute; top: -12px; left: 20px; font-size: 9.5px; font-weight: 800;
+            letter-spacing: 1px; text-transform: uppercase; color: #fff; background: var(--brand-sapphire);
+            padding: 5px 12px; border-radius: 6px; }
+        .br-unis h4 { font-size: 14.5px; font-weight: 800; color: var(--brand-sapphire); line-height: 1.4; margin: 4px 0 14px; }
+        .br-uni-list { list-style: none; margin: 0; padding: 0; }
+        .br-uni-list li { position: relative; padding-left: 16px; font-size: 13px; color: #64748b; line-height: 1.5; margin-bottom: 9px; }
+        .br-uni-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px;
+            border-radius: 50%; background: var(--brand-claret); }
+        .br-uni-list b { color: #0f172a; font-weight: 700; }
+        .br-uni-more { display: block; font-style: italic; font-size: 12.5px; color: #94a3b8; padding-left: 16px; }
+
+        .br-split { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 22px; align-items: start; }
+        .br-shot { width: 100%; height: auto; display: block; border: 1px solid #e2e8f0; border-radius: 10px;
+            box-shadow: 0 3px 14px rgba(8,37,103,0.08); }
+        .br-cap { font-size: 12.5px; color: #94a3b8; line-height: 1.65; margin: 10px 0 0; }
+
+        .br-counts { margin-top: 16px; display: flex; flex-direction: column; gap: 7px; }
+        .br-count { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #64748b; }
+        .br-count b { color: #0f172a; font-weight: 800; }
+        .br-count i { font-style: normal; }
+        .br-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+        .br-dot.g { background: #10b981; }
+        .br-dot.o { background: #f59e0b; }
+        .br-dot.b { background: #3b82f6; }
+
+        .br-flow { display: grid; grid-template-columns: minmax(0,1fr) 40px minmax(0,1fr); gap: 10px;
+            align-items: center; margin-top: 22px; }
+        .br-flow-left { position: relative; }
+        .br-scribble { position: absolute; left: -14px; top: -26px; width: 78px; height: auto; z-index: 2;
+            filter: drop-shadow(0 4px 10px rgba(15,23,42,0.18)); }
+        .br-arrow svg { width: 30px; height: 30px; margin: 0 auto; display: block; fill: none;
+            stroke: #93a4c4; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+        .br-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .br-pills span { font-size: 12px; font-weight: 700; color: var(--brand-sapphire); background: #eff4fd;
+            border: 1px solid #dbe4f5; border-radius: 7px; padding: 7px 12px; }
+
+        @media (max-width: 760px) {
+            .br-hero, .br-cols, .br-split { grid-template-columns: 1fr; }
+            .br-flow { grid-template-columns: 1fr; }
+            .br-arrow svg { transform: rotate(90deg); }
+            .br-scribble { width: 62px; left: -8px; top: -20px; }
+        }
+
         /* ===================== EKUAL AÇILIŞ DUYURUSU ===================== */
         #ekualOverlay { position: fixed; inset: 0; z-index: 7200; display: none; align-items: center; justify-content: center;
             padding: 24px; background: rgba(15,23,42,0.55); backdrop-filter: blur(2px); font-family: 'Inter', sans-serif; }
@@ -2390,8 +2462,8 @@
       <span class="side-link-chev"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
     </button>
     <div class="side-submenu" id="lqSubmenu3">
-      <a class="side-sublink" href="#" onclick="lqOpenV3(); return false;"><span data-i18n="menuV3About">Introducing Version 3.0</span></a>
-      <a class="side-sublink" href="#" onclick="lqOpenBrochure(); return false;"><span data-i18n="menuV3Brochure">Brochure (PDF)</span></a>
+      <a class="side-sublink" href="#" onclick="lqOpenV3(); return false;"><span data-i18n="menuV3About">Introduction</span></a>
+      <a class="side-sublink" href="#" onclick="lqOpenBrochure(); return false;"><span data-i18n="menuV3Brochure">Brochure</span></a>
     </div>
     <button type="button" class="side-link side-link-parent" id="lqSubToggle" onclick="lqToggleSub()" aria-expanded="false">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6" fill="currentColor"></circle><path d="M12 2.2v4.2M12 17.6v4.2M2.2 12h4.2M17.6 12h4.2M5.1 5.1l3 3M15.9 15.9l3 3M18.9 5.1l-3 3M8.1 15.9l-3 3" fill="none" stroke="currentColor" stroke-width="2.7"></path></svg><span data-i18n="menuLQ2">LexiQamus 2.0</span>
@@ -2510,25 +2582,54 @@
 </section>
 
 <section class="v3-page" id="v3Page" hidden>
+  <div class="v3-draft-flag" data-i18n="v3DraftFlag">Draft &middot; placeholder text</div>
   <div class="v3-head">
-    <span class="v3-kicker" data-i18n="v3Kicker">The first of its kind</span>
-    <h2 data-i18n="v3Title">Digital Dictionary Ecosystem for Ottoman Turkish</h2>
-    <p class="v3-lead" data-i18n="v3Lead" data-i18n-html>LexiQamus went online in 2016 as the <b>first digital tool</b> built to recover unreadable words in Ottoman Turkish texts. Make out even a few letters and it puts every possibility in the digitized dictionaries in front of you within seconds. With <b>version 3.0</b> a word is searched in all of its forms; results come with their linguistic breakdown and the original scan, in an interactive result list and entry window.</p>
+    <span class="v3-kicker" data-i18n="v3ArtKicker">Version 3.0</span>
+    <h2 data-i18n="v3ArtTitle">Ten years on, LexiQamus starts over</h2>
+    <p class="v3-lead" data-i18n="v3ArtLead">A draft opening paragraph sits here until the real text arrives. It should say, in a few sentences, what LexiQamus set out to do in 2016 and why the tenth year seemed like the right moment to rebuild it from the ground up.</p>
   </div>
+  <div class="v3-article">
+    <p data-i18n="v3ArtP1">The first version answered a single question: what could this word be? You entered the letters you could make out, marked the ones you could not, and the tool listed every entry in the digitized dictionaries that fit. That question has not changed, but the answer can now be given in far greater detail.</p>
+    <p data-i18n="v3ArtP2">In version 3.0 a word is no longer searched in one shape. Every inflected, derived, and compound form is scanned at once, and the results are laid out from the barest form to the fullest, so a reader can see at a glance whether what they hold is a root, an inflection, or a phrase that happens to look like one.</p>
+    <p data-i18n="v3ArtP3">The second change concerns trust. Every line carries its source dictionary and page number, and the entry window opens on the original scan rather than a transcription of it. Nothing stands between the reader and the page the reading came from.</p>
+    <p data-i18n="v3ArtP4">Paragraph on the EKUAL agreement and what it means for readers in T&uuml;rkiye and Northern Cyprus goes here, followed by a closing paragraph inviting corrections and reports from users.</p>
+  </div>
+  <div class="v3-foot">
+    <div class="v3-contact" data-i18n="v3Contact" data-i18n-html>For demonstrations and training sessions: <a href="mailto:info@lexiqamus.com">info@lexiqamus.com</a></div>
+  </div>
+</section>
 
-  <div class="v3-stats">
-    <div class="v3-stat">
-      <div class="v3-stat-num">9 &middot; 17</div>
-      <div class="v3-stat-lbl" data-i18n="v3StatDict">Dictionaries and volumes, digitized by an expert team in BuildLQ, our purpose-built program</div>
+<section class="v3-page brochure" id="v3Brochure" hidden>
+  <div class="br-hero">
+    <div class="br-hero-main">
+      <span class="v3-kicker" data-i18n="v3Kicker">The first of its kind</span>
+      <h2 class="br-title" data-i18n="v3Title">Digital Dictionary Ecosystem for Ottoman Turkish</h2>
+      <p class="br-lead" data-i18n="v3Lead" data-i18n-html>LexiQamus went online in 2016 as the <b>first digital tool</b> built to recover unreadable words in Ottoman Turkish texts. Make out even a few letters and it puts every possibility in the digitized dictionaries in front of you within seconds. With <b>version 3.0</b> a word is searched in all of its forms; results come with their linguistic breakdown and the original scan, in an interactive result list and entry window.</p>
+      <div class="br-cols">
+        <div class="br-versions">
+          <div class="br-vlabel" data-i18n="v3VerLabel">LexiQamus versions</div>
+          <div class="br-vrow"><span>2016</span><b>1.0</b></div>
+          <div class="br-vrow"><span>2020</span><b>2.0</b></div>
+          <div class="br-vrow is-now"><span>2026</span><b>3.0</b></div>
+        </div>
+        <div class="br-figs">
+          <div class="br-fig">
+            <div class="br-fig-num" data-i18n="v3FigDictNum">9 Dictionaries, 17 Volumes</div>
+            <div class="br-fig-lbl" data-i18n="v3FigDict">A rapidly growing collection, digitized by an expert team in BuildLQ, our purpose-built program</div>
+          </div>
+          <div class="br-fig">
+            <div class="br-fig-num" data-i18n="v3StatRecNum">491,000+</div>
+            <div class="br-fig-lbl" data-i18n="v3FigRec">Words, phrases, and entry records</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="v3-stat">
-      <div class="v3-stat-num" data-i18n="v3StatRecNum">491,000+</div>
-      <div class="v3-stat-lbl" data-i18n="v3StatRec">Words, phrases, and entry records: 209,000+ headwords, 152,000+ subheadwords, 130,000+ related words</div>
-    </div>
-    <div class="v3-stat">
-      <div class="v3-stat-num">2016 &bull; 2026</div>
-      <div class="v3-stat-lbl" data-i18n="v3StatYear">Tenth year, developed in T&uuml;rkiye</div>
-    </div>
+    <aside class="br-unis">
+      <span class="br-unis-badge" data-i18n="v3UniBadge">Developed in T&uuml;rkiye</span>
+      <h4 data-i18n="v3UniTitle">In the world's leading research institutions</h4>
+      <ul class="br-uni-list" data-i18n="v3Unis" data-i18n-html><li><b>Oxford</b> University</li><li><b>Yale</b> University</li><li><b>Princeton</b> University</li><li><b>Chicago</b> University</li><li><b>Michigan</b> University</li><li><b>Pennsylvania</b> University</li><li><b>Toronto</b> University</li><li><b>Leiden</b> University</li><li><b>Coll&egrave;ge de France</b></li><li>All Universities and Research Institutions in <b>Germany</b></li></ul>
+      <em class="br-uni-more" data-i18n="v3UniMore">and many more</em>
+    </aside>
   </div>
 
   <div class="v3-band">
@@ -2538,12 +2639,21 @@
 
   <div class="v3-block">
     <h3 class="v3-sec-title" data-i18n="v3NewTitle" data-i18n-html>What version <em>3.0</em> brings</h3>
-    <ul class="v3-list">
-      <li data-i18n="v3New1" data-i18n-html>How many records were found, how many <b>dictionaries and volumes</b> were scanned</li>
-      <li data-i18n="v3New2" data-i18n-html>Every <b>spelling variant</b> of the word</li>
-      <li data-i18n="v3New3" data-i18n-html><b>Source dictionary and page number</b> on every line</li>
-      <li data-i18n="v3New4" data-i18n-html>Results grouped under seven categories, from the barest form to the fullest: <b>Lemma, Inflected Forms, Lexicalized Inflected Forms, Similar Spellings, Derived Forms, Compounds, Phrases</b></li>
-    </ul>
+    <div class="br-split">
+      <img class="br-shot" alt="" data-src-en="assets/brochure/en-results.jpg" data-src-tr="assets/brochure/tr-results.jpg" src="assets/brochure/en-results.jpg">
+      <div>
+        <ul class="v3-list">
+          <li data-i18n="v3New1" data-i18n-html>How many records were found, how many <b>dictionaries and volumes</b> were scanned</li>
+          <li data-i18n="v3New2" data-i18n-html>Every <b>spelling variant</b> of the word</li>
+          <li data-i18n="v3New3" data-i18n-html><b>Source dictionary and page number</b> on every line</li>
+        </ul>
+        <div class="br-counts">
+          <div class="br-count"><span class="br-dot g"></span><b data-i18n="v3CntHeadNum">209,000+</b> <i data-i18n="v3CntHead">Headwords</i></div>
+          <div class="br-count"><span class="br-dot o"></span><b data-i18n="v3CntSubNum">152,000+</b> <i data-i18n="v3CntSub">Subheadwords</i></div>
+          <div class="br-count"><span class="br-dot b"></span><b data-i18n="v3CntRelNum">130,000+</b> <i data-i18n="v3CntRel">Related words</i></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="v3-block">
@@ -2565,40 +2675,53 @@
         <p data-i18n="v3Step3P" data-i18n-html>If you still cannot find it, the algorithm expands the search to letters that sound or look alike in the <b>Rik'a</b> and <b>Divani</b> hands.</p>
       </div>
     </div>
+    <div class="br-flow">
+      <div class="br-flow-left">
+        <img class="br-scribble" src="assets/brochure/scribble.png" alt="">
+        <img class="br-shot" alt="" data-src-en="assets/brochure/en-decoder.jpg" data-src-tr="assets/brochure/tr-decoder.jpg" src="assets/brochure/en-decoder.jpg">
+      </div>
+      <div class="br-arrow"><svg viewBox="0 0 24 24"><path d="M4 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></div>
+      <div class="br-flow-right">
+        <img class="br-shot" alt="" data-src-en="assets/brochure/en-lemma.jpg" data-src-tr="assets/brochure/tr-lemma.jpg" src="assets/brochure/en-lemma.jpg">
+      </div>
+    </div>
+    <p class="br-cap" data-i18n="v3CatsLead">Results are grouped under seven categories, from the barest form to the fullest:</p>
+    <div class="br-pills" data-i18n="v3Cats" data-i18n-html><span>Lemma</span><span>Inflected Forms</span><span>Lexicalized Inflected Forms</span><span>Similar Spellings</span><span>Derived Forms</span><span>Compounds</span><span>Phrases</span></div>
   </div>
 
   <div class="v3-block">
     <h3 class="v3-sec-title" data-i18n="v3FeatTitle" data-i18n-html>Other <em>distinctive</em> features</h3>
-    <div class="v3-feats">
-      <div class="v3-feat">
-        <h4 data-i18n="v3Feat1H">Visual dictionary</h4>
-        <p data-i18n="v3Feat1P">The entry window opens on the dictionary's original scan. Every digitized word is live: hover for its reading, click to start a new search.</p>
+    <div class="br-split">
+      <div class="v3-feats">
+        <div class="v3-feat">
+          <h4 data-i18n="v3Feat1H">Visual dictionary</h4>
+          <p data-i18n="v3Feat1P">The entry window opens on the dictionary's original scan. Every digitized word is live: hover for its reading, click to start a new search.</p>
+        </div>
+        <div class="v3-feat">
+          <h4 data-i18n="v3Feat2H">Transcription and translation</h4>
+          <p data-i18n="v3Feat2P" data-i18n-html>Modern Turkish transcription, transliteration in five systems (<b>&#304;SAM, IJMES, Brill, DMG, Turkish academic</b>), and translation into ten languages. Entry texts outside the verified set were machine transcribed as well, so your searches return results in those too.</p>
+        </div>
+        <div class="v3-feat">
+          <h4 data-i18n="v3Feat3H">Morphological analysis</h4>
+          <p data-i18n="v3Feat3P">The parts of a word are separated out by language of origin; the root, its derivations, compounds, and phrases are gathered in a single window.</p>
+        </div>
+        <div class="v3-feat">
+          <h4 data-i18n="v3Feat4H">Error reporting</h4>
+          <p data-i18n="v3Feat4P">A report button sits beside every word, so data already verified by the expert team is also checked by its users.</p>
+        </div>
+        <div class="v3-feat">
+          <h4 data-i18n="v3Feat5H">Citation ready</h4>
+          <p data-i18n="v3Feat5P" data-i18n-html>Source citations for every entry copy in <b>Chicago, APA, and Harvard</b> format with one click.</p>
+        </div>
       </div>
-      <div class="v3-feat">
-        <h4 data-i18n="v3Feat2H">Transcription and translation</h4>
-        <p data-i18n="v3Feat2P" data-i18n-html>Modern Turkish transcription, transliteration in five systems (<b>&#304;SAM, IJMES, Brill, DMG, Turkish academic</b>), and translation into ten languages. Entry texts outside the verified set were machine transcribed as well, so your searches return results in those too.</p>
-      </div>
-      <div class="v3-feat">
-        <h4 data-i18n="v3Feat3H">Morphological analysis</h4>
-        <p data-i18n="v3Feat3P">The parts of a word are separated out by language of origin; the root, its derivations, compounds, and phrases are gathered in a single window.</p>
-      </div>
-      <div class="v3-feat">
-        <h4 data-i18n="v3Feat4H">Error reporting</h4>
-        <p data-i18n="v3Feat4P">A report button sits beside every word, so data already verified by the expert team is also checked by its users.</p>
-      </div>
-      <div class="v3-feat">
-        <h4 data-i18n="v3Feat5H">Citation ready</h4>
-        <p data-i18n="v3Feat5P" data-i18n-html>Source citations for every entry copy in <b>Chicago, APA, and Harvard</b> format with one click.</p>
+      <div>
+        <img class="br-shot" alt="" data-src-en="assets/brochure/en-entry.jpg" data-src-tr="assets/brochure/tr-entry.jpg" src="assets/brochure/en-entry.jpg">
+        <p class="br-cap" data-i18n="v3EntryCap">The entry window opens on the dictionary's original scan, with language and transliteration tabs across the top.</p>
       </div>
     </div>
   </div>
 
   <div class="v3-foot">
-    <div class="v3-foot-title" data-i18n="v3DlTitle">Download the brochure</div>
-    <div class="v3-dl">
-      <a href="assets/lexiqamus-brochure-en.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 3v12"></path><path d="M7 11l5 5 5-5"></path><path d="M4 20h16"></path></svg><span data-i18n="v3DlEn">English (PDF)</span></a>
-      <a href="assets/lexiqamus-brosur-tr.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 3v12"></path><path d="M7 11l5 5 5-5"></path><path d="M4 20h16"></path></svg><span data-i18n="v3DlTr">T&uuml;rk&ccedil;e (PDF)</span></a>
-    </div>
     <div class="v3-contact" data-i18n="v3Contact" data-i18n-html>For demonstrations and training sessions: <a href="mailto:info@lexiqamus.com">info@lexiqamus.com</a></div>
   </div>
 </section>
@@ -3783,8 +3906,8 @@
             menuLQ2: 'LexiQamus 2.0',
             menuNewFeatures: 'Yeni Özellikler ve İyileştirmeler',
             menuLexicon: 'Lexicon Dijitalleştirme Projesi',
-            menuV3About: 'Sürüm 3.0 Tanıtımı',
-            menuV3Brochure: 'Broşür (PDF)',
+            menuV3About: 'Tanıtım Yazısı',
+            menuV3Brochure: 'Broşür',
 
             v3Kicker: 'Alanında bir ilk',
             v3Title: 'Osmanlı Türkçesi Dijital Sözlük Ekosistemi',
@@ -3818,6 +3941,32 @@
             v3Feat4P: 'Her kelimenin yanında bildir düğmesi var; uzman ekipçe doğrulanan veri kullanıcıların da denetiminden geçer.',
             v3Feat5H: 'Hazır künye',
             v3Feat5P: 'Her madde için kaynak künyesi <b>Chicago, APA ve Harvard</b> biçimlerinde tek tıkla kopyalanır.',
+            v3DraftFlag: 'Taslak · yer tutucu metin',
+            v3ArtKicker: 'Sürüm 3.0',
+            v3ArtTitle: 'Onuncu yılında LexiQamus yeniden kuruldu',
+            v3ArtLead: 'Gerçek metin gelene kadar burada taslak bir giriş paragrafı duruyor. Birkaç cümleyle LexiQamus\'un 2016\'da ne yapmak için yola çıktığını ve onuncu yılın neden baştan inşa etmek için doğru an göründüğünü anlatmalı.',
+            v3ArtP1: 'İlk sürüm tek bir soruya cevap veriyordu: bu kelime ne olabilir? Okuyabildiğiniz harfleri giriyor, okuyamadıklarınızı işaretliyordunuz; araç dijitalleştirilmiş sözlüklerde bu ipuçlarına uyan bütün maddeleri listeliyordu. Soru değişmedi, ama cevap artık çok daha ayrıntılı verilebiliyor.',
+            v3ArtP2: '3.0 ile kelime tek bir biçimde aranmıyor. Çekimli, türemiş ve birleşik bütün biçimler aynı anda taranıyor; sonuçlar en sade formdan en genişe doğru diziliyor. Böylece elinizdekinin bir kök mü, bir çekim mi, yoksa öyle görünen bir ibare mi olduğu ilk bakışta görülüyor.',
+            v3ArtP3: 'İkinci değişiklik güvenle ilgili. Her satır kaynak sözlüğünü ve sayfa numarasını taşıyor; madde penceresi transkripsiyonun değil, orijinal taramanın üzerinde açılıyor. Okuyucuyla okumanın geldiği sayfa arasında hiçbir şey durmuyor.',
+            v3ArtP4: 'EKUAL anlaşmasının Türkiye ve KKTC\'deki okuyucular için ne anlama geldiğini anlatan paragraf buraya gelecek; ardından kullanıcıları düzeltme ve hata bildirimine davet eden bir kapanış paragrafı.',
+
+            v3VerLabel: 'LexiQamus sürümleri',
+            v3FigDictNum: '9 Sözlük, 17 Cilt',
+            v3FigDict: 'Hızla genişleyen koleksiyon; özel olarak geliştirilen BuildLQ programında uzman ekip tarafından dijitalleştirildi',
+            v3FigRec: 'Kelime, ibare ve madde kaydı',
+            v3UniBadge: 'Türkiye\'de geliştirildi',
+            v3UniTitle: 'Dünyanın en prestijli kurumlarında',
+            v3Unis: '<li><b>Oxford</b> Üniversitesi</li><li><b>Yale</b> Üniversitesi</li><li><b>Princeton</b> Üniversitesi</li><li><b>Chicago</b> Üniversitesi</li><li><b>Michigan</b> Üniversitesi</li><li><b>Pennsylvania</b> Üniversitesi</li><li><b>Toronto</b> Üniversitesi</li><li><b>Leiden</b> Üniversitesi</li><li><b>Collège de France</b></li><li><b>Almanya</b>\'nın tüm Üniversite ve Araştırma Kurumları</li>',
+            v3UniMore: 've daha fazlası',
+            v3CntHeadNum: '209.000+',
+            v3CntSubNum: '152.000+',
+            v3CntRelNum: '130.000+',
+            v3CntHead: 'Madde başı',
+            v3CntSub: 'Alt madde başı',
+            v3CntRel: 'İlişkili kelime',
+            v3CatsLead: 'Sonuçlar, en sade formdan en genişe doğru yedi başlıkta tasnif edilir:',
+            v3Cats: '<span>Kök</span><span>Çekimli Biçimler</span><span>Sözlükselleşmiş Çekimli Formlar</span><span>Benzer İmlalar</span><span>Türemiş Biçimler</span><span>Birleşik Kelimeler</span><span>İbareler</span>',
+            v3EntryCap: 'Madde penceresi, üstte dil ve çeviri yazı sekmeleriyle, sözlüğün orijinal taraması üzerinde açılır.',
             v3DlTitle: 'Broşürü indirin',
             v3DlEn: 'İngilizce (PDF)',
             v3DlTr: 'Türkçe (PDF)',
@@ -4041,6 +4190,10 @@
                 if (!(key in i18nOriginals)) i18nOriginals[key] = asHtml ? el.innerHTML : el.textContent;
                 const val = (lang === 'tr' && I18N_TR[key] !== undefined) ? I18N_TR[key] : i18nOriginals[key];
                 if (asHtml) el.innerHTML = val; else el.textContent = val;
+            });
+            document.querySelectorAll('[data-src-en]').forEach(el => {
+                const s = (lang === 'tr' && el.dataset.srcTr) ? el.dataset.srcTr : el.dataset.srcEn;
+                if (el.getAttribute('src') !== s) el.setAttribute('src', s);
             });
             document.querySelectorAll('[data-i18n-title]').forEach(el => {
                 const key = el.dataset.i18nTitle;
@@ -7210,17 +7363,23 @@
             if (typeof lqCloseTeam === 'function') lqCloseTeam();
             if (typeof setViewState === 'function') setViewState('home');
             window.__v3Opening = true; document.body.classList.add('v3-page-open'); window.__v3Opening = false;
+            var b = document.getElementById('v3Brochure'); if (b) b.hidden = true;
             var s = document.getElementById('v3Page'); if (s) s.hidden = false;
             window.scrollTo({ top: 0 });
         }
         function lqCloseV3() {
             document.body.classList.remove('v3-page-open');
             var s = document.getElementById('v3Page'); if (s) s.hidden = true;
+            var b = document.getElementById('v3Brochure'); if (b) b.hidden = true;
         }
         function lqOpenBrochure() {
             lqCloseMenu();
-            var l = (typeof currentLang !== 'undefined') ? currentLang : 'en';
-            window.open(l === 'tr' ? 'assets/lexiqamus-brosur-tr.pdf' : 'assets/lexiqamus-brochure-en.pdf', '_blank', 'noopener');
+            if (typeof lqCloseTeam === 'function') lqCloseTeam();
+            if (typeof setViewState === 'function') setViewState('home');
+            window.__v3Opening = true; document.body.classList.add('v3-page-open'); window.__v3Opening = false;
+            var a = document.getElementById('v3Page'); if (a) a.hidden = true;
+            var s = document.getElementById('v3Brochure'); if (s) s.hidden = false;
+            window.scrollTo({ top: 0 });
         }
         (function(){ var orig = window.setViewState; if (typeof orig === 'function') { window.setViewState = function(s){ if (document.body.classList.contains('v3-page-open') && !window.__v3Opening) lqCloseV3(); return orig.apply(this, arguments); }; } })();
         function lqSyncMenuLang() { var l = (typeof currentLang !== 'undefined') ? currentLang : 'en'; syncLangSwitches(l); }
