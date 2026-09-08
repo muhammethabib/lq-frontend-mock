@@ -630,7 +630,7 @@
         /* ---- Broşür sayfası ---- */
         .brochure { max-width: 900px; }
         .br-hero { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap: 34px; margin-bottom: 42px; align-items: start; }
-        .br-title { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 31px;
+        .br-title { font-family: 'Inter', sans-serif; font-style: italic; font-size: 31px;
             font-weight: 700; line-height: 1.22; letter-spacing: -0.2px; margin: 6px 0 18px; }
         .br-title span { display: block; }
         .br-t1 { color: var(--brand-sapphire); }
@@ -690,7 +690,7 @@
         .br-flow-left { position: relative; }
         .br-scribble { position: absolute; left: -8px; top: 10px; width: 88px; height: auto; z-index: 2;
             transform: rotate(-7deg); filter: drop-shadow(0 6px 14px rgba(15,23,42,0.22)); }
-        .br-qmark { position: absolute; left: 92px; top: -2px; z-index: 2; font-family: 'Playfair Display', Georgia, serif;
+        .br-qmark { position: absolute; left: 92px; top: -2px; z-index: 2; font-family: 'Inter', sans-serif;
             font-style: italic; font-size: 30px; font-weight: 700; color: var(--brand-claret); line-height: 1; }
         .br-arrow { display: flex; align-items: center; justify-content: center; margin: 18px 0 6px;
             color: var(--brand-sapphire); }
@@ -843,7 +843,7 @@
 #lqStory .placeholder-osm{ font-family: 'Noto Naskh Arabic', serif; font-size: 19px; direction: rtl; text-align: right; }
 #lqStory .scroll-indicator-wrapper{ position: absolute; bottom: 40px; display: flex; flex-direction: column; align-items: center; cursor: pointer; z-index: 50; transition: transform 0.3s; }
 #lqStory .scroll-indicator-wrapper:hover{ transform: translateY(-5px); }
-#lqStory .si-text{ font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; background: linear-gradient(to right, var(--sapphire) 0%, #3b82f6 40%, var(--gold-accent) 50%, #3b82f6 60%, var(--sapphire) 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: textShimmerFlow_lqs 3s linear infinite; }
+#lqStory .si-text{ font-family: 'Inter', sans-serif; font-size: 1.5rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; background: linear-gradient(to right, var(--sapphire) 0%, #3b82f6 40%, var(--gold-accent) 50%, #3b82f6 60%, var(--sapphire) 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: textShimmerFlow_lqs 3s linear infinite; }
 @keyframes textShimmerFlow_lqs{ to { background-position: 200% center; } }
 #lqStory .si-arrow-container{ width: 30px; height: 45px; position: relative; }
 #lqStory .si-chevron{ position: absolute; width: 24px; height: 7px; opacity: 0; transform: scale(0.3); animation: scrollFlowSlow_lqs 3s ease-out infinite; }
@@ -876,7 +876,7 @@
 #lqStory .pos-3{ top: 80%; left: 85%; }
 #lqStory .pos-4{ top: 75%; left: 15%; }
 #lqStory .vision-wrapper{ position: relative; z-index: 10; width: 100%; max-width: 1200px; display: flex; flex-direction: column; align-items: center; }
-#lqStory .lq-title-hero{ font-family: 'Playfair Display', serif; font-size: 4rem; line-height: 1.1; font-weight: 800; text-align: center; margin-bottom: 25px; background: linear-gradient(135deg, var(--sapphire) 0%, var(--lq-bordo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.9)); position: relative; z-index: 30; animation: slideUp_lqs 1s ease-out; }
+#lqStory .lq-title-hero{ font-family: 'Inter', sans-serif; font-size: 4rem; line-height: 1.1; font-weight: 800; text-align: center; margin-bottom: 25px; background: linear-gradient(135deg, var(--sapphire) 0%, var(--lq-bordo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.9)); position: relative; z-index: 30; animation: slideUp_lqs 1s ease-out; }
 #lqStory .hero-card{ background: white; border-left: 8px solid var(--lq-bordo); padding: 40px 50px; border-radius: 16px; box-shadow: 0 30px 60px -10px rgba(8, 37, 103, 0.2); max-width: 900px; position: relative; overflow: hidden; opacity: 0; transform: scale(0.95); transition: opacity 0.8s ease-out, transform 0.8s ease-out; z-index: 30; }
 #lqStory .hero-card.start-anim{ opacity: 1; transform: scale(1); }
 #lqStory .buildlq-features{ display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; margin-top: 35px; border-top: 1px solid #e2e8f0; padding-top: 25px; }
@@ -903,9 +903,9 @@
 #lqStory .heritage-real-bg{ position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 0; pointer-events: none; background-image: url('assets/story/kapak4.jpg'); background-size: cover; background-position: center bottom; opacity: 0.08; filter: grayscale(100%) sepia(20%); transition: transform 0.1s ease-out; }
 #lqStory .heritage-container{ width: 100%; max-width: 1200px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding: 40px; box-sizing: border-box; position: relative; z-index: 10; gap: 60px; }
 #lqStory .left-panel{ flex: 0 0 35%; display: flex; flex-direction: column; align-items: flex-start; gap: 50px; margin-top: -40px; }
-#lqStory .lq-gradient-title-sm{ font-family: 'Playfair Display', serif; font-size: 3.8rem; line-height: 1.1; font-weight: 800; margin: 0; background: linear-gradient(135deg, var(--sapphire) 0%, var(--lq-bordo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1)); }
+#lqStory .lq-gradient-title-sm{ font-family: 'Inter', sans-serif; font-size: 3.8rem; line-height: 1.1; font-weight: 800; margin: 0; background: linear-gradient(135deg, var(--sapphire) 0%, var(--lq-bordo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1)); }
 #lqStory .hi-text-block{ font-size: 1.05rem; line-height: 1.7; color: var(--text-body); text-shadow: 0 1px 1px rgba(255,255,255,0.8); }
-#lqStory .lexicon-pro{ font-family: 'Playfair Display', serif; font-weight: 900; font-style: italic; font-size: 1.3em; color: var(--sapphire); margin-right: 2px; }
+#lqStory .lexicon-pro{ font-family: 'Inter', sans-serif; font-weight: 900; font-style: normal; font-size: 1.3em; color: var(--sapphire); margin-right: 2px; }
 #lqStory .highlight-row{ font-size: 1.25rem; font-weight: 700; color: var(--sapphire); border-left: 4px solid var(--lq-bordo); padding-left: 15px; margin: 15px 0; display: block; }
 #lqStory .vision-box-premium{ width: 100%; padding: 22px 28px; border-radius: 16px; background: rgba(255, 255, 255, 0.95); border: 1px solid #e2e8f0; border-left: 6px solid var(--lq-bordo); box-shadow: 0 15px 40px rgba(0,0,0,0.06); display: flex; flex-direction: row; align-items: center; justify-content: space-between; transition: transform 0.3s ease; position: relative; overflow: hidden; gap: 20px; }
 #lqStory .vision-box-premium::after{ content: ""; position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent); transform: skewX(-25deg); animation: shimmer_lqs 4s infinite ease-in-out; }
@@ -913,7 +913,7 @@
 #lqStory .vision-box-premium:hover{ transform: translateY(-3px); }
 #lqStory .vp-icon-box{ width: 55px; height: 50px; background: rgba(190, 18, 60, 0.05); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 #lqStory .vp-content{ display: flex; flex-direction: column; gap: 8px; text-align: left; }
-#lqStory .vp-main-text{ font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--sapphire); line-height: 1.2; }
+#lqStory .vp-main-text{ font-family: 'Inter', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--sapphire); line-height: 1.2; }
 #lqStory .vp-sub-text{ font-family: 'Inter', sans-serif; font-size: 1.05rem; color: #0f172a; font-weight: 500; line-height: 1.4; }
 @keyframes fadeInUp_lqs{ from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 #lqStory .anim-enter{ opacity: 0; animation: fadeInUp_lqs 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
@@ -964,16 +964,16 @@
 #lqStory .bk-red{ background: var(--leather-red); }
 #lqStory .bk-blue{ background: var(--leather-blue); }
 #lqStory .bk-green{ background: var(--leather-green); }
-#lqStory .bk-title{ font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.3); margin-bottom: 8px; line-height: 1.2; z-index: 5; }
+#lqStory .bk-title{ font-family: 'Inter', sans-serif; font-size: 1.15rem; font-weight: 700; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.3); margin-bottom: 8px; line-height: 1.2; z-index: 5; }
 #lqStory .bk-auth{ font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500; color: var(--gold-text); margin-top: 5px; opacity: 0.95; z-index: 5; }
 #lqStory .bk-vol-box{ margin-top: 15px; width: 60%; border-top: 1px solid rgba(255,255,255,0.3); border-bottom: 1px solid rgba(255,255,255,0.3); padding: 5px 0; z-index: 5; }
-#lqStory .bk-vol{ font-family: 'Playfair Display', serif; font-size: 0.65rem; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
-#lqStory .bk-year{ position: absolute; bottom: 20px; font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: var(--silver-text); opacity: 0.9; z-index: 5; }
-#lqStory .ic-title{ font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ic-title-color); margin-bottom: 12px; }
+#lqStory .bk-vol{ font-family: 'Inter', sans-serif; font-size: 0.65rem; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
+#lqStory .bk-year{ position: absolute; bottom: 20px; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--silver-text); opacity: 0.9; z-index: 5; }
+#lqStory .ic-title{ font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--ic-title-color); margin-bottom: 12px; }
 #lqStory .ic-auth{ font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; color: var(--ic-text-color); margin-top: 5px; }
 #lqStory .ic-vol-box{ margin-top: 20px; padding: 5px 0; width: 60%; border-top: 1px solid rgba(0,0,0,0.2); border-bottom: 1px solid rgba(0,0,0,0.2); }
-#lqStory .ic-vol{ font-family: 'Playfair Display', serif; font-size: 0.65rem; letter-spacing: 2px; color: var(--ic-text-color); text-transform: uppercase; }
-#lqStory .ic-year{ position: absolute; bottom: 15px; font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: #444; }
+#lqStory .ic-vol{ font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 2px; color: var(--ic-text-color); text-transform: uppercase; }
+#lqStory .ic-year{ position: absolute; bottom: 15px; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 700; color: #444; }
 #lqStory .book-deco-border{ position: absolute; top: 12px; bottom: 12px; left: 12px; right: 20px; border: 2px solid rgba(251, 191, 36, 0.3); border-radius: 8px 2px 2px 8px; z-index: 5; }
 #lqStory .approved-stamp{ position: absolute; top: 15px; left: 10px; width: 18px; height: 18px; background: #22c55e; color: #052e16; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; z-index: 12; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
 #lqStory .exclusive-badge{ position: absolute; top: -12px; left: 15px; background: #fef3c7; color: #92400e; font-size: 9px; font-weight: 900; padding: 5px 12px; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.25); z-index: 20; border: 1.5px solid #d97706; }
@@ -995,7 +995,7 @@
         }
 #lqStory .header-visible{ opacity: 1; transform: translateY(0); }
 #lqStory .ha-title{
-            font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800;
+            font-family: 'Inter', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800;
             background: linear-gradient(90deg, #082567 0%, #7e1e52 40%, #be123c 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin: 0; line-height: 1.2; margin-bottom: 20px;
@@ -1030,7 +1030,7 @@
 #lqStory .raw-img-wrapper{ background: var(--vintage-paper); border: 1px solid var(--vintage-border); position: relative; z-index: 10; padding: 6px; box-sizing: border-box; }
 #lqStory .cr-header{ background: var(--vintage-leather); color: #fdfbf7; padding: 3px 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #3e2723; height: 24px; box-shadow: inset 0 -1px 2px rgba(0,0,0,0.2); position: relative; z-index: 11; clip-path: inset(0 100% 0 0); box-sizing: content-box; }
 #lqStory .cr-titles{ display: flex; align-items: baseline; gap: 6px; white-space: nowrap; }
-#lqStory .cr-dict{ font-family: 'Playfair Display', serif; font-style: italic; color: var(--vintage-gold); font-size: 0.85rem; }
+#lqStory .cr-dict{ font-family: 'Inter', sans-serif; font-style: normal; color: var(--vintage-gold); font-size: 0.85rem; }
 #lqStory .cr-sep{ color: rgba(255,255,255,0.4); font-size: 0.8rem; }
 #lqStory .cr-entry{ font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; color: white; font-size: 0.75rem; letter-spacing: 0.5px; }
 #lqStory .cr-pg{ font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.7rem; color: #3e2723; background: var(--vintage-gold); padding: 1px 5px; border-radius: 2px; }
@@ -1077,7 +1077,7 @@
 #lqStory .typing-cursor{ display: inline-block; width: 2px; height: 1.2em; background-color: var(--sapphire); animation: blink_lqs 0.8s infinite; margin-left: 2px; vertical-align: middle; }
 @keyframes blink_lqs{ 50% { opacity: 0; } }
 #lqStory .desc-box{ position: absolute; width: 220px; background: white; padding: 8px 14px; border-radius: 8px; border-left: 3px solid #ccc; box-shadow: 0 8px 20px rgba(0,0,0,0.06); z-index: 15; opacity: 0; transition: all 0.5s ease; }
-#lqStory .db-title{ font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; display: block; margin-bottom: 4px; }
+#lqStory .db-title{ font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; display: block; margin-bottom: 4px; }
 #lqStory .db-text{ font-size: 0.95rem; color: var(--text-body); line-height: 1.4; }
 #lqStory .box-entry{ top: -30px; left: calc(50% + 70px); border-color: var(--c-entry); transform: translateX(20px); }
 #lqStory .box-sub{ top: 260px; left: 10%; border-color: var(--c-sub); transform: translateY(20px); }
@@ -1091,7 +1091,7 @@
 #lqStory .lg-2{ bottom: -20%; right: -10%; background: radial-gradient(circle, rgba(190, 18, 60, 0.2) 0%, rgba(2, 6, 23, 0) 70%); }
 #lqStory .lab-container{ width: 100%; max-width: 1200px; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 10; padding: 0 40px; }
 #lqStory .lab-header{ text-align: center; margin-bottom: 40px; animation: fadeDown_lqs 1s ease-out; }
-#lqStory .lab-title{ font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 800; background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; }
+#lqStory .lab-title{ font-family: 'Inter', sans-serif; font-size: 3.5rem; font-weight: 800; background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; }
 #lqStory .lab-subtitle{ font-size: 1.2rem; color: #cbd5e1; font-weight: 300; max-width: 700px; margin: 0 auto; line-height: 1.6; }
 #lqStory .interface-grid{ display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; width: 100%; align-items: center; }
 #lqStory .mockup-stage{ position: relative; width: 100%; height: 450px; perspective: 1500px; }
@@ -1112,7 +1112,7 @@
 #lqStory .info-card-deck{ position: relative; min-height: 250px; }
 #lqStory .feature-card{ background: rgba(30, 41, 59, 0.4); border-left: 4px solid var(--gold-accent); padding: 25px; border-radius: 0 12px 12px 0; backdrop-filter: blur(10px); position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transform: translateX(20px); transition: all 0.5s ease; pointer-events: none; }
 #lqStory .feature-card.active{ opacity: 1; transform: translateX(0); pointer-events: all; }
-#lqStory .fc-title{ font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold-accent); margin: 0 0 10px 0; }
+#lqStory .fc-title{ font-family: 'Inter', sans-serif; font-size: 1.5rem; color: var(--gold-accent); margin: 0 0 10px 0; }
 #lqStory .fc-list{ list-style: none; padding: 0; margin: 0; }
 #lqStory .fc-list li{ position: relative; padding-left: 20px; margin-bottom: 12px; color: #e2e8f0; line-height: 1.5; }
 #lqStory .fc-list li::before{ content: '›'; position: absolute; left: 0; color: var(--lq-bordo); font-weight: 800; font-size: 1.2rem; line-height: 1; }
@@ -1123,17 +1123,41 @@
            ========================================= */
         #networkCanvas{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #0f172a; }
 #lqStory .future-content{ position: relative; z-index: 2; text-align: center; color: white; max-width: 900px; }
-#lqStory .lq-title-section{ font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--sapphire); margin-bottom: 25px; text-align: center; font-weight: 700; }
-#lqStory .brand-footer{ margin-top: 60px; font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 800; color: #fbbf24; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
+#lqStory .lq-title-section{ font-family: 'Inter', sans-serif; font-size: 3rem; color: var(--sapphire); margin-bottom: 25px; text-align: center; font-weight: 700; }
+#lqStory .brand-footer{ margin-top: 60px; font-family: 'Inter', sans-serif; font-size: 2rem; font-weight: 800; color: #fbbf24; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
 
     
+
+        .lq-discover { display: none; margin: 54px auto 0; width: max-content; text-align: center; cursor: pointer;
+            user-select: none; opacity: .85; transition: opacity .2s; }
+        .lq-discover:hover { opacity: 1; }
+        body.vs-home .lq-discover { display: block; }
+        body.team-page-open .lq-discover, body.v3-page-open .lq-discover, body.first-entry .lq-discover { display: none !important; }
+        .lq-discover-text { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase;
+            color: var(--brand-sapphire); margin-bottom: 10px; }
+        .lq-discover-chevrons { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        .lq-discover-chevrons span { width: 13px; height: 13px; border-right: 2.2px solid var(--brand-claret);
+            border-bottom: 2.2px solid var(--brand-claret); transform: rotate(45deg); opacity: 0; border-radius: 2px;
+            animation: lqDiscoverPulse 1.8s infinite; }
+        .lq-discover-chevrons span:nth-child(2) { animation-delay: .25s; }
+        .lq-discover-chevrons span:nth-child(3) { animation-delay: .5s; }
+        @keyframes lqDiscoverPulse { 0% { opacity: 0; } 45% { opacity: 1; } 100% { opacity: 0; } }
 
         /* ===================== ANA SAYFA ALTI TANITIM AKIŞI ===================== */
         #lqStory { display: none; width: 100vw; margin-left: calc(50% - 50vw); margin-top: 64px;
             height: auto !important; scroll-snap-type: none !important; overflow-x: hidden; text-align: left; }
         body.vs-home #lqStory { display: block; }
         body.team-page-open #lqStory, body.v3-page-open #lqStory, body.first-entry #lqStory { display: none !important; }
-        #lqStory .snap-section { scroll-snap-align: none; min-height: 100vh; height: auto; }
+        #lqStory .snap-section { scroll-snap-align: none; height: 100vh; min-height: 620px; }
+        #lqStory .page-nav-arrow { opacity: 1 !important; z-index: 600; }
+        #lqStory .page-nav-arrow .arrow-shape { width: 16px; height: 16px; border-left-width: 3px; border-top-width: 3px; }
+        #lqStory .pna-top .arrow-shape { opacity: .75; border-color: #94a3b8; }
+        #lqStory .pna-bottom .arrow-shape { border-color: var(--brand-claret); }
+        #lqStory .page-nav-arrow:hover { opacity: 1; }
+        #lqStory h1, #lqStory h2, #lqStory h3, #lqStory h4,
+        #lqStory .lq-title-hero, #lqStory .lq-gradient-title-sm, #lqStory .ha-title, #lqStory .lab-title,
+        #lqStory .future-content div { font-style: normal !important; font-family: 'Inter', sans-serif !important; }
+        #lqStory .lq-title-hero, #lqStory .lq-gradient-title-sm { letter-spacing: -1px; }
         #lqStory img { max-width: 100%; }
 
         /* ===================== EKUAL AÇILIŞ DUYURUSU ===================== */
@@ -3634,6 +3658,11 @@
 </div>
 </div>
 
+<div class="lq-discover" id="lqDiscover" onclick="lqsGo('sectionBuildLQ')" role="button" tabindex="0">
+  <div class="lq-discover-text" data-i18n="discoverStory">Discover what 2026 brings</div>
+  <div class="lq-discover-chevrons"><span></span><span></span><span></span></div>
+</div>
+
 <div id="lqStory">
 <div class="snap-section buildlq-section" id="sectionBuildLQ">
 <div class="abstract-bg-ui ui-table-right">
@@ -3642,7 +3671,7 @@
 <div class="abstract-bg-ui ui-table-left">
 <div class="ui-block highlight"></div><div class="ui-block"></div><div class="ui-block"></div>
 </div>
-<div class="page-nav-arrow pna-top" onclick="lqsGo('sectionHome')">
+<div class="page-nav-arrow pna-top" onclick="lqsTop()">
 <div class="arrow-shape"></div>
 </div>
 <svg class="connection-layer" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none;">
@@ -3660,7 +3689,7 @@
 <h1 class="lq-title-hero" data-i18n="story1" data-i18n-html="">A New Digital Era for<br/>Ottoman Dictionaries</h1>
 <div class="hero-card" id="heroCard">
 <div style="position: absolute; top: -20px; left: -20px; width: 80px; height: 80px; background: var(--lq-bordo); border-radius: 50%; opacity: 0.08;"></div>
-<h2 data-i18n="story2" style="font-family: 'Playfair Display'; color: var(--lq-bordo); font-size: 2rem; margin-top:0; position:relative; z-index:2;">The BuildLQ Program</h2>
+<h2 data-i18n="story2" style="font-family: 'Inter', sans-serif; color: var(--lq-bordo); font-size: 2rem; margin-top:0; position:relative; z-index:2;">The BuildLQ Program</h2>
 <p data-i18n="story3" style="font-size: 1.1rem; line-height: 1.6; color: var(--text-body); position:relative; z-index:2;">Aware of the profound importance of dictionary digitization, LexiQamus has developed a dedicated program called BuildLQ. Through the new digital architecture offered by BuildLQ, dictionaries are digitized with academic rigor.</p>
 <div class="buildlq-features">
 <div class="blq-feat-item">
@@ -3999,7 +4028,7 @@
 <div class="page-nav-arrow pna-top" onclick="lqsGo('sectionFlow')">
 <div class="arrow-shape" style="border-color: rgba(255,255,255,0.5);"></div>
 </div>
-<div class="page-nav-arrow pna-bottom" onclick="lqsGo('sectionFuture')" style="opacity:0.3">
+<div class="page-nav-arrow pna-bottom" onclick="lqsGo('sectionFuture')">
 <div class="arrow-shape" style="border-color: rgba(255,255,255,0.5);"></div>
 </div>
 </div>
@@ -4007,7 +4036,7 @@
 <canvas id="networkCanvas"></canvas>
 <div class="future-content">
 <div class="lq-title-section" data-i18n="story54" style="color:white; font-size: 2rem; margin-bottom:10px;">What's Coming Next</div>
-<div data-i18n="story55" data-i18n-html="" style="font-family: 'Playfair Display', serif; font-size: 3.5rem; color: #fbbf24; margin-bottom: 20px; text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);">Endless Connections<br/>Between Words</div>
+<div data-i18n="story55" data-i18n-html="" style="font-family: 'Inter', sans-serif; font-size: 3.5rem; color: #fbbf24; margin-bottom: 20px; text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);">Endless Connections<br/>Between Words</div>
 <div data-i18n="story56" data-i18n-html="" style="font-size: 1.2rem; line-height: 1.8; color: #e2e8f0; font-weight: 300; max-width: 800px; margin: 0 auto;">In LexiQamus, words are no longer alone. With our new infrastructure, words are linked to one another through 25 different semantic tags (root, synonym, antonym, etc.).<br/><br/>
                 You will now be able to follow a word's historical journey and the expansion of its meaning on a single screen, in a seamless discovery experience.</div>
 <div class="brand-footer" data-i18n="story57">MUCH MORE COMING SOON.</div>
@@ -4827,6 +4856,7 @@
             story55: 'Kelimeler Arası Sonsuz<br/>Bağlantılar',
             story56: 'LexiQamus’ta kelimeler artık asla yalnız değil. Yeni altyapımızla kelimeler, 25 farklı anlamsal etiket (kök, eş anlam, zıt anlam vb.) üzerinden birbirine bağlanıyor.<br/><br/>                 Bir kelimenin tarihî yolculuğunu ve anlam genişlemesini artık tek bir ekranda, kesintisiz bir keşif deneyimiyle takip edebileceksiniz.',
             story57: 'DAHA FAZLASI ÇOK YAKINDA.',
+            discoverStory: '2026 yeniliklerini keşfedin',
             menuWhat: 'LexiQamus Nedir?',
             menuGuide: 'Kullanım Kılavuzu',
             menuUpdates: 'Güncellemeler',
@@ -12578,6 +12608,7 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeEquival
 
 
 <script>
+window.lqsTop = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
 (function(){
 
         // --- GENERAL SCROLL HELPER ---
@@ -12638,7 +12669,7 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeEquival
         });
 
         // --- SECTION 4: FLOW LOGIC (Merged) ---
-        const wait = ms => new Promise(r => setTimeout(r, ms));
+        const wait = ms => new Promise(r => setTimeout(r, ms * 0.5));
         const manualDetectedData = {
             'layer-entry': [{ t: 0, h: 8, l: 80, w: 18 }],
             'layer-sub': [ { t: 3, h: 4, l: 10, w: 20 }, { t: 8, h: 4, l: 15, w: 18 }, { t: 14, h: 4, l: 10, w: 22 }, { t: 19, h: 4, l: 12, w: 20 }, { t: 25, h: 4, l: 15, w: 18 }, { t: 30, h: 4, l: 10, w: 20 }, { t: 36, h: 4, l: 12, w: 18 }, { t: 41, h: 4, l: 15, w: 15 }, { t: 47, h: 4, l: 10, w: 22 }, { t: 52, h: 4, l: 12, w: 20 }, { t: 58, h: 4, l: 15, w: 18 }, { t: 63, h: 4, l: 10, w: 20 }, { t: 69, h: 4, l: 12, w: 18 }, { t: 74, h: 4, l: 15, w: 15 }, { t: 80, h: 4, l: 10, w: 22 }, { t: 85, h: 4, l: 12, w: 20 }, { t: 90, h: 4, l: 10, w: 18 }, { t: 88, h: 5, l: 85, w: 12 }, { t: 95, h: 5, l: 60, w: 10 }, { t: 95, h: 5, l: 70, w: 10 }, { t: 95, h: 5, l: 80, w: 10 }, { t: 95, h: 5, l: 90, w: 8 } ],
@@ -12731,7 +12762,7 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeEquival
             const wrapper = procCard.querySelector('.proc-wrapper'); const wrapRect = wrapper.getBoundingClientRect(); const contRect = document.querySelector('.stage-container').getBoundingClientRect();
             const wL = wrapRect.left + (wrapRect.width * 0.89) - contRect.left; const wT = wrapRect.top + (wrapRect.height * 0.04) - contRect.top;
             orb.style.left = (wL - 6 - 36) + 'px'; orb.style.top = (wT - 6) + 'px'; orb.style.opacity = '1'; orb.classList.add('orb-pulse'); await wait(1200); orb.classList.remove('orb-pulse');
-            orb.style.transition = 'all 1s cubic-bezier(0.45, 0, 0.55, 1)';
+            orb.style.transition = 'all 0.55s cubic-bezier(0.45, 0, 0.55, 1)';
             const pyRect = document.getElementById('pyramid-area').getBoundingClientRect();
             const destX = (pyRect.left - contRect.left) + (pyRect.width / 2); const destY = (pyRect.top - contRect.top) + 30; 
             orb.style.left = destX + 'px'; orb.style.top = destY + 'px'; await wait(1000); orb.style.opacity = '0'; 
@@ -12750,12 +12781,12 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeEquival
             const raw = document.getElementById('card-raw-real'); const proc = document.getElementById('card-proc-real'); const headerStrip = document.getElementById('raw-header-strip');
             setCenter(raw); raw.style.display = 'block'; raw.style.opacity = '0'; await runTextSequence();
             raw.style.transform = 'translate(-50%, -50%) scale(0.8)'; headerStrip.style.clipPath = 'inset(0 100% 0 0)'; headerStrip.style.transition = 'none'; void raw.offsetWidth; 
-            raw.style.transition = 'all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1)'; raw.style.opacity = '1'; raw.style.transform = 'translate(-50%, -50%) scale(1)'; headerStrip.style.transition = 'clip-path 1.5s cubic-bezier(0.2, 0.8, 0.2, 1)'; headerStrip.style.clipPath = 'inset(0 0 0 0)';
+            raw.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)'; raw.style.opacity = '1'; raw.style.transform = 'translate(-50%, -50%) scale(1)'; headerStrip.style.transition = 'clip-path 1.5s cubic-bezier(0.2, 0.8, 0.2, 1)'; headerStrip.style.clipPath = 'inset(0 0 0 0)';
             await wait(1600); moveToSpot(raw, 'spot-raw', 1200); await wait(1000); 
             proc.style.display = 'block'; proc.style.width = raw.style.width; proc.style.top = raw.style.top; proc.style.left = raw.style.left; proc.style.transform = raw.style.transform; proc.style.transition = 'none';
             document.getElementById('layer-raw-filter').style.opacity = '1'; proc.style.opacity = '1'; await wait(200); document.getElementById('layer-base').classList.add('wipe-left-reveal');
             await wait(1500); proc.classList.add('digital-ready'); 
-            proc.style.transition = 'all 1.5s cubic-bezier(0.25, 0.8, 0.25, 1)'; proc.style.top = '60%'; proc.style.left = '50%'; proc.style.transform = 'translate(-50%, -50%) scale(1.1) rotate(0deg)';
+            proc.style.transition = 'all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1)'; proc.style.top = '60%'; proc.style.left = '50%'; proc.style.transform = 'translate(-50%, -50%) scale(1.1) rotate(0deg)';
             startCanvasFlow(); await wait(1500); 
             var lqsT = function (en, tr) { return (typeof currentLang !== 'undefined' && currentLang === 'tr') ? tr : en; };
             await runSmartScan(proc, 'layer-entry', '#0d9488', lqsT('HEADWORD', 'MADDE BAŞI'), false, true); await wait(500); await runSmartScan(proc, 'layer-sub', '#d97706', lqsT('SUBHEADWORDS', 'ALT MADDE BAŞLARI'), false); await wait(500); await runSmartScan(proc, 'layer-rel', '#2563eb', lqsT('RELATED WORDS', 'İLİŞKİLİ KELİMELER'), true); await wait(1000);
