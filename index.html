@@ -667,7 +667,8 @@
             box-shadow: 0 3px 14px rgba(8,37,103,0.08); }
         .br-cap { font-size: 12.5px; color: #94a3b8; line-height: 1.7; margin: 12px 0 0; }
 
-        .br-counts { margin-top: 20px; padding-top: 16px; border-top: 1px solid #e8edf4; display: flex; flex-direction: column; gap: 9px; }
+        .br-counts { margin: 18px 0 24px; padding-top: 16px; border-top: 1px solid #e8edf4;
+            display: flex; flex-wrap: wrap; gap: 10px 30px; }
         .br-count { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #64748b; }
         .br-count b { color: #0f172a; font-weight: 800; }
         .br-count i { font-style: normal; font-weight: 600; }
@@ -679,27 +680,25 @@
         .br-dot.o { background: #f59e0b; }
         .br-dot.b { background: #3b82f6; }
 
-        .br-flow { display: grid; grid-template-columns: minmax(0,1fr) 46px minmax(0,1fr); gap: 12px;
-            align-items: start; margin-top: 34px; }
-        .br-flow-right { padding-top: 34px; }
+        .br-flow { margin-top: 30px; }
+        .br-flow-right { margin-top: 4px; }
+        .br-shot-wide { width: 100%; }
+        .br-stack { display: block; }
+        .br-stack .v3-feats { margin-bottom: 26px; }
         .br-flow-left { position: relative; }
         .br-scribble { position: absolute; left: -8px; top: 10px; width: 88px; height: auto; z-index: 2;
             transform: rotate(-7deg); filter: drop-shadow(0 6px 14px rgba(15,23,42,0.22)); }
         .br-qmark { position: absolute; left: 92px; top: -2px; z-index: 2; font-family: 'Playfair Display', Georgia, serif;
             font-style: italic; font-size: 30px; font-weight: 700; color: var(--brand-claret); line-height: 1; }
-        .br-arrow { display: flex; align-items: center; justify-content: center; padding-top: 92px; }
-        .br-arrow svg { width: 30px; height: 30px; display: block; fill: none;
-            stroke: var(--brand-sapphire); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+        .br-arrow { display: flex; align-items: center; justify-content: center; margin: 18px 0 6px;
+            color: var(--brand-sapphire); }
+        .br-arrow svg { width: 26px; height: 26px; display: block; transform: rotate(90deg); }
         .br-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
         .br-pills span { font-size: 12px; font-weight: 700; color: var(--brand-sapphire); background: #eff4fd;
             border: 1px solid #dbe4f5; border-radius: 7px; padding: 7px 12px; }
 
         @media (max-width: 760px) {
             .br-hero, .br-cols, .br-split { grid-template-columns: 1fr; gap: 22px; }
-            .br-flow { grid-template-columns: 1fr; }
-            .br-arrow { padding-top: 0; }
-            .br-arrow svg { transform: rotate(90deg); }
-            .br-flow-right { padding-top: 0; }
             .br-scribble { width: 66px; left: -6px; top: 4px; }
             .br-qmark { left: 62px; top: -10px; font-size: 24px; }
             .br-title { font-size: 25px; }
@@ -2673,21 +2672,17 @@
 
   <div class="v3-block">
     <h3 class="v3-sec-title" data-i18n="v3NewTitle" data-i18n-html>What version <em>3.0</em> brings</h3>
-    <div class="br-split">
-      <img class="br-shot" alt="" data-src-en="assets/brochure/en-results.jpg" data-src-tr="assets/brochure/tr-results.jpg" src="assets/brochure/en-results.jpg">
-      <div>
-        <ul class="v3-list">
-          <li data-i18n="v3New1" data-i18n-html>How many records were found, how many <b>dictionaries and volumes</b> were scanned</li>
-          <li data-i18n="v3New2" data-i18n-html>Every <b>spelling variant</b> of the word</li>
-          <li data-i18n="v3New3" data-i18n-html><b>Source dictionary and page number</b> on every line</li>
-        </ul>
-        <div class="br-counts">
-          <div class="br-count"><span class="br-dot g"></span><b data-i18n="v3CntHeadNum">209,000+</b> <i class="c-g" data-i18n="v3CntHead">Headwords</i></div>
-          <div class="br-count"><span class="br-dot o"></span><b data-i18n="v3CntSubNum">152,000+</b> <i class="c-o" data-i18n="v3CntSub">Subheadwords</i></div>
-          <div class="br-count"><span class="br-dot b"></span><b data-i18n="v3CntRelNum">130,000+</b> <i class="c-b" data-i18n="v3CntRel">Related words</i></div>
-        </div>
-      </div>
+    <ul class="v3-list">
+      <li data-i18n="v3New1" data-i18n-html>How many records were found, how many <b>dictionaries and volumes</b> were scanned</li>
+      <li data-i18n="v3New2" data-i18n-html>Every <b>spelling variant</b> of the word</li>
+      <li data-i18n="v3New3" data-i18n-html><b>Source dictionary and page number</b> on every line</li>
+    </ul>
+    <div class="br-counts">
+      <div class="br-count"><span class="br-dot g"></span><b data-i18n="v3CntHeadNum">209,000+</b> <i class="c-g" data-i18n="v3CntHead">Headwords</i></div>
+      <div class="br-count"><span class="br-dot o"></span><b data-i18n="v3CntSubNum">152,000+</b> <i class="c-o" data-i18n="v3CntSub">Subheadwords</i></div>
+      <div class="br-count"><span class="br-dot b"></span><b data-i18n="v3CntRelNum">130,000+</b> <i class="c-b" data-i18n="v3CntRel">Related words</i></div>
     </div>
+    <img class="br-shot br-shot-wide" alt="" data-src-en="assets/brochure/en-results.jpg" data-src-tr="assets/brochure/tr-results.jpg" src="assets/brochure/en-results.jpg">
   </div>
 
   <div class="v3-block">
@@ -2713,12 +2708,12 @@
       <div class="br-flow-left">
         <img class="br-scribble" src="assets/brochure/scribble.png" alt="">
         <span class="br-qmark">?</span>
-        <img class="br-shot" alt="" data-src-en="assets/brochure/en-decoder.jpg" data-src-tr="assets/brochure/tr-decoder.jpg" src="assets/brochure/en-decoder.jpg">
+        <img class="br-shot br-shot-wide" alt="" data-src-en="assets/brochure/en-decoder.jpg" data-src-tr="assets/brochure/tr-decoder.jpg" src="assets/brochure/en-decoder.jpg">
         <p class="br-cap" data-i18n="v3DecoderCap">The Word Decoder and the purpose-built on-screen Ottoman keyboard.</p>
       </div>
-      <div class="br-arrow"><svg viewBox="0 0 24 24"><path d="M4 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></div>
+      <div class="br-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
       <div class="br-flow-right">
-        <img class="br-shot" alt="" data-src-en="assets/brochure/en-lemma.jpg" data-src-tr="assets/brochure/tr-lemma.jpg" src="assets/brochure/en-lemma.jpg">
+        <img class="br-shot br-shot-wide" alt="" data-src-en="assets/brochure/en-lemma.jpg" data-src-tr="assets/brochure/tr-lemma.jpg" src="assets/brochure/en-lemma.jpg">
       </div>
     </div>
     <p class="br-cap" data-i18n="v3CatsLead">Results are grouped under seven categories, from the barest form to the fullest:</p>
@@ -2727,7 +2722,7 @@
 
   <div class="v3-block">
     <h3 class="v3-sec-title" data-i18n="v3FeatTitle" data-i18n-html>Other <em>distinctive</em> features</h3>
-    <div class="br-split">
+    <div class="br-stack">
       <div class="v3-feats">
         <div class="v3-feat">
           <h4 class="has-ico"><span class="br-ico i-t"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"></rect><path d="M3 15.5l4.5-4 3.5 3 4-4.5 5 5.5"></path><circle cx="8.5" cy="9" r="1.4"></circle></svg></span><span data-i18n="v3Feat1H">Visual dictionary</span></h4>
@@ -2750,10 +2745,8 @@
           <p data-i18n="v3Feat5P" data-i18n-html>Source citations for every entry copy in <b>Chicago, APA, and Harvard</b> format with one click.</p>
         </div>
       </div>
-      <div>
-        <img class="br-shot" alt="" data-src-en="assets/brochure/en-entry.jpg" data-src-tr="assets/brochure/tr-entry.jpg" src="assets/brochure/en-entry.jpg">
-        <p class="br-cap" data-i18n="v3EntryCap">The entry window opens on the dictionary's original scan, with language and transliteration tabs across the top.</p>
-      </div>
+      <img class="br-shot br-shot-wide" alt="" data-src-en="assets/brochure/en-entry.jpg" data-src-tr="assets/brochure/tr-entry.jpg" src="assets/brochure/en-entry.jpg">
+      <p class="br-cap" data-i18n="v3EntryCap">The entry window opens on the dictionary's original scan, with language and transliteration tabs across the top.</p>
     </div>
   </div>
 
