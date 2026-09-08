@@ -9,7 +9,7 @@
 
 </script>
 <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,600;1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&display=swap');
         
         :root {
             /* --- MAIN SITE COLORS --- */
@@ -1151,7 +1151,7 @@
 
 
         /* ===================== ANA SAYFA ALTI TANITIM AKIŞI ===================== */
-        #lqStory { display: none; width: 100vw; margin-left: calc(50% - 50vw); margin-top: 64px;
+        #lqStory { display: none; width: 100vw; margin-left: calc(50% - 50vw); margin-top: 40px;
             height: auto !important; scroll-snap-type: none !important; overflow-x: hidden; text-align: left; }
         body.vs-home #lqStory { display: block; }
         body.team-page-open #lqStory, body.v3-page-open #lqStory, body.first-entry #lqStory { display: none !important; }
@@ -12633,6 +12633,25 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeEquival
 
 <script>
 window.lqsTop = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+window.lqsFitStory = function () {
+    var s = document.getElementById('lqStory');
+    if (!s || getComputedStyle(s).display === 'none') return;
+    s.style.marginTop = '0px';
+    var top = s.getBoundingClientRect().top + window.scrollY;
+    var m = Math.max(40, Math.round(window.innerHeight - top));
+    s.style.marginTop = m + 'px';
+    var delta = Math.round(window.innerHeight - (s.getBoundingClientRect().top + window.scrollY));
+    if (delta) s.style.marginTop = Math.max(40, m + delta) + 'px';
+};
+window.addEventListener('load', lqsFitStory);
+window.addEventListener('resize', lqsFitStory);
+document.addEventListener('DOMContentLoaded', function () { setTimeout(lqsFitStory, 60); setTimeout(lqsFitStory, 600); });
+(function () {
+    var orig = window.setViewState;
+    if (typeof orig === 'function') {
+        window.setViewState = function () { var r = orig.apply(this, arguments); setTimeout(lqsFitStory, 0); return r; };
+    }
+})();
 document.addEventListener('click', function (e) {
     var btn = e.target.closest && e.target.closest('#lqStory .toggle-btn');
     if (!btn) return;
