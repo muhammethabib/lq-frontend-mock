@@ -1095,8 +1095,15 @@
 #lqStory .lab-subtitle{ font-size: 1.2rem; color: #cbd5e1; font-weight: 300; max-width: 700px; margin: 0 auto; line-height: 1.6; }
 #lqStory .interface-grid{ display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; width: 100%; align-items: center; }
 #lqStory .mockup-stage{ position: relative; width: 100%; height: 450px; perspective: 1500px; }
-        #lqStory .mockup-stage { height: clamp(340px, 50vh, 500px); }
-        #lqStory .interface-grid { grid-template-columns: 1.35fr 0.75fr; gap: 38px; }
+        #lqStory .mockup-stage { height: clamp(320px, 54vh, 520px); }
+        #lqStory .interface-grid { grid-template-columns: minmax(0,1.25fr) minmax(320px,0.8fr); gap: 40px; }
+        #lqStory .toggle-btn { white-space: nowrap; padding: 9px 18px; font-size: .88rem; }
+        #lqStory .toggle-btn svg { width: 15px; height: 15px; }
+        #lqStory .feature-card { padding: 22px 24px; }
+        #lqStory .fc-title { font-size: 1.35rem; margin-bottom: 12px; }
+        #lqStory .fc-list li { font-size: .93rem; line-height: 1.55; margin-bottom: 10px; }
+        #lqStory .citation-badge { font-size: .82rem; padding: 10px 14px; }
+        #lqStory .lab-header { margin-bottom: 26px; }
 #lqStory .browser-frame{ width: 100%; height: 100%; background: #1e293b; border-radius: 12px; border: 1px solid #334155; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); transform-style: preserve-3d; }
 #lqStory .mockup-stage:hover .browser-frame{ transform: rotateY(5deg) rotateX(2deg); }
 #lqStory .browser-header{ height: 36px; background: #0f172a; border-bottom: 1px solid #334155; display: flex; align-items: center; padding: 0 16px; gap: 8px; }
@@ -12665,10 +12672,14 @@ window.lqsMountPopup = function () {
     var tpl = lang === 'tr' ? 'tplPopupTr' : 'tplPopupEn';
     if (fr.dataset.cur !== tpl) { fr.dataset.cur = tpl; fr.srcdoc = getEmbedTpl(tpl); }
     // popup kartı 1500x1000 sayfanın içinde 1100x900; boş kenarları saymadan ölçekle
-    var k = Math.min(wrap.clientWidth / 1110, wrap.clientHeight / 908);
+    // kart 1100x900; genişliğe göre ölçekle, gerekirse alttan kırp
+    var k = wrap.clientWidth / 1185;
+    var cardH = 900 * k;
     fr.style.transform = 'scale(' + k + ')';
     fr.style.left = Math.round(wrap.clientWidth / 2 - 750 * k) + 'px';
-    fr.style.top = Math.round(wrap.clientHeight / 2 - 500 * k) + 'px';
+    fr.style.top = Math.round(cardH <= wrap.clientHeight
+        ? wrap.clientHeight / 2 - 500 * k
+        : -46 * k) + 'px';
 };
 window.addEventListener('resize', function () { lqsMountPopup(); });
 window.addEventListener('load', lqsMountPopup);
