@@ -710,6 +710,432 @@
             .br-foot { flex-direction: column; text-align: center; gap: 10px; }
         }
 
+#lqStory{
+
+            /* --- ANA RENK PALETİ --- */
+            --sapphire: #082567;
+            --sapphire-dark: #051b4d;
+            --vurgu-indigo: #1e1b4b;
+            --sapphire-light: #eff6ff; 
+            --lq-bordo: #be123c;
+            --lq-bg-red: #fff1f2; 
+            --lq-border-red: #ffe4e6; 
+            --tok-bordo: #9d1c51; 
+            --tok-bordo-hover: #831843; 
+            --gold-accent: #d97706;
+            --text-main: #0f172a; 
+            --text-body: #334155; 
+            --text-muted: #64748b;
+            --border: #cbd5e1;
+            --white: #ffffff;
+            --bg-body-start: #f8fafc;
+            --bg-body-end: #f1f5f9;
+            --max-width-ceviz: 960px;
+            
+            /* LIBRARY / HERITAGE VARS (EKLENDİ) */
+            --leather-red: linear-gradient(145deg, #7f1d1d 0%, #450a0a 100%);
+            --leather-blue: linear-gradient(145deg, #1e3a8a 0%, #172554 100%);
+            --leather-green: linear-gradient(145deg, #14532d 0%, #064e3b 100%);
+            --gold-text: #fcd34d; 
+            --silver-text: #cbd5e1;
+            --ic-title-color: #800000;
+            --ic-text-color: #1a1a1a;
+
+            /* FLOW SECTION (UC143) VARS */
+            --vintage-paper: #f4ecd8;
+            --vintage-border: #dcd3c0;
+            --vintage-leather: #5d4037;
+            --vintage-gold: #ffecb3;
+            --tech-navy: #000080; 
+            --tech-cyan: #06b6d4; 
+            --tech-blue-border: #3b82f6;
+            --c-entry: #0d9488; --c-entry-bg: #f0fdfa;
+            --c-sub: #d97706;   --c-sub-bg: #fffbeb;
+            --c-rel: #2563eb;   --c-rel-bg: #eff6ff;
+
+            /* ENGINE VARS */
+            --sep-bg: #e2e8f0; --sep-bg-hover: #cbd5e1;
+            --zincir-gray: #475569; --box-h: 60px; 
+            --sep-w: 18px; --line-thickness: 4px;
+            --box-border: #ef4444; --box-pink: #ffe4e6; 
+            --delete-red: #b91c1c; --add-blue: #082567;
+            --reset-btn: #134296; --reset-btn-hover: #0e3682; 
+        }
+#lqStory{
+ scroll-behavior: smooth; scroll-snap-type: y mandatory; height: 100%; }
+#lqStory{
+ 
+            font-family: 'Inter', sans-serif; margin: 0; padding: 0; 
+            background: var(--white); height: 100%; overflow-x: hidden;
+        }
+#lqStory /* --- SNAP ARCHITECTURE --- */
+        .snap-section{
+            width: 100%; height: 100vh;
+            scroll-snap-align: start; scroll-snap-stop: always;
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column; 
+            align-items: center; justify-content: center;
+        }
+#lqStory /* =========================================
+           SECTION 1: HOME & SEARCH
+           ========================================= */
+        .main-search-wrapper{
+            background: linear-gradient(to bottom, var(--bg-body-start), var(--bg-body-end));
+            justify-content: flex-start;
+            padding-top: 8vh;
+            z-index: 10;
+        }
+#lqStory .header-area{ text-align: center; margin-bottom: 35px; display: flex; flex-direction: column; align-items: center; z-index: 20; }
+#lqStory .logo-wrapper{ display: inline-flex; align-items: center; text-decoration: none; line-height: 1; margin-bottom: 8px; user-select: none; gap: 1px; }
+#lqStory .l-part{ font-family: 'Inter', sans-serif; font-size: 46px; font-weight: 800; color: var(--sapphire); letter-spacing: -1.5px; text-shadow: 0 2px 4px rgba(8,37,103,0.1); }
+#lqStory .q-part{ font-family: 'Cinzel', serif; font-size: 50px; font-weight: 700; color: var(--lq-bordo); margin: 0 -2px; transform: translateY(2px); text-shadow: 0 2px 4px rgba(190,18,60,0.1); }
+#lqStory .amus-part{ font-family: 'Inter', sans-serif; font-size: 46px; font-weight: 300; color: var(--lq-bordo); letter-spacing: -0.5px; }
+#lqStory .logo-subtitle{ font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: var(--text-muted); letter-spacing: 2px; opacity: 0.75; margin-top: 4px; text-transform: uppercase; }
+#lqStory .nav-tabs{ display: flex; justify-content: center; margin-bottom: -1px; width: 100%; max-width: var(--max-width-ceviz); position: relative; z-index: 20; }
+#lqStory .tab{ padding: 15px 30px; cursor: pointer; border: 1px solid var(--border); border-bottom: 1px solid var(--border); border-radius: 12px 12px 0 0; color: var(--text-muted); font-weight: 600; background: #e9eff5; margin: 0 4px; }
+#lqStory .tab:hover{ background: #e2e8f0; color: var(--sapphire); }
+#lqStory .tab.active{ background: var(--white); border-color: var(--border); color: var(--sapphire); padding-bottom: 17px; border-bottom: 1px solid var(--white); box-shadow: 0 -4px 6px rgba(0,0,0,0.02); position: relative; z-index: 25; }
+#lqStory .search-container{ background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 45px; width: 100%; max-width: var(--max-width-ceviz); box-shadow: 0 20px 40px -10px rgba(8, 37, 103, 0.08), 0 0 2px rgba(0,0,0,0.05); margin-bottom: 30px; box-sizing: border-box; position: relative; z-index: 10; }
+#lqStory .search-mode{ display: none; width: 100%; }
+#lqStory .search-mode.active.mode-engine{ display: flex; flex-direction: column; align-items: center; gap: 24px; }
+#lqStory .search-mode.active:not(.mode-engine){ display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 15px; }
+#lqStory /* Engine Elements */
+        .kayin-engine-core{ display: flex; align-items: flex-start; justify-content: center; gap: 6px; background: #ffffff; padding: 5px 0; }
+#lqStory .box-wrapper{ display: flex; height: var(--box-h); border: 2px solid var(--box-border); border-radius: 6px; position: relative; z-index: 10; background-color: #ffffff; transition: border-color 0.2s, box-shadow 0.2s; }
+#lqStory .box-wrapper:focus-within{ border-color: var(--sapphire); box-shadow: 0 0 0 4px rgba(8, 37, 103, 0.15); z-index: 100; }
+#lqStory .sub-box{ position: relative; width: 55px; height: 100%; display: flex; align-items: center; justify-content: center; background-color: transparent; z-index: 20; cursor: pointer; transition: background-color 0.1s; }
+#lqStory .sub-box:hover:not(:focus-within){ background-color: var(--box-pink); }
+#lqStory .sub-box:not(:last-child){ border-right: 2px dashed #cbd5e1; }
+#lqStory .s-action-btn{ position: absolute; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; opacity: 0; transition: opacity 0.2s, transform 0.2s; z-index: 1000; background: transparent; }
+#lqStory .sub-box:not(:focus-within):hover .s-action-btn, #lqStory .sub-box:focus-within .s-action-btn:hover{ opacity: 1; }
+#lqStory .s-add{ top: 0; left: 0; width: 24px; height: 24px; }
+#lqStory .s-add::before{ content: "+"; width: 16px; height: 16px; background: var(--add-blue); color: white; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; position: absolute; top: 2px; left: 2px; }
+#lqStory .s-del{ top: 0; right: 0; width: 32px; height: 32px; transform: translate(50%, -50%); }
+#lqStory .s-del::after{ content: "×"; width: 18px; height: 18px; background: var(--delete-red); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; }
+#lqStory .char-input{ width: 100%; height: 100%; border: none; background: transparent; font-size: 26px; font-weight: bold; color: var(--sapphire); text-align: center; outline: none; cursor: inherit; }
+#lqStory .column-unit{ display: flex; flex-direction: column; align-items: center; width: var(--sep-w); }
+#lqStory .divider-btn{ width: var(--sep-w); height: var(--box-h); background-color: var(--sep-bg); border: none; border-radius: 3px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s; }
+#lqStory .divider-btn:hover{ background-color: var(--sep-bg-hover); }
+#lqStory .divider-btn:hover .plus-icon{ transform: scale(1.4); color: var(--sapphire); }
+#lqStory .plus-icon{ color: #94a3b8; font-size: 16px; font-weight: 900; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s; }
+#lqStory .zincir-wrapper{ width: var(--sep-w); height: 25px; display: flex; justify-content: center; align-items: center; cursor: pointer; position: relative; margin-top: 3px; }
+#lqStory .zincir-wrapper svg{ overflow: visible; }
+#lqStory .halka{ fill: none; stroke: var(--zincir-gray); stroke-width: var(--line-thickness); rx: 8; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+#lqStory .orta-cizgi{ fill: none; stroke: var(--sapphire); stroke-width: var(--line-thickness); stroke-linecap: round; opacity: 0; transform: scaleX(0.1); transform-origin: center; transition: 0.3s; }
+#lqStory .soru-isareti{ position: absolute; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 900; color: var(--sapphire); opacity: 0; transition: 1.2s; pointer-events: none; transform: translate(0, -15px); }
+#lqStory .is-locked .halka-sol{ transform: translateX(5.5px); stroke: var(--sapphire); }
+#lqStory .is-locked .halka-sag{ transform: translateX(-5.5px); stroke: var(--sapphire); }
+#lqStory .is-locked .orta-cizgi{ opacity: 1; transform: scaleX(0.75); }
+#lqStory .is-uncertain .halka-sol{ transform: translateX(-4px); stroke: var(--zincir-gray); }
+#lqStory .is-uncertain .halka-sag{ transform: translateX(4px); stroke: var(--zincir-gray); }
+#lqStory .is-uncertain .soru-isareti{ opacity: 1; transform: translate(0, -2px); }
+#lqStory .btn-ara{ height: 56px; background: var(--tok-bordo); color: white; border: none; padding: 0 35px; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; margin-left: 10px; transition: all 0.2s ease; box-shadow: 0 4px 6px rgba(131, 24, 67, 0.2); }
+#lqStory .btn-ara:hover{ background: var(--tok-bordo-hover); transform: translateY(-2px); }
+#lqStory .engine-footer{ display: flex; align-items: center; justify-content: center; gap: 16px; width: 100%; }
+#lqStory .btn-footer{ height: 42px; padding: 0 24px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; }
+#lqStory .btn-reset{ background: var(--reset-btn); color: white; border: none; }
+#lqStory .btn-share{ background-color: var(--sapphire-light); color: var(--sapphire); border: 1px solid #dbeafe; }
+#lqStory .ana20-input-wrapper{ position: relative; width: 520px; height: 56px; background: #fff; border: 1.5px solid var(--border); border-radius: 12px; display: flex; align-items: center; transition: border-color 0.2s; overflow: hidden; }
+#lqStory .ana20-input-wrapper:focus-within{ border-color: var(--sapphire); box-shadow: 0 0 0 4px rgba(8, 37, 103, 0.1); }
+#lqStory .main-input{ width: 100%; height: 100%; border: none; outline: none; background: transparent; padding: 0 20px; font-size: 18px; color: var(--text-main); font-weight: 500; z-index: 2; position: relative; }
+#lqStory .placeholder-container{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; box-sizing: border-box; pointer-events: none; z-index: 1; }
+#lqStory .placeholder-text{ font-size: 15px; color: #94a3b8; transition: 0.2s; }
+#lqStory .placeholder-osm{ font-family: 'Noto Naskh Arabic', serif; font-size: 19px; direction: rtl; text-align: right; }
+#lqStory .scroll-indicator-wrapper{ position: absolute; bottom: 40px; display: flex; flex-direction: column; align-items: center; cursor: pointer; z-index: 50; transition: transform 0.3s; }
+#lqStory .scroll-indicator-wrapper:hover{ transform: translateY(-5px); }
+#lqStory .si-text{ font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; background: linear-gradient(to right, var(--sapphire) 0%, #3b82f6 40%, var(--gold-accent) 50%, #3b82f6 60%, var(--sapphire) 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: textShimmerFlow_lqs 3s linear infinite; }
+@keyframes textShimmerFlow_lqs{ to { background-position: 200% center; } }
+#lqStory .si-arrow-container{ width: 30px; height: 45px; position: relative; }
+#lqStory .si-chevron{ position: absolute; width: 24px; height: 7px; opacity: 0; transform: scale(0.3); animation: scrollFlowSlow_lqs 3s ease-out infinite; }
+#lqStory .si-chevron:before, #lqStory .si-chevron:after{ content: ' '; position: absolute; top: 0; height: 100%; width: 51%; background: var(--sapphire); }
+#lqStory .si-chevron:before{ left: 0; transform: skew(0deg, 30deg); }
+#lqStory .si-chevron:after{ right: 0; width: 50%; transform: skew(0deg, -30deg); }
+#lqStory .si-chevron:first-child{ animation-delay: 0s; }
+#lqStory .si-chevron:nth-child(2){ animation-delay: 1s; }
+#lqStory .si-chevron:nth-child(3){ animation-delay: 2s; }
+@keyframes scrollFlowSlow_lqs{ 0% { opacity: 0; transform: translateY(-15px) scale(0.7); } 40% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(15px) scale(0.7); } }
+#lqStory /* =========================================
+           SECTION 2: BuildLQ
+           ========================================= */
+        .buildlq-section{ background: white; position: relative; }
+#lqStory .abstract-bg-ui{ position: absolute; pointer-events: none; z-index: 0; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 4px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03); opacity: 0.4; }
+#lqStory .ui-table-right{ top: 15%; right: 5%; width: 200px; padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+#lqStory .ui-row{ height: 6px; background: #f1f5f9; border-radius: 2px; width: 100%; }
+#lqStory .ui-row.active{ background: #dbeafe; width: 80%; }
+#lqStory .ui-table-left{ bottom: 15%; left: 5%; width: 60px; padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+#lqStory .ui-block{ height: 6px; background: #e2e8f0; border-radius: 2px; }
+#lqStory .ui-block.highlight{ background: #fcd34d; opacity: 0.5; }
+#lqStory .osm-tech-node{ position: absolute; display: flex; align-items: center; justify-content: center; font-family: 'Noto Naskh Arabic', serif; font-weight: 700; font-size: 1.25rem; color: var(--sapphire-dark); padding: 12px 24px; border-radius: 6px; z-index: 10; transform: translate(-50%, -50%); box-shadow: 0 4px 15px rgba(0,0,0,0.08); animation: floating_lqs 6s ease-in-out infinite; }
+#lqStory .otn-latin{ font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.5px; }
+@keyframes floating_lqs{ 0% { transform: translate(-50%, -50%) translateY(0px); } 50% { transform: translate(-50%, -50%) translateY(-12px); } 100% { transform: translate(-50%, -50%) translateY(0px); } }
+#lqStory .otn-blue{ background: #eff6ff; border: 2px solid #bfdbfe; color: #1e3a8a; }
+#lqStory .otn-green{ background: #f0fdf4; border: 2px solid #bbf7d0; color: #166534; }
+#lqStory .otn-orange{ background: #fffbeb; border: 2px solid #fde68a; color: #92400e; }
+#lqStory .pos-1{ top: 25%; left: 15%; }
+#lqStory .pos-2{ top: 28%; left: 85%; }
+#lqStory .pos-3{ top: 80%; left: 85%; }
+#lqStory .pos-4{ top: 75%; left: 15%; }
+#lqStory .vision-wrapper{ position: relative; z-index: 10; width: 100%; max-width: 1200px; display: flex; flex-direction: column; align-items: center; }
+#lqStory .lq-title-hero{ font-family: 'Playfair Display', serif; font-size: 4rem; line-height: 1.1; font-weight: 800; text-align: center; margin-bottom: 25px; background: linear-gradient(135deg, var(--sapphire) 0%, var(--lq-bordo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.9)); position: relative; z-index: 30; animation: slideUp_lqs 1s ease-out; }
+#lqStory .hero-card{ background: white; border-left: 8px solid var(--lq-bordo); padding: 40px 50px; border-radius: 16px; box-shadow: 0 30px 60px -10px rgba(8, 37, 103, 0.2); max-width: 900px; position: relative; overflow: hidden; opacity: 0; transform: scale(0.95); transition: opacity 0.8s ease-out, transform 0.8s ease-out; z-index: 30; }
+#lqStory .hero-card.start-anim{ opacity: 1; transform: scale(1); }
+#lqStory .buildlq-features{ display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; margin-top: 35px; border-top: 1px solid #e2e8f0; padding-top: 25px; }
+#lqStory .blq-feat-item{ opacity: 0; transform: translateY(20px); transition: 0.6s ease-out; }
+#lqStory .hero-card.start-anim .blq-feat-item:nth-child(1){ transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+#lqStory .hero-card.start-anim .blq-feat-item:nth-child(2){ transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+#lqStory .hero-card.start-anim .blq-feat-item:nth-child(3){ transition-delay: 0.8s; opacity: 1; transform: translateY(0); }
+#lqStory .blq-feat-item h4{ color: var(--sapphire); font-size: 1.15rem; margin: 0 0 8px 0; font-weight: 800; }
+#lqStory .blq-feat-item p{ font-size: 0.95rem; color: var(--text-main); margin: 0; line-height: 1.5; font-weight: 500; }
+@keyframes slideUp_lqs{ from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+#lqStory .page-nav-arrow{ position: absolute; left: 50%; transform: translateX(-50%); cursor: pointer; z-index: 100; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; opacity: 0.6; transition: 0.3s; }
+#lqStory .page-nav-arrow:hover{ opacity: 1; transform: translateX(-50%) scale(1.1); }
+#lqStory .pna-top{ top: 15px; }
+#lqStory .pna-bottom{ bottom: 15px; }
+#lqStory .arrow-shape{ width: 14px; height: 14px; border-left: 3px solid var(--sapphire); border-top: 3px solid var(--sapphire); transform: rotate(45deg); }
+#lqStory .pna-bottom .arrow-shape{ transform: rotate(-135deg); animation: bounceSmall_lqs 2s infinite; }
+#lqStory .pna-top .arrow-shape{ opacity: 0.4; border-color: #94a3b8; }
+@keyframes bounceSmall_lqs{ 0%, 100% { transform: translateY(0) rotate(-135deg); } 50% { transform: translateY(5px) rotate(-135deg); } }
+#lqStory /* =========================================
+           SECTION 3: LIBRARY / HERITAGE (EKSİK OLAN KISIM)
+           ========================================= */
+        .noise-overlay{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+#lqStory .heritage-section{ width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; background: #f8fafc; overflow: hidden; }
+#lqStory .heritage-real-bg{ position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 0; pointer-events: none; background-image: url('assets/story/kapak4.jpg'); background-size: cover; background-position: center bottom; opacity: 0.08; filter: grayscale(100%) sepia(20%); transition: transform 0.1s ease-out; }
+#lqStory .heritage-container{ width: 100%; max-width: 1200px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding: 40px; box-sizing: border-box; position: relative; z-index: 10; gap: 60px; }
+#lqStory .left-panel{ flex: 0 0 35%; display: flex; flex-direction: column; align-items: flex-start; gap: 50px; margin-top: -40px; }
+#lqStory .lq-gradient-title-sm{ font-family: 'Playfair Display', serif; font-size: 3.8rem; line-height: 1.1; font-weight: 800; margin: 0; background: linear-gradient(135deg, var(--sapphire) 0%, var(--lq-bordo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1)); }
+#lqStory .hi-text-block{ font-size: 1.05rem; line-height: 1.7; color: var(--text-body); text-shadow: 0 1px 1px rgba(255,255,255,0.8); }
+#lqStory .lexicon-pro{ font-family: 'Playfair Display', serif; font-weight: 900; font-style: italic; font-size: 1.3em; color: var(--sapphire); margin-right: 2px; }
+#lqStory .highlight-row{ font-size: 1.25rem; font-weight: 700; color: var(--sapphire); border-left: 4px solid var(--lq-bordo); padding-left: 15px; margin: 15px 0; display: block; }
+#lqStory .vision-box-premium{ width: 100%; padding: 22px 28px; border-radius: 16px; background: rgba(255, 255, 255, 0.95); border: 1px solid #e2e8f0; border-left: 6px solid var(--lq-bordo); box-shadow: 0 15px 40px rgba(0,0,0,0.06); display: flex; flex-direction: row; align-items: center; justify-content: space-between; transition: transform 0.3s ease; position: relative; overflow: hidden; gap: 20px; }
+#lqStory .vision-box-premium::after{ content: ""; position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent); transform: skewX(-25deg); animation: shimmer_lqs 4s infinite ease-in-out; }
+@keyframes shimmer_lqs{ 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
+#lqStory .vision-box-premium:hover{ transform: translateY(-3px); }
+#lqStory .vp-icon-box{ width: 55px; height: 50px; background: rgba(190, 18, 60, 0.05); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+#lqStory .vp-content{ display: flex; flex-direction: column; gap: 8px; text-align: left; }
+#lqStory .vp-main-text{ font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--sapphire); line-height: 1.2; }
+#lqStory .vp-sub-text{ font-family: 'Inter', sans-serif; font-size: 1.05rem; color: #0f172a; font-weight: 500; line-height: 1.4; }
+@keyframes fadeInUp_lqs{ from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+#lqStory .anim-enter{ opacity: 0; animation: fadeInUp_lqs 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+#lqStory .d-1{ animation-delay: 0.2s; }
+#lqStory .d-2{ animation-delay: 0.4s; }
+#lqStory .d-3{ animation-delay: 0.6s; }
+@keyframes bookCascade_lqs{ 0% { opacity: 0; transform: translateY(60px); } 100% { opacity: 1; transform: translateY(0); } }
+#lqStory .bd-1{ animation: bookCascade_lqs 0.8s 0.20s forwards; }
+#lqStory .bd-2{ animation: bookCascade_lqs 0.8s 0.35s forwards; }
+#lqStory .bd-3{ animation: bookCascade_lqs 0.8s 0.50s forwards; }
+#lqStory .bd-4{ animation: bookCascade_lqs 0.8s 0.65s forwards; }
+#lqStory .bd-5{ animation: bookCascade_lqs 0.8s 0.80s forwards; }
+#lqStory .bd-6{ animation: bookCascade_lqs 0.8s 0.95s forwards; }
+#lqStory .stack-col{ display: flex; flex-direction: column; justify-content: flex-end; width: 28px; height: 30px; position: relative; }
+#lqStory .s-book{ width: 100%; height: 8px; background: var(--lq-bordo); border-radius: 1px; margin-bottom: 2px; opacity: 0; position: absolute; left: 0; }
+#lqStory .s-book.b1{ bottom: 0; animation: stackSequence1_lqs 6s infinite ease-in-out; }
+#lqStory .s-book.b2{ bottom: 10px; animation: stackSequence2_lqs 6s infinite ease-in-out; }
+#lqStory .s-book.b3{ bottom: 20px; animation: stackSequence3_lqs 6s infinite ease-in-out; }
+@keyframes stackSequence1_lqs{ 0% { opacity: 0; transform: translate(15px, -15px) rotate(10deg); } 15%, 85% { opacity: 1; transform: translate(0, 0) rotate(0deg); } 100% { opacity: 0; } }
+@keyframes stackSequence2_lqs{ 0%, 25% { opacity: 0; transform: translate(15px, -15px) rotate(10deg); } 40%, 85% { opacity: 1; transform: translate(0, 0) rotate(0deg); } 100% { opacity: 0; } }
+@keyframes stackSequence3_lqs{ 0%, 50% { opacity: 0; transform: translate(15px, -15px) rotate(10deg); } 65%, 85% { opacity: 1; transform: translate(0, 0) rotate(0deg); } 100% { opacity: 0; } }
+#lqStory .right-panel{ flex: 0 0 60%; display: flex; justify-content: center; align-items: center; }
+#lqStory .library-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; perspective: 2000px; }
+#lqStory .sahne{ width: 160px; height: 230px; position: relative; cursor: pointer; opacity: 0; perspective: 1500px; z-index: 1; transition: z-index 0.3s; }
+#lqStory .sahne:hover{ z-index: 100; }
+#lqStory .kitap{ width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); will-change: transform; }
+#lqStory .sahne:hover .kitap{ transform: translateZ(150px) rotateY(10deg) translateX(-20px); }
+#lqStory .kapak-grubu{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-origin: right center; transform-style: preserve-3d; transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1); z-index: 10; will-change: transform; }
+#lqStory .sahne:hover .kapak-grubu{ transform: rotateY(125deg); }
+#lqStory .kapak-on{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px 2px 2px 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px 25px 40px 10px; box-sizing: border-box; box-shadow: -2px 2px 8px rgba(0,0,0,0.2); z-index: 2; backface-visibility: hidden; -webkit-backface-visibility: hidden; outline: 1px solid transparent; transform: translateZ(1px); }
+#lqStory .kapak-on::after{ content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 12px; background: linear-gradient(to left, rgba(0,0,0,0.3) 0%, rgba(255,255,255,0.08) 30%, rgba(0,0,0,0.1) 100% ); border-left: 1px solid rgba(0,0,0,0.15); pointer-events: none; z-index: 10; border-radius: 0 2px 2px 0; }
+#lqStory .kapak-arka{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 2px 12px 12px 2px; transform: rotateY(180deg) translateZ(1px); z-index: 1; padding: 5px 5px 5px 0; box-sizing: border-box; display: flex; box-shadow: inset -5px 0 15px rgba(0,0,0,0.2); backface-visibility: hidden; -webkit-backface-visibility: hidden; outline: 1px solid transparent; }
+#lqStory .kapak-arka::after{ content: ''; flex: 1; width: 100%; height: 100%; background-size: cover; background-position: center; border-radius: 12px 0 0 12px; box-shadow: 0 0 3px rgba(0,0,0,0.3); transform: scaleX(-1); outline: 1px solid transparent; }
+#lqStory .kitap-1 .kapak-arka{ background: #7f1d1d; }
+#lqStory .kitap-1 .kapak-arka::after{ background-image: url('assets/story/battal7.jpg'); }
+#lqStory .kitap-2 .kapak-arka{ background: #1e3a8a; }
+#lqStory .kitap-2 .kapak-arka::after{ background-image: url('assets/story/battal2.jpg'); }
+#lqStory .kitap-3 .kapak-arka{ background: #14532d; }
+#lqStory .kitap-3 .kapak-arka::after{ background-image: url('assets/story/battal6.jpg'); }
+#lqStory .kitap-4 .kapak-arka{ background: #1e3a8a; }
+#lqStory .kitap-4 .kapak-arka::after{ background-image: url('assets/story/gelgit2.jpg'); }
+#lqStory .kitap-5 .kapak-arka{ background: #7f1d1d; }
+#lqStory .kitap-5 .kapak-arka::after{ background-image: url('assets/story/battal5.jpg'); }
+#lqStory .kitap-6 .kapak-arka{ background: #14532d; }
+#lqStory .kitap-6 .kapak-arka::after{ background-image: url('assets/story/gelgit1.jpg'); }
+#lqStory .kitap::after{ content: ''; position: absolute; left: -6px; top: 4px; width: 6px; height: calc(100% - 8px); background: #fdfdfd; transform: rotateY(-90deg); transform-origin: right; background-image: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.05) 50%); background-size: 100% 2px; box-shadow: inset 1px 0 3px rgba(0,0,0,0.1); outline: 1px solid transparent; }
+#lqStory .ic-sayfa{ position: absolute; top: 4px; bottom: 4px; right: 0; width: calc(100% - 4px); background-color: #fffdf0; border-radius: 8px 1px 1px 8px; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; padding: 25px 15px 15px 15px; box-sizing: border-box; background: linear-gradient(to left, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.02) 8%, #fffdf0 20%); box-shadow: -1px 0 2px rgba(0,0,0,0.05); transform: translateZ(-2px); outline: 1px solid transparent; }
+#lqStory .bk-red{ background: var(--leather-red); }
+#lqStory .bk-blue{ background: var(--leather-blue); }
+#lqStory .bk-green{ background: var(--leather-green); }
+#lqStory .bk-title{ font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.3); margin-bottom: 8px; line-height: 1.2; z-index: 5; }
+#lqStory .bk-auth{ font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500; color: var(--gold-text); margin-top: 5px; opacity: 0.95; z-index: 5; }
+#lqStory .bk-vol-box{ margin-top: 15px; width: 60%; border-top: 1px solid rgba(255,255,255,0.3); border-bottom: 1px solid rgba(255,255,255,0.3); padding: 5px 0; z-index: 5; }
+#lqStory .bk-vol{ font-family: 'Playfair Display', serif; font-size: 0.65rem; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
+#lqStory .bk-year{ position: absolute; bottom: 20px; font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: var(--silver-text); opacity: 0.9; z-index: 5; }
+#lqStory .ic-title{ font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ic-title-color); margin-bottom: 12px; }
+#lqStory .ic-auth{ font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; color: var(--ic-text-color); margin-top: 5px; }
+#lqStory .ic-vol-box{ margin-top: 20px; padding: 5px 0; width: 60%; border-top: 1px solid rgba(0,0,0,0.2); border-bottom: 1px solid rgba(0,0,0,0.2); }
+#lqStory .ic-vol{ font-family: 'Playfair Display', serif; font-size: 0.65rem; letter-spacing: 2px; color: var(--ic-text-color); text-transform: uppercase; }
+#lqStory .ic-year{ position: absolute; bottom: 15px; font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: #444; }
+#lqStory .book-deco-border{ position: absolute; top: 12px; bottom: 12px; left: 12px; right: 20px; border: 2px solid rgba(251, 191, 36, 0.3); border-radius: 8px 2px 2px 8px; z-index: 5; }
+#lqStory .approved-stamp{ position: absolute; top: 15px; left: 10px; width: 18px; height: 18px; background: #22c55e; color: #052e16; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; z-index: 12; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+#lqStory .exclusive-badge{ position: absolute; top: -12px; left: 15px; background: #fef3c7; color: #92400e; font-size: 9px; font-weight: 900; padding: 5px 12px; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.25); z-index: 20; border: 1.5px solid #d97706; }
+#lqStory .sahne:hover .exclusive-badge{ display: none; }
+#lqStory /* =========================================
+           SECTION 4: THE FLOW (UC143)
+           ========================================= */
+        #sectionFlow{ background: var(--bg-body-start); position: relative; }
+#lqStory .stage-container{
+            width: 100%; height: 100%;
+            display: grid; grid-template-rows: auto 1fr;
+            padding: 2vh 2vw; box-sizing: border-box;
+            position: relative;
+        }
+#lqStory #data-canvas{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 50; pointer-events: none; }
+#lqStory .flow-header-area{
+            text-align: left; padding-left: 5vw; position: relative; z-index: 20; padding-top: 5vh; 
+            opacity: 0; transform: translateY(-20px); transition: opacity 1s, transform 1s;
+        }
+#lqStory .header-visible{ opacity: 1; transform: translateY(0); }
+#lqStory .ha-title{
+            font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800;
+            background: linear-gradient(90deg, #082567 0%, #7e1e52 40%, #be123c 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin: 0; line-height: 1.2; margin-bottom: 20px;
+        }
+#lqStory .ha-sub-container{ display: flex; flex-direction: column; align-items: flex-start; gap: 12px; max-width: 1100px; position: relative; padding-left: 25px; }
+#lqStory .ha-sub-container::before{ content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 0%; background-color: var(--lq-bordo); transition: height 1s cubic-bezier(0.45, 0, 0.55, 1); }
+#lqStory .ha-sub-container.border-draw-active::before{ height: 100%; }
+#lqStory .ha-sub-container.pulsing-mode::before{ animation: pulseBorderAnim_lqs 1.2s infinite ease-in-out; }
+@keyframes pulseBorderAnim_lqs{ 0% { background-color: var(--lq-bordo); } 50% { background-color: rgba(190, 18, 60, 0.3); } 100% { background-color: var(--lq-bordo); } }
+#lqStory .strip-wrapper{ position: relative; display: inline-block; overflow: hidden; padding-right: 5px; }
+#lqStory .category-line{ font-size: clamp(1.0rem, 1.1vw, 1.2rem); color: var(--sapphire); font-weight: 500; white-space: nowrap; clip-path: inset(0 100% 0 0); transition: clip-path 3.5s linear; display: inline-flex; align-items: center; }
+#lqStory .strip-active .category-line{ clip-path: inset(0 0 0 0); }
+#lqStory .bold-text{ font-weight: 800; color: var(--sapphire); }
+#lqStory .cat-dot{ display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-left: 12px; margin-right: 6px; }
+#lqStory .cat-entry{ color: var(--c-entry); font-weight: 800; }
+#lqStory .cat-sub{ color: var(--c-sub); font-weight: 800; }
+#lqStory .cat-rel{ color: var(--c-rel); font-weight: 800; }
+#lqStory .doc-stack-container{ position: absolute; top: 0; right: 2%; width: 30vw; max-width: 450px; height: 100%; pointer-events: none; z-index: 10; }
+#lqStory .ghost-spot{ position: absolute; width: 60%; aspect-ratio: 0.65; visibility: hidden; }
+#lqStory #spot-raw{ top: 120px; right: 40px; transform: rotate(3deg); }
+#lqStory #spot-proc{ top: 180px; right: 20%; transform: rotate(-6deg); }
+#lqStory .active-card{ position: absolute; width: 300px; transform-origin: center center; will-change: transform, top, left, width, filter, opacity, box-shadow; z-index: 100; display: none; overflow: visible !important; }
+#lqStory.hover-mode-on .active-card:not(:hover){ filter: blur(4px) grayscale(80%); opacity: 0.7; transform: scale(0.98) !important; transition: all 0.5s ease; }
+#lqStory.hover-mode-on .active-card:hover{ z-index: 1000 !important; filter: none; opacity: 1; cursor: pointer; transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1); }
+#lqStory .img-content{ display: block; height: auto; width: 100%; vertical-align: bottom; }
+#lqStory .proc-wrapper .img-content.overlay-layer{ position: absolute; top: 6px; left: 6px; width: calc(100% - 12px); }
+#lqStory #layer-raw-filter{ z-index: 1; filter: sepia(0.6) contrast(1.1) brightness(0.95); }
+#lqStory #layer-base{ z-index: 2; filter: grayscale(100%) contrast(1.2) brightness(1.25); clip-path: inset(0 0 0 100%); }
+#lqStory #layer-entry{ z-index: 3; clip-path: inset(0 0 100% 0); }
+#lqStory #layer-sub{ z-index: 4; clip-path: inset(0 0 100% 0); }
+#lqStory #layer-rel{ z-index: 5; clip-path: inset(0 0 100% 0); }
+#lqStory .raw-img-wrapper{ background: var(--vintage-paper); border: 1px solid var(--vintage-border); position: relative; z-index: 10; padding: 6px; box-sizing: border-box; }
+#lqStory .cr-header{ background: var(--vintage-leather); color: #fdfbf7; padding: 3px 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #3e2723; height: 24px; box-shadow: inset 0 -1px 2px rgba(0,0,0,0.2); position: relative; z-index: 11; clip-path: inset(0 100% 0 0); box-sizing: content-box; }
+#lqStory .cr-titles{ display: flex; align-items: baseline; gap: 6px; white-space: nowrap; }
+#lqStory .cr-dict{ font-family: 'Playfair Display', serif; font-style: italic; color: var(--vintage-gold); font-size: 0.85rem; }
+#lqStory .cr-sep{ color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+#lqStory .cr-entry{ font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; color: white; font-size: 0.75rem; letter-spacing: 0.5px; }
+#lqStory .cr-pg{ font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.7rem; color: #3e2723; background: var(--vintage-gold); padding: 1px 5px; border-radius: 2px; }
+#lqStory .proc-wrapper{ position: relative; padding: 6px 6px 25px 6px; background: white; outline: 1px solid white; box-shadow: 0 0 0 1px white, 0 10px 30px rgba(0,0,0,0.2); transition: all 0.5s; box-sizing: border-box; overflow: visible !important; }
+#lqStory .wipe-left-reveal{ animation: wipeLeftAnim_lqs 2s cubic-bezier(0.4, 0.0, 0.2, 1) forwards; }
+@keyframes wipeLeftAnim_lqs{ 0% { clip-path: inset(0 0 0 100%); } 100% { clip-path: inset(0 0 0 0%); } }
+#lqStory .digital-ready .proc-wrapper{ background: white; border: none; outline: none; box-shadow: inset 0 0 0 1px var(--tech-blue-border); }
+#lqStory .scan-line-container{ position: absolute; top: 0; left: 0; width: 100%; height: 3px; z-index: 200; opacity: 0; pointer-events: none; }
+#lqStory .scan-beam{ width: 100%; height: 100%; background: var(--tech-cyan); box-shadow: 0 0 15px var(--tech-cyan); }
+#lqStory .scan-label{ position: absolute; left: calc(100% + 15px); top: -12px; background: var(--tech-cyan); color: white; font-family: 'Courier New', monospace; font-size: 13px; font-weight: bold; padding: 4px 10px; border-radius: 4px; white-space: nowrap; box-shadow: 5px 5px 15px rgba(0,0,0,0.1); }
+#lqStory .scan-label::before{ content: ''; position: absolute; top: 50%; left: -6px; transform: translateY(-50%); width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-right: 6px solid currentColor; }
+#lqStory .corner{ position: absolute; width: 25px; height: 25px; border-color: var(--tech-navy); border-style: solid; border-width: 4px; opacity: 0; transition: opacity 0.5s; z-index: 20; }
+#lqStory .digital-ready .corner{ opacity: 1; }
+#lqStory .c-tl{ top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+#lqStory .c-tr{ top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
+#lqStory .c-bl{ bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
+#lqStory .c-br{ bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+#lqStory .align-spacer{ width: 100%; height: 32px; visibility: hidden; pointer-events: none; opacity: 0; }
+#lqStory #flash-overlay-container{ position: absolute; top: 6px; left: 6px; width: calc(100% - 12px); height: calc(100% - 31px); pointer-events: none; z-index: 150; }
+#lqStory .smart-box{ position: absolute; background: transparent; opacity: 0; border-radius: 4px; }
+#lqStory .flash-active{ animation: wordFlash_lqs 0.8s ease-out forwards; }
+@keyframes wordFlash_lqs{ 0% { opacity: 1; box-shadow: 0 0 20px 10px currentColor, inset 0 0 20px currentColor; background: rgba(255, 255, 255, 0.4); filter: brightness(2) contrast(1.5); } 100% { opacity: 0; box-shadow: 0 0 0 0 transparent; background: transparent; filter: brightness(1); } }
+#lqStory #pyramid-area{ position: absolute; top: 32vh; left: 8vw; width: 55vw; height: 60vh; z-index: 60; pointer-events: none; }
+#lqStory .pyramid-svg{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; overflow: visible; clip-path: inset(0 0 100% 0); transition: clip-path 2.5s linear; }
+#lqStory .conn-path{ fill: none; stroke-width: 2; stroke-linecap: round; }
+#lqStory .path-sub{ stroke: var(--c-sub); opacity: 0.6; }
+#lqStory .path-rel{ stroke: var(--c-rel); opacity: 0.6; }
+#lqStory .lq-node{ position: absolute; padding: 6px 14px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); z-index: 20; background: white; text-align: center; opacity: 0; transform: scale(0.9); transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+#lqStory .node-main{ top: 15px; left: 50%; transform: translateX(-50%) scale(0.9); background: var(--c-entry-bg); border: 1px solid rgba(0,0,0,0.05); border-bottom: 4px solid var(--c-entry); border-radius: 12px 12px 16px 16px; min-width: 80px; min-height: 50px; }
+#lqStory .ln-osm{ font-family: 'Noto Naskh Arabic', serif; font-size: 1.7rem; color: var(--sapphire); font-weight: 700; }
+#lqStory .ln-lat{ font-family: 'Inter', sans-serif; font-size: 1.0rem; font-weight: 700; color: var(--c-entry); margin-top: 2px; }
+#lqStory .sub-group{ position: absolute; top: 180px; left: 0; width: 48%; display: flex; justify-content: center; gap: 8px; }
+#lqStory .rel-group{ position: absolute; top: 180px; right: 0; width: 48%; display: flex; justify-content: center; gap: 8px; }
+#lqStory .mini-node{ position: relative; padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.05); transform: none; opacity: 1; clip-path: inset(0 100% 0 0); min-width: 60px; white-space: nowrap; pointer-events: auto; transition: clip-path 1.2s cubic-bezier(0.25, 0.8, 0.25, 1); }
+#lqStory .mini-node:hover{ transform: scale(1.1) !important; z-index: 100; box-shadow: 0 10px 25px rgba(0,0,0,0.1); cursor: pointer; clip-path: inset(0 0 0 0) !important; }
+#lqStory .mn-sub{ border-bottom: 3px solid var(--c-sub); background: #fff8e1; }
+#lqStory .mn-rel{ border-bottom: 3px solid var(--c-rel); background: #eef5ff; }
+#lqStory .mn-osm{ font-family: 'Noto Naskh Arabic', serif; font-size: 1.2rem; color: #334155; }
+#lqStory .mn-lat{ font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #64748b; font-weight: 600; margin-top: 2px; }
+#lqStory .mn-note{ display: block; font-size: 0.7rem; color: #94a3b8; font-weight: 500; margin-top: 1px; }
+#lqStory .transfer-orb{ position: absolute; width: 12px; height: 12px; border-radius: 50%; background: var(--tech-cyan); box-shadow: 0 0 10px var(--tech-cyan), 0 0 20px white; z-index: 200; pointer-events: none; opacity: 0; transform-origin: center center; }
+#lqStory .orb-pulse{ animation: orbHeartbeat_lqs 0.6s ease-in-out infinite; }
+@keyframes orbHeartbeat_lqs{ 0% { transform: scale(1); box-shadow: 0 0 10px var(--tech-cyan); } 50% { transform: scale(1.6); box-shadow: 0 0 25px var(--tech-cyan), 0 0 10px white; } 100% { transform: scale(1); box-shadow: 0 0 10px var(--tech-cyan); } }
+#lqStory .typing-cursor{ display: inline-block; width: 2px; height: 1.2em; background-color: var(--sapphire); animation: blink_lqs 0.8s infinite; margin-left: 2px; vertical-align: middle; }
+@keyframes blink_lqs{ 50% { opacity: 0; } }
+#lqStory .desc-box{ position: absolute; width: 220px; background: white; padding: 8px 14px; border-radius: 8px; border-left: 3px solid #ccc; box-shadow: 0 8px 20px rgba(0,0,0,0.06); z-index: 15; opacity: 0; transition: all 0.5s ease; }
+#lqStory .db-title{ font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; display: block; margin-bottom: 4px; }
+#lqStory .db-text{ font-size: 0.95rem; color: var(--text-body); line-height: 1.4; }
+#lqStory .box-entry{ top: -30px; left: calc(50% + 70px); border-color: var(--c-entry); transform: translateX(20px); }
+#lqStory .box-sub{ top: 260px; left: 10%; border-color: var(--c-sub); transform: translateY(20px); }
+#lqStory .box-rel{ top: 260px; right: 10%; border-color: var(--c-rel); transform: translateY(20px); }
+#lqStory /* =========================================
+           SECTION 5: INTERFACE LAB
+           ========================================= */
+        .lab-section{ background-color: #020617; color: white; position: relative; overflow: hidden; }
+#lqStory .lab-glow{ position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(8, 37, 103, 0.4) 0%, rgba(2, 6, 23, 0) 70%); border-radius: 50%; pointer-events: none; z-index: 1; }
+#lqStory .lg-1{ top: -20%; left: -10%; }
+#lqStory .lg-2{ bottom: -20%; right: -10%; background: radial-gradient(circle, rgba(190, 18, 60, 0.2) 0%, rgba(2, 6, 23, 0) 70%); }
+#lqStory .lab-container{ width: 100%; max-width: 1200px; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; z-index: 10; padding: 0 40px; }
+#lqStory .lab-header{ text-align: center; margin-bottom: 40px; animation: fadeDown_lqs 1s ease-out; }
+#lqStory .lab-title{ font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 800; background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; }
+#lqStory .lab-subtitle{ font-size: 1.2rem; color: #cbd5e1; font-weight: 300; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+#lqStory .interface-grid{ display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; width: 100%; align-items: center; }
+#lqStory .mockup-stage{ position: relative; width: 100%; height: 450px; perspective: 1500px; }
+#lqStory .browser-frame{ width: 100%; height: 100%; background: #1e293b; border-radius: 12px; border: 1px solid #334155; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); position: relative; overflow: hidden; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); transform-style: preserve-3d; }
+#lqStory .mockup-stage:hover .browser-frame{ transform: rotateY(5deg) rotateX(2deg); }
+#lqStory .browser-header{ height: 36px; background: #0f172a; border-bottom: 1px solid #334155; display: flex; align-items: center; padding: 0 16px; gap: 8px; }
+#lqStory .b-dot{ width: 10px; height: 10px; border-radius: 50%; }
+#lqStory .bd-red{ background: #ef4444; }
+#lqStory .bd-yellow{ background: #f59e0b; }
+#lqStory .bd-green{ background: #22c55e; }
+#lqStory .screen-content{ width: 100%; height: calc(100% - 36px); position: relative; background: white; }
+#lqStory .ui-image{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; opacity: 0; transition: opacity 0.5s ease-in-out, transform 0.5s ease; transform: scale(1.02); }
+#lqStory .ui-image.active{ opacity: 1; transform: scale(1); }
+#lqStory .controls-panel{ display: flex; flex-direction: column; gap: 25px; }
+#lqStory .toggle-pill-container{ display: flex; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); padding: 6px; border-radius: 50px; width: fit-content; margin-bottom: 10px; }
+#lqStory .toggle-btn{ padding: 10px 24px; border-radius: 40px; border: none; background: transparent; color: #94a3b8; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 0.95rem; }
+#lqStory .toggle-btn.active{ background: var(--sapphire); color: white; box-shadow: 0 4px 12px rgba(8, 37, 103, 0.4); }
+#lqStory .info-card-deck{ position: relative; min-height: 250px; }
+#lqStory .feature-card{ background: rgba(30, 41, 59, 0.4); border-left: 4px solid var(--gold-accent); padding: 25px; border-radius: 0 12px 12px 0; backdrop-filter: blur(10px); position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transform: translateX(20px); transition: all 0.5s ease; pointer-events: none; }
+#lqStory .feature-card.active{ opacity: 1; transform: translateX(0); pointer-events: all; }
+#lqStory .fc-title{ font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold-accent); margin: 0 0 10px 0; }
+#lqStory .fc-list{ list-style: none; padding: 0; margin: 0; }
+#lqStory .fc-list li{ position: relative; padding-left: 20px; margin-bottom: 12px; color: #e2e8f0; line-height: 1.5; }
+#lqStory .fc-list li::before{ content: '›'; position: absolute; left: 0; color: var(--lq-bordo); font-weight: 800; font-size: 1.2rem; line-height: 1; }
+#lqStory .citation-badge{ margin-top: 20px; display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background: rgba(190, 18, 60, 0.1); border: 1px solid rgba(190, 18, 60, 0.3); border-radius: 8px; color: #fda4af; font-size: 0.9rem; font-weight: 600; }
+@keyframes fadeDown_lqs{ from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+#lqStory /* =========================================
+           SECTION 6: FUTURE
+           ========================================= */
+        #networkCanvas{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background: #0f172a; }
+#lqStory .future-content{ position: relative; z-index: 2; text-align: center; color: white; max-width: 900px; }
+#lqStory .lq-title-section{ font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--sapphire); margin-bottom: 25px; text-align: center; font-weight: 700; }
+#lqStory .brand-footer{ margin-top: 60px; font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 800; color: #fbbf24; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
+
+    
+
+        /* ===================== ANA SAYFA ALTI TANITIM AKIŞI ===================== */
+        #lqStory { display: none; width: 100vw; margin-left: calc(50% - 50vw); margin-top: 64px;
+            height: auto !important; scroll-snap-type: none !important; overflow-x: hidden; text-align: left; }
+        body.vs-home #lqStory { display: block; }
+        body.team-page-open #lqStory, body.v3-page-open #lqStory, body.first-entry #lqStory { display: none !important; }
+        #lqStory .snap-section { scroll-snap-align: none; min-height: 100vh; height: auto; }
+        #lqStory img { max-width: 100%; }
+
         /* ===================== EKUAL AÇILIŞ DUYURUSU ===================== */
         #ekualOverlay { position: fixed; inset: 0; z-index: 7200; display: none; align-items: center; justify-content: center;
             padding: 24px; background: rgba(15,23,42,0.55); backdrop-filter: blur(2px); font-family: 'Inter', sans-serif; }
@@ -3207,6 +3633,390 @@
 </div>
 </div>
 </div>
+
+<div id="lqStory">
+<div class="snap-section buildlq-section" id="sectionBuildLQ">
+<div class="abstract-bg-ui ui-table-right">
+<div class="ui-row active"></div><div class="ui-row"></div><div class="ui-row short"></div><div class="ui-row"></div>
+</div>
+<div class="abstract-bg-ui ui-table-left">
+<div class="ui-block highlight"></div><div class="ui-block"></div><div class="ui-block"></div>
+</div>
+<div class="page-nav-arrow pna-top" onclick="lqsGo('sectionHome')">
+<div class="arrow-shape"></div>
+</div>
+<svg class="connection-layer" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none;">
+<line opacity="0.25" stroke="#94a3b8" stroke-dasharray="6 6" stroke-width="1.5" x1="15%" x2="85%" y1="25%" y2="28%"></line>
+<line opacity="0.25" stroke="#94a3b8" stroke-dasharray="6 6" stroke-width="1.5" x1="85%" x2="85%" y1="28%" y2="80%"></line>
+<line opacity="0.25" stroke="#94a3b8" stroke-dasharray="6 6" stroke-width="1.5" x1="85%" x2="15%" y1="80%" y2="75%"></line>
+<line opacity="0.25" stroke="#94a3b8" stroke-dasharray="6 6" stroke-width="1.5" x1="15%" x2="15%" y1="75%" y2="25%"></line>
+<line opacity="0.25" stroke="#94a3b8" stroke-dasharray="6 6" stroke-width="1.5" x1="15%" x2="85%" y1="25%" y2="80%"></line>
+</svg>
+<div class="osm-tech-node pos-1 otn-blue otn-latin">Lexicon</div>
+<div class="osm-tech-node pos-2 otn-green">لغت</div>
+<div class="osm-tech-node pos-3 otn-orange otn-latin">Kamus</div>
+<div class="osm-tech-node pos-4 otn-blue">املا</div>
+<div class="vision-wrapper">
+<h1 class="lq-title-hero" data-i18n="story1" data-i18n-html="">A New Digital Era for<br/>Ottoman Dictionaries</h1>
+<div class="hero-card" id="heroCard">
+<div style="position: absolute; top: -20px; left: -20px; width: 80px; height: 80px; background: var(--lq-bordo); border-radius: 50%; opacity: 0.08;"></div>
+<h2 data-i18n="story2" style="font-family: 'Playfair Display'; color: var(--lq-bordo); font-size: 2rem; margin-top:0; position:relative; z-index:2;">The BuildLQ Program</h2>
+<p data-i18n="story3" style="font-size: 1.1rem; line-height: 1.6; color: var(--text-body); position:relative; z-index:2;">Aware of the profound importance of dictionary digitization, LexiQamus has developed a dedicated program called BuildLQ. Through the new digital architecture offered by BuildLQ, dictionaries are digitized with academic rigor.</p>
+<div class="buildlq-features">
+<div class="blq-feat-item">
+<h4 data-i18n="story4">Preserved Link to the Original</h4> <p data-i18n="story5">Users can access and verify the original text at any moment.</p>
+</div>
+<div class="blq-feat-item">
+<h4 data-i18n="story6">Verified Data</h4> <p data-i18n="story7">Reliable information through expert input and peer review.</p>
+</div>
+<div class="blq-feat-item">
+<h4 data-i18n="story8">Transparent Knowledge</h4> <p data-i18n="story9">An open, democratic structure subject to user oversight.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="page-nav-arrow pna-bottom" onclick="lqsGo('sectionLibrary')">
+<div class="arrow-shape"></div>
+</div>
+</div>
+<div class="snap-section" id="sectionLibrary">
+<div class="noise-overlay"></div>
+<div class="heritage-section">
+<div class="heritage-real-bg"></div>
+<div class="heritage-container">
+<div class="left-panel">
+<h2 class="lq-gradient-title-sm anim-enter d-1" data-i18n="story10">Digitized Heritage</h2>
+<div class="hi-text-block anim-enter d-2">
+<p data-i18n="story11" data-i18n-html="" style="margin:0;">In addition to the <span class="lexicon-pro">Lexicon</span> (Redhouse, 1890);</p>
+<span class="highlight-row" data-i18n="story12" data-i18n-html="">6 major Ottoman Turkish dictionaries<br/>(13 volumes in total)</span>
+<p data-i18n="story13" data-i18n-html="" style="margin:0;">have been processed to "<strong>LQ-Digital</strong>" standards through the <strong>BuildLQ</strong> program.</p>
+</div>
+<div class="vision-box-premium anim-enter d-3">
+<div class="vp-content">
+<span class="vp-main-text" data-i18n="story14">Expanding Collection</span>
+<span class="vp-sub-text" data-i18n="story15" data-i18n-html="">New dictionaries will continue<br/>to be added throughout 2026…</span>
+</div>
+<div class="vp-icon-box">
+<div class="stack-col c1">
+<div class="s-book b1"></div>
+<div class="s-book b2"></div>
+<div class="s-book b3"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="right-panel">
+<div class="library-grid">
+<div class="sahne kitap-1 bd-1">
+<div class="kitap">
+<div class="kapak-grubu">
+<div class="kapak-on bk-red">
+<div class="exclusive-badge" data-i18n="story16">ONLY ON LQ</div>
+<div class="book-deco-border"></div>
+<div class="approved-stamp">✓</div>
+<div class="bk-title">Ahterî-i<br/>Kebîr</div>
+<div class="bk-auth">Muslihiddin<br/>Mustafa</div>
+<div class="bk-vol-box"><div class="bk-vol" data-i18n="story17">1 VOLUME</div></div>
+<div class="bk-year">1892</div>
+</div>
+<div class="kapak-arka"></div>
+</div>
+<div class="ic-sayfa">
+<div class="ic-title">Ahterî-i<br/>Kebîr</div>
+<div class="ic-auth">Muslihiddin<br/>Mustafa</div>
+<div class="ic-vol-box"><div class="ic-vol" data-i18n="story18">1 VOLUME</div></div>
+<div class="ic-year">1892</div>
+</div>
+</div>
+</div>
+<div class="sahne kitap-2 bd-2">
+<div class="kitap">
+<div class="kapak-grubu">
+<div class="kapak-on bk-blue">
+<div class="book-deco-border"></div>
+<div class="approved-stamp">✓</div>
+<div class="bk-title">Kamus-ı<br/>Türki</div>
+<div class="bk-auth">Şemseddin Sami</div>
+<div class="bk-vol-box"><div class="bk-vol" data-i18n="story19">2 VOLUMES</div></div>
+<div class="bk-year">1900</div>
+</div>
+<div class="kapak-arka"></div>
+</div>
+<div class="ic-sayfa">
+<div class="ic-title">Kamus-ı<br/>Türki</div>
+<div class="ic-auth">Şemseddin Sami</div>
+<div class="ic-vol-box"><div class="ic-vol" data-i18n="story20">2 VOLUMES</div></div>
+<div class="ic-year">1900</div>
+</div>
+</div>
+</div>
+<div class="sahne kitap-3 bd-3">
+<div class="kitap">
+<div class="kapak-grubu">
+<div class="kapak-on bk-green">
+<div class="book-deco-border"></div>
+<div class="approved-stamp">✓</div>
+<div class="bk-title">Lehçe-i<br/>Osmanî</div>
+<div class="bk-auth">Ahmed Vefik<br/>Paşa</div>
+<div class="bk-vol-box"><div class="bk-vol" data-i18n="story21">2 VOLUMES</div></div>
+<div class="bk-year">1876</div>
+</div>
+<div class="kapak-arka"></div>
+</div>
+<div class="ic-sayfa">
+<div class="ic-title">Lehçe-i<br/>Osmanî</div>
+<div class="ic-auth">Ahmed Vefik<br/>Paşa</div>
+<div class="ic-vol-box"><div class="ic-vol" data-i18n="story22">2 VOLUMES</div></div>
+<div class="ic-year">1876</div>
+</div>
+</div>
+</div>
+<div class="sahne kitap-4 bd-4">
+<div class="kitap">
+<div class="kapak-grubu">
+<div class="kapak-on bk-blue">
+<div class="book-deco-border"></div>
+<div class="approved-stamp">✓</div>
+<div class="bk-title">Lûgat-ı<br/>Naci</div>
+<div class="bk-auth">Muallim Naci</div>
+<div class="bk-vol-box"><div class="bk-vol" data-i18n="story23">1 VOLUME</div></div>
+<div class="bk-year">1891</div>
+</div>
+<div class="kapak-arka"></div>
+</div>
+<div class="ic-sayfa">
+<div class="ic-title">Lûgat-ı<br/>Naci</div>
+<div class="ic-auth">Muallim Naci</div>
+<div class="ic-vol-box"><div class="ic-vol" data-i18n="story24">1 VOLUME</div></div>
+<div class="ic-year">1891</div>
+</div>
+</div>
+</div>
+<div class="sahne kitap-5 bd-5">
+<div class="kitap">
+<div class="kapak-grubu">
+<div class="kapak-on bk-red">
+<div class="book-deco-border"></div>
+<div class="approved-stamp">✓</div>
+<div class="bk-title">Lûgat-ı<br/>Ebuzziya</div>
+<div class="bk-auth">Ebuzziya Tevfik</div>
+<div class="bk-vol-box"><div class="bk-vol" data-i18n="story25">1 VOLUME</div></div>
+<div class="bk-year">1888</div>
+</div>
+<div class="kapak-arka"></div>
+</div>
+<div class="ic-sayfa">
+<div class="ic-title">Lûgat-ı<br/>Ebuzziya</div>
+<div class="ic-auth">Ebuzziya Tevfik</div>
+<div class="ic-vol-box"><div class="ic-vol" data-i18n="story26">1 VOLUME</div></div>
+<div class="ic-year">1888</div>
+</div>
+</div>
+</div>
+<div class="sahne kitap-6 bd-6">
+<div class="kitap">
+<div class="kapak-grubu">
+<div class="kapak-on bk-green">
+<div class="book-deco-border"></div>
+<div class="approved-stamp">✓</div>
+<div class="bk-title">Kamusü’l<br/>A’lâm</div>
+<div class="bk-auth">Şemseddin Sami</div>
+<div class="bk-vol-box"><div class="bk-vol" data-i18n="story27">6 VOLUMES</div></div>
+<div class="bk-year">1889</div>
+</div>
+<div class="kapak-arka"></div>
+</div>
+<div class="ic-sayfa">
+<div class="ic-title">Kamusü’l<br/>A’lâm</div>
+<div class="ic-auth">Şemseddin Sami</div>
+<div class="ic-vol-box"><div class="ic-vol" data-i18n="story28">6 VOLUMES</div></div>
+<div class="ic-year">1889</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="page-nav-arrow pna-top" onclick="lqsGo('sectionBuildLQ')">
+<div class="arrow-shape"></div>
+</div>
+<div class="page-nav-arrow pna-bottom" onclick="lqsGo('sectionFlow')">
+<div class="arrow-shape"></div>
+</div>
+</div>
+<div class="snap-section" id="sectionFlow">
+<div class="stage-container">
+<canvas id="data-canvas"></canvas>
+<div class="flow-header-area" id="header">
+<h2 class="ha-title" data-i18n="story29">Lexicography Redefined</h2>
+<div class="ha-sub-container" id="sub-container">
+<div class="strip-wrapper" id="strip-1">
+<div class="category-line" data-i18n="story30" data-i18n-html="">Beyond the classical approach to lexicography, LexiQamus builds a 
+                            <span class="bold-text" style="margin-left: 5px;">two-tiered</span> 
+                             
+                            <span class="bold-text">digital infrastructure</span> directly on the original copy.</div>
+</div>
+<div class="strip-wrapper" id="strip-2">
+<div class="category-line" data-i18n="story31" data-i18n-html="">It processes words in three categories: 
+                            <span class="cat-dot first" style="background: var(--c-entry);"></span>
+<span class="cat-entry">Headword</span>
+<span class="cat-dot" style="background: var(--c-sub);"></span>
+<span class="cat-sub">Subheadwords</span>
+<span class="cat-dot" style="background: var(--c-rel);"></span>
+<span class="cat-rel">Related Words</span></div>
+</div>
+</div>
+</div>
+<div id="pyramid-area">
+<svg class="pyramid-svg" id="pyramid-svg"></svg>
+<div class="lq-node node-main" id="node-main">
+<div class="ln-osm" id="main-osm"></div>
+<div class="ln-lat" id="main-lat"></div>
+</div>
+<div class="desc-box box-entry" id="desc-main">
+<span class="db-title" data-i18n="story32" style="color:var(--c-entry)">Headword</span>
+<p class="db-text" data-i18n="story33">The headword head, listed alphabetically in the dictionary, with its spelling, pronunciation, and meaning provided.</p>
+</div>
+<div class="sub-group">
+<div class="lq-node mini-node mn-sub" id="mn-sub-1">
+<div class="mn-osm">حركت ارض</div> <div class="mn-lat">hareket-i arz</div>
+</div>
+<div class="lq-node mini-node mn-sub" id="mn-sub-2">
+<div class="mn-osm">بلا حركت</div> <div class="mn-lat">bilâ hareket</div>
+</div>
+<div class="lq-node mini-node mn-sub" id="mn-sub-3">
+<div class="mn-osm">حركت اضافيه</div> <div class="mn-lat">hareket-i izâfiyye</div>
+</div>
+</div>
+<div class="desc-box box-sub" id="desc-sub">
+<span class="db-title" data-i18n="story34" style="color:var(--c-sub)">Subheadwords</span>
+<p class="db-text" data-i18n="story35">Compound phrases, idioms, and compound verbs formed with the headword, found within the entry's definition.</p>
+</div>
+<div class="rel-group">
+<div class="lq-node mini-node mn-rel" id="mn-rel-1">
+<div class="mn-osm">سكون</div> <div class="mn-lat" data-i18n="story36" data-i18n-html="">sükun<br/><span class="mn-note">(antonym)</span></div>
+</div>
+<div class="lq-node mini-node mn-rel" id="mn-rel-2">
+<div class="mn-osm">عطالت</div> <div class="mn-lat" data-i18n="story37" data-i18n-html="">atalet<br/><span class="mn-note">(antonym)</span></div>
+</div>
+<div class="lq-node mini-node mn-rel" id="mn-rel-3">
+<div class="mn-osm">حركات</div> <div class="mn-lat" data-i18n="story38" data-i18n-html="">harekât<br/><span class="mn-note">(plural)</span></div>
+</div>
+<div class="lq-node mini-node mn-rel" id="mn-rel-4">
+<div class="mn-osm">حركه</div> <div class="mn-lat" data-i18n="story39" data-i18n-html="">hareke<br/><span class="mn-note">(variant spelling)</span></div>
+</div>
+</div>
+<div class="desc-box box-rel" id="desc-rel">
+<span class="db-title" data-i18n="story40" style="color:var(--c-rel)">Related Words</span>
+<p class="db-text" data-i18n="story41">Words etymologically or semantically connected to the entry, along with variant spellings and pronunciations of the entry itself.</p>
+</div>
+</div>
+<div class="doc-stack-container">
+<div class="ghost-spot" id="spot-raw"></div>
+<div class="ghost-spot" id="spot-proc"></div>
+</div>
+<div class="active-card" id="card-raw-real">
+<div class="cr-header" id="raw-header-strip">
+<div class="cr-titles">
+<span class="cr-dict">Kamus-i Türki</span> <span class="cr-sep">|</span> <span class="cr-entry">Hareket</span>
+</div>
+<span class="cr-pg" data-i18n="story42">p.545</span>
+</div>
+<div class="raw-img-wrapper">
+<img class="img-content" id="raw-img-source" src="assets/story/hareket1.jpg"/>
+</div>
+</div>
+<div class="active-card" id="card-proc-real">
+<div class="align-spacer"></div>
+<div class="proc-wrapper">
+<div class="scan-line-container" id="main-scan-line">
+<div class="scan-beam" id="scan-beam-el"></div> <div class="scan-label" id="scan-label-text">ANALYZING</div>
+</div>
+<div class="corner c-tl"></div><div class="corner c-tr"></div><div class="corner c-bl"></div><div class="corner c-br"></div>
+<div id="flash-overlay-container"></div>
+<img class="img-content overlay-layer" id="layer-raw-filter" src="assets/story/hareket1.jpg" style="position:relative; z-index:1;"/>
+<img class="img-content overlay-layer" id="layer-base" src="assets/story/hareket1.jpg"/>
+<img class="img-content overlay-layer" id="layer-entry" src="assets/story/hareket2.jpg"/>
+<img class="img-content overlay-layer" id="layer-sub" src="assets/story/hareket3.jpg"/>
+<img class="img-content overlay-layer" id="layer-rel" src="assets/story/hareket4.jpg"/>
+</div>
+</div>
+<div class="transfer-orb" id="transfer-orb"></div>
+</div>
+<div class="page-nav-arrow pna-top" onclick="lqsGo('sectionLibrary')" style="z-index: 500;">
+<div class="arrow-shape"></div>
+</div>
+<div class="page-nav-arrow pna-bottom" onclick="lqsGo('sectionInterface')" style="z-index: 500;">
+<div class="arrow-shape"></div>
+</div>
+</div>
+<div class="snap-section lab-section" id="sectionInterface">
+<div class="lab-glow lg-1"></div>
+<div class="lab-glow lg-2"></div>
+<div class="lab-container">
+<div class="lab-header">
+<h2 class="lab-title" data-i18n="story43">Smart Analysis &amp; Discovery</h2>
+<p class="lab-subtitle" data-i18n="story44">Go beyond the surface meanings of words. Move from categorized results into the depths of the original document with a single click.</p>
+</div>
+<div class="interface-grid">
+<div class="mockup-stage">
+<div class="browser-frame">
+<div class="browser-header">
+<div class="b-dot bd-red"></div> <div class="b-dot bd-yellow"></div> <div class="b-dot bd-green"></div>
+</div>
+<div class="screen-content">
+<img alt="Arama Sonuçları" class="ui-image active" id="img-results" src="assets/story/sonuc_resmi.jpg"/>
+<img alt="Popup Görüntüsü" class="ui-image" id="img-popup" src="assets/story/popup_resmi.jpg"/>
+</div>
+</div>
+</div>
+<div class="controls-panel">
+<div class="toggle-pill-container">
+<button class="toggle-btn active" data-i18n="story45" onclick="lqsSetLabMode(0)">Smart Results</button>
+<button class="toggle-btn" data-i18n="story46" onclick="lqsSetLabMode(1)">Original Document</button>
+</div>
+<div class="info-card-deck">
+<div class="feature-card active" id="card-results">
+<h3 class="fc-title" data-i18n="story47">Categorical Classification</h3>
+<ul class="fc-list">
+<li data-i18n="story48" data-i18n-html=""><strong>Smart Parsing:</strong> Results are presented in three distinct categories: Headwords, Subheadwords, and Related Words.</li>
+<li data-i18n="story49" data-i18n-html=""><strong>Deep Search:</strong> Every word on the results screen is clickable; clicking it launches a new search for that word.</li>
+</ul>
+<div class="citation-badge" data-i18n="story50" data-i18n-html=""><span>❝</span> One-Click Academic Citation Copy</div>
+</div>
+<div class="feature-card" id="card-popup">
+<h3 class="fc-title" data-i18n="story51">Visual Navigation</h3>
+<ul class="fc-list">
+<li data-i18n="story52" data-i18n-html=""><strong>Automatic Highlighting:</strong> When you jump to the original page, the system detects and highlights your search term.</li>
+<li data-i18n="story53" data-i18n-html=""><strong>In-Image Interaction:</strong> Not just text — click on any word in the original image to search the database.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="page-nav-arrow pna-top" onclick="lqsGo('sectionFlow')">
+<div class="arrow-shape" style="border-color: rgba(255,255,255,0.5);"></div>
+</div>
+<div class="page-nav-arrow pna-bottom" onclick="lqsGo('sectionFuture')" style="opacity:0.3">
+<div class="arrow-shape" style="border-color: rgba(255,255,255,0.5);"></div>
+</div>
+</div>
+<div class="snap-section" id="sectionFuture" style="background: #0f172a; overflow: hidden;">
+<canvas id="networkCanvas"></canvas>
+<div class="future-content">
+<div class="lq-title-section" data-i18n="story54" style="color:white; font-size: 2rem; margin-bottom:10px;">What's Coming Next</div>
+<div data-i18n="story55" data-i18n-html="" style="font-family: 'Playfair Display', serif; font-size: 3.5rem; color: #fbbf24; margin-bottom: 20px; text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);">Endless Connections<br/>Between Words</div>
+<div data-i18n="story56" data-i18n-html="" style="font-size: 1.2rem; line-height: 1.8; color: #e2e8f0; font-weight: 300; max-width: 800px; margin: 0 auto;">In LexiQamus, words are no longer alone. With our new infrastructure, words are linked to one another through 25 different semantic tags (root, synonym, antonym, etc.).<br/><br/>
+                You will now be able to follow a word's historical journey and the expansion of its meaning on a single screen, in a seamless discovery experience.</div>
+<div class="brand-footer" data-i18n="story57">MUCH MORE COMING SOON.</div>
+</div>
+<div class="page-nav-arrow pna-top" onclick="lqsGo('sectionInterface')">
+<div class="arrow-shape" style="border-color: rgba(255,255,255,0.5);"></div>
+</div>
+</div>
+</div>
 </div>
 <div class="modal-overlay" id="morphModal" onclick="closeMorphModal(event)">
 <div class="analysis-card" onclick="event.stopPropagation()">
@@ -3960,6 +4770,63 @@
             teamBioZO: 'Zeyneb Odabaş, lisans eğitimini Marmara Üniversitesi İlahiyat Fakültesi’nde tamamlamıştır. Yüksek lisansını Ankara Sosyal Bilimler Üniversitesi Tefsir Anabilim Dalı’nda yapmış ve “Tefsire Metodik Bir Yaklaşım Olarak İbn Teymiyye ve Mukaddimesi: Eleştirel Bir Tahlil” başlıklı yüksek lisans tezini tamamlamıştır. Ekim 2023’ten bu yana LexiQamus projesinde çalışmaktadır.',
             teamBioAS: '<p>Ahmet Abdullah Saçmalı, Osmanlı Türkçesi ile yazılmış metinler üzerine çalışan bir araştırmacı ve LexiQamus’un geliştiricisidir. Lisans eğitimini Boğaziçi Üniversitesi’nin Sosyoloji ve Tarih bölümlerinde tamamlamış, ardından Tarih alanındaki ilk yüksek lisans derecesini de yine bu üniversiteden almıştır.</p><p>2010 yılında Amerika Birleşik Devletleri’ndeki Arizona Üniversitesi’nin Middle Eastern and North African Studies programına kabul edilmiş ve burada ikinci yüksek lisansını tamamlamıştır. Dr. Saçmalı, 2014 yılında Birleşik Krallık’taki Durham Üniversitesi School of Government and International Affairs bünyesinde doktoraya başlamış; tezini 2019’da başarıyla savunarak 2020 yılında doktora derecesini almıştır.</p><p>Dr. Saçmalı, 2017 ile 2021 yılları arasında İbn Haldun Üniversitesi Sosyoloji Bölümünde araştırma görevlisi olarak çalışmıştır. Bu dönemin iki yılında çeşitli sosyoloji derslerinin yanı sıra Osmanlı Türkçesi dersleri de vermiştir.</p><p>Doktora çalışmaları sırasında, başlangıçta Osmanlı Türkçesi ile yazılmış metinlerde okunması güç kelimelerin çözümlenmesine yardımcı olacak çevrimiçi bir araç olarak tasarladığı LexiQamus’u geliştirmiştir. Proje zamanla, Türkçenin tarihsel söz varlığının ortaya çıkarılmasına adanmış çok daha kapsamlı bir dijital platforma dönüşmüştür. LexiQamus, dilbilimsel analiz ve kelime çözümleme araçlarının yanı sıra, tarihten günümüze yazılmış yazma ya da matbu bütün Türkçe sözlükleri yüksek bir bilimsel titizlikle dijitalleştirmeyi hedeflemektedir. Bu geniş sözlükbilimsel mirası tek bir dijital ortamda bir araya getirerek proje, Türk dilinin tarihsel derinliğini ve sözcük sınırlarını belgelemeyi ve keşfetmeyi amaçlamaktadır.</p><p>LexiQamus, dünyanın farklı ülkelerinden araştırmacıların ve akademik kurumların büyük ilgisini kazanmıştır. Çalışmalarını İstanbul, Türkiye merkezli olarak sürdüren Dr. Saçmalı ve ekibi, platformu geliştirmeye devam etmektedir.</p>',
 
+            story1: 'Osmanlıca Sözlüklerde<br/>Yeni Bir Dijital Çağ',
+            story2: 'BuildLQ Programı',
+            story3: 'LexiQamus, sözlük dijitalleştirmenin taşıdığı yüksek önemin bilinciyle BuildLQ adlı özel bir program geliştirdi. BuildLQ’nun sunduğu yeni dijital mimari sayesinde sözlükler, akademik titizlikle dijitalleştirilmektedir.',
+            story4: 'Orijinal ile Korunan Bağ',
+            story5: 'Kullanıcı her an orijinal metne ulaşır ve kontrol eder.',
+            story6: 'Doğrulanmış Veri',
+            story7: 'Uzman girişi ve akran denetimi ile güvenilir bilgi.',
+            story8: 'Şeffaf Bilgi',
+            story9: 'Kullanıcı denetimine açık, demokratik yapı.',
+            story10: 'Dijitalleşen Miras',
+            story11: '<span class="lexicon-pro">Lexicon</span>\'a (Redhouse, 1890) ek olarak;',
+            story12: '6 büyük Osmanlı Türkçesi sözlüğü<br/>(toplam 13 cilt)',
+            story13: '<strong>BuildLQ</strong> programıyla “<strong>LQ-Dijital</strong>” standartlarında işlendi.',
+            story14: 'Genişleyen Koleksiyon',
+            story15: '2026 boyunca yeni sözlükler<br/>eklenmeye devam edecek…',
+            story16: 'SADECE LQ\'DA',
+            story17: '1 CİLT',
+            story18: '1 CİLT',
+            story19: '2 CİLT',
+            story20: '2 CİLT',
+            story21: '2 CİLT',
+            story22: '2 CİLT',
+            story23: '1 CİLT',
+            story24: '1 CİLT',
+            story25: '1 CİLT',
+            story26: '1 CİLT',
+            story27: '6 CİLT',
+            story28: '6 CİLT',
+            story29: 'Sözlükçülük Yeniden Tanımlanıyor',
+            story30: 'LexiQamus, klasik sözlükçülük yaklaşımının ötesinde, orijinal nüsha üzerinde                              <span class="bold-text" style="margin-left: 5px;">iki kademeli</span>                               bir                               <span class="bold-text">dijital altyapı</span> kurar.',
+            story31: 'Kelimeleri üç kategoride işler:                              <span class="cat-dot first" style="background: var(--c-entry);"></span> <span class="cat-entry">Madde başı</span> <span class="cat-dot" style="background: var(--c-sub);"></span> <span class="cat-sub">Alt madde başları</span> <span class="cat-dot" style="background: var(--c-rel);"></span> <span class="cat-rel">İlişkili kelimeler</span>',
+            story32: 'Madde Başı',
+            story33: 'Sözlükte alfabetik sırayla yer alan, imlası, okunuşu ve anlamı verilen madde başıdır.',
+            story34: 'Alt Madde Başları',
+            story35: 'Madde tanımı içerisinde yer alan, madde başı ile kurulan tamlamalar, deyimler ve birleşik fiillerdir.',
+            story36: 'sükun<br/><span class="mn-note">(zıt anlam)</span>',
+            story37: 'atalet<br/><span class="mn-note">(zıt anlam)</span>',
+            story38: 'harekât<br/><span class="mn-note">(çoğul)</span>',
+            story39: 'hareke<br/><span class="mn-note">(farklı imla)</span>',
+            story40: 'İlişkili Kelimeler',
+            story41: 'Maddeyle etimolojik ya da anlamsal açıdan bağlantılı kelimeler ve maddenin farklı yazım veya telaffuzları.',
+            story42: 's.545',
+            story43: 'Akıllı Analiz ve Keşif',
+            story44: 'Kelimelerin yüzeysel anlamlarının ötesine geçin. Kategorize edilmiş sonuçlardan, orijinal belgenin derinliklerine tek bir tıklamayla inin.',
+            story45: 'Akıllı Sonuçlar',
+            story46: 'Orijinal Belge',
+            story47: 'Kategorik Tasnif',
+            story48: '<strong>Akıllı Ayrıştırma:</strong> Sonuçlar; Madde Başı, Alt Madde Başları ve İlişkili Kelimeler olarak üç ayrı kategoride sunulur.',
+            story49: '<strong>Derinlemesine Arama:</strong> Sonuç ekranındaki her kelime tıklanabilirdir; tıkladığınızda o kelime için yeni bir arama başlar.',
+            story50: '<span>❝</span> Tek Tıkla Akademik Atıf Kopyalama',
+            story51: 'Görsel Navigasyon',
+            story52: '<strong>Otomatik Vurgulama:</strong> Orijinal sayfaya gidildiğinde, aradığınız kelime sistem tarafından tespit edilir ve vurgulanır.',
+            story53: '<strong>Resim İçi Etkileşim:</strong> Sadece metin değil, orijinal resim üzerindeki herhangi bir kelimeye tıklayarak veritabanında arayabilirsiniz.',
+            story54: 'Sıradaki Yenilikler',
+            story55: 'Kelimeler Arası Sonsuz<br/>Bağlantılar',
+            story56: 'LexiQamus’ta kelimeler artık asla yalnız değil. Yeni altyapımızla kelimeler, 25 farklı anlamsal etiket (kök, eş anlam, zıt anlam vb.) üzerinden birbirine bağlanıyor.<br/><br/>                 Bir kelimenin tarihî yolculuğunu ve anlam genişlemesini artık tek bir ekranda, kesintisiz bir keşif deneyimiyle takip edebileceksiniz.',
+            story57: 'DAHA FAZLASI ÇOK YAKINDA.',
             menuWhat: 'LexiQamus Nedir?',
             menuGuide: 'Kullanım Kılavuzu',
             menuUpdates: 'Güncellemeler',
@@ -11710,5 +12577,230 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeEquival
 <div id="gridKbdSpacer" style="height:0;width:1px;"></div>
 
 
+<script>
+(function(){
+
+        // --- GENERAL SCROLL HELPER ---
+        window.lqsGo = function(id) {
+            var el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // --- HOME & SEARCH LOGIC ---
+        function lqs_switchMode(idx) {
+            document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+            document.querySelectorAll('.search-mode').forEach((m, i) => m.classList.toggle('active', i === idx));
+        }
+        const zincirHTML = `<div class="zincir-wrapper can-hover" onclick="lqs_handleZincirClick(this)" onmouseleave="enableHover(this)"><span class="soru-isareti">?</span><svg viewBox="0 0 60 40" width="40" height="20"><rect class="halka halka-sol" x="2" y="10" width="22" height="16" /><line class="orta-cizgi" x1="15" y1="18" x2="45" y2="18" /><rect class="halka halka-sag" x="36" y="10" width="22" height="16" /></svg></div>`;
+        function createSubBoxHTML(val = "") { return `<div class="sub-box"><button class="s-action-btn s-add" onclick="lqs_addSubBox(this)"></button><button class="s-action-btn s-del" onclick="lqs_removeSubBox(this)"></button><input type="text" class="char-input" maxlength="1" value="${val}" spellcheck="false"></div>`; }
+        function createBoxWithSepHTML(val = "") { const wrapper = document.createElement('div'); wrapper.className = 'box-wrapper'; wrapper.innerHTML = createSubBoxHTML(val); const column = document.createElement('div'); column.className = 'column-unit'; column.innerHTML = `<button class="divider-btn" onclick="lqs_smartAdd(this)"><span class="plus-icon">+</span></button>`; return [wrapper, column]; }
+        const core = document.getElementById('engineCore'); const searchBtn = core.querySelector('.btn-ara'); const defaultChars = ["", "", "", ""];
+        function lqs_initBoxes() { const firstSep = document.createElement('div'); firstSep.className = 'column-unit'; firstSep.innerHTML = `<button class="divider-btn" onclick="lqs_smartAdd(this)"><span class="plus-icon">+</span></button>`; core.insertBefore(firstSep, searchBtn); defaultChars.forEach(char => { const [b, c] = createBoxWithSepHTML(char); core.insertBefore(b, searchBtn); core.insertBefore(c, searchBtn); }); refreshUçlar(); }
+        lqs_initBoxes();
+        function lqs_resetSearch() { core.querySelectorAll('.box-wrapper, .column-unit').forEach(el => el.remove()); lqs_initBoxes(); }
+        function lqs_addSubBox(btn) { event.stopPropagation(); const currentSub = btn.closest('.sub-box'); const temp = document.createElement('div'); temp.innerHTML = createSubBoxHTML(""); currentSub.before(temp.firstElementChild); currentSub.previousElementSibling.querySelector('.char-input').focus(); }
+        function lqs_removeSubBox(btn) { event.stopPropagation(); const currentSub = btn.closest('.sub-box'); const wrapper = currentSub.closest('.box-wrapper'); currentSub.remove(); if (wrapper.querySelectorAll('.sub-box').length === 0) { const nextSep = wrapper.nextElementSibling; wrapper.remove(); if (nextSep && nextSep.classList.contains('column-unit')) nextSep.remove(); refreshUçlar(); } }
+        function lqs_smartAdd(btn) { const targetSep = btn.parentElement; const [newBox, newSep] = createBoxWithSepHTML(""); targetSep.after(newSep); targetSep.after(newBox); refreshUçlar(); }
+        function refreshUçlar() { const allUnits = core.querySelectorAll('.column-unit'); allUnits.forEach((unit, index) => { const zincir = unit.querySelector('.zincir-wrapper'); if (index === 0 || index === allUnits.length - 1) { if (zincir) zincir.remove(); } else { if (!zincir) unit.insertAdjacentHTML('beforeend', zincirHTML); } }); }
+        function lqs_handleZincirClick(el) { el.classList.remove('can-hover'); if (!el.classList.contains('is-locked') && !el.classList.contains('is-uncertain')) { el.classList.add('is-locked'); } else if (el.classList.contains('is-locked')) { el.classList.remove('is-locked'); el.classList.add('is-uncertain'); } else { el.classList.remove('is-uncertain'); } }
+        function enableHover(el) { el.classList.add('can-hover'); }
+        function lqs_handleInputClick(event, wrapper) { const input = wrapper.querySelector('.main-input'); const phs = wrapper.querySelectorAll('.placeholder-text'); if (phs.length === 1) phs[0].style.opacity = '0'; else if(!input.value && phs.length > 1) { const isRight = (event.clientX - wrapper.getBoundingClientRect().left) > (wrapper.offsetWidth / 2); phs[isRight ? 1 : 0].style.opacity = '0'; phs[isRight ? 0 : 1].style.opacity = '1'; input.dir = isRight ? 'rtl' : 'ltr'; input.style.textAlign = isRight ? 'right' : 'left'; } input.focus(); }
+        function lqs_checkInput(input) { if(input.value) input.parentElement.querySelectorAll('.placeholder-text').forEach(ph => ph.style.opacity = '0'); }
+        document.querySelectorAll('.main-input').forEach(input => { input.addEventListener('blur', function() { if(!this.value) { this.parentElement.querySelectorAll('.placeholder-text').forEach(ph => ph.style.opacity = '1'); this.dir = 'ltr'; this.style.textAlign = 'left'; } }); });
+
+        // --- SECTION ANIMATION TRIGGERS ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('start-anim');
+                    // Trigger for Flow Section (UC143)
+                    if (entry.target.id === 'sectionFlow' && !window.flowSectionStarted) {
+                        window.flowSectionStarted = true;
+                        playScenario();
+                    }
+                } else {
+                    entry.target.classList.remove('start-anim');
+                }
+            });
+        }, { threshold: 0.3 });
+        const heroCard = document.getElementById('heroCard');
+        if (heroCard) observer.observe(heroCard);
+        observer.observe(document.getElementById('sectionFlow'));
+        observer.observe(document.getElementById('sectionLibrary'));
+
+        // --- LIBRARY PARALLAX ---
+        document.addEventListener('mousemove', (e) => {
+            const bg = document.querySelector('.heritage-real-bg');
+            if(bg && bg.getBoundingClientRect().top < window.innerHeight) {
+                const xVal = (window.innerWidth / 2 - e.pageX) / 50; 
+                const yVal = (window.innerHeight / 2 - e.pageY) / 50;
+                bg.style.transform = `translate(${xVal}px, ${yVal}px) scale(1.05)`; 
+            }
+        });
+
+        // --- SECTION 4: FLOW LOGIC (Merged) ---
+        const wait = ms => new Promise(r => setTimeout(r, ms));
+        const manualDetectedData = {
+            'layer-entry': [{ t: 0, h: 8, l: 80, w: 18 }],
+            'layer-sub': [ { t: 3, h: 4, l: 10, w: 20 }, { t: 8, h: 4, l: 15, w: 18 }, { t: 14, h: 4, l: 10, w: 22 }, { t: 19, h: 4, l: 12, w: 20 }, { t: 25, h: 4, l: 15, w: 18 }, { t: 30, h: 4, l: 10, w: 20 }, { t: 36, h: 4, l: 12, w: 18 }, { t: 41, h: 4, l: 15, w: 15 }, { t: 47, h: 4, l: 10, w: 22 }, { t: 52, h: 4, l: 12, w: 20 }, { t: 58, h: 4, l: 15, w: 18 }, { t: 63, h: 4, l: 10, w: 20 }, { t: 69, h: 4, l: 12, w: 18 }, { t: 74, h: 4, l: 15, w: 15 }, { t: 80, h: 4, l: 10, w: 22 }, { t: 85, h: 4, l: 12, w: 20 }, { t: 90, h: 4, l: 10, w: 18 }, { t: 88, h: 5, l: 85, w: 12 }, { t: 95, h: 5, l: 60, w: 10 }, { t: 95, h: 5, l: 70, w: 10 }, { t: 95, h: 5, l: 80, w: 10 }, { t: 95, h: 5, l: 90, w: 8 } ],
+            'layer-rel': [ { t: 3, h: 4, l: 52, w: 13 }, { t: 8, h: 4, l: 68, w: 12 }, { t: 38, h: 4, l: 85, w: 13 }, { t: 72, h: 4, l: 52, w: 15 }, { t: 85, h: 4, l: 55, w: 12 } ]
+        };
+
+        const canvas = document.getElementById('data-canvas');
+        const ctx = canvas.getContext('2d');
+        let canvasActive = false; let particles = []; let animationFrameId;
+        const charPool = ["حركة", "سكوت", "تلاش", "عطالات", "اراده", "دوره", "ا", "ب", "ج", "د", "٠", "١", "٢", "X", "Y", "0", "1"];
+        let currentRainColor = '#06b6d4'; 
+
+        function resizeCanvas() { canvas.width = canvas.offsetWidth || window.innerWidth; canvas.height = canvas.offsetHeight || window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+
+        class DataParticle {
+            constructor() { this.reset(); this.progress = Math.random(); }
+            reset() {
+                const srcEl = document.getElementById('card-raw-real'); const tgtEl = document.getElementById('card-proc-real');
+                if (!srcEl || !tgtEl) return;
+                const h1 = srcEl.getBoundingClientRect(); const h2 = tgtEl.getBoundingClientRect();
+                this.startX = h1.left + (h1.width * 0.5); this.startY = h1.top + (h1.height * 0.2) + (Math.random() * h1.height * 0.6);
+                this.endX = h2.left + (h2.width * 0.5); this.endY = h2.top + (h2.height * 0.2) + (Math.random() * h2.height * 0.6);
+                this.progress = 0; this.speed = 0.005 + Math.random() * 0.003; 
+                this.size = 10 + Math.random() * 6; this.text = charPool[Math.floor(Math.random() * charPool.length)]; this.color = currentRainColor;
+            }
+            update() { this.progress += this.speed; this.color = currentRainColor; if (this.progress >= 1) this.reset(); }
+            draw() {
+                const curX = this.startX + (this.endX - this.startX) * this.progress; const curY = this.startY + (this.endY - this.startY) * this.progress;
+                let alpha = 0; if(this.progress < 0.2) alpha = this.progress * 5; else if(this.progress > 0.8) alpha = (1 - this.progress) * 5; else alpha = 1; alpha *= 0.6; 
+                ctx.save(); ctx.globalAlpha = alpha; ctx.shadowColor = this.color; ctx.shadowBlur = 5; 
+                ctx.fillStyle = this.color; ctx.font = `${this.size}px 'Noto Naskh Arabic', monospace`; ctx.fillText(this.text, curX, curY);
+                ctx.beginPath(); ctx.strokeStyle = this.color; ctx.globalAlpha = alpha * 0.2; ctx.lineWidth = 1; ctx.moveTo(curX - 10, curY); ctx.lineTo(curX, curY); ctx.stroke(); ctx.restore();
+            }
+        }
+        function startCanvasFlow() { if (canvasActive) return; canvasActive = true; particles = Array.from({ length: 50 }, () => new DataParticle()); animateCanvas(); }
+        function stopCanvasFlow() { canvasActive = false; cancelAnimationFrame(animationFrameId); ctx.clearRect(0, 0, canvas.width, canvas.height); }
+        function animateCanvas() { if (!canvasActive) return; ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); animationFrameId = requestAnimationFrame(animateCanvas); }
+
+        const scanLineCont = document.getElementById('main-scan-line'); const scanBeam = document.getElementById('scan-beam-el'); const scanLabel = document.getElementById('scan-label-text'); const flashOverlay = document.getElementById('flash-overlay-container');
+        function setCenter(el) { const w = 300; el.style.width = w + 'px'; el.style.top = '60%'; el.style.left = '50%'; el.style.transition = 'none'; }
+        function moveToSpot(el, spotId, duration = 1000) {
+            const spot = document.getElementById(spotId); const rect = spot.getBoundingClientRect();
+            // Since active-card is absolute, we need to adjust for section offset if needed, but since section is relative and card is inside, offsetTop works.
+            el.style.transition = `all ${duration}ms cubic-bezier(0.25, 0.8, 0.25, 1)`;
+            // Calculate position relative to container
+            const containerRect = document.querySelector('.stage-container').getBoundingClientRect();
+            el.style.width = rect.width + 'px'; 
+            el.style.top = (rect.top - containerRect.top) + 'px'; 
+            el.style.left = (rect.left - containerRect.left) + 'px';
+            let rotate = '0deg'; if(spotId === 'spot-raw') rotate = '3deg'; if(spotId === 'spot-proc') rotate = '-6deg';
+            el.style.transform = `translate(0,0) rotate(${rotate})`; 
+        }
+        async function runTextSequence() {
+            const subCont = document.getElementById('sub-container'); await wait(300); document.querySelector('.flow-header-area').classList.add('header-visible'); await wait(1000); subCont.classList.add('border-draw-active'); await wait(1000); subCont.classList.add('pulsing-mode'); document.getElementById('strip-1').classList.add('strip-active'); await wait(3500); document.getElementById('strip-2').classList.add('strip-active'); await wait(4500); subCont.classList.remove('pulsing-mode');
+        }
+        function prepareSmartBoxes(layerId, color) {
+            flashOverlay.innerHTML = ''; const regions = manualDetectedData[layerId]; if (!regions) return; const contH = flashOverlay.offsetHeight;
+            regions.forEach((reg, index) => { const box = document.createElement('div'); box.className = 'smart-box'; box.style.top = reg.t + '%'; box.style.height = reg.h + '%'; box.style.left = reg.l + '%'; box.style.width = reg.w + '%'; box.style.color = color; box.dataset.yStartPx = (reg.t / 100) * contH; box.id = `sb-${index}`; flashOverlay.appendChild(box); });
+        }
+        function runSmartScan(procCard, layerId, color, labelText, isFinal = false, blinkStart = false) {
+            return new Promise(async (resolve) => {
+                currentRainColor = color; scanBeam.style.background = color; scanBeam.style.boxShadow = `0 0 15px ${color}`; scanLabel.style.background = color; scanLabel.style.color = 'white'; scanLabel.innerText = labelText; scanLineCont.style.opacity = '1';
+                if(blinkStart) { scanLineCont.style.top = '0%'; scanLineCont.style.opacity = '1'; await wait(150); scanLineCont.style.opacity = '0'; await wait(150); scanLineCont.style.opacity = '1'; await wait(150); scanLineCont.style.opacity = '0'; await wait(150); scanLineCont.style.opacity = '1'; await wait(300); }
+                const targetLayer = document.getElementById(layerId); procCard.classList.add('scanning'); prepareSmartBoxes(layerId, color);
+                const boxes = Array.from(document.querySelectorAll('.smart-box')); let startTime = null; const duration = 2500; 
+                function animate(timestamp) {
+                    if (!startTime) startTime = timestamp; const runtime = timestamp - startTime; let progress = runtime / duration; if (progress > 1) progress = 1;
+                    scanLineCont.style.top = (progress * 100) + '%'; const insetBottom = (1 - progress) * 100; targetLayer.style.clipPath = `inset(0 0 ${insetBottom}% 0)`; const scanY = (progress) * flashOverlay.offsetHeight;
+                    boxes.forEach(box => { if (!box.classList.contains('flash-active')) { const boxY = parseFloat(box.dataset.yStartPx); if (scanY >= boxY - 10) box.classList.add('flash-active'); } });
+                    if (progress < 1) requestAnimationFrame(animate); else { scanLineCont.style.opacity = '0'; procCard.classList.remove('scanning'); if(!isFinal) targetLayer.classList.add('turn-to-bw'); resolve(); }
+                } requestAnimationFrame(animate);
+            });
+        }
+        async function typeWriter(elementId, text, speed = 100) {
+            const el = document.getElementById(elementId); el.innerHTML = ''; const cursor = document.createElement('span'); cursor.className = 'typing-cursor'; el.appendChild(cursor);
+            for (let i = 0; i < text.length; i++) { const char = text.charAt(i); cursor.insertAdjacentText('beforebegin', char); await wait(speed); } cursor.remove();
+        }
+        function createDynamicPath(sourceId, targetId, type) {
+            const container = document.getElementById('pyramid-area'); const svg = document.getElementById('pyramid-svg'); const source = document.getElementById(sourceId); const target = document.getElementById(targetId);
+            const cRect = container.getBoundingClientRect(); const sRect = source.getBoundingClientRect(); const tRect = target.getBoundingClientRect();
+            const x1 = (sRect.left + sRect.width / 2) - cRect.left; const y1 = (sRect.bottom - cRect.top) - 2; const x2 = (tRect.left + tRect.width / 2) - cRect.left; const y2 = (tRect.top - cRect.top);
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            const cp1x = x1; const cp1y = y1 + (y2 - y1) * 0.9; const cp2x = x2; const cp2y = y1 + (y2 - y1) * 0.9;
+            path.setAttribute("d", `M${x1},${y1} C${cp1x},${cp1y} ${cp2x},${cp2y} ${x2},${y2}`); path.setAttribute("class", `conn-path path-${type}`); path.id = 'path-to-' + targetId; svg.appendChild(path);
+        }
+        async function runPyramidSequence() {
+            const mainNode = document.getElementById('node-main'); const orb = document.getElementById('transfer-orb'); const procCard = document.getElementById('card-proc-real');
+            const descMain = document.getElementById('desc-main'); const descSub = document.getElementById('desc-sub'); const descRel = document.getElementById('desc-rel');
+            const wrapper = procCard.querySelector('.proc-wrapper'); const wrapRect = wrapper.getBoundingClientRect(); const contRect = document.querySelector('.stage-container').getBoundingClientRect();
+            const wL = wrapRect.left + (wrapRect.width * 0.89) - contRect.left; const wT = wrapRect.top + (wrapRect.height * 0.04) - contRect.top;
+            orb.style.left = (wL - 6 - 36) + 'px'; orb.style.top = (wT - 6) + 'px'; orb.style.opacity = '1'; orb.classList.add('orb-pulse'); await wait(1200); orb.classList.remove('orb-pulse');
+            orb.style.transition = 'all 1s cubic-bezier(0.45, 0, 0.55, 1)';
+            const pyRect = document.getElementById('pyramid-area').getBoundingClientRect();
+            const destX = (pyRect.left - contRect.left) + (pyRect.width / 2); const destY = (pyRect.top - contRect.top) + 30; 
+            orb.style.left = destX + 'px'; orb.style.top = destY + 'px'; await wait(1000); orb.style.opacity = '0'; 
+            mainNode.style.opacity = '1'; mainNode.style.transform = 'translateX(-50%) scale(1)'; await wait(300);
+            await typeWriter('main-osm', 'حركت', 150); await wait(200); await typeWriter('main-lat', 'hareket', 80); await wait(500);
+            document.getElementById('pyramid-svg').innerHTML = ''; 
+            const nodeIds = ['mn-sub-1', 'mn-sub-2', 'mn-sub-3', 'mn-rel-1', 'mn-rel-2', 'mn-rel-3', 'mn-rel-4'];
+            nodeIds.forEach(id => { const type = id.includes('sub') ? 'sub' : 'rel'; createDynamicPath('node-main', id, type); });
+            const svgEl = document.getElementById('pyramid-svg'); svgEl.style.clipPath = 'inset(0 0 0 0)'; await wait(2500); 
+            document.querySelectorAll('.mini-node').forEach(node => { node.style.clipPath = 'inset(0 0 0 0)'; }); await wait(1000); 
+            await wait(2500); descMain.style.opacity = '1'; descMain.style.transform = 'translateX(20px)'; await wait(1500);
+            descSub.style.opacity = '1'; descSub.style.transform = 'translateY(20px)'; await wait(1500);
+            descRel.style.opacity = '1'; descRel.style.transform = 'translateY(20px)'; await wait(500);
+        }
+        async function playScenario() {
+            const raw = document.getElementById('card-raw-real'); const proc = document.getElementById('card-proc-real'); const headerStrip = document.getElementById('raw-header-strip');
+            setCenter(raw); raw.style.display = 'block'; raw.style.opacity = '0'; await runTextSequence();
+            raw.style.transform = 'translate(-50%, -50%) scale(0.8)'; headerStrip.style.clipPath = 'inset(0 100% 0 0)'; headerStrip.style.transition = 'none'; void raw.offsetWidth; 
+            raw.style.transition = 'all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1)'; raw.style.opacity = '1'; raw.style.transform = 'translate(-50%, -50%) scale(1)'; headerStrip.style.transition = 'clip-path 1.5s cubic-bezier(0.2, 0.8, 0.2, 1)'; headerStrip.style.clipPath = 'inset(0 0 0 0)';
+            await wait(1600); moveToSpot(raw, 'spot-raw', 1200); await wait(1000); 
+            proc.style.display = 'block'; proc.style.width = raw.style.width; proc.style.top = raw.style.top; proc.style.left = raw.style.left; proc.style.transform = raw.style.transform; proc.style.transition = 'none';
+            document.getElementById('layer-raw-filter').style.opacity = '1'; proc.style.opacity = '1'; await wait(200); document.getElementById('layer-base').classList.add('wipe-left-reveal');
+            await wait(1500); proc.classList.add('digital-ready'); 
+            proc.style.transition = 'all 1.5s cubic-bezier(0.25, 0.8, 0.25, 1)'; proc.style.top = '60%'; proc.style.left = '50%'; proc.style.transform = 'translate(-50%, -50%) scale(1.1) rotate(0deg)';
+            startCanvasFlow(); await wait(1500); 
+            var lqsT = function (en, tr) { return (typeof currentLang !== 'undefined' && currentLang === 'tr') ? tr : en; };
+            await runSmartScan(proc, 'layer-entry', '#0d9488', lqsT('HEADWORD', 'MADDE BAŞI'), false, true); await wait(500); await runSmartScan(proc, 'layer-sub', '#d97706', lqsT('SUBHEADWORDS', 'ALT MADDE BAŞLARI'), false); await wait(500); await runSmartScan(proc, 'layer-rel', '#2563eb', lqsT('RELATED WORDS', 'İLİŞKİLİ KELİMELER'), true); await wait(1000);
+            stopCanvasFlow(); moveToSpot(proc, 'spot-proc', 1500); await wait(1600); await runPyramidSequence(); 
+            document.body.classList.add('interaction-enabled');
+            document.querySelectorAll('.active-card').forEach(card => { card.addEventListener('mouseenter', () => { if(document.body.classList.contains('interaction-enabled')) document.body.classList.add('hover-mode-on'); }); card.addEventListener('mouseleave', () => { if(document.body.classList.contains('interaction-enabled')) document.body.classList.remove('hover-mode-on'); }); });
+        }
+
+        // --- SECTION 5: INTERFACE LAB LOGIC ---
+        window.lqsSetLabMode = function(mode) {
+            const btns = document.querySelectorAll('.toggle-btn');
+            btns.forEach((btn, idx) => { if(idx === mode) btn.classList.add('active'); else btn.classList.remove('active'); });
+            const imgResults = document.getElementById('img-results'); const imgPopup = document.getElementById('img-popup');
+            const cardResults = document.getElementById('card-results'); const cardPopup = document.getElementById('card-popup');
+            if (mode === 0) { imgResults.classList.add('active'); imgPopup.classList.remove('active'); cardResults.classList.add('active'); cardPopup.classList.remove('active'); } 
+            else { imgResults.classList.remove('active'); imgPopup.classList.add('active'); cardResults.classList.remove('active'); cardPopup.classList.add('active'); }
+        }
+
+        // --- SECTION 6: FUTURE (Network Canvas) ---
+        const netCanvas = document.getElementById('networkCanvas');
+        const netCtx = netCanvas.getContext('2d');
+        let netW, netH, netParticles = [];
+
+        function resizeNetCanvas() { netW = netCanvas.width = netCanvas.offsetWidth || window.innerWidth; netH = netCanvas.height = netCanvas.offsetHeight || window.innerHeight; }
+        window.addEventListener('resize', resizeNetCanvas); resizeNetCanvas();
+
+        class NetParticle {
+            constructor() { this.x = Math.random() * netW; this.y = Math.random() * netH; this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5; this.size = Math.random() * 2 + 1; }
+            update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > netW) this.vx *= -1; if (this.y < 0 || this.y > netH) this.vy *= -1; }
+            draw() { netCtx.beginPath(); netCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2); netCtx.fillStyle = 'rgba(251, 191, 36, 0.7)'; netCtx.fill(); }
+        }
+        function initNetParticles() { netParticles = []; const count = Math.min(netW * 0.1, 80); for (let i = 0; i < count; i++) netParticles.push(new NetParticle()); }
+        function animateNet() {
+            netCtx.clearRect(0, 0, netW, netH);
+            for (let i = 0; i < netParticles.length; i++) {
+                netParticles[i].update(); netParticles[i].draw();
+                for (let j = i + 1; j < netParticles.length; j++) {
+                    const dx = netParticles[i].x - netParticles[j].x; const dy = netParticles[i].y - netParticles[j].y; const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) { netCtx.beginPath(); netCtx.strokeStyle = `rgba(255, 255, 255, ${0.15 - dist/1000})`; netCtx.lineWidth = 0.5; netCtx.moveTo(netParticles[i].x, netParticles[i].y); netCtx.lineTo(netParticles[j].x, netParticles[j].y); netCtx.stroke(); }
+                }
+            } requestAnimationFrame(animateNet);
+        }
+        initNetParticles(); animateNet();
+    
+})();
+</script>
 </body>
 </html>
