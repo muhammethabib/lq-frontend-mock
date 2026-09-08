@@ -12636,6 +12636,14 @@ window.lqsTop = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 window.lqsFitStory = function () {
     var s = document.getElementById('lqStory');
     if (!s || getComputedStyle(s).display === 'none') return;
+    // keşfet göstergesi ana sayfanın tabanına yakın dursun
+    var d = document.getElementById('lqDiscover');
+    if (d && getComputedStyle(d).display !== 'none') {
+        d.style.marginTop = '0px';
+        var dTop = d.getBoundingClientRect().top + window.scrollY;
+        var wanted = window.innerHeight - d.offsetHeight - 46;
+        d.style.marginTop = Math.max(24, Math.round(wanted - dTop)) + 'px';
+    }
     s.style.marginTop = '0px';
     var top = s.getBoundingClientRect().top + window.scrollY;
     var m = Math.max(40, Math.round(window.innerHeight - top));
