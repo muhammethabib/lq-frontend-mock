@@ -12645,9 +12645,11 @@ window.lqsMountPopup = function () {
     var lang = (typeof currentLang !== 'undefined' && currentLang === 'tr') ? 'tr' : 'en';
     var tpl = lang === 'tr' ? 'tplPopupTr' : 'tplPopupEn';
     if (fr.dataset.cur !== tpl) { fr.dataset.cur = tpl; fr.srcdoc = getEmbedTpl(tpl); }
-    var k = Math.min(wrap.clientWidth / 1500, wrap.clientHeight / 1000);
+    // popup kartı 1500x1000 sayfanın içinde 1100x900; boş kenarları saymadan ölçekle
+    var k = Math.min(wrap.clientWidth / 1145, wrap.clientHeight / 925);
     fr.style.transform = 'scale(' + k + ')';
-    fr.style.left = Math.round((wrap.clientWidth - 1500 * k) / 2) + 'px';
+    fr.style.left = Math.round(wrap.clientWidth / 2 - 750 * k) + 'px';
+    fr.style.top = Math.round(wrap.clientHeight / 2 - 500 * k) + 'px';
 };
 window.addEventListener('resize', function () { lqsMountPopup(); });
 window.addEventListener('load', lqsMountPopup);
