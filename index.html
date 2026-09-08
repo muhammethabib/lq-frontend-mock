@@ -439,7 +439,9 @@
         .side-logo { height: 45px; width: auto; display: block; }
         /* Menüdeki dil anahtarı artık sitenin kendi .lang-switch bileşeninin birebir aynısı;
            tek fark konumu: sabit/mutlak değil, üst blok içinde normal akışta duruyor. */
-        .lang-switch.side-lang { position: relative; top: auto; right: auto; flex-shrink: 0; }
+        .lang-switch.side-lang { position: relative; top: auto; right: auto; flex-shrink: 0;
+            font-family: 'Inter', sans-serif; }
+        .lang-switch.side-lang .lang-btn { font-family: 'Inter', sans-serif; }
 
         /* Giriş / Kaydol */
         .side-auth { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px 16px;
