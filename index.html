@@ -1178,6 +1178,35 @@
             70% { box-shadow: 0 0 0 0 rgba(217,119,6,0); }
         }
         #lqStory .lqs-toggle-hint.is-done { opacity: 0; transition: opacity .4s; }
+        /* Popup ekranı: vurgulu kelimelerin üzerinde dijital kartlar */
+        #lqStory .lqs-scan { overflow: hidden; }
+        #lqStory .lqs-scan > img { position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; object-position: top center; }
+        #lqStory .lqs-hot { position: absolute; border-radius: 7px; cursor: pointer; z-index: 3;
+            transition: box-shadow .2s, background .2s; }
+        #lqStory .lqs-hot:hover { z-index: 9; }
+        #lqStory .lqs-hot.tone-entry:hover { box-shadow: 0 0 0 3px rgba(13,148,136,.55); background: rgba(13,148,136,.10); }
+        #lqStory .lqs-hot.tone-rel:hover { box-shadow: 0 0 0 3px rgba(37,99,235,.55); background: rgba(37,99,235,.10); }
+        #lqStory .lqs-hot.tone-sub:hover { box-shadow: 0 0 0 3px rgba(217,119,6,.55); background: rgba(217,119,6,.10); }
+        #lqStory .lqs-card { position: absolute; left: 50%; width: 178px; padding: 12px 14px 11px; border-radius: 12px;
+            background: rgba(15,23,42,.96); border: 1px solid rgba(148,163,184,.35);
+            box-shadow: 0 18px 40px -12px rgba(2,6,23,.75); color: #e2e8f0; text-align: center;
+            opacity: 0; pointer-events: none; transition: opacity .18s ease, transform .18s ease; }
+        #lqStory .lqs-card.above { bottom: calc(100% + 12px); transform: translate(-50%, 6px); }
+        #lqStory .lqs-card.below { top: calc(100% + 12px); transform: translate(-50%, -6px); }
+        #lqStory .lqs-hot:hover .lqs-card { opacity: 1; transform: translate(-50%, 0); }
+        #lqStory .lqs-card:after { content: ''; position: absolute; left: 50%; margin-left: -6px; width: 12px; height: 12px;
+            background: rgba(15,23,42,.96); border: 1px solid rgba(148,163,184,.35); transform: rotate(45deg); }
+        #lqStory .lqs-card.above:after { bottom: -7px; border-top: 0; border-left: 0; }
+        #lqStory .lqs-card.below:after { top: -7px; border-bottom: 0; border-right: 0; }
+        #lqStory .lqs-chip { display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: 1px;
+            padding: 3px 9px; border-radius: 999px; margin-bottom: 8px; }
+        #lqStory .tone-entry .lqs-chip { color: #5eead4; background: rgba(13,148,136,.18); }
+        #lqStory .tone-rel .lqs-chip { color: #93c5fd; background: rgba(37,99,235,.18); }
+        #lqStory .tone-sub .lqs-chip { color: #fcd34d; background: rgba(217,119,6,.18); }
+        #lqStory .lqs-osm { font-family: 'Noto Naskh Arabic', serif; font-size: 21px; line-height: 1.5; color: #fff; direction: rtl; }
+        #lqStory .lqs-lat { font-size: 13px; font-weight: 700; color: #cbd5e1; margin-top: 2px; }
+        #lqStory .lqs-note { font-size: 10.5px; color: #7d8ba5; margin-top: 7px; }
         #sectionBuildLQ .pna-top { display: none !important; }
         #lqStory .sahne { cursor: default; }
         #lqStory img { max-width: 100%; }
@@ -4018,7 +4047,7 @@
 </div>
 <div class="screen-content">
 <img alt="Arama Sonuçları" class="ui-image active" id="img-results" src="assets/story/sonuc_resmi.jpg"/>
-<img alt="Popup Görüntüsü" class="ui-image" id="img-popup" src="assets/story/popup_resmi.jpg"/>
+<div class="ui-image lqs-scan" id="img-popup"><img src="assets/story/popup_resmi.jpg" alt=""><div class="lqs-hot tone-entry" data-l="76.22" data-t="29.06" data-w="15.7" data-h="18.77"><div class="lqs-card below"><span class="lqs-chip" data-i18n="storyHotEntry">HEADWORD</span><div class="lqs-osm">مَنْظَر</div><div class="lqs-lat">manzar</div><div class="lqs-note" data-i18n="storyHotNote">Click to search this word</div></div></div><div class="lqs-hot tone-rel" data-l="25.06" data-t="29.94" data-w="9.21" data-h="9.58"><div class="lqs-card below"><span class="lqs-chip" data-i18n="storyHotRel">RELATED WORD</span><div class="lqs-osm">نظر</div><div class="lqs-lat">nazar</div><div class="lqs-note" data-i18n="storyHotNote">Click to search this word</div></div></div><div class="lqs-hot tone-sub" data-l="11.62" data-t="52.56" data-w="11.74" data-h="11.15"><div class="lqs-card above"><span class="lqs-chip" data-i18n="storyHotSub">SUBHEADWORD</span><div class="lqs-osm">كريه</div><div class="lqs-lat">kerih</div><div class="lqs-note" data-i18n="storyHotNote">Click to search this word</div></div></div><div class="lqs-hot tone-sub" data-l="71.45" data-t="65.31" data-w="13.54" data-h="10.09"><div class="lqs-card above"><span class="lqs-chip" data-i18n="storyHotSub2">SUBHEADWORD</span><div class="lqs-osm">المنظر</div><div class="lqs-lat">el-manzar</div><div class="lqs-note" data-i18n="storyHotNote">Click to search this word</div></div></div></div>
 </div>
 </div>
 </div>
@@ -4881,6 +4910,11 @@
             story57: 'DAHA FAZLASI ÇOK YAKINDA.',
             discoverStory: '2026 YENİLİKLERİNİ KEŞFET',
             storySwitchHint: 'İki görünüm, tek tık',
+            storyHotEntry: 'MADDE BAŞI',
+            storyHotRel: 'İLİŞKİLİ KELİME',
+            storyHotSub: 'ALT MADDE BAŞI',
+            storyHotSub2: 'ALT MADDE BAŞI',
+            storyHotNote: 'Tıklayınca bu kelime için arama başlar',
             menuWhat: 'LexiQamus Nedir?',
             menuGuide: 'Kullanım Kılavuzu',
             menuUpdates: 'Güncellemeler',
@@ -12633,6 +12667,25 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeEquival
 
 <script>
 window.lqsTop = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+window.lqsPlaceHotspots = function () {
+    var wrap = document.getElementById('img-popup');
+    if (!wrap) return;
+    var img = wrap.querySelector('img');
+    if (!img || !img.naturalWidth) return;
+    var cw = wrap.clientWidth, ch = wrap.clientHeight;
+    var scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+    var dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
+    var ox = (cw - dw) / 2, oy = 0; // object-position: top center
+    wrap.querySelectorAll('.lqs-hot').forEach(function (el) {
+        el.style.left = (ox + dw * parseFloat(el.dataset.l) / 100) + 'px';
+        el.style.top = (oy + dh * parseFloat(el.dataset.t) / 100) + 'px';
+        el.style.width = (dw * parseFloat(el.dataset.w) / 100) + 'px';
+        el.style.height = (dh * parseFloat(el.dataset.h) / 100) + 'px';
+    });
+};
+window.addEventListener('resize', lqsPlaceHotspots);
+window.addEventListener('load', lqsPlaceHotspots);
+document.addEventListener('DOMContentLoaded', function () { setTimeout(lqsPlaceHotspots, 100); setTimeout(lqsPlaceHotspots, 900); });
 window.lqsFitStory = function () {
     var s = document.getElementById('lqStory');
     if (!s || getComputedStyle(s).display === 'none') return;
@@ -12663,6 +12716,7 @@ document.addEventListener('DOMContentLoaded', function () { setTimeout(lqsFitSto
 document.addEventListener('click', function (e) {
     var btn = e.target.closest && e.target.closest('#lqStory .toggle-btn');
     if (!btn) return;
+    setTimeout(window.lqsPlaceHotspots, 60);
     var wrap = btn.closest('.toggle-pill-container');
     if (wrap) wrap.classList.add('lqs-touched');
     var hint = document.querySelector('#lqStory .lqs-toggle-hint');
