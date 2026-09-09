@@ -13444,7 +13444,7 @@ document.addEventListener('click', function (e) {
             const cRect = container.getBoundingClientRect(); const sRect = source.getBoundingClientRect(); const tRect = target.getBoundingClientRect();
             const x1 = (sRect.left + sRect.width / 2) - cRect.left; const y1 = (sRect.bottom - cRect.top) - 2; const x2 = (tRect.left + tRect.width / 2) - cRect.left; const y2 = (tRect.top - cRect.top);
             const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            const cp1x = x1; const cp1y = y1 + (y2 - y1) * 0.9; const cp2x = x2; const cp2y = y1 + (y2 - y1) * 0.9;
+            const dy = y2 - y1; const cp1x = x1; const cp1y = y1 + dy * 0.45; const cp2x = x2; const cp2y = y2 - dy * 0.45;
             path.setAttribute("d", `M${x1},${y1} C${cp1x},${cp1y} ${cp2x},${cp2y} ${x2},${y2}`); path.setAttribute("class", `conn-path path-${type}`); path.id = 'path-to-' + targetId; svg.appendChild(path);
         }
         async function runPyramidSequence() {
@@ -13453,10 +13453,15 @@ document.addEventListener('click', function (e) {
             const wrapper = procCard.querySelector('.proc-wrapper'); const wrapRect = wrapper.getBoundingClientRect(); const contRect = document.querySelector('.stage-container').getBoundingClientRect();
             // Orb, madde başının (layer-entry) tam üzerinden fırlar
                 const hwReg = manualDetectedData['layer-entry'][0];
-                const flashRect = document.getElementById('flash-overlay-container').getBoundingClientRect();
-                const hwX = flashRect.left + flashRect.width * (hwReg.l + hwReg.w / 2) / 100 - contRect.left;
-                const hwY = flashRect.top + flashRect.height * (hwReg.t + hwReg.h / 2) / 100 - contRect.top;
-                orb.style.left = (hwX - 6) + 'px'; orb.style.top = (hwY - 6) + 'px'; orb.style.opacity = '1'; orb.classList.add('orb-pulse'); await wait(1200); orb.classList.remove('orb-pulse');
+                const flashCont = document.getElementById('flash-overlay-container');
+                const probe = document.createElement('div');
+                probe.style.cssText = 'position:absolute;pointer-events:none;opacity:0;top:' + hwReg.t + '%;left:' +
+                    hwReg.l + '%;width:' + hwReg.w + '%;height:' + hwReg.h + '%;';
+                flashCont.appendChild(probe);
+                const hwRect = probe.getBoundingClientRect();   // kartın dönüşü dahil gerçek konum
+                probe.remove();
+                orb.style.left = (hwRect.left + hwRect.width / 2 - contRect.left - 6) + 'px';
+                orb.style.top = (hwRect.top + hwRect.height / 2 - contRect.top - 6) + 'px'; orb.style.opacity = '1'; orb.classList.add('orb-pulse'); await wait(1200); orb.classList.remove('orb-pulse');
             orb.style.transition = 'all 0.55s cubic-bezier(0.45, 0, 0.55, 1)';
             const pyRect = document.getElementById('pyramid-area').getBoundingClientRect();
             const destX = (pyRect.left - contRect.left) + (pyRect.width / 2); const destY = (pyRect.top - contRect.top) + 30; 
