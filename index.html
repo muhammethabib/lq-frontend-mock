@@ -1274,14 +1274,21 @@
             animation: lqsBadgeIn .45s ease-out both, lqsOpenNudge 2.8s ease-in-out 0.6s infinite; }
         #lqStory .lqs-hoverhint.show { opacity: 1; animation: lqsBadgeIn .45s ease-out both; }
         #lqStory .lqs-hoverhint .oh-ico { overflow: visible; }
-        #lqStory .lqs-hoverhint .oh-ico svg { animation: lqsCursorRoam 3.4s ease-in-out infinite; }
+        #lqStory .lqs-hoverhint .oh-ico svg { animation: lqsCursorRoam 3s cubic-bezier(.4,0,.3,1) infinite; }
         @keyframes lqsCursorRoam {
-            0%, 100% { transform: translate(-6px, 3px); }
-            25% { transform: translate(0, -2px); }
-            50% { transform: translate(7px, 2px); }
-            75% { transform: translate(1px, -3px); }
+            0% { transform: translate(11px, 9px); opacity: 0; }
+            12% { transform: translate(8px, 6px); opacity: 1; }
+            62% { transform: translate(-8px, -7px); opacity: 1; }
+            78% { transform: translate(-11px, -10px); opacity: 0; }
+            79%, 100% { transform: translate(11px, 9px); opacity: 0; }
         }
-        #lqStory .oh-ico-click { animation: lqsCursorTap 1.9s ease-in-out infinite; }
+        #lqStory .oh-ico-click svg { animation: lqsCursorTap 1.9s ease-in-out infinite; }
+        #lqStory .oh-wave { animation: lqsClickWave 1.9s ease-out infinite; transform-origin: 5.5px 3.2px; }
+        @keyframes lqsClickWave {
+            0%, 62% { opacity: 0; transform: scale(.6); }
+            72% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.25); }
+        }
         @keyframes lqsBadgeIn {
             from { opacity: 0; transform: translate(-50%, -50%) translateY(7px) scale(.97); }
             to { opacity: 1; transform: translate(-50%, -50%) translateY(0) scale(1); }
@@ -4223,7 +4230,7 @@
 <img alt="Arama Sonuçları" class="ui-image active" id="img-results" onclick="lqsOpenOriginal()" src="assets/story/sonuc_resmi.jpg"/>
 <div class="ui-image lqs-live" id="img-popup"><iframe id="lqsPopupFrame" title="LexiQamus popup" scrolling="no"></iframe></div>
 <div class="lqs-openhint" onclick="lqsOpenOriginal()">
-  <span class="oh-ico oh-ico-click"><svg viewBox="0 0 24 24"><path d="M5.5 3.2v15.6l3.9-3.7 2.3 5.1 2.4-1.1-2.2-4.9h5.2z" fill="currentColor"></path><path d="M3.6 1.9L2.2 0.5M9.1 1.4l.5-1.6M1.9 6.9l-1.6.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"></path></svg></span>
+  <span class="oh-ico oh-ico-click"><svg viewBox="-5 -5 29 29"><path d="M5.5 3.2v15.6l3.9-3.7 2.3 5.1 2.4-1.1-2.2-4.9h5.2z" fill="currentColor"></path><g class="oh-wave" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M2.1 3.2A3.4 3.4 0 0 1 5.5 -0.2" stroke-width="1.5"></path><path d="M-0.7 3.2A6.2 6.2 0 0 1 5.5 -3" stroke-width="1.3" opacity=".55"></path></g></svg></span>
   <span data-i18n="storyOpenOriginal">Open the original page</span>
 </div>
 <div class="lqs-hoverhint" id="lqsHoverHint">
