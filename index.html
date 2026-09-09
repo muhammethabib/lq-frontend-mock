@@ -6709,13 +6709,36 @@
         // Açılan pencere ekranın altına taşıyorsa sayfa oraya iner
         window.lqRevealPanel = function (el) {
             if (!el) return;
-            setTimeout(function () {
-                document.body.classList.remove('lqs-fit');
-                var r = el.getBoundingClientRect();
-                var over = r.bottom - (window.innerHeight - 16);
-                if (over > 0) window.scrollBy({ top: Math.ceil(over), behavior: 'smooth' });
-            }, 70);
+            [70, 420, 900].forEach(function (d) { setTimeout(function () { lqRevealStep(el); }, d); });
         };
+        function lqRevealStep(el) {
+            (function () {
+                document.body.classList.remove('lqs-fit');
+                var sp = document.getElementById('lqPanelSpacer');
+                if (!sp) {
+                    sp = document.createElement('div');
+                    sp.id = 'lqPanelSpacer';
+                    sp.style.cssText = 'height:0;width:100%;pointer-events:none;';
+                    document.body.appendChild(sp);
+                }
+                var r = el.getBoundingClientRect();
+                var over = r.bottom - (window.innerHeight - 20);
+                if (over > 0) {
+                    // sayfa o kadar aşağı inemiyorsa geçici bir pay bırak
+                    var maxY = document.documentElement.scrollHeight - window.innerHeight;
+                    var need = (window.scrollY + over) - maxY;
+                    if (need > 0) sp.style.height = Math.ceil(need + 20) + 'px';
+                    window.scrollBy({ top: Math.ceil(over), behavior: 'smooth' });
+                }
+                clearInterval(window.__lqSpacerT);
+                window.__lqSpacerT = setInterval(function () {
+                    var fOpen = document.getElementById('filterDropdown');
+                    var dOpen = document.getElementById('dictMenu');
+                    var open = (fOpen && fOpen.classList.contains('open')) || (dOpen && dOpen.classList.contains('show'));
+                    if (!open) { sp.style.height = '0'; clearInterval(window.__lqSpacerT); }
+                }, 400);
+            })();
+        }
 
         document.addEventListener('click', (e) => {
             const dd = document.getElementById('filterDropdown');
