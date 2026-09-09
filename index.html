@@ -12772,7 +12772,11 @@ window.lqsTrimPopup = function (fr) {
         var st = doc.createElement('style');
         st.id = 'lqsTrim';
         st.textContent = '.section-controls, .global-ai-notice, .view-text { display: none !important; }' +
-            '.content-area { overflow: hidden !important; }' +
+            '.content-area { overflow: hidden !important; display: flex !important; flex-direction: column !important; }' +
+            '.view-original { flex: 1 1 auto !important; min-height: 0 !important; }' +
+            '.view-original .section-body { flex: 1 1 auto !important; min-height: 0 !important; display: flex !important; padding-bottom: 14px !important; }' +
+            '.image-viewport, .image-wrapper { max-height: 100% !important; }' +
+            '.lex-popup { height: 700px !important; }' +
             '.content-area::-webkit-scrollbar { width: 0 !important; height: 0 !important; }' +
             'html, body { overflow: hidden !important; }';
         doc.head.appendChild(st);
@@ -12792,7 +12796,7 @@ window.lqsMountPopup = function () {
         lqsTrimPopup(fr);
     }
     // Kart 1100x900; baştan sona görünsün diye iki eksene birden sığdırılır
-    var k = Math.min(wrap.clientWidth / 1150, wrap.clientHeight / 935);
+    var k = Math.min(wrap.clientWidth / 1150, wrap.clientHeight / 745);
     fr.style.transform = 'scale(' + k + ')';
     fr.style.left = Math.round(wrap.clientWidth / 2 - 750 * k) + 'px';
     fr.style.top = Math.round(wrap.clientHeight / 2 - 500 * k) + 'px';
