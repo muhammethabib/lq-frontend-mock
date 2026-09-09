@@ -2725,7 +2725,11 @@
             box-shadow: 0 10px 26px rgba(15,23,42,.3); opacity: 0; pointer-events: none;
             transition: opacity .18s ease, transform .18s ease; }
         .wd-hint.show { display: flex; opacity: 1; transform: translateX(-50%) translateY(0); }
-        .wd-hint svg { width: 16px; height: 16px; opacity: .8; }
+        .wd-hint .kbd-demo { margin-right: 2px; }
+        .wd-hint .kbd-demo-key { width: 20px; height: 20px; font-size: 10px; }
+        .wd-hint .kbd-demo-arrow { color: #64748b; }
+        .wd-hint .kbd-demo-out { color: #f9a8d4 !important; font-size: 16px; }
+        .wd-hint .kbd-demo-key { color: #0f172a !important; }
         .wd-hint-tip { position: absolute; top: -5px; left: 50%; width: 10px; height: 10px; margin-left: -5px;
             background: #1e293b; transform: rotate(45deg); border-radius: 2px; }
 
@@ -3327,7 +3331,7 @@
             </div>
 <div class="wd-hint" id="wdHint" aria-hidden="true">
   <span class="wd-hint-tip"></span>
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2.5"></rect><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M18 14h.01M9.5 14h5"></path></svg>
+  <span class="kbd-demo"><span class="kbd-demo-key">K</span><span class="kbd-demo-arrow">&rarr;</span><span class="kbd-demo-out">&#x0643;</span></span>
   <span data-i18n="wdOwnKeyboard">You can type with your own keyboard too</span>
 </div>
 <button class="btn-ara" data-i18n="btnSearch">Search</button>
