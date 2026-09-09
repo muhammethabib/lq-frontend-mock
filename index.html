@@ -1179,8 +1179,15 @@
         body.story-open { scrollbar-width: none; }
         body.story-open::-webkit-scrollbar { width: 0; height: 0; }
         #lqStory .snap-section { scroll-snap-align: none; height: 100vh; min-height: 620px; }
-        /* Koleksiyon 9 kitap: ızgara üç sıraya çıktı */
-        #lqStory .library-grid { gap: 28px; transform: scale(.72); transform-origin: center center; }
+        /* Koleksiyon: altta beş, üstte dört; üst sıra aralara oturur */
+        #lqStory .library-grid { display: flex; flex-direction: column; align-items: center; gap: 18px;
+            transform: scale(.78); transform-origin: center center; }
+        #lqStory .lib-row { display: flex; gap: 18px; }
+
+        #lqStory .vol-multi { background: rgba(217,119,6,.18); border: 1px solid rgba(217,119,6,.85);
+            border-radius: 5px; padding: 2px 6px !important; }
+        #lqStory .vol-multi .bk-vol, #lqStory .vol-multi .ic-vol { color: #fde68a !important; font-weight: 900 !important;
+            letter-spacing: .6px; }
         #lqStory .bd-7 { animation: bookCascade_lqs 0.8s 1.10s forwards; }
         #lqStory .bd-8 { animation: bookCascade_lqs 0.8s 1.25s forwards; }
         #lqStory .bd-9 { animation: bookCascade_lqs 0.8s 0.12s forwards; }
@@ -3849,6 +3856,7 @@
 </div>
 <div class="right-panel">
 <div class="library-grid">
+<div class="lib-row lib-row-top">
 <div class="sahne kitap-9 bd-9">
 <div class="kitap">
 <div class="kapak-grubu">
@@ -3901,7 +3909,7 @@
 <div class="approved-stamp">✓</div>
 <div class="bk-title">Kamus-ı<br/>Türki</div>
 <div class="bk-auth">Şemseddin Sami</div>
-<div class="bk-vol-box"><div class="bk-vol" data-i18n="story19">2 VOLUMES</div></div>
+<div class="bk-vol-box vol-multi"><div class="bk-vol" data-i18n="story19">2 VOLUMES</div></div>
 <div class="bk-year">1900</div>
 </div>
 <div class="kapak-arka"></div>
@@ -3909,7 +3917,7 @@
 <div class="ic-sayfa">
 <div class="ic-title">Kamus-ı<br/>Türki</div>
 <div class="ic-auth">Şemseddin Sami</div>
-<div class="ic-vol-box"><div class="ic-vol" data-i18n="story20">2 VOLUMES</div></div>
+<div class="ic-vol-box vol-multi"><div class="ic-vol" data-i18n="story20">2 VOLUMES</div></div>
 <div class="ic-year">1900</div>
 </div>
 </div>
@@ -3922,7 +3930,7 @@
 <div class="approved-stamp">✓</div>
 <div class="bk-title">Lehçe-i<br/>Osmanî</div>
 <div class="bk-auth">Ahmed Vefik<br/>Paşa</div>
-<div class="bk-vol-box"><div class="bk-vol" data-i18n="story21">2 VOLUMES</div></div>
+<div class="bk-vol-box vol-multi"><div class="bk-vol" data-i18n="story21">2 VOLUMES</div></div>
 <div class="bk-year">1876</div>
 </div>
 <div class="kapak-arka"></div>
@@ -3930,11 +3938,13 @@
 <div class="ic-sayfa">
 <div class="ic-title">Lehçe-i<br/>Osmanî</div>
 <div class="ic-auth">Ahmed Vefik<br/>Paşa</div>
-<div class="ic-vol-box"><div class="ic-vol" data-i18n="story22">2 VOLUMES</div></div>
+<div class="ic-vol-box vol-multi"><div class="ic-vol" data-i18n="story22">2 VOLUMES</div></div>
 <div class="ic-year">1876</div>
 </div>
 </div>
 </div>
+</div>
+<div class="lib-row lib-row-bottom">
 <div class="sahne kitap-4 bd-4">
 <div class="kitap">
 <div class="kapak-grubu">
@@ -3985,7 +3995,7 @@
 <div class="approved-stamp">✓</div>
 <div class="bk-title">Kamusü’l<br/>A’lâm</div>
 <div class="bk-auth">Şemseddin Sami</div>
-<div class="bk-vol-box"><div class="bk-vol" data-i18n="story27">6 VOLUMES</div></div>
+<div class="bk-vol-box vol-multi"><div class="bk-vol" data-i18n="story27">6 VOLUMES</div></div>
 <div class="bk-year">1889</div>
 </div>
 <div class="kapak-arka"></div>
@@ -3993,7 +4003,7 @@
 <div class="ic-sayfa">
 <div class="ic-title">Kamusü’l<br/>A’lâm</div>
 <div class="ic-auth">Şemseddin Sami</div>
-<div class="ic-vol-box"><div class="ic-vol" data-i18n="story28">6 VOLUMES</div></div>
+<div class="ic-vol-box vol-multi"><div class="ic-vol" data-i18n="story28">6 VOLUMES</div></div>
 <div class="ic-year">1889</div>
 </div>
 </div>
@@ -4040,7 +4050,7 @@
 </div>
 </div>
 </div>
-
+</div>
 </div>
 </div>
 </div>
