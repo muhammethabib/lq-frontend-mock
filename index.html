@@ -12728,17 +12728,22 @@ document.addEventListener('DOMContentLoaded', function () { setTimeout(lqsMountP
         window.applyLanguage = function () { var r = orig.apply(this, arguments); setTimeout(lqsMountPopup, 0); return r; };
     }
 })();
+// Keşfet göstergesi, akış kilitli olsa da ana sayfanın tabanına yakın durur
+window.lqsPlaceDiscover = function () {
+    var d = document.getElementById('lqDiscover');
+    if (!d || getComputedStyle(d).display === 'none') return;
+    d.style.marginTop = '0px';
+    var dTop = d.getBoundingClientRect().top + window.scrollY;
+    var wanted = window.innerHeight - d.offsetHeight - 6;
+    d.style.marginTop = Math.max(24, Math.round(wanted - dTop)) + 'px';
+};
+window.addEventListener('resize', lqsPlaceDiscover);
+window.addEventListener('load', lqsPlaceDiscover);
+document.addEventListener('DOMContentLoaded', function () { setTimeout(lqsPlaceDiscover, 80); setTimeout(lqsPlaceDiscover, 700); });
 window.lqsFitStory = function () {
+    lqsPlaceDiscover();
     var s = document.getElementById('lqStory');
     if (!s || getComputedStyle(s).display === 'none') return;
-    // keşfet göstergesi ana sayfanın tabanına yakın dursun
-    var d = document.getElementById('lqDiscover');
-    if (d && getComputedStyle(d).display !== 'none') {
-        d.style.marginTop = '0px';
-        var dTop = d.getBoundingClientRect().top + window.scrollY;
-        var wanted = window.innerHeight - d.offsetHeight - 6;
-        d.style.marginTop = Math.max(24, Math.round(wanted - dTop)) + 'px';
-    }
     s.style.marginTop = '0px';
     var top = s.getBoundingClientRect().top + window.scrollY;
     var m = Math.max(40, Math.round(window.innerHeight - top));
