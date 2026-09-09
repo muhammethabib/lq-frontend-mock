@@ -10388,8 +10388,14 @@
         boxes.forEach(box => {
         box.addEventListener('mouseenter', (e) => {
             clearTimeout(hoverTimeout);
-            const osm = box.getAttribute('data-osm');
-            const lat = box.getAttribute('data-lat');
+            let osm = box.getAttribute('data-osm');
+            let lat = box.getAttribute('data-lat');
+            // Alttaki iki kutu tek bir ibare: hangisine gelinirse gelinsin ibarenin tamamı gösterilir
+            if (box.dataset.pair) {
+                const group = document.querySelectorAll('[data-pair="' + box.dataset.pair + '"]');
+                osm = [...group].map(function (g) { return g.getAttribute('data-osm'); }).join(' ');
+                lat = [...group].map(function (g) { return g.getAttribute('data-lat'); }).join(' ');
+            }
             const isRelated = box.classList.contains('box-related');
             tooltip.innerHTML = `
                 <div class="gt-row">
@@ -12334,8 +12340,14 @@
         boxes.forEach(box => {
         box.addEventListener('mouseenter', (e) => {
             clearTimeout(hoverTimeout);
-            const osm = box.getAttribute('data-osm');
-            const lat = box.getAttribute('data-lat');
+            let osm = box.getAttribute('data-osm');
+            let lat = box.getAttribute('data-lat');
+            // Alttaki iki kutu tek bir ibare: hangisine gelinirse gelinsin ibarenin tamamı gösterilir
+            if (box.dataset.pair) {
+                const group = document.querySelectorAll('[data-pair="' + box.dataset.pair + '"]');
+                osm = [...group].map(function (g) { return g.getAttribute('data-osm'); }).join(' ');
+                lat = [...group].map(function (g) { return g.getAttribute('data-lat'); }).join(' ');
+            }
             const isRelated = box.classList.contains('box-related');
             tooltip.innerHTML = `
                 <div class="gt-row">
