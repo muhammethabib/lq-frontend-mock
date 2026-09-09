@@ -1201,6 +1201,24 @@
             70% { box-shadow: 0 0 0 0 rgba(217,119,6,0); }
         }
         #lqStory .lqs-toggle-hint.is-done { opacity: 0; transition: opacity .4s; }
+        /* Sonuç görseli tıklanabilir: orijinal belgeye davet */
+        #lqStory #img-results { cursor: pointer; }
+        #lqStory .lqs-openhint { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%);
+            z-index: 5; display: inline-flex; align-items: center; gap: 10px; padding: 11px 20px; border-radius: 999px;
+            background: rgba(8, 20, 45, .93); color: #fff; font-size: 13px; font-weight: 700;
+            box-shadow: 0 16px 34px -14px rgba(2, 6, 23, .85); cursor: pointer; white-space: nowrap;
+            opacity: 0; pointer-events: none; transition: opacity .25s ease, background .2s ease; }
+        #lqStory .lqs-openhint svg { width: 15px; height: 15px; flex: none; }
+        #lqStory .lqs-openhint .oh-arrow { width: 16px; height: 16px; color: #fcd34d; transition: transform .2s ease; }
+        #lqStory .lqs-openhint:hover { background: rgba(8, 20, 45, 1); }
+        #lqStory .lqs-openhint:hover .oh-arrow { transform: translateX(3px); }
+        #lqStory #img-results.active ~ .lqs-openhint { opacity: 1; pointer-events: auto;
+            animation: lqsOpenNudge 2.6s ease-in-out infinite; }
+        @keyframes lqsOpenNudge {
+            0%, 100% { box-shadow: 0 16px 34px -14px rgba(2,6,23,.85), 0 0 0 0 rgba(252,211,77,0); }
+            45% { box-shadow: 0 16px 34px -14px rgba(2,6,23,.85), 0 0 0 6px rgba(252,211,77,.16); }
+        }
+
         /* Popup ekranı: mock'un kendi popup sayfası, canlı ve etkileşimli */
         #lqStory .lqs-live { overflow: hidden; background: #e5e5e5; }
         #lqStory .lqs-live iframe { position: absolute; top: 0; left: 0; width: 1500px; height: 1000px;
@@ -4035,8 +4053,13 @@
 <div class="b-dot bd-red"></div> <div class="b-dot bd-yellow"></div> <div class="b-dot bd-green"></div>
 </div>
 <div class="screen-content">
-<img alt="Arama Sonuçları" class="ui-image active" id="img-results" src="assets/story/sonuc_resmi.jpg"/>
+<img alt="Arama Sonuçları" class="ui-image active" id="img-results" onclick="lqsOpenOriginal()" src="assets/story/sonuc_resmi.jpg"/>
 <div class="ui-image lqs-live" id="img-popup"><iframe id="lqsPopupFrame" title="LexiQamus popup" scrolling="no"></iframe></div>
+<div class="lqs-openhint" onclick="lqsOpenOriginal()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8"></path><path d="M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8"></path><path d="M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16"></path><path d="M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"></path><line x1="7" y1="12" x2="17" y2="12"></line></svg>
+  <span data-i18n="storyOpenOriginal">Click to open the original page</span>
+  <svg class="oh-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+</div>
 </div>
 </div>
 </div>
@@ -4899,6 +4922,7 @@
             story57: 'DAHA FAZLASI ÇOK YAKINDA.',
             discoverStory: '2026 YENİLİKLERİNİ KEŞFET',
             storySwitchHint: 'İki görünüm, tek tık',
+            storyOpenOriginal: 'Orijinal sayfayı açmak için tıklayın',
             menuWhat: 'LexiQamus Nedir?',
             menuGuide: 'Kullanım Kılavuzu',
             menuUpdates: 'Güncellemeler',
@@ -12829,6 +12853,10 @@ window.lqsTrimPopup = function (fr) {
             'html, body { overflow: hidden !important; }';
         doc.head.appendChild(st);
     } catch (e) { /* yok say */ }
+};
+window.lqsOpenOriginal = function () {
+    if (typeof lqsSetLabMode === 'function') lqsSetLabMode(1);
+    setTimeout(function () { if (window.lqsMountPopup) window.lqsMountPopup(); }, 30);
 };
 window.lqsMountPopup = function () {
     var wrap = document.getElementById('img-popup');
