@@ -1168,7 +1168,8 @@
         body.team-page-open #lqStory, body.v3-page-open #lqStory { display: none !important; }
         body.tool-focus #lqStory, body.tool-focus #lqDiscover { display: none !important; }
         body.story-armed #lqStory { display: none !important; }
-        body.story-armed.vs-home { overflow-y: hidden; }
+        body.story-armed.vs-home { height: 100vh; overflow: hidden; }
+        html:has(body.story-armed.vs-home) { overflow: hidden; }
         body.story-open { scrollbar-width: none; }
         body.story-open::-webkit-scrollbar { width: 0; height: 0; }
         #lqStory .snap-section { scroll-snap-align: none; height: 100vh; min-height: 620px; }
