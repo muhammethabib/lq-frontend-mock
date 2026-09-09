@@ -1148,7 +1148,7 @@
             background: linear-gradient(to right, #082567 0%, #3b82f6 40%, #d97706 50%, #3b82f6 60%, #082567 100%);
             background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
             -webkit-text-fill-color: transparent; color: transparent; animation: textShimmerFlow_lqs 3s linear infinite; }
-        #lqDiscover .si-arrow-container { width: 30px; height: 45px; position: relative; }
+        #lqDiscover .si-arrow-container { width: 30px; height: 14px; position: relative; overflow: visible; }
         #lqDiscover .si-chevron { position: absolute; width: 24px; height: 7px; opacity: 0; transform: scale(0.3);
             animation: scrollFlowSlow_lqs 3s ease-out infinite; }
         #lqDiscover .si-chevron:before, #lqDiscover .si-chevron:after { content: ' '; position: absolute; top: 0;
@@ -1160,6 +1160,7 @@
         #lqDiscover .si-chevron:nth-child(3) { animation-delay: 2s; }
 
 
+        html, body { overflow-x: hidden; overflow-x: clip; }
         /* ===================== ANA SAYFA ALTI TANITIM AKIŞI ===================== */
         #lqStory { display: none; width: 100vw; margin-left: calc(50% - 50vw); margin-top: 40px;
             height: auto !important; scroll-snap-type: none !important; overflow-x: hidden; text-align: left; }
