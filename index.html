@@ -1255,7 +1255,7 @@
         /* Sonuç görseli tıklanabilir: orijinal belgeye davet */
         #lqStory #img-results { cursor: pointer; }
         #lqStory .lqs-openhint, #lqStory .lqs-hoverhint {
-            position: absolute; left: 62%; top: 34%; transform: translate(-50%, -50%);
+            position: absolute; left: 0; top: 0;
             z-index: 6; display: inline-flex; align-items: center; gap: 13px; padding: 9px 22px 9px 10px;
             border-radius: 999px; background: #ffffff; color: #0f172a; font-size: 13.5px; font-weight: 700;
             border: 1px solid rgba(8,37,103,.10); box-shadow: 0 20px 40px -16px rgba(2,6,23,.6);
@@ -1272,6 +1272,7 @@
         #lqStory .oh-ico-click { overflow: visible; }
         #lqStory .oh-arrow { width: 17px; height: 17px; color: var(--brand-claret); transition: transform .2s ease; }
         #lqStory .lqs-openhint:hover { background: #fffdfe; box-shadow: 0 24px 46px -16px rgba(2,6,23,.7); }
+        #lqStory .lqs-openhint, #lqStory .lqs-hoverhint { backface-visibility: hidden; }
         #lqStory .lqs-openhint:hover .oh-arrow { transform: translateX(4px); }
         #lqStory .lqs-openhint:active { box-shadow: 0 12px 26px -14px rgba(2,6,23,.7); }
         #lqStory #img-results.active ~ .lqs-openhint { opacity: 1; pointer-events: auto;
@@ -1296,8 +1297,8 @@
             95%, 100% { opacity: 0; transform: scale(1.3); }
         }
         @keyframes lqsBadgeIn {
-            from { opacity: 0; transform: translate(-50%, -50%) translateY(7px) scale(.97); }
-            to { opacity: 1; transform: translate(-50%, -50%) translateY(0) scale(1); }
+            from { opacity: 0; transform: translateY(7px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         @keyframes lqsOpenNudge {
             0%, 100% { box-shadow: 0 20px 40px -16px rgba(2,6,23,.6), 0 0 0 0 rgba(157,28,81,0); }
@@ -13180,11 +13181,33 @@ window.lqsOpenOriginal = function () {
     setTimeout(function () { if (window.lqsMountPopup) window.lqsMountPopup(); }, 30);
     var hint = document.getElementById('lqsHoverHint');
     if (hint) {
+        if (window.lqsPlaceBadges) { lqsPlaceBadges(); setTimeout(lqsPlaceBadges, 60); }
         hint.classList.add('show');
         clearTimeout(window.__lqsHoverT);
         window.__lqsHoverT = setTimeout(function () { hint.classList.remove('show'); }, 7000);
     }
 };
+// Rozetler tam piksele otursun: yüzdeli ortalama yazıyı bulanıklaştırıyor
+window.lqsPlaceBadges = function () {
+    var host = document.querySelector('#lqStory .screen-content');
+    if (!host) return;
+    var w = host.clientWidth, hgt = host.clientHeight;
+    ['.lqs-openhint', '.lqs-hoverhint'].forEach(function (sel) {
+        var el = document.querySelector('#lqStory ' + sel);
+        if (!el) return;
+        var L = Math.round(w * 0.62 - el.offsetWidth / 2);
+        var T = Math.round(hgt * 0.34 - el.offsetHeight / 2);
+        el.style.left = L + 'px';
+        el.style.top = T + 'px';
+        // ekrandaki gerçek konum yarım piksele düşerse yazı bulanır; düzelt
+        var r = el.getBoundingClientRect();
+        el.style.left = (L - (r.left - Math.round(r.left))) + 'px';
+        el.style.top = (T - (r.top - Math.round(r.top))) + 'px';
+    });
+};
+window.addEventListener('resize', function () { lqsPlaceBadges(); });
+window.addEventListener('load', function () { setTimeout(lqsPlaceBadges, 100); });
+document.addEventListener('DOMContentLoaded', function () { setTimeout(lqsPlaceBadges, 300); setTimeout(lqsPlaceBadges, 1200); });
 window.lqsMountPopup = function () {
     var wrap = document.getElementById('img-popup');
     var fr = document.getElementById('lqsPopupFrame');
