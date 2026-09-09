@@ -8640,7 +8640,9 @@
                 && !document.body.classList.contains('v3-page-open')
                 && document.body.getAttribute('data-view') !== 'results';
             var mode1 = document.getElementById('mode-1');
-            return onHome && mode1 && mode1.classList.contains('active') && inp && !inp.value;
+            // Klavye açıkken ipucu hiç çıkmaz: tek çubuğun altında iki katman olmasın
+            var kbdOpen = !!(document.querySelector('#osmKbd.open') || document.querySelector('#gridKbd.open'));
+            return onHome && !kbdOpen && mode1 && mode1.classList.contains('active') && inp && !inp.value;
         }
         function lqHintShow() {
             var hint = document.getElementById('bidiHint');
