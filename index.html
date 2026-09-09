@@ -1193,6 +1193,13 @@
         #lqStory .ic-vol-box.vol-multi { background: rgba(217,119,6,.16); border-color: rgba(146,64,14,.55); }
         #lqStory .vol-multi .ic-vol { color: #7c4a03 !important; font-weight: 800 !important; letter-spacing: .6px; }
         /* Çok ciltli sözlüklerde arkada ikinci bir cilt sezilir */
+        /* Kısa ekranlarda sahne küçülür, tarama alt chevronla çakışmaz */
+        #lqStory #sectionFlow .stage-container { transform-origin: center 44%; }
+        @media (max-height: 820px) { #lqStory #sectionFlow .stage-container { transform: scale(.92); } }
+        @media (max-height: 760px) { #lqStory #sectionFlow .stage-container { transform: scale(.85); } }
+        @media (max-height: 700px) { #lqStory #sectionFlow .stage-container { transform: scale(.78); } }
+        @media (max-height: 650px) { #lqStory #sectionFlow .stage-container { transform: scale(.72); } }
+
         /* Kitaplar bölüme ilk gelindiğinde dizilir */
         #lqStory #sectionLibrary .sahne { animation-play-state: paused; }
         #lqStory #sectionLibrary.books-in .sahne { animation-play-state: running; }
