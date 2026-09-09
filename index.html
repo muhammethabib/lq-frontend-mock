@@ -12872,6 +12872,12 @@ window.lqsTrimPopup = function (fr) {
                 });
             });
         }
+        // Künye satırı Osmanlıca görünsün, punto büyüsün
+        var bcMap = { 'manzar': 'منظر', 'nazar': 'نظر', 'kerîh': 'كريه', 'el-manzar': 'المنظر' };
+        doc.querySelectorAll('.breadcrumb .entry-link, .breadcrumb b').forEach(function (el) {
+            var key = (el.textContent || '').trim();
+            if (bcMap[key]) { el.dataset.lqsLat = key; el.textContent = bcMap[key]; }
+        });
         if (doc.getElementById('lqsTrim')) return;
         var st = doc.createElement('style');
         st.id = 'lqsTrim';
@@ -12881,6 +12887,9 @@ window.lqsTrimPopup = function (fr) {
             '.view-original .section-body { flex: 1 1 auto !important; min-height: 0 !important; display: flex !important; padding-bottom: 14px !important; }' +
             '.image-viewport, .image-wrapper { max-height: 100% !important; }' +
             '.lex-popup { height: 700px !important; }' +
+            '.breadcrumb .entry-link, .breadcrumb b { font-size: 26px !important; line-height: 1.35 !important; font-family: "Noto Naskh Arabic", serif !important; }' +
+            '.breadcrumb { gap: 12px !important; }' +
+            '.popup-header .header-top { align-items: center !important; }' +
             '.content-area::-webkit-scrollbar { width: 0 !important; height: 0 !important; }' +
             'html, body { overflow: hidden !important; }';
         doc.head.appendChild(st);
