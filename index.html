@@ -2665,13 +2665,15 @@
         .osm-kbd-hint-drag { flex:1; display:flex; align-items:center; justify-content:center; }
         .osm-kbd-hint > div { position:absolute; right:0; top:-2px; }
         .kbd-demo { display:inline-flex; align-items:center; gap:5px; margin-right:8px; pointer-events:none; }
-        .kbd-demo-key { display:inline-flex; align-items:center; justify-content:center; width:21px; height:21px; background:#fff; border:1px solid #cbd5e1; border-bottom-width:3px; border-radius:5px; font-family:'Inter',sans-serif; font-size:10px; font-weight:800; color:#334155; animation:kbdDemoPress 3.2s infinite; }
+        .kbd-demo-key { display:inline-flex; align-items:center; justify-content:center; width:21px; height:21px; background:#fff; border:1px solid #cbd5e1; border-bottom-width:3px; border-radius:5px; font-family:'Inter',sans-serif; font-size:10px; font-weight:800; color:#334155; animation:kbdDemoPress 2s infinite; }
         .kbd-demo-arrow { font-size:11px; color:#cbd5e1; }
-        .kbd-demo-out { font-family:'Noto Naskh Arabic',serif; font-size:16px; line-height:1; color:var(--tok-bordo); animation:kbdDemoPop 3.2s infinite; }
+        .kbd-demo-out { font-family:'Noto Naskh Arabic',serif; font-size:16px; line-height:1; color:var(--tok-bordo); animation:kbdDemoPop 2s infinite; }
         @keyframes kbdDemoPress { 0%, 100% { transform:none; border-bottom-width:3px; background:#fff; } 5% { transform:translateY(2px); border-bottom-width:1px; background:#fdf2f8; border-color:#9d1c51; color:#9d1c51; } 11% { transform:none; border-bottom-width:3px; background:#fff; } }
         @keyframes kbdDemoPop { 0%, 4%, 100% { opacity:.3; transform:none; } 8% { opacity:1; transform:scale(1.25); } 16% { opacity:.3; transform:none; } }
         .kbd-learned .kbd-demo-key, .kbd-learned .kbd-demo-out { animation:none; }
         .kbd-learned .kbd-demo-out { opacity:1; }
+        .kbd-learned .kbd-demo { opacity: 0; width: 0; margin-right: 0; overflow: hidden;
+            transition: opacity .3s ease, width .3s ease, margin .3s ease; }
         .kbd-hint-text b { font-weight:700; color:#475569; }
         .osm-key.kbd-echo, .dual-primary.kbd-echo, .dual-shift.kbd-echo, .dual-alt.kbd-echo { background:#9d1c51 !important; }
         .kbd-echo .ok-l, .kbd-echo .ok-a { color:#fff !important; }
@@ -7556,6 +7558,15 @@
         var hd = document.getElementById('osmKbdHintDrag');
         if (hd) hd.classList.add('kbd-learned'); // mesaj yerine ulaştı: demo animasyonu durur
     }
+    // Kullanıcı ister ekran klavyesini ister kendi klavyesini kullansın,
+    // ilk harften sonra K→ك rozeti işini bitirir ve çekilir.
+    document.addEventListener('pointerdown', function (e) {
+        var t = e.target;
+        if (!t || !t.closest) return;
+        if (!t.closest('#osmKbd .osm-kbd-row')) return;
+        var hd = document.getElementById('osmKbdHintDrag');
+        if (hd) hd.classList.add('kbd-learned');
+    }, true);
     input.addEventListener('keydown', function(e) {
         if (activeSide !== 'rtl' || currentSource !== 'osm') return;
         if (e.ctrlKey || e.metaKey) return;
