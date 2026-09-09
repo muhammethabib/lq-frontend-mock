@@ -1170,6 +1170,10 @@
         body.story-armed #lqStory { display: none !important; }
         body.story-armed.vs-home:not(.tool-focus) { height: 100vh; overflow: hidden; }
         html:has(body.story-armed.vs-home:not(.tool-focus)) { overflow: hidden; }
+        /* Akış modunda sayfa tek başına kalsın: üstteki sabit ögeler çekilir */
+        body.story-open #menuBtn,
+        body.story-open .legacy-link,
+        body.story-open #langSwitch { opacity: 0; pointer-events: none; transition: opacity .25s ease; }
         body.story-open { scrollbar-width: none; }
         body.story-open::-webkit-scrollbar { width: 0; height: 0; }
         #lqStory .snap-section { scroll-snap-align: none; height: 100vh; min-height: 620px; }
