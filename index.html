@@ -3288,7 +3288,7 @@
 <span class="placeholder-text" id="ph-left">Search using Latin letters...</span>
 <span class="placeholder-text placeholder-osm" id="ph-right">عثمانلی حرفلریلە آرە...</span>
 </div>
-<input class="main-input" id="mainInput" onblur="handleBlur(this)" oninput="handleInput(this)" type="text"/></a>
+<input class="main-input" id="mainInput" onblur="handleBlur(this)" oninput="handleInput(this)" type="text"/>
 <div class="bidi-hint" id="bidiHint" aria-hidden="true">
   <span class="bidi-hint-tip"></span>
   <span class="bidi-side">
@@ -7245,6 +7245,7 @@
     }
 
     function osmKbdShow() {
+            if (typeof lqHintHide === 'function') lqHintHide();
         var r = searchWrapper.getBoundingClientRect();
         var kbd = document.getElementById('osmKbd');
         // İmlecin gerçekte durduğu yer: kutu boşken (RTL, sağa yaslı metin) imleç
@@ -7608,6 +7609,7 @@
     }
 
     function gridKbdOpen(inputEl) {
+            if (typeof lqHintHide === 'function') lqHintHide();
         activeCharInput = inputEl || activeCharInput;
         if (!activeCharInput) return;
         gridKbd.classList.add('open');
