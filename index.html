@@ -2716,6 +2716,19 @@
 
         /* ==== WORD DECODER ENGINE (ported verbatim from MainPage) ==== */
         .engine-row { display: flex; align-items: flex-start; gap: 8px; width: 100%; justify-content: center; }
+        /* Kelime Çözücü: kendi klavyeni kullanabilirsin ipucu */
+        .engine-row { position: relative; }
+        .wd-hint { position: absolute; left: 50%; top: calc(100% + 16px); transform: translateX(-50%) translateY(-4px);
+            z-index: 40; display: none; align-items: center; gap: 9px; white-space: nowrap;
+            background: #1e293b; color: #fff; border-radius: 10px; padding: 9px 15px;
+            font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; line-height: 1;
+            box-shadow: 0 10px 26px rgba(15,23,42,.3); opacity: 0; pointer-events: none;
+            transition: opacity .18s ease, transform .18s ease; }
+        .wd-hint.show { display: flex; opacity: 1; transform: translateX(-50%) translateY(0); }
+        .wd-hint svg { width: 16px; height: 16px; opacity: .8; }
+        .wd-hint-tip { position: absolute; top: -5px; left: 50%; width: 10px; height: 10px; margin-left: -5px;
+            background: #1e293b; transform: rotate(45deg); border-radius: 2px; }
+
         .btn-ara { height: 52px; width: 88px; background: var(--tok-bordo); color: white; border: none; padding: 0; border-radius: 10px; font-size: 15px; font-weight: 700; letter-spacing: 0.3px; cursor: pointer; margin-left: 8px; transition: all 0.25s; box-shadow: 0 4px 6px rgba(131,24,67,0.15); }
         .search-mode.mode-engine .btn-ara { margin-top: 2px; flex-shrink: 0; }
         .btn-ara:hover { background: var(--tok-bordo-hover); box-shadow: 0 8px 15px rgba(131,24,67,0.25); transform: translateY(-2px); }
@@ -3312,6 +3325,11 @@
 </button>
 <div class="kayin-engine-core" id="engineCore">
             </div>
+<div class="wd-hint" id="wdHint" aria-hidden="true">
+  <span class="wd-hint-tip"></span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2.5"></rect><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M18 14h.01M9.5 14h5"></path></svg>
+  <span data-i18n="wdOwnKeyboard">You can type with your own keyboard too</span>
+</div>
 <button class="btn-ara" data-i18n="btnSearch">Search</button>
 </div>
 </div>
@@ -5030,6 +5048,7 @@
             swEngTooltip: "Redhouse'ta İngilizce tanımlar içinde ara",
             selectAll: 'Tümünü Seç',
             allDicts: 'Tüm Sözlükler',
+            wdOwnKeyboard: 'Kendi klavyenizle de yazabilirsiniz',
             hintLat: 'Latin harfleriyle',
             hintOsm: 'Osmanlı harfleriyle',
             hintMid: 'tek çubuk, iki yön',
@@ -8452,6 +8471,38 @@
                 inp.addEventListener('input', function () { if (this.value) lqHintHide(); });
             }
             window.addEventListener('resize', function () { if (document.getElementById('bidiHint').classList.contains('show')) lqHintPlace(); });
+        })();
+        // ===================== KELİME ÇÖZÜCÜ =====================
+        function wdHintShow() {
+            var el = document.getElementById('wdHint');
+            var kbdOpen = !!(document.querySelector('#gridKbd.open') || document.querySelector('#osmKbd.open'));
+            if (el && !kbdOpen) el.classList.add('show');
+        }
+        function wdHintHide() {
+            var el = document.getElementById('wdHint');
+            if (el) el.classList.remove('show');
+        }
+        window.lqRunDecoderSearch = function () {
+            if (typeof gridKbdHide === 'function') gridKbdHide();
+            wdHintHide();
+            if (typeof setViewState === 'function') setViewState('results');
+        };
+        (function () {
+            var row = document.querySelector('.search-mode.mode-engine .engine-row');
+            if (row) {
+                row.addEventListener('mouseenter', wdHintShow);
+                row.addEventListener('mouseleave', wdHintHide);
+            }
+            var btn = document.querySelector('.search-mode.mode-engine .btn-ara');
+            if (btn) btn.addEventListener('click', function () { lqRunDecoderSearch(); });
+            document.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+                var mode0 = document.getElementById('mode-0');
+                if (!mode0 || !mode0.classList.contains('active')) return;
+                if (!document.body.classList.contains('vs-home')) return;
+                e.preventDefault();
+                lqRunDecoderSearch();
+            });
         })();
         function lqSetActive(el) { document.querySelectorAll('.side-nav .side-link').forEach(a => a.classList.remove('active')); el.classList.add('active'); }
         // Ekip dışında bir görünüme geçilirse ekip sayfası kapanır
