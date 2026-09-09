@@ -2547,7 +2547,8 @@
         .gt-row::after { content: ''; position: absolute; top: 0; bottom: 0; right: -40px; width: 40px; background: transparent; z-index: 5; }
         .gt-osm { font-family: 'Noto Naskh Arabic', serif; font-size: 22px; font-weight: 700; line-height: 1.2; text-align: center; color: var(--text-white); }
         .gt-lat { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; text-align: center; letter-spacing: 0.3px; color: var(--text-white); }
-        .gt-divider { width: 85%; height: 1px; background: rgba(255,255,255,0.1); margin: 2px 0; }
+        .gt-divider-strong { height: 2px !important; background: rgba(255,255,255,0.28) !important; margin: 3px 6px !important; }
+            .gt-divider { width: 85%; height: 1px; background: rgba(255,255,255,0.1); margin: 2px 0; }
 
         /* OSM KLAVYE */
         .osm-kbd { display:none; position:fixed; z-index:99999; flex-direction:column; gap:8px;
@@ -10388,38 +10389,31 @@
         boxes.forEach(box => {
         box.addEventListener('mouseenter', (e) => {
             clearTimeout(hoverTimeout);
-            let osm = box.getAttribute('data-osm');
-            let lat = box.getAttribute('data-lat');
-            // Alttaki iki kutu tek bir ibare: hangisine gelinirse gelinsin ibarenin tamamı gösterilir
+            const osm = box.getAttribute('data-osm');
+            const lat = box.getAttribute('data-lat');
+            // Alttaki iki kutu tek bir ibarenin parçası: üstte kelime, altta ibarenin tamamı
+            let phraseOsm = '', phraseLat = '';
             if (box.dataset.pair) {
                 const group = document.querySelectorAll('[data-pair="' + box.dataset.pair + '"]');
-                osm = [...group].map(function (g) { return g.getAttribute('data-osm'); }).join(' ');
-                lat = [...group].map(function (g) { return g.getAttribute('data-lat'); }).join(' ');
+                phraseOsm = [...group].map(function (g) { return g.getAttribute('data-osm'); }).join(' ');
+                phraseLat = [...group].map(function (g) { return g.getAttribute('data-lat'); }).join(' ');
             }
+            const gtIcon = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+            const gtRow = function (text, cls, ro, rl) {
+                return '<div class="gt-row"><div class="gt-pill" onclick="console.log(\'Search: ' + text + '\')">' +
+                    '<span class="' + cls + '">' + text + '</span>' +
+                    '<div class="report-btn-wrapper"><div class="report-circle-btn" data-tooltip="Report Error" ' +
+                    'onclick="event.stopPropagation(); triggerReport(\'' + ro + '\', \'' + rl + '\')">' + gtIcon +
+                    '</div></div></div></div>';
+            };
             const isRelated = box.classList.contains('box-related');
-            tooltip.innerHTML = `
-                <div class="gt-row">
-                    <div class="gt-pill" onclick="console.log('Search: ${osm}')">
-                        <span class="gt-osm">${osm}</span>
-                        <div class="report-btn-wrapper">
-                            <div class="report-circle-btn" data-tooltip="Report Error" onclick="event.stopPropagation(); triggerReport('${osm}', '${lat}')">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="gt-divider"></div>
-                <div class="gt-row">
-                    <div class="gt-pill" onclick="console.log('Search: ${lat}')">
-                        <span class="gt-lat">${lat}</span>
-                        <div class="report-btn-wrapper">
-                            <div class="report-circle-btn" data-tooltip="Report Error" onclick="event.stopPropagation(); triggerReport('${osm}', '${lat}')">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                ${isRelated ? `` : ''}`;
+            tooltip.innerHTML = gtRow(osm, 'gt-osm', osm, lat)
+                + '<div class="gt-divider"></div>'
+                + gtRow(lat, 'gt-lat', osm, lat)
+                + (phraseOsm ? '<div class="gt-divider gt-divider-strong"></div>'
+                    + gtRow(phraseOsm, 'gt-osm', phraseOsm, phraseLat)
+                    + '<div class="gt-divider"></div>'
+                    + gtRow(phraseLat, 'gt-lat', phraseOsm, phraseLat) : '');
             const boxRect = box.getBoundingClientRect();
             let tooltipTop = boxRect.top < 120 ? boxRect.bottom + 10 : boxRect.top - 10;
             let transformOrigin = boxRect.top < 120 ? 'translate(-50%, 0)' : 'translate(-50%, -100%)';
@@ -12340,38 +12334,31 @@
         boxes.forEach(box => {
         box.addEventListener('mouseenter', (e) => {
             clearTimeout(hoverTimeout);
-            let osm = box.getAttribute('data-osm');
-            let lat = box.getAttribute('data-lat');
-            // Alttaki iki kutu tek bir ibare: hangisine gelinirse gelinsin ibarenin tamamı gösterilir
+            const osm = box.getAttribute('data-osm');
+            const lat = box.getAttribute('data-lat');
+            // Alttaki iki kutu tek bir ibarenin parçası: üstte kelime, altta ibarenin tamamı
+            let phraseOsm = '', phraseLat = '';
             if (box.dataset.pair) {
                 const group = document.querySelectorAll('[data-pair="' + box.dataset.pair + '"]');
-                osm = [...group].map(function (g) { return g.getAttribute('data-osm'); }).join(' ');
-                lat = [...group].map(function (g) { return g.getAttribute('data-lat'); }).join(' ');
+                phraseOsm = [...group].map(function (g) { return g.getAttribute('data-osm'); }).join(' ');
+                phraseLat = [...group].map(function (g) { return g.getAttribute('data-lat'); }).join(' ');
             }
+            const gtIcon = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+            const gtRow = function (text, cls, ro, rl) {
+                return '<div class="gt-row"><div class="gt-pill" onclick="console.log(\'Search: ' + text + '\')">' +
+                    '<span class="' + cls + '">' + text + '</span>' +
+                    '<div class="report-btn-wrapper"><div class="report-circle-btn" data-tooltip="Report Error" ' +
+                    'onclick="event.stopPropagation(); triggerReport(\'' + ro + '\', \'' + rl + '\')">' + gtIcon +
+                    '</div></div></div></div>';
+            };
             const isRelated = box.classList.contains('box-related');
-            tooltip.innerHTML = `
-                <div class="gt-row">
-                    <div class="gt-pill" onclick="console.log('Search: ${osm}')">
-                        <span class="gt-osm">${osm}</span>
-                        <div class="report-btn-wrapper">
-                            <div class="report-circle-btn" data-tooltip="Hata Bildir" onclick="event.stopPropagation(); triggerReport('${osm}', '${lat}')">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="gt-divider"></div>
-                <div class="gt-row">
-                    <div class="gt-pill" onclick="console.log('Search: ${lat}')">
-                        <span class="gt-lat">${lat}</span>
-                        <div class="report-btn-wrapper">
-                            <div class="report-circle-btn" data-tooltip="Hata Bildir" onclick="event.stopPropagation(); triggerReport('${osm}', '${lat}')">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                ${isRelated ? `` : ''}`;
+            tooltip.innerHTML = gtRow(osm, 'gt-osm', osm, lat)
+                + '<div class="gt-divider"></div>'
+                + gtRow(lat, 'gt-lat', osm, lat)
+                + (phraseOsm ? '<div class="gt-divider gt-divider-strong"></div>'
+                    + gtRow(phraseOsm, 'gt-osm', phraseOsm, phraseLat)
+                    + '<div class="gt-divider"></div>'
+                    + gtRow(phraseLat, 'gt-lat', phraseOsm, phraseLat) : '');
             const boxRect = box.getBoundingClientRect();
             let tooltipTop = boxRect.top < 120 ? boxRect.bottom + 10 : boxRect.top - 10;
             let transformOrigin = boxRect.top < 120 ? 'translate(-50%, 0)' : 'translate(-50%, -100%)';
