@@ -8681,7 +8681,12 @@
         (function () {
             var row = document.querySelector('.search-mode.mode-engine .engine-row');
             if (row) {
-                row.addEventListener('mouseenter', wdHintShow);
+                // ipucu yalnız harf kutularının üzerinde çıkar, satırın tamamında değil
+                row.addEventListener('mouseover', function (e) {
+                    var t = e.target;
+                    if (t && t.closest && t.closest('.box-wrapper')) wdHintShow();
+                    else wdHintHide();
+                });
                 row.addEventListener('mouseleave', wdHintHide);
             }
             var btn = document.querySelector('.search-mode.mode-engine .btn-ara');
