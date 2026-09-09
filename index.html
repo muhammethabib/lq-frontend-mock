@@ -1173,9 +1173,9 @@
         body.story-armed.vs-home:not(.tool-focus) { height: 100vh; overflow: hidden; }
         html:has(body.story-armed.vs-home:not(.tool-focus)) { overflow: hidden; }
         /* Akış modunda sayfa tek başına kalsın: üstteki sabit ögeler çekilir */
-        body.story-open #menuBtn,
-        body.story-open .legacy-link,
-        body.story-open #langSwitch { opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+        body.in-story-view #menuBtn,
+        body.in-story-view .legacy-link,
+        body.in-story-view #langSwitch { opacity: 0; pointer-events: none; transition: opacity .25s ease; }
         body.story-open { scrollbar-width: none; }
         body.story-open::-webkit-scrollbar { width: 0; height: 0; }
         #lqStory .snap-section { scroll-snap-align: none; height: 100vh; min-height: 620px; }
@@ -12967,6 +12967,19 @@ window.lqsTop = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 // ana sayfaya dönüşte veya yenilemede geri gelir.
 // Akış yalnızca davete tıklanınca açılır; tekerlek veya Page Down onu getirmez.
 // ---- Tam sayfa gezinme: serbest kaydırma yok, her hareket bir bölüm ----
+// Üstteki denetimler yalnız akış bölümlerindeyken çekilir; ana ekranda hep durur
+(function () {
+    function sync() {
+        var inStory = document.body.classList.contains('story-open')
+            && window.scrollY > window.innerHeight * 0.35;
+        document.body.classList.toggle('in-story-view', inStory);
+    }
+    window.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(sync, 300); });
+    window.addEventListener('load', sync);
+    window.lqsSyncChrome = sync;
+})();
 window.lqsStoryOpen = function () {
     var s = document.getElementById('lqStory');
     return !!s && getComputedStyle(s).display !== 'none';
@@ -13032,14 +13045,14 @@ window.lqsRevealStory = function () {
     var first = document.getElementById('sectionBuildLQ');
     if (first) setTimeout(function () { first.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 20);
 };
-window.lqsArmStory = function () { document.body.classList.add('story-armed'); document.body.classList.remove('story-open'); };
+window.lqsArmStory = function () { document.body.classList.add('story-armed'); document.body.classList.remove('story-open', 'in-story-view'); };
 document.addEventListener('DOMContentLoaded', function () { document.body.classList.add('story-armed'); });
 window.lqsHideStory = function () {
     if (document.body.classList.contains('tool-focus')) return;
     document.body.classList.add('tool-focus');
 };
 window.lqsShowStory = function () {
-    document.body.classList.remove('tool-focus', 'story-open');
+    document.body.classList.remove('tool-focus', 'story-open', 'in-story-view');
     document.body.classList.add('story-armed');
     if (typeof lqsFitStory === 'function') setTimeout(lqsFitStory, 0);
 };
