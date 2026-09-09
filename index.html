@@ -1273,7 +1273,14 @@
         #lqStory #img-results.active ~ .lqs-openhint { opacity: 1; pointer-events: auto;
             animation: lqsBadgeIn .45s ease-out both, lqsOpenNudge 2.8s ease-in-out 0.6s infinite; }
         #lqStory .lqs-hoverhint.show { opacity: 1; animation: lqsBadgeIn .45s ease-out both; }
-        #lqStory .lqs-hoverhint .oh-ico { animation: lqsCursorTap 2.2s ease-in-out infinite; }
+        #lqStory .lqs-hoverhint .oh-ico { overflow: visible; }
+        #lqStory .lqs-hoverhint .oh-ico svg { animation: lqsCursorRoam 3.4s ease-in-out infinite; }
+        @keyframes lqsCursorRoam {
+            0%, 100% { transform: translate(-6px, 3px); }
+            25% { transform: translate(0, -2px); }
+            50% { transform: translate(7px, 2px); }
+            75% { transform: translate(1px, -3px); }
+        }
         #lqStory .oh-ico-click { animation: lqsCursorTap 1.9s ease-in-out infinite; }
         @keyframes lqsBadgeIn {
             from { opacity: 0; transform: translate(-50%, -50%) translateY(7px) scale(.97); }
@@ -4216,11 +4223,11 @@
 <img alt="Arama Sonuçları" class="ui-image active" id="img-results" onclick="lqsOpenOriginal()" src="assets/story/sonuc_resmi.jpg"/>
 <div class="ui-image lqs-live" id="img-popup"><iframe id="lqsPopupFrame" title="LexiQamus popup" scrolling="no"></iframe></div>
 <div class="lqs-openhint" onclick="lqsOpenOriginal()">
-  <span class="oh-ico oh-ico-click"><svg viewBox="0 0 24 24"><path d="M7 3l11 7-4.7.9 2.5 5-2 1-2.5-5L7.8 15z" fill="currentColor"></path><path d="M4.2 4.4L2.6 2.8M9 2.1V0M2.4 9.6H0.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"></path></svg></span>
+  <span class="oh-ico oh-ico-click"><svg viewBox="0 0 24 24"><path d="M5.5 3.2v15.6l3.9-3.7 2.3 5.1 2.4-1.1-2.2-4.9h5.2z" fill="currentColor"></path><path d="M3.6 1.9L2.2 0.5M9.1 1.4l.5-1.6M1.9 6.9l-1.6.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"></path></svg></span>
   <span data-i18n="storyOpenOriginal">Open the original page</span>
 </div>
 <div class="lqs-hoverhint" id="lqsHoverHint">
-  <span class="oh-ico"><svg viewBox="0 0 24 24"><path d="M5 2l14 9-6 1.2 3.2 6.4-2.6 1.3-3.2-6.4L6 17z" fill="currentColor"></path></svg></span>
+  <span class="oh-ico"><svg viewBox="0 0 24 24"><path d="M5.5 3.2v15.6l3.9-3.7 2.3 5.1 2.4-1.1-2.2-4.9h5.2z" fill="currentColor"></path></svg></span>
   <span data-i18n="storyHoverWords">Hover a marked word</span>
 </div>
 </div>
