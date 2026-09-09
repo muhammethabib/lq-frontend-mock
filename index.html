@@ -1193,6 +1193,9 @@
         #lqStory .ic-vol-box.vol-multi { background: rgba(217,119,6,.16); border-color: rgba(146,64,14,.55); }
         #lqStory .vol-multi .ic-vol { color: #7c4a03 !important; font-weight: 800 !important; letter-spacing: .6px; }
         /* Çok ciltli sözlüklerde arkada ikinci bir cilt sezilir */
+        /* Sağda yer yoksa kapak sola doğru açılır */
+        #lqStory .sahne.flip-left:hover .kapak-grubu { transform-origin: left center; transform: rotateY(-125deg); }
+        #lqStory .sahne.flip-left:hover .kitap { transform: translateZ(150px) rotateY(-10deg) translateX(20px); }
         #lqStory .sahne.multi-vol { z-index: 2; }
         #lqStory .sahne.multi-vol:hover { z-index: 100; }
         #lqStory .sahne.multi-vol > .kitap { position: relative; z-index: 2; }
@@ -13085,6 +13088,24 @@ window.lqsTrimPopup = function (fr) {
     };
     document.addEventListener('DOMContentLoaded', function () { setTimeout(wrap, 300); });
     window.addEventListener('load', wrap);
+})();
+// Koleksiyondaki kapak, ekranın dışına taşacaksa öbür yöne açılır
+(function () {
+    function hook() {
+        var books = document.querySelectorAll('#lqStory .sahne');
+        if (!books.length) return;
+        books.forEach(function (bk) {
+            if (bk.dataset.flipHooked) return;
+            bk.dataset.flipHooked = '1';
+            bk.addEventListener('mouseenter', function () {
+                var r = bk.getBoundingClientRect();
+                var need = r.width * 1.25 + 24;   // açılan kapağın kapladığı yer
+                bk.classList.toggle('flip-left', r.right + need > window.innerWidth);
+            });
+        });
+    }
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(hook, 500); });
+    window.addEventListener('load', hook);
 })();
 window.lqsOpenOriginal = function () {
     if (typeof lqsSetLabMode === 'function') lqsSetLabMode(1);
