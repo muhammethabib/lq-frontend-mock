@@ -1167,6 +1167,7 @@
         body.vs-home #lqStory { display: block; }
         body.team-page-open #lqStory, body.v3-page-open #lqStory { display: none !important; }
         body.tool-focus #lqStory, body.tool-focus #lqDiscover { display: none !important; }
+        body.story-armed #lqStory { display: none !important; }
         #lqStory .snap-section { scroll-snap-align: none; height: 100vh; min-height: 620px; }
         #lqStory .page-nav-arrow { opacity: 1 !important; z-index: 600; }
         #lqStory .page-nav-arrow .arrow-shape { width: 16px; height: 16px; border-left-width: 3px; border-top-width: 3px; }
@@ -3686,7 +3687,7 @@
 </div>
 </div>
 
-<div class="scroll-indicator-wrapper" id="lqDiscover" onclick="lqsGo('sectionBuildLQ')" role="button" tabindex="0">
+<div class="scroll-indicator-wrapper" id="lqDiscover" onclick="lqsRevealStory()" role="button" tabindex="0">
   <div class="si-text" data-i18n="discoverStory">DISCOVER 2026 INNOVATIONS</div>
   <div class="si-arrow-container"><div class="si-chevron"></div><div class="si-chevron"></div><div class="si-chevron"></div></div>
 </div>
@@ -12639,21 +12640,36 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeEquival
 window.lqsTop = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
 // Kullanıcı arama araçlarına dokununca alttaki tanıtım akışı çekilir;
 // ana sayfaya dönüşte veya yenilemede geri gelir.
+// Akış yalnızca davete tıklanınca açılır; tekerlek veya Page Down onu getirmez.
+window.lqsRevealStory = function () {
+    document.body.classList.remove('story-armed');
+    if (typeof lqsFitStory === 'function') lqsFitStory();
+    var first = document.getElementById('sectionBuildLQ');
+    if (first) setTimeout(function () { first.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 20);
+};
+window.lqsArmStory = function () { document.body.classList.add('story-armed'); };
+document.addEventListener('DOMContentLoaded', function () { document.body.classList.add('story-armed'); });
 window.lqsHideStory = function () {
     if (document.body.classList.contains('tool-focus')) return;
     document.body.classList.add('tool-focus');
 };
 window.lqsShowStory = function () {
     document.body.classList.remove('tool-focus');
+    document.body.classList.add('story-armed');
     if (typeof lqsFitStory === 'function') setTimeout(lqsFitStory, 0);
 };
 (function () {
     var sel = '#searchWrapper, #mainInput, #engineCore, .filter-trigger, #dictTrigger, #dictMenu, .filter-panel';
-    ['pointerdown', 'focusin', 'keydown'].forEach(function (ev) {
+    ['pointerdown', 'keydown'].forEach(function (ev) {
         document.addEventListener(ev, function (e) {
             var t = e.target;
             if (!t || !t.closest) return;
-            if (ev === 'keydown' && !t.closest('#mainInput, #engineCore')) return;
+            if (ev === 'keydown') {
+                var nav = ['PageDown', 'PageUp', 'Home', 'End', 'Tab', 'Escape',
+                           'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+                if (nav.indexOf(e.key) !== -1) return;
+                if (!t.closest('#mainInput, #engineCore')) return;
+            }
             if (t.closest(sel)) lqsHideStory();
         }, true);
     });
@@ -12669,6 +12685,7 @@ window.lqGoHome = function () {
 document.addEventListener('keydown', function (e) {
     if (e.key !== 'PageDown' && e.key !== 'PageUp') return;
     if (!document.body.classList.contains('vs-home')) return;
+    if (document.body.classList.contains('story-armed')) return;
     var story = document.getElementById('lqStory');
     if (!story || getComputedStyle(story).display === 'none') return;
     var t = e.target;
@@ -12736,7 +12753,7 @@ document.addEventListener('DOMContentLoaded', function () { setTimeout(lqsFitSto
     var orig = window.setViewState;
     if (typeof orig === 'function') {
         window.setViewState = function (s) {
-            if (s === 'home' || s === 'fe-home') document.body.classList.remove('tool-focus');
+            if (s === 'home' || s === 'fe-home') { document.body.classList.remove('tool-focus'); document.body.classList.add('story-armed'); }
             var r = orig.apply(this, arguments); setTimeout(lqsFitStory, 0); return r;
         };
     }
