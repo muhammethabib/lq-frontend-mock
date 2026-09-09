@@ -1166,6 +1166,7 @@
             height: auto !important; scroll-snap-type: none !important; overflow-x: hidden; text-align: left; }
         body.vs-home #lqStory { display: block; }
         body.team-page-open #lqStory, body.v3-page-open #lqStory { display: none !important; }
+        body.tool-focus #lqStory, body.tool-focus #lqDiscover { display: none !important; }
         #lqStory .snap-section { scroll-snap-align: none; height: 100vh; min-height: 620px; }
         #lqStory .page-nav-arrow { opacity: 1 !important; z-index: 600; }
         #lqStory .page-nav-arrow .arrow-shape { width: 16px; height: 16px; border-left-width: 3px; border-top-width: 3px; }
@@ -12636,7 +12637,29 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeEquival
 
 <script>
 window.lqsTop = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+// Kullanıcı arama araçlarına dokununca alttaki tanıtım akışı çekilir;
+// ana sayfaya dönüşte veya yenilemede geri gelir.
+window.lqsHideStory = function () {
+    if (document.body.classList.contains('tool-focus')) return;
+    document.body.classList.add('tool-focus');
+};
+window.lqsShowStory = function () {
+    document.body.classList.remove('tool-focus');
+    if (typeof lqsFitStory === 'function') setTimeout(lqsFitStory, 0);
+};
+(function () {
+    var sel = '#searchWrapper, #mainInput, #engineCore, .filter-trigger, #dictTrigger, #dictMenu, .filter-panel';
+    ['pointerdown', 'focusin', 'keydown'].forEach(function (ev) {
+        document.addEventListener(ev, function (e) {
+            var t = e.target;
+            if (!t || !t.closest) return;
+            if (ev === 'keydown' && !t.closest('#mainInput, #engineCore')) return;
+            if (t.closest(sel)) lqsHideStory();
+        }, true);
+    });
+})();
 window.lqGoHome = function () {
+    lqsShowStory();
     if (typeof lqCloseMenu === 'function') lqCloseMenu();
     if (typeof lqCloseTeam === 'function') lqCloseTeam();
     if (typeof lqCloseV3 === 'function') lqCloseV3();
@@ -12712,7 +12735,10 @@ document.addEventListener('DOMContentLoaded', function () { setTimeout(lqsFitSto
 (function () {
     var orig = window.setViewState;
     if (typeof orig === 'function') {
-        window.setViewState = function () { var r = orig.apply(this, arguments); setTimeout(lqsFitStory, 0); return r; };
+        window.setViewState = function (s) {
+            if (s === 'home' || s === 'fe-home') document.body.classList.remove('tool-focus');
+            var r = orig.apply(this, arguments); setTimeout(lqsFitStory, 0); return r;
+        };
     }
 })();
 document.addEventListener('click', function (e) {
