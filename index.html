@@ -1150,17 +1150,14 @@
             background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
             -webkit-text-fill-color: transparent; color: transparent; animation: textShimmerFlow_lqs 3s linear infinite; }
         #lqDiscover .si-arrow-container { width: 30px; height: 14px; position: relative; overflow: visible; }
-        #lqDiscover .si-chevron { position: absolute; width: 23px; height: 6px; opacity: 0; transform: scale(0.3);
-            animation: lqDiscoverFlow 3s ease-out infinite; }
+        #lqDiscover .si-chevron { position: absolute; width: 23px; height: 13px; opacity: 0; transform: scale(0.3);
+            background: #082567; animation: lqDiscoverFlow 3s ease-out infinite;
+            clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 46%, 50% 100%, 0 46%); }
         @keyframes lqDiscoverFlow {
             0% { opacity: 0; transform: translateY(-8px) scale(0.75); }
             40% { opacity: 1; transform: translateY(0) scale(1); }
             100% { opacity: 0; transform: translateY(8px) scale(0.75); }
         }
-        #lqDiscover .si-chevron:before, #lqDiscover .si-chevron:after { content: ' '; position: absolute; top: 0;
-            height: 100%; width: 51%; background: #082567; }
-        #lqDiscover .si-chevron:before { left: 0; transform: skew(0deg, 30deg); }
-        #lqDiscover .si-chevron:after { right: 0; width: 51%; transform: skew(0deg, -30deg); }
         #lqDiscover .si-chevron:first-child { animation-delay: 0s; }
         #lqDiscover .si-chevron:nth-child(2) { animation-delay: 1.5s; }
 
