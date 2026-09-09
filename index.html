@@ -1191,7 +1191,15 @@
             border-radius: 5px; padding: 2px 6px !important; }
         #lqStory .vol-multi .bk-vol, #lqStory .vol-multi .ic-vol { color: #fde68a !important; font-weight: 900 !important;
             letter-spacing: .6px; }
-        #lqStory .vol-n { font-family: 'Inter', sans-serif; font-size: 1.3em; font-weight: 700;
+        /* Çok ciltli sözlüklerde arkada ikinci bir cilt sezilir */
+        #lqStory .sahne.multi-vol { z-index: 2; }
+        #lqStory .sahne.multi-vol > .kitap { position: relative; z-index: 2; }
+        #lqStory .sahne.multi-vol::before { content: ''; position: absolute; top: -8px; right: -8px;
+            width: 100%; height: 100%; border-radius: 3px 7px 7px 3px; z-index: 1;
+            box-shadow: 3px -2px 8px rgba(0,0,0,.28); }
+        #lqStory .sahne.mv-blue::before { background: linear-gradient(180deg, #24418f, #16306f); }
+        #lqStory .sahne.mv-green::before { background: linear-gradient(180deg, #1a6136, #0f4526); }
+        #lqStory .vol-n { font-family: 'Playfair Display', Georgia, serif; font-size: 1.45em; font-weight: 700;
             letter-spacing: 0; color: #fff; margin-right: 3px; }
         #lqStory .bd-7 { animation: bookCascade_lqs 0.8s 1.10s forwards; }
         #lqStory .bd-8 { animation: bookCascade_lqs 0.8s 1.25s forwards; }
@@ -3872,7 +3880,7 @@
 <div class="approved-stamp">✓</div>
 <div class="bk-title">Turkish &amp;<br/>English<br/>Lexicon</div>
 <div class="bk-auth">James W.<br/>Redhouse</div>
-<div class="bk-vol-box"><div class="bk-vol" data-i18n="storyVol9a">1 VOLUME</div></div>
+<div class="bk-vol-box"><div class="bk-vol" data-i18n="storyVol9a" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="bk-year">1890</div>
 </div>
 <div class="kapak-arka"></div>
@@ -3880,7 +3888,7 @@
 <div class="ic-sayfa">
 <div class="ic-title">Turkish &amp;<br/>English<br/>Lexicon</div>
 <div class="ic-auth">James W.<br/>Redhouse</div>
-<div class="ic-vol-box"><div class="ic-vol" data-i18n="storyVol9b">1 VOLUME</div></div>
+<div class="ic-vol-box"><div class="ic-vol" data-i18n="storyVol9b" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="ic-year">1890</div>
 </div>
 </div>
@@ -3907,7 +3915,7 @@
 </div>
 </div>
 </div>
-<div class="sahne kitap-2 bd-2">
+<div class="sahne multi-vol mv-blue kitap-2 bd-2">
 <div class="kitap">
 <div class="kapak-grubu">
 <div class="kapak-on bk-blue">
@@ -3928,7 +3936,7 @@
 </div>
 </div>
 </div>
-<div class="sahne kitap-3 bd-3">
+<div class="sahne multi-vol mv-green kitap-3 bd-3">
 <div class="kitap">
 <div class="kapak-grubu">
 <div class="kapak-on bk-green">
@@ -3993,7 +4001,7 @@
 </div>
 </div>
 </div>
-<div class="sahne kitap-6 bd-6">
+<div class="sahne multi-vol mv-green kitap-6 bd-6">
 <div class="kitap">
 <div class="kapak-grubu">
 <div class="kapak-on bk-green">
@@ -4022,7 +4030,7 @@
 <div class="approved-stamp">✓</div>
 <div class="bk-title">Kamus-ı<br/>Fransevî</div>
 <div class="bk-auth">Şemseddin Sami</div>
-<div class="bk-vol-box"><div class="bk-vol" data-i18n="storyVol7a">1 VOLUME</div></div>
+<div class="bk-vol-box"><div class="bk-vol" data-i18n="storyVol7a" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="bk-year">1883</div>
 </div>
 <div class="kapak-arka"></div>
@@ -4030,7 +4038,7 @@
 <div class="ic-sayfa">
 <div class="ic-title">Kamus-ı<br/>Fransevî</div>
 <div class="ic-auth">Şemseddin Sami</div>
-<div class="ic-vol-box"><div class="ic-vol" data-i18n="storyVol7b">1 VOLUME</div></div>
+<div class="ic-vol-box"><div class="ic-vol" data-i18n="storyVol7b" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="ic-year">1883</div>
 </div>
 </div>
@@ -4043,7 +4051,7 @@
 <div class="approved-stamp">✓</div>
 <div class="bk-title">Türkçeden<br/>Almancaya</div>
 <div class="bk-auth">Galancızade<br/>Hakkı Tevfik</div>
-<div class="bk-vol-box"><div class="bk-vol" data-i18n="storyVol8a">1 VOLUME</div></div>
+<div class="bk-vol-box"><div class="bk-vol" data-i18n="storyVol8a" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="bk-year">1907</div>
 </div>
 <div class="kapak-arka"></div>
@@ -4051,7 +4059,7 @@
 <div class="ic-sayfa">
 <div class="ic-title">Türkçeden<br/>Almancaya</div>
 <div class="ic-auth">Galancızade<br/>Hakkı Tevfik</div>
-<div class="ic-vol-box"><div class="ic-vol" data-i18n="storyVol8b">1 VOLUME</div></div>
+<div class="ic-vol-box"><div class="ic-vol" data-i18n="storyVol8b" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="ic-year">1907</div>
 </div>
 </div>
@@ -5020,12 +5028,12 @@
             story15: '2026 boyunca yeni sözlükler<br/>eklenmeye devam edecek…',
             story16: 'SADECE LQ\'DA',
             storyFullText: 'TAM METİN · SADECE LQ\'DA',
-            storyVol7a: '1 CİLT',
-            storyVol7b: '1 CİLT',
-            storyVol8a: '1 CİLT',
-            storyVol8b: '1 CİLT',
-            storyVol9a: '1 CİLT',
-            storyVol9b: '1 CİLT',
+            storyVol7a: '<b class="vol-n">1</b> CİLT',
+            storyVol7b: '<b class="vol-n">1</b> CİLT',
+            storyVol8a: '<b class="vol-n">1</b> CİLT',
+            storyVol8b: '<b class="vol-n">1</b> CİLT',
+            storyVol9a: '<b class="vol-n">1</b> CİLT',
+            storyVol9b: '<b class="vol-n">1</b> CİLT',
             story17: '<b class="vol-n">1</b> CİLT',
             story18: '<b class="vol-n">1</b> CİLT',
             story19: '<b class="vol-n">2</b> CİLT',
