@@ -5454,7 +5454,8 @@
                     phRight.classList.add('hidden-ph');
                     phLeft.classList.remove('hidden-ph');
                 } else {
-                    phLeft.classList.remove('hidden-ph');
+                    // Latin tarafına tıklandı: o taraftaki metin gizli, Osmanlıca durur
+                    phLeft.classList.add('hidden-ph');
                     phRight.classList.remove('hidden-ph');
                 }
             }
@@ -5478,8 +5479,12 @@
                     // OSM tarafında yazarken silip boşaltınca: Latin döner, OSM gizli kalır (imleç orada)
                     phLeft.classList.remove('hidden-ph');
                     phRight.classList.add('hidden-ph');
+                } else if (activeSide === 'ltr') {
+                    // Latin tarafında yazarken silip boşaltınca: Osmanlıca döner, Latin gizli kalır
+                    phLeft.classList.add('hidden-ph');
+                    phRight.classList.remove('hidden-ph');
                 } else {
-                    // Latin tarafı / başlangıç: ikisi de görünür
+                    // Başlangıç: ikisi de görünür
                     phLeft.classList.remove('hidden-ph');
                     phRight.classList.remove('hidden-ph');
                 }
