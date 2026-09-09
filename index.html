@@ -1173,8 +1173,8 @@
         body.team-page-open #lqStory, body.v3-page-open #lqStory { display: none !important; }
         body.tool-focus #lqStory, body.tool-focus #lqDiscover { display: none !important; }
         body.story-armed #lqStory { display: none !important; }
-        body.story-armed.vs-home:not(.tool-focus) { height: 100vh; overflow: hidden; }
-        html:has(body.story-armed.vs-home:not(.tool-focus)) { overflow: hidden; }
+        body.lqs-fit { height: 100vh; overflow: hidden; }
+        html:has(body.lqs-fit) { overflow: hidden; }
         /* Akış modunda sayfa tek başına kalsın: üstteki sabit ögeler çekilir */
         body.in-story-view #menuBtn,
         body.in-story-view .legacy-link,
@@ -13060,7 +13060,7 @@ window.lqsStep = function (dir) {
     });
 })();
 window.lqsRevealStory = function () {
-    document.body.classList.remove('story-armed');
+    document.body.classList.remove('story-armed', 'lqs-fit');
     document.body.classList.add('story-open');
     if (typeof lqsFitStory === 'function') lqsFitStory();
     var first = document.getElementById('sectionBuildLQ');
@@ -13068,6 +13068,28 @@ window.lqsRevealStory = function () {
 };
 window.lqsArmStory = function () { document.body.classList.add('story-armed'); document.body.classList.remove('story-open', 'in-story-view'); };
 document.addEventListener('DOMContentLoaded', function () { document.body.classList.add('story-armed'); });
+// Ana ekran içeriği sığıyorsa kaydırma çubuğu hiç çıkmasın;
+// klavye gibi bir şey aşağı taşarsa kilit kendiliğinden açılır.
+window.lqsFitLock = function () {
+    var b = document.body;
+    if (!b.classList.contains('story-armed') || !b.classList.contains('vs-home')) {
+        b.classList.remove('lqs-fit');
+        return;
+    }
+    b.classList.remove('lqs-fit');
+    var excess = document.documentElement.scrollHeight - window.innerHeight;
+    if (excess <= 30) b.classList.add('lqs-fit');
+};
+(function () {
+    var t;
+    function later() { clearTimeout(t); t = setTimeout(window.lqsFitLock, 80); }
+    ['pointerdown', 'keydown', 'transitionend', 'focusin'].forEach(function (ev) {
+        document.addEventListener(ev, later, true);
+    });
+    window.addEventListener('resize', later);
+    window.addEventListener('load', later);
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(window.lqsFitLock, 300); });
+})();
 window.lqsHideStory = function () {
     if (document.body.classList.contains('tool-focus')) return;
     document.body.classList.add('tool-focus');
@@ -13075,6 +13097,7 @@ window.lqsHideStory = function () {
 window.lqsShowStory = function () {
     document.body.classList.remove('tool-focus', 'story-open', 'in-story-view');
     document.body.classList.add('story-armed');
+    setTimeout(window.lqsFitLock, 60);
     if (typeof lqsFitStory === 'function') setTimeout(lqsFitStory, 0);
 };
 (function () {
