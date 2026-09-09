@@ -1193,6 +1193,10 @@
         #lqStory .ic-vol-box.vol-multi { background: rgba(217,119,6,.16); border-color: rgba(146,64,14,.55); }
         #lqStory .vol-multi .ic-vol { color: #7c4a03 !important; font-weight: 800 !important; letter-spacing: .6px; }
         /* Çok ciltli sözlüklerde arkada ikinci bir cilt sezilir */
+        /* Kitaplar bölüme ilk gelindiğinde dizilir */
+        #lqStory #sectionLibrary .sahne { animation-play-state: paused; }
+        #lqStory #sectionLibrary.books-in .sahne { animation-play-state: running; }
+
         /* Kenara yakın kitap aynı yöne açılır, yalnızca içeri kayar */
         #lqStory .sahne:hover .kitap { transform: translateZ(150px) rotateY(10deg)
             translateX(calc(-20px - var(--lqs-push, 0px))); }
@@ -13118,6 +13122,23 @@ window.lqsTrimPopup = function (fr) {
     }
     document.addEventListener('DOMContentLoaded', function () { setTimeout(hook, 500); });
     window.addEventListener('load', hook);
+})();
+// Koleksiyon animasyonu yalnız bölüme ilk gelişte oynar
+(function () {
+    function watch() {
+        var sec = document.getElementById('sectionLibrary');
+        if (!sec || sec.dataset.libWatched) return;
+        sec.dataset.libWatched = '1';
+        if (!('IntersectionObserver' in window)) { sec.classList.add('books-in'); return; }
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (e.isIntersecting) { sec.classList.add('books-in'); io.disconnect(); }
+            });
+        }, { threshold: 0.35 });
+        io.observe(sec);
+    }
+    document.addEventListener('DOMContentLoaded', function () { setTimeout(watch, 400); });
+    window.addEventListener('load', watch);
 })();
 window.lqsOpenOriginal = function () {
     if (typeof lqsSetLabMode === 'function') lqsSetLabMode(1);
