@@ -2873,20 +2873,11 @@
 <body class="p-4 md:p-8">
 <div class="dev-state-bar" id="devStateBar">
     <button class="dev-state-btn" data-state="home" onclick="setViewState('home')">Home</button>
+    <button class="dev-state-btn" data-state="fe-home" onclick="setViewState('fe-home')">Home &ndash; New Visitor</button>
     <button class="dev-state-btn" data-state="noresults" onclick="setViewState('noresults')">No Results</button>
     <button class="dev-state-btn active" data-state="results" onclick="setViewState('results')">Results</button>
     <button class="dev-state-btn" data-state="popup" onclick="setViewState('popup')">Popup</button>
     <button class="dev-state-btn" data-state="redhouse" onclick="setViewState('redhouse')">Redhouse</button>
-    <div class="dev-state-item" id="devFirstEntryItem">
-        <button class="dev-state-btn dev-state-parent" data-state="fe-home" onclick="setViewState('fe-home')">New Visitor <span class="dsp-arrow">&#9656;</span></button>
-        <div class="dev-submenu">
-            <button class="dev-state-btn" data-state="fe-home" onclick="setViewState('fe-home')">Home</button>
-            <button class="dev-state-btn" data-state="fe-noresults" onclick="setViewState('fe-noresults')">No Results</button>
-            <button class="dev-state-btn" data-state="fe-results" onclick="setViewState('fe-results')">Results</button>
-            <button class="dev-state-btn" data-state="fe-popup" onclick="setViewState('fe-popup')">Popup</button>
-            <button class="dev-state-btn" data-state="fe-redhouse" onclick="setViewState('fe-redhouse')">Redhouse</button>
-        </div>
-    </div>
 </div>
 
 <div id="embedSurface" style="display:none;">
