@@ -902,7 +902,7 @@
         .noise-overlay{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
 #lqStory .heritage-section{ width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; background: #f8fafc; overflow: hidden; }
 #lqStory .heritage-real-bg{ position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 0; pointer-events: none; background-image: url('assets/story/kapak4.jpg'); background-size: cover; background-position: center bottom; opacity: 0.08; filter: grayscale(100%) sepia(20%); transition: transform 0.1s ease-out; }
-#lqStory .heritage-container{ width: 100%; max-width: 1360px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding: 40px; box-sizing: border-box; position: relative; z-index: 10; gap: 60px; }
+#lqStory .heritage-container{ width: 100%; max-width: 1500px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding: 40px; box-sizing: border-box; position: relative; z-index: 10; gap: 60px; }
 #lqStory .left-panel{ flex: 0 0 35%; display: flex; flex-direction: column; align-items: flex-start; gap: 50px; margin-top: -40px; }
 #lqStory .lq-gradient-title-sm{ font-family: 'Playfair Display', serif; font-size: 3.8rem; line-height: 1.1; font-weight: 800; margin: 0; background: linear-gradient(135deg, var(--sapphire) 0%, var(--lq-bordo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1)); }
 #lqStory .hi-text-block{ font-size: 1.05rem; line-height: 1.7; color: var(--text-body); text-shadow: 0 1px 1px rgba(255,255,255,0.8); }
@@ -936,7 +936,7 @@
 @keyframes stackSequence1_lqs{ 0% { opacity: 0; transform: translate(15px, -15px) rotate(10deg); } 15%, 85% { opacity: 1; transform: translate(0, 0) rotate(0deg); } 100% { opacity: 0; } }
 @keyframes stackSequence2_lqs{ 0%, 25% { opacity: 0; transform: translate(15px, -15px) rotate(10deg); } 40%, 85% { opacity: 1; transform: translate(0, 0) rotate(0deg); } 100% { opacity: 0; } }
 @keyframes stackSequence3_lqs{ 0%, 50% { opacity: 0; transform: translate(15px, -15px) rotate(10deg); } 65%, 85% { opacity: 1; transform: translate(0, 0) rotate(0deg); } 100% { opacity: 0; } }
-#lqStory .right-panel{ flex: 0 0 66%; display: flex; justify-content: center; align-items: center; }
+#lqStory .right-panel{ flex: 0 0 70%; display: flex; justify-content: center; align-items: center; }
 #lqStory .library-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; perspective: 2000px; }
 #lqStory .sahne{ width: 160px; height: 230px; position: relative; cursor: pointer; opacity: 0; perspective: 1500px; z-index: 1; transition: z-index 0.3s; }
 #lqStory .sahne:hover{ z-index: 100; }
@@ -977,7 +977,7 @@
 #lqStory .ic-year{ position: absolute; bottom: 15px; font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: #444; }
 #lqStory .book-deco-border{ position: absolute; top: 12px; bottom: 12px; left: 12px; right: 20px; border: 2px solid rgba(251, 191, 36, 0.3); border-radius: 8px 2px 2px 8px; z-index: 5; }
 #lqStory .approved-stamp{ position: absolute; top: 15px; left: 10px; width: 18px; height: 18px; background: #22c55e; color: #052e16; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; z-index: 12; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
-#lqStory .exclusive-badge{ position: absolute; top: -12px; left: 15px; background: #fef3c7; color: #92400e; font-size: 9px; font-weight: 900; padding: 5px 12px; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.25); z-index: 20; border: 1.5px solid #d97706; }
+#lqStory .exclusive-badge{ position: absolute; top: -13px; left: 50%; transform: translateX(-50%); white-space: nowrap; background: #fef3c7; color: #92400e; font-size: 9px; font-weight: 900; padding: 5px 12px; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.25); z-index: 20; border: 1.5px solid #d97706; }
 #lqStory .sahne:hover .exclusive-badge{ display: none; }
 #lqStory /* =========================================
            SECTION 4: THE FLOW (UC143)
@@ -1182,17 +1182,18 @@
         /* Koleksiyon: altta beş, üstte dört; üst sıra aralara oturur */
         #lqStory .library-grid { display: flex; flex-direction: column; align-items: center; gap: 16px;
             transform: scale(.92); transform-origin: center center; }
-        @media (max-width: 1560px) { #lqStory .library-grid { transform: scale(.84); } }
-        @media (max-width: 1400px) { #lqStory .library-grid { transform: scale(.76); } }
-        @media (max-width: 1280px) { #lqStory .library-grid { transform: scale(.68); } }
-        @media (max-width: 1200px) { #lqStory .library-grid { transform: scale(.60); } }
+        @media (max-width: 1560px) { #lqStory .library-grid { transform: scale(.86); } }
+        @media (max-width: 1400px) { #lqStory .library-grid { transform: scale(.82); } }
+        @media (max-width: 1280px) { #lqStory .library-grid { transform: scale(.72); } }
+        @media (max-width: 1200px) { #lqStory .library-grid { transform: scale(.62); } }
         #lqStory .lib-row { display: flex; gap: 14px; }
 
         #lqStory .vol-multi { background: rgba(217,119,6,.18); border: 1px solid rgba(217,119,6,.85);
             border-radius: 5px; padding: 2px 6px !important; }
         #lqStory .vol-multi .bk-vol, #lqStory .vol-multi .ic-vol { color: #fde68a !important; font-weight: 900 !important;
             letter-spacing: .6px; }
-        #lqStory .vol-n { font-size: 1.45em; font-weight: 900; color: #fff; margin-right: 2px; }
+        #lqStory .vol-n { font-family: 'Inter', sans-serif; font-size: 1.3em; font-weight: 700;
+            letter-spacing: 0; color: #fff; margin-right: 3px; }
         #lqStory .bd-7 { animation: bookCascade_lqs 0.8s 1.10s forwards; }
         #lqStory .bd-8 { animation: bookCascade_lqs 0.8s 1.25s forwards; }
         #lqStory .bd-9 { animation: bookCascade_lqs 0.8s 0.12s forwards; }
@@ -1203,10 +1204,11 @@
         #lqStory .kitap-9 .bk-title, #lqStory .kitap-9 .ic-title { font-size: 15px !important; line-height: 1.2 !important; }
         #lqStory .kitap-9 .kapak-arka { background: #7f1d1d; }
         #lqStory .kitap-9 .kapak-arka::after { background-image: url('assets/story/battal6.jpg'); }
-        #lqStory .fulltext-badge { position: absolute; bottom: -11px; left: 50%; transform: translateX(-50%);
-            background: #0f766e; color: #ecfdf5; font-size: 8.5px; font-weight: 900; letter-spacing: .3px;
-            padding: 5px 10px; border-radius: 6px; white-space: nowrap; z-index: 20;
-            border: 1.5px solid #0d9488; box-shadow: 0 4px 10px rgba(0,0,0,.25); }
+        #lqStory .sahne { overflow: visible; }
+        #lqStory .fulltext-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+            background: #fef3c7; color: #92400e; font-size: 8px; font-weight: 900; letter-spacing: .2px;
+            padding: 5px 9px; border-radius: 6px; white-space: nowrap; z-index: 20;
+            border: 1.5px solid #d97706; box-shadow: 0 4px 10px rgba(0,0,0,.25); }
         #lqStory .page-nav-arrow { opacity: 1 !important; z-index: 600; }
         #lqStory .page-nav-arrow .arrow-shape { width: 16px; height: 16px; border-left-width: 3px; border-top-width: 3px; }
         #lqStory .pna-top .arrow-shape { opacity: .75; border-color: #94a3b8; }
@@ -3863,10 +3865,10 @@
 <div class="library-grid">
 <div class="lib-row lib-row-top">
 <div class="sahne kitap-9 bd-9">
+<div class="fulltext-badge" data-i18n="storyFullText">FULL TEXT · ONLY ON LQ</div>
 <div class="kitap">
 <div class="kapak-grubu">
 <div class="kapak-on bk-red">
-<div class="fulltext-badge" data-i18n="storyFullText">FULL TEXT · ONLY ON LQ</div>
 <div class="book-deco-border"></div>
 <div class="approved-stamp">✓</div>
 <div class="bk-title">Turkish &amp;<br/>English<br/>Lexicon</div>
@@ -3885,15 +3887,15 @@
 </div>
 </div>
 <div class="sahne kitap-1 bd-1">
+<div class="exclusive-badge" data-i18n="story16">ONLY ON LQ</div>
 <div class="kitap">
 <div class="kapak-grubu">
 <div class="kapak-on bk-red">
-<div class="exclusive-badge" data-i18n="story16">ONLY ON LQ</div>
 <div class="book-deco-border"></div>
 <div class="approved-stamp">✓</div>
 <div class="bk-title">Ahterî-i<br/>Kebîr</div>
 <div class="bk-auth">Muslihiddin<br/>Mustafa</div>
-<div class="bk-vol-box"><div class="bk-vol" data-i18n="story17">1 VOLUME</div></div>
+<div class="bk-vol-box"><div class="bk-vol" data-i18n="story17" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="bk-year">1892</div>
 </div>
 <div class="kapak-arka"></div>
@@ -3901,7 +3903,7 @@
 <div class="ic-sayfa">
 <div class="ic-title">Ahterî-i<br/>Kebîr</div>
 <div class="ic-auth">Muslihiddin<br/>Mustafa</div>
-<div class="ic-vol-box"><div class="ic-vol" data-i18n="story18">1 VOLUME</div></div>
+<div class="ic-vol-box"><div class="ic-vol" data-i18n="story18" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="ic-year">1892</div>
 </div>
 </div>
@@ -3958,7 +3960,7 @@
 <div class="approved-stamp">✓</div>
 <div class="bk-title">Lûgat-ı<br/>Naci</div>
 <div class="bk-auth">Muallim Naci</div>
-<div class="bk-vol-box"><div class="bk-vol" data-i18n="story23">1 VOLUME</div></div>
+<div class="bk-vol-box"><div class="bk-vol" data-i18n="story23" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="bk-year">1891</div>
 </div>
 <div class="kapak-arka"></div>
@@ -3966,7 +3968,7 @@
 <div class="ic-sayfa">
 <div class="ic-title">Lûgat-ı<br/>Naci</div>
 <div class="ic-auth">Muallim Naci</div>
-<div class="ic-vol-box"><div class="ic-vol" data-i18n="story24">1 VOLUME</div></div>
+<div class="ic-vol-box"><div class="ic-vol" data-i18n="story24" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="ic-year">1891</div>
 </div>
 </div>
@@ -3979,7 +3981,7 @@
 <div class="approved-stamp">✓</div>
 <div class="bk-title">Lûgat-ı<br/>Ebuzziya</div>
 <div class="bk-auth">Ebuzziya Tevfik</div>
-<div class="bk-vol-box"><div class="bk-vol" data-i18n="story25">1 VOLUME</div></div>
+<div class="bk-vol-box"><div class="bk-vol" data-i18n="story25" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="bk-year">1888</div>
 </div>
 <div class="kapak-arka"></div>
@@ -3987,7 +3989,7 @@
 <div class="ic-sayfa">
 <div class="ic-title">Lûgat-ı<br/>Ebuzziya</div>
 <div class="ic-auth">Ebuzziya Tevfik</div>
-<div class="ic-vol-box"><div class="ic-vol" data-i18n="story26">1 VOLUME</div></div>
+<div class="ic-vol-box"><div class="ic-vol" data-i18n="story26" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="ic-year">1888</div>
 </div>
 </div>
@@ -5025,16 +5027,16 @@
             storyVol8b: '1 CİLT',
             storyVol9a: '1 CİLT',
             storyVol9b: '1 CİLT',
-            story17: '1 CİLT',
-            story18: '1 CİLT',
+            story17: '<b class="vol-n">1</b> CİLT',
+            story18: '<b class="vol-n">1</b> CİLT',
             story19: '<b class="vol-n">2</b> CİLT',
             story20: '<b class="vol-n">2</b> CİLT',
             story21: '<b class="vol-n">2</b> CİLT',
             story22: '<b class="vol-n">2</b> CİLT',
-            story23: '1 CİLT',
-            story24: '1 CİLT',
-            story25: '1 CİLT',
-            story26: '1 CİLT',
+            story23: '<b class="vol-n">1</b> CİLT',
+            story24: '<b class="vol-n">1</b> CİLT',
+            story25: '<b class="vol-n">1</b> CİLT',
+            story26: '<b class="vol-n">1</b> CİLT',
             story27: '<b class="vol-n">6</b> CİLT',
             story28: '<b class="vol-n">6</b> CİLT',
             story29: 'Sözlükçülük Yeniden Tanımlanıyor',
