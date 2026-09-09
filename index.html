@@ -10377,6 +10377,13 @@
 
     // --- BOX & TOOLTIP ---
     const tooltip = document.getElementById('ghostTooltip');
+    let phraseTip = document.getElementById('phraseTooltip');
+    if (!phraseTip) {
+        phraseTip = document.createElement('div');
+        phraseTip.id = 'phraseTooltip';
+        phraseTip.className = 'ghost-tooltip';
+        document.body.appendChild(phraseTip);
+    }
     const boxes = document.querySelectorAll('.box');
     let hoverTimeout;
 
@@ -10409,11 +10416,7 @@
             const isRelated = box.classList.contains('box-related');
             tooltip.innerHTML = gtRow(osm, 'gt-osm', osm, lat)
                 + '<div class="gt-divider"></div>'
-                + gtRow(lat, 'gt-lat', osm, lat)
-                + (phraseOsm ? '<div class="gt-divider gt-divider-strong"></div>'
-                    + gtRow(phraseOsm, 'gt-osm', phraseOsm, phraseLat)
-                    + '<div class="gt-divider"></div>'
-                    + gtRow(phraseLat, 'gt-lat', phraseOsm, phraseLat) : '');
+                + gtRow(lat, 'gt-lat', osm, lat);
             const boxRect = box.getBoundingClientRect();
             let tooltipTop = boxRect.top < 120 ? boxRect.bottom + 10 : boxRect.top - 10;
             let transformOrigin = boxRect.top < 120 ? 'translate(-50%, 0)' : 'translate(-50%, -100%)';
@@ -10422,6 +10425,19 @@
             tooltip.style.top = `${tooltipTop}px`;
             tooltip.style.transform = transformOrigin;
             tooltip.classList.add('active');
+
+            // İbarenin parçasıysa: kelime kartı üstte, ibare kartı kutunun altında
+            if (phraseOsm) {
+                phraseTip.innerHTML = gtRow(phraseOsm, 'gt-osm', phraseOsm, phraseLat)
+                    + '<div class="gt-divider"></div>'
+                    + gtRow(phraseLat, 'gt-lat', phraseOsm, phraseLat);
+                phraseTip.style.left = `${tooltipLeft}px`;
+                phraseTip.style.top = `${boxRect.bottom + 10}px`;
+                phraseTip.style.transform = 'translate(-50%, 0)';
+                phraseTip.classList.add('active');
+            } else {
+                phraseTip.classList.remove('active');
+            }
 
             // Related ise goto tooltip'i de göster (altında)
             if (isRelated) {
@@ -10432,9 +10448,10 @@
         });
         box.addEventListener('mouseleave', (e) => {
             hoverTimeout = setTimeout(() => {
-                if (!tooltip.matches(':hover') && !gotoTooltip.matches(':hover')) {
+                if (!tooltip.matches(':hover') && !gotoTooltip.matches(':hover') && !phraseTip.matches(':hover')) {
                     tooltip.classList.remove('active');
                     gotoTooltip.classList.remove('active');
+                    phraseTip.classList.remove('active');
                 }
             }, 300);
         });
@@ -10444,6 +10461,13 @@
     tooltip.addEventListener('mouseleave', () => hoverTimeout = setTimeout(() => {
         tooltip.classList.remove('active');
         gotoTooltip.classList.remove('active');
+        phraseTip.classList.remove('active');
+    }, 300));
+    phraseTip.addEventListener('mouseenter', () => clearTimeout(hoverTimeout));
+    phraseTip.addEventListener('mouseleave', () => hoverTimeout = setTimeout(() => {
+        tooltip.classList.remove('active');
+        gotoTooltip.classList.remove('active');
+        phraseTip.classList.remove('active');
     }, 300));
     gotoTooltip.addEventListener('mouseenter', () => clearTimeout(hoverTimeout));
     gotoTooltip.addEventListener('mouseleave', () => hoverTimeout = setTimeout(() => {
@@ -12322,6 +12346,13 @@
 
     // --- BOX & TOOLTIP ---
     const tooltip = document.getElementById('ghostTooltip');
+    let phraseTip = document.getElementById('phraseTooltip');
+    if (!phraseTip) {
+        phraseTip = document.createElement('div');
+        phraseTip.id = 'phraseTooltip';
+        phraseTip.className = 'ghost-tooltip';
+        document.body.appendChild(phraseTip);
+    }
     const boxes = document.querySelectorAll('.box');
     let hoverTimeout;
 
@@ -12354,11 +12385,7 @@
             const isRelated = box.classList.contains('box-related');
             tooltip.innerHTML = gtRow(osm, 'gt-osm', osm, lat)
                 + '<div class="gt-divider"></div>'
-                + gtRow(lat, 'gt-lat', osm, lat)
-                + (phraseOsm ? '<div class="gt-divider gt-divider-strong"></div>'
-                    + gtRow(phraseOsm, 'gt-osm', phraseOsm, phraseLat)
-                    + '<div class="gt-divider"></div>'
-                    + gtRow(phraseLat, 'gt-lat', phraseOsm, phraseLat) : '');
+                + gtRow(lat, 'gt-lat', osm, lat);
             const boxRect = box.getBoundingClientRect();
             let tooltipTop = boxRect.top < 120 ? boxRect.bottom + 10 : boxRect.top - 10;
             let transformOrigin = boxRect.top < 120 ? 'translate(-50%, 0)' : 'translate(-50%, -100%)';
@@ -12367,6 +12394,19 @@
             tooltip.style.top = `${tooltipTop}px`;
             tooltip.style.transform = transformOrigin;
             tooltip.classList.add('active');
+
+            // İbarenin parçasıysa: kelime kartı üstte, ibare kartı kutunun altında
+            if (phraseOsm) {
+                phraseTip.innerHTML = gtRow(phraseOsm, 'gt-osm', phraseOsm, phraseLat)
+                    + '<div class="gt-divider"></div>'
+                    + gtRow(phraseLat, 'gt-lat', phraseOsm, phraseLat);
+                phraseTip.style.left = `${tooltipLeft}px`;
+                phraseTip.style.top = `${boxRect.bottom + 10}px`;
+                phraseTip.style.transform = 'translate(-50%, 0)';
+                phraseTip.classList.add('active');
+            } else {
+                phraseTip.classList.remove('active');
+            }
 
             // Related ise goto tooltip'i de göster (altında)
             if (isRelated) {
@@ -12377,9 +12417,10 @@
         });
         box.addEventListener('mouseleave', (e) => {
             hoverTimeout = setTimeout(() => {
-                if (!tooltip.matches(':hover') && !gotoTooltip.matches(':hover')) {
+                if (!tooltip.matches(':hover') && !gotoTooltip.matches(':hover') && !phraseTip.matches(':hover')) {
                     tooltip.classList.remove('active');
                     gotoTooltip.classList.remove('active');
+                    phraseTip.classList.remove('active');
                 }
             }, 300);
         });
@@ -12389,6 +12430,13 @@
     tooltip.addEventListener('mouseleave', () => hoverTimeout = setTimeout(() => {
         tooltip.classList.remove('active');
         gotoTooltip.classList.remove('active');
+        phraseTip.classList.remove('active');
+    }, 300));
+    phraseTip.addEventListener('mouseenter', () => clearTimeout(hoverTimeout));
+    phraseTip.addEventListener('mouseleave', () => hoverTimeout = setTimeout(() => {
+        tooltip.classList.remove('active');
+        gotoTooltip.classList.remove('active');
+        phraseTip.classList.remove('active');
     }, 300));
     gotoTooltip.addEventListener('mouseenter', () => clearTimeout(hoverTimeout));
     gotoTooltip.addEventListener('mouseleave', () => hoverTimeout = setTimeout(() => {
