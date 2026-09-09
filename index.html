@@ -1100,7 +1100,8 @@
         #lqStory .interface-grid { grid-template-columns: minmax(0,1.25fr) minmax(320px,0.8fr); gap: 40px; }
         #lqStory .toggle-btn { white-space: nowrap; padding: 9px 18px; font-size: .88rem; }
         #lqStory .toggle-btn svg { width: 15px; height: 15px; }
-        #lqStory .feature-card { padding: 22px 24px; }
+        #lqStory .feature-card { padding: 20px 24px; }
+        #lqStory .controls-panel { padding-bottom: 26px; }
         #lqStory .fc-title { font-size: 1.35rem; margin-bottom: 12px; }
         #lqStory .fc-list li { font-size: .93rem; line-height: 1.55; margin-bottom: 10px; }
         #lqStory .citation-badge { font-size: .82rem; padding: 10px 14px; }
@@ -12763,22 +12764,38 @@ window.lqGoHome = function () {
     if (typeof setViewState === 'function') setViewState('home');
     window.scrollTo({ top: 0 });
 };
+// Akış içindeki popup: kaydırma, tümünü aç/kapat ve yapay zekâ uyarısı olmadan
+window.lqsTrimPopup = function (fr) {
+    try {
+        var doc = fr.contentDocument;
+        if (!doc || !doc.head || doc.getElementById('lqsTrim')) return;
+        var st = doc.createElement('style');
+        st.id = 'lqsTrim';
+        st.textContent = '.section-controls, .global-ai-notice { display: none !important; }' +
+            '.content-area { overflow: hidden !important; }' +
+            '.content-area::-webkit-scrollbar { width: 0 !important; height: 0 !important; }' +
+            'html, body { overflow: hidden !important; }';
+        doc.head.appendChild(st);
+    } catch (e) { /* yok say */ }
+};
 window.lqsMountPopup = function () {
     var wrap = document.getElementById('img-popup');
     var fr = document.getElementById('lqsPopupFrame');
     if (!wrap || !fr || typeof getEmbedTpl !== 'function') return;
     var lang = (typeof currentLang !== 'undefined' && currentLang === 'tr') ? 'tr' : 'en';
     var tpl = lang === 'tr' ? 'tplPopupTr' : 'tplPopupEn';
-    if (fr.dataset.cur !== tpl) { fr.dataset.cur = tpl; fr.srcdoc = getEmbedTpl(tpl); }
-    // popup kartı 1500x1000 sayfanın içinde 1100x900; boş kenarları saymadan ölçekle
-    // kart 1100x900; genişliğe göre ölçekle, gerekirse alttan kırp
-    var k = wrap.clientWidth / 1185;
-    var cardH = 900 * k;
+    if (fr.dataset.cur !== tpl) {
+        fr.dataset.cur = tpl;
+        fr.srcdoc = getEmbedTpl(tpl);
+        fr.onload = function () { lqsTrimPopup(fr); };
+    } else {
+        lqsTrimPopup(fr);
+    }
+    // Kart 1100x900; baştan sona görünsün diye iki eksene birden sığdırılır
+    var k = Math.min(wrap.clientWidth / 1150, wrap.clientHeight / 935);
     fr.style.transform = 'scale(' + k + ')';
     fr.style.left = Math.round(wrap.clientWidth / 2 - 750 * k) + 'px';
-    fr.style.top = Math.round(cardH <= wrap.clientHeight
-        ? wrap.clientHeight / 2 - 500 * k
-        : -46 * k) + 'px';
+    fr.style.top = Math.round(wrap.clientHeight / 2 - 500 * k) + 'px';
 };
 window.addEventListener('resize', function () { lqsMountPopup(); });
 window.addEventListener('load', lqsMountPopup);
