@@ -13451,8 +13451,12 @@ document.addEventListener('click', function (e) {
             const mainNode = document.getElementById('node-main'); const orb = document.getElementById('transfer-orb'); const procCard = document.getElementById('card-proc-real');
             const descMain = document.getElementById('desc-main'); const descSub = document.getElementById('desc-sub'); const descRel = document.getElementById('desc-rel');
             const wrapper = procCard.querySelector('.proc-wrapper'); const wrapRect = wrapper.getBoundingClientRect(); const contRect = document.querySelector('.stage-container').getBoundingClientRect();
-            const wL = wrapRect.left + (wrapRect.width * 0.89) - contRect.left; const wT = wrapRect.top + (wrapRect.height * 0.04) - contRect.top;
-            orb.style.left = (wL - 6 - 36) + 'px'; orb.style.top = (wT - 6) + 'px'; orb.style.opacity = '1'; orb.classList.add('orb-pulse'); await wait(1200); orb.classList.remove('orb-pulse');
+            // Orb, madde başının (layer-entry) tam üzerinden fırlar
+                const hwReg = manualDetectedData['layer-entry'][0];
+                const flashRect = document.getElementById('flash-overlay-container').getBoundingClientRect();
+                const hwX = flashRect.left + flashRect.width * (hwReg.l + hwReg.w / 2) / 100 - contRect.left;
+                const hwY = flashRect.top + flashRect.height * (hwReg.t + hwReg.h / 2) / 100 - contRect.top;
+                orb.style.left = (hwX - 6) + 'px'; orb.style.top = (hwY - 6) + 'px'; orb.style.opacity = '1'; orb.classList.add('orb-pulse'); await wait(1200); orb.classList.remove('orb-pulse');
             orb.style.transition = 'all 0.55s cubic-bezier(0.45, 0, 0.55, 1)';
             const pyRect = document.getElementById('pyramid-area').getBoundingClientRect();
             const destX = (pyRect.left - contRect.left) + (pyRect.width / 2); const destY = (pyRect.top - contRect.top) + 30; 
