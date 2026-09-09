@@ -5609,7 +5609,13 @@
         updateUIState();
         trigger.addEventListener('click', (e) => { e.stopPropagation(); menu.classList.contains('show') ? closeMenu() : openMenu(); });
         document.addEventListener('click', (e) => { if (!trigger.contains(e.target) && !menu.contains(e.target)) closeMenu(); });
-        function openMenu() { menu.classList.add('show'); trigger.classList.add('open'); }
+        function openMenu() {
+            var fd = document.getElementById('filterDropdown');
+            if (fd) fd.classList.remove('open');
+            menu.classList.add('show'); trigger.classList.add('open');
+            if (window.lqRevealPanel) lqRevealPanel(menu);
+        }
+        window.lqCloseDictMenu = function () { closeMenu(); };
         function closeMenu() { menu.classList.remove('show'); trigger.classList.remove('open'); }
         function toggleSelectAll(e) { e.stopPropagation(); selectedDicts = selectedDicts.length === rawDictionaries.length ? [] : [...rawDictionaries]; updateUIState(); }
         function toggleSingle(e, dict) { e.stopPropagation(); selectedDicts.includes(dict) ? selectedDicts = selectedDicts.filter(d => d !== dict) : selectedDicts.push(dict); updateUIState(); }
@@ -6694,8 +6700,22 @@
 
         function toggleFilters(e){
             e.stopPropagation();
-            document.getElementById('filterDropdown').classList.toggle('open');
+            var dd = document.getElementById('filterDropdown');
+            var willOpen = !dd.classList.contains('open');
+            if (willOpen && window.lqCloseDictMenu) lqCloseDictMenu();
+            dd.classList.toggle('open');
+            if (willOpen) lqRevealPanel(dd.querySelector('.filter-panel') || dd);
         }
+        // Açılan pencere ekranın altına taşıyorsa sayfa oraya iner
+        window.lqRevealPanel = function (el) {
+            if (!el) return;
+            setTimeout(function () {
+                document.body.classList.remove('lqs-fit');
+                var r = el.getBoundingClientRect();
+                var over = r.bottom - (window.innerHeight - 16);
+                if (over > 0) window.scrollBy({ top: Math.ceil(over), behavior: 'smooth' });
+            }, 70);
+        };
 
         document.addEventListener('click', (e) => {
             const dd = document.getElementById('filterDropdown');
