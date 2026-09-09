@@ -1266,6 +1266,7 @@
             display: flex; align-items: center; justify-content: center; margin-left: -4px;
             background: rgba(157,28,81,.12); color: var(--brand-claret); }
         #lqStory .oh-ico svg { width: 20px; height: 20px; }
+        #lqStory .oh-ico-click svg { width: 27px; height: 27px; }
         #lqStory .oh-arrow { width: 17px; height: 17px; color: var(--brand-claret); transition: transform .2s ease; }
         #lqStory .lqs-openhint:hover { background: #fffdfe; box-shadow: 0 24px 46px -16px rgba(2,6,23,.7); }
         #lqStory .lqs-openhint:hover .oh-arrow { transform: translateX(4px); }
@@ -1274,7 +1275,7 @@
             animation: lqsBadgeIn .45s ease-out both, lqsOpenNudge 2.8s ease-in-out 0.6s infinite; }
         #lqStory .lqs-hoverhint.show { opacity: 1; animation: lqsBadgeIn .45s ease-out both; }
         #lqStory .lqs-hoverhint .oh-ico { overflow: visible; }
-        #lqStory .lqs-hoverhint .oh-ico svg { animation: lqsCursorRoam 3s cubic-bezier(.4,0,.3,1) infinite; }
+        #lqStory .lqs-hoverhint .oh-ico svg { animation: lqsCursorRoam 3s linear infinite; }
         @keyframes lqsCursorRoam {
             0% { transform: translate(11px, 9px); opacity: 0; }
             12% { transform: translate(8px, 6px); opacity: 1; }
