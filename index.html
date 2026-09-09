@@ -7605,6 +7605,22 @@
         var hd = document.getElementById('osmKbdHintDrag');
         if (hd) { hd.classList.add('kbd-learned'); if (hd.parentElement) hd.parentElement.classList.add('kbd-learned'); }
     }, true);
+    // Kutuya bir şey yazıldıysa, hangi yolla olursa olsun ipucu satırı çekilir
+    (function () {
+        function markLearned() {
+            var inp = document.getElementById('mainInput');
+            var hd = document.getElementById('osmKbdHintDrag');
+            if (!inp || !hd || !inp.value) return;
+            hd.classList.add('kbd-learned');
+            if (hd.parentElement) hd.parentElement.classList.add('kbd-learned');
+        }
+        var inp = document.getElementById('mainInput');
+        if (inp) {
+            inp.addEventListener('input', markLearned);
+            inp.addEventListener('keyup', markLearned);
+        }
+        document.addEventListener('keyup', markLearned, true);
+    })();
     input.addEventListener('keydown', function(e) {
         if (activeSide !== 'rtl' || currentSource !== 'osm') return;
         if (e.ctrlKey || e.metaKey) return;
