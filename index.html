@@ -12771,7 +12771,7 @@ window.lqsTrimPopup = function (fr) {
         if (!doc || !doc.head || doc.getElementById('lqsTrim')) return;
         var st = doc.createElement('style');
         st.id = 'lqsTrim';
-        st.textContent = '.section-controls, .global-ai-notice { display: none !important; }' +
+        st.textContent = '.section-controls, .global-ai-notice, .view-text { display: none !important; }' +
             '.content-area { overflow: hidden !important; }' +
             '.content-area::-webkit-scrollbar { width: 0 !important; height: 0 !important; }' +
             'html, body { overflow: hidden !important; }';
