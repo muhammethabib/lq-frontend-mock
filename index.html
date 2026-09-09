@@ -902,7 +902,7 @@
         .noise-overlay{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
 #lqStory .heritage-section{ width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; background: #f8fafc; overflow: hidden; }
 #lqStory .heritage-real-bg{ position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 0; pointer-events: none; background-image: url('assets/story/kapak4.jpg'); background-size: cover; background-position: center bottom; opacity: 0.08; filter: grayscale(100%) sepia(20%); transition: transform 0.1s ease-out; }
-#lqStory .heritage-container{ width: 100%; max-width: 1500px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding: 40px; box-sizing: border-box; position: relative; z-index: 10; gap: 60px; }
+#lqStory .heritage-container{ width: 100%; max-width: 1280px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding: 40px; box-sizing: border-box; position: relative; z-index: 10; gap: 60px; }
 #lqStory .left-panel{ flex: 0 0 35%; display: flex; flex-direction: column; align-items: flex-start; gap: 50px; margin-top: -40px; }
 #lqStory .lq-gradient-title-sm{ font-family: 'Playfair Display', serif; font-size: 3.8rem; line-height: 1.1; font-weight: 800; margin: 0; background: linear-gradient(135deg, var(--sapphire) 0%, var(--lq-bordo) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1)); }
 #lqStory .hi-text-block{ font-size: 1.05rem; line-height: 1.7; color: var(--text-body); text-shadow: 0 1px 1px rgba(255,255,255,0.8); }
@@ -936,7 +936,7 @@
 @keyframes stackSequence1_lqs{ 0% { opacity: 0; transform: translate(15px, -15px) rotate(10deg); } 15%, 85% { opacity: 1; transform: translate(0, 0) rotate(0deg); } 100% { opacity: 0; } }
 @keyframes stackSequence2_lqs{ 0%, 25% { opacity: 0; transform: translate(15px, -15px) rotate(10deg); } 40%, 85% { opacity: 1; transform: translate(0, 0) rotate(0deg); } 100% { opacity: 0; } }
 @keyframes stackSequence3_lqs{ 0%, 50% { opacity: 0; transform: translate(15px, -15px) rotate(10deg); } 65%, 85% { opacity: 1; transform: translate(0, 0) rotate(0deg); } 100% { opacity: 0; } }
-#lqStory .right-panel{ flex: 0 0 70%; display: flex; justify-content: center; align-items: center; }
+#lqStory .right-panel{ flex: 0 0 64%; display: flex; justify-content: center; align-items: center; }
 #lqStory .library-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; perspective: 2000px; }
 #lqStory .sahne{ width: 160px; height: 230px; position: relative; cursor: pointer; opacity: 0; perspective: 1500px; z-index: 1; transition: z-index 0.3s; }
 #lqStory .sahne:hover{ z-index: 100; }
@@ -1182,10 +1182,9 @@
         /* Koleksiyon: altta beş, üstte dört; üst sıra aralara oturur */
         #lqStory .library-grid { display: flex; flex-direction: column; align-items: center; gap: 16px;
             transform: scale(.92); transform-origin: center center; }
-        @media (max-width: 1560px) { #lqStory .library-grid { transform: scale(.86); } }
-        @media (max-width: 1400px) { #lqStory .library-grid { transform: scale(.82); } }
-        @media (max-width: 1280px) { #lqStory .library-grid { transform: scale(.72); } }
-        @media (max-width: 1200px) { #lqStory .library-grid { transform: scale(.62); } }
+        @media (max-width: 1360px) { #lqStory .library-grid { transform: scale(.76); } }
+        @media (max-width: 1240px) { #lqStory .library-grid { transform: scale(.68); } }
+        @media (max-width: 1140px) { #lqStory .library-grid { transform: scale(.60); } }
         #lqStory .lib-row { display: flex; gap: 14px; }
 
         #lqStory .vol-multi { background: rgba(217,119,6,.18); border: 1px solid rgba(217,119,6,.85);
