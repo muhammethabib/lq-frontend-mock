@@ -1193,9 +1193,9 @@
         #lqStory .ic-vol-box.vol-multi { background: rgba(217,119,6,.16); border-color: rgba(146,64,14,.55); }
         #lqStory .vol-multi .ic-vol { color: #7c4a03 !important; font-weight: 800 !important; letter-spacing: .6px; }
         /* Çok ciltli sözlüklerde arkada ikinci bir cilt sezilir */
-        /* Sağda yer yoksa kapak sola doğru açılır */
-        #lqStory .sahne.flip-left:hover .kapak-grubu { transform-origin: left center; transform: rotateY(-125deg); }
-        #lqStory .sahne.flip-left:hover .kitap { transform: translateZ(150px) rotateY(-10deg) translateX(-26px); }
+        /* Kenara yakın kitap aynı yöne açılır, yalnızca içeri kayar */
+        #lqStory .sahne:hover .kitap { transform: translateZ(150px) rotateY(10deg)
+            translateX(calc(-20px - var(--lqs-push, 0px))); }
         #lqStory .sahne.multi-vol { z-index: 2; }
         #lqStory .sahne.multi-vol:hover { z-index: 100; }
         #lqStory .sahne.multi-vol > .kitap { position: relative; z-index: 2; }
@@ -2672,8 +2672,8 @@
         @keyframes kbdDemoPop { 0%, 4%, 100% { opacity:.3; transform:none; } 8% { opacity:1; transform:scale(1.25); } 16% { opacity:.3; transform:none; } }
         .kbd-learned .kbd-demo-key, .kbd-learned .kbd-demo-out { animation:none; }
         .kbd-learned .kbd-demo-out { opacity:1; }
-        .kbd-learned .kbd-demo { opacity: 0; width: 0; margin-right: 0; overflow: hidden;
-            transition: opacity .3s ease, width .3s ease, margin .3s ease; }
+        .osm-kbd-hint.kbd-learned .osm-kbd-hint-drag { display: none; }
+        .osm-kbd-hint.kbd-learned { min-height: 16px; padding-bottom: 4px; }
         .kbd-hint-text b { font-weight:700; color:#475569; }
         .osm-key.kbd-echo, .dual-primary.kbd-echo, .dual-shift.kbd-echo, .dual-alt.kbd-echo { background:#9d1c51 !important; }
         .kbd-echo .ok-l, .kbd-echo .ok-a { color:#fff !important; }
@@ -7556,7 +7556,7 @@
             break;
         }
         var hd = document.getElementById('osmKbdHintDrag');
-        if (hd) hd.classList.add('kbd-learned'); // mesaj yerine ulaştı: demo animasyonu durur
+        if (hd) { hd.classList.add('kbd-learned'); if (hd.parentElement) hd.parentElement.classList.add('kbd-learned'); }
     }
     // Kullanıcı ister ekran klavyesini ister kendi klavyesini kullansın,
     // ilk harften sonra K→ك rozeti işini bitirir ve çekilir.
@@ -7565,7 +7565,7 @@
         if (!t || !t.closest) return;
         if (!t.closest('#osmKbd .osm-kbd-row')) return;
         var hd = document.getElementById('osmKbdHintDrag');
-        if (hd) hd.classList.add('kbd-learned');
+        if (hd) { hd.classList.add('kbd-learned'); if (hd.parentElement) hd.parentElement.classList.add('kbd-learned'); }
     }, true);
     input.addEventListener('keydown', function(e) {
         if (activeSide !== 'rtl' || currentSource !== 'osm') return;
@@ -13110,8 +13110,9 @@ window.lqsTrimPopup = function (fr) {
             bk.dataset.flipHooked = '1';
             bk.addEventListener('mouseenter', function () {
                 var r = bk.getBoundingClientRect();
-                var need = r.width * 1.25 + 24;   // açılan kapağın kapladığı yer
-                bk.classList.toggle('flip-left', r.right + need > window.innerWidth);
+                var need = r.width * 0.82 + 10;          // açılan kapağın sağa taşan payı
+                var over = (r.right + need) - (window.innerWidth - 14);
+                bk.style.setProperty('--lqs-push', (over > 0 ? Math.round(over) : 0) + 'px');
             });
         });
     }
