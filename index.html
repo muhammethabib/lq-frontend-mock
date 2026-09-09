@@ -3264,7 +3264,7 @@
 <div class="search-container">
 <div class="search-mode mode-engine" id="mode-0">
 <div class="engine-row">
-<button class="btn-temizle" id="btnEngineClear" onclick="window.temizleMotor && window.temizleMotor()">
+<button class="btn-temizle" id="btnEngineClear" onclick="window.temizleMotor && window.temizleMotor(false); window.updateTemizleBtn && window.updateTemizleBtn();">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
 <span data-i18n="clearBtn">Clear</span>
 </button>
@@ -7264,6 +7264,7 @@
     }
     function osmKbdHide() {
         document.getElementById('osmKbd').classList.remove('open');
+        if (window.updateTemizleBtn) setTimeout(window.updateTemizleBtn, 0);
     }
 
     // Klavye sürükleme + snap-to-origin
@@ -7491,7 +7492,9 @@
             var any = inputs.length !== 5; // box structure changed (added/removed boxes or sub-boxes)
             inputs.forEach(function(i){ if (i.value.trim() !== '') any = true; });
             if (document.querySelector('#engineCore .gk-char-overlay') || document.querySelector('#engineCore .star-overlay')) any = true;
-            ec.classList.toggle('visible', any);
+            // Klavye açıkken kendi Temizle'si var; dıştaki gizlenir
+            var kbdOpen = !!(document.querySelector('#gridKbd.open') || document.querySelector('#osmKbd.open'));
+            ec.classList.toggle('visible', any && !kbdOpen);
         }
     }
     function temizleMotor(focusFirst) {
@@ -7501,6 +7504,7 @@
         if (inputs.length) inputs[0].focus();
     }
     window.temizleMotor = temizleMotor;
+    window.updateTemizleBtn = updateTemizleBtn;
     window.prefillBoxes = prefillBoxes;
     core.addEventListener('input', updateTemizleBtn);
     function addSubBox(b){const s=b.closest('.sub-box');const n=document.createElement('div');n.innerHTML=`<div class="sub-box" data-auto-expand="1"><button class="s-action-btn s-add" onclick="addSubBox(this)"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg></button><button class="s-action-btn s-del" onclick="removeSubBox(this)"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="2" y1="2" x2="8" y2="8" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="2" x2="2" y2="8" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg></button><input type="text" class="char-input" maxlength="1" spellcheck="false"></div>`;s.before(n.firstElementChild);const ni=s.previousElementSibling.querySelector('.char-input');if(ni)ni.focus();updateTemizleBtn();}
@@ -7615,6 +7619,7 @@
 
     function gridKbdOpen(inputEl) {
             if (typeof lqHintHide === 'function') lqHintHide();
+        setTimeout(function () { if (window.updateTemizleBtn) window.updateTemizleBtn(); }, 0);
         activeCharInput = inputEl || activeCharInput;
         if (!activeCharInput) return;
         gridKbd.classList.add('open');
@@ -7630,6 +7635,7 @@
     };
     window.gridKbdHide = function() {
         gridKbd.classList.remove('open');
+        setTimeout(function () { if (window.updateTemizleBtn) window.updateTemizleBtn(); }, 0);
         activeCharInput = null;
         _kbdScrollLocked = false;
         var _gkSpacer = document.getElementById('gridKbdSpacer');
