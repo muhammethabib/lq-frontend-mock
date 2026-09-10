@@ -7620,6 +7620,7 @@
     });
 
     // Fiziksel klavye transliterasyon
+    var _LATIN = /\p{Script=Latin}/u;
     // ALT kombinasyonları ekrandaki klavyenin etiketinden okunur (_DUAL[x][3]),
     // böylece EN ve TR düzeni kendi Alt atamalarıyla birebir çalışır.
 
@@ -7678,6 +7679,7 @@
                 : (/^Key[A-Z]$/.test(e.code || '') ? e.code.slice(3).toLowerCase() : lowerKey);
             var altCfg = _DUAL[altLat];
             if (altCfg && altCfg[3]) { e.preventDefault(); _osmInsert(altCfg[3]); _echoKey(altLat, 'alt'); }
+            else if (e.key.length === 1 && _LATIN.test(e.key)) e.preventDefault();
             return;
         }
         var key = e.shiftKey ? e.key.toUpperCase() : lowerKey;
@@ -7685,8 +7687,30 @@
             e.preventDefault();
             _osmInsert((key === 'y' || key === 'i') ? _resolveYe() : _OSM_MAP[key]);
             _echoKey(lowerKey, e.shiftKey ? 'shift' : null);
+        } else if (e.key.length === 1 && _LATIN.test(e.key)) {
+            e.preventDefault();   // karşılığı olmayan Latin harf Osmanlıca tarafa girmez
         }
     });
+    // Osmanlıca tarafta Latin harf hiçbir yoldan kalmaz: yapıştırma, sürükleme,
+    // otomatik doldurma, mobil klavye. Rakam, boşluk ve Arap harfleri serbest.
+    var _LATIN_ALL = /\p{Script=Latin}/gu;
+    function _stripLatin() {
+        if (activeSide !== 'rtl' || currentSource !== 'osm') return;
+        var v = input.value;
+        if (!_LATIN.test(v)) return;
+        var pos = input.selectionStart == null ? v.length : input.selectionStart;
+        var caret = v.slice(0, pos).replace(_LATIN_ALL, '').length;
+        input.value = v.replace(_LATIN_ALL, '');
+        input.setSelectionRange(caret, caret);
+        _normalizeYe();
+    }
+    window.addEventListener('input', function (e) {
+        if (e.target !== input || e.isComposing) return;
+        _stripLatin();
+    }, true);
+    input.addEventListener('compositionend', function () { setTimeout(function () {
+        _stripLatin(); if (typeof handleInput === 'function') handleInput(input);
+    }, 0); });
 
 
         /* ==== WORD DECODER ENGINE JS (ported verbatim from MainPage) ==== */
