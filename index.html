@@ -6785,6 +6785,30 @@
                 if (t.closest('#osmKbd .osm-kbd-hint')) { document.getElementById('osmKbd').dataset.moved = '1'; }
                 if (t.closest('#gridKbdDragBar')) { document.getElementById('gridKbd').dataset.moved = '1'; }
             }, true);
+            // Panel açıldığında tamamı görünür olmalı: gerekirse sayfa iner,
+            // sayfa o kadar inemiyorsa geçici pay bırakılır.
+            function ensureVisible() {
+                var gk = document.getElementById('gridKbd');
+                var osm = document.getElementById('osmKbd');
+                var kbd = (gk && gk.classList.contains('open')) ? gk
+                        : (osm && osm.classList.contains('open')) ? osm : null;
+                if (!kbd || kbd.dataset.moved === '1') return;
+                follow();
+                var r = kbd.getBoundingClientRect();
+                var over = r.bottom - (window.innerHeight - 10);
+                if (over <= 0) return;
+                document.body.classList.remove('lqs-fit');
+                var sp = document.getElementById('gridKbdSpacer');
+                if (sp) {
+                    var maxY = document.documentElement.scrollHeight - window.innerHeight;
+                    var need = (window.scrollY + over) - maxY;
+                    if (need > 0) sp.style.height = (parseInt(sp.style.height || 0, 10) + Math.ceil(need + 20)) + 'px';
+                }
+                window.scrollBy({ top: Math.ceil(over), behavior: 'smooth' });
+            }
+            window.lqKbdEnsureVisible = function () {
+                [80, 320, 700, 1100].forEach(function (d) { setTimeout(ensureVisible, d); });
+            };
             window.lqKbdFollow = follow;
         })();
         window.lqRevealPanel = function (el) {
@@ -7624,7 +7648,7 @@
             kbd.style.top = (r.bottom + 10) + 'px';
             kbd.style.transform = 'translateX(-50%)';
             kbd.dataset.moved = '';
-            if (window.lqKbdFollow) setTimeout(window.lqKbdFollow, 60);
+            if (window.lqKbdEnsureVisible) lqKbdEnsureVisible();
         }
     function osmKbdHide() {
         document.getElementById('osmKbd').classList.remove('open');
@@ -8037,7 +8061,8 @@
     function gridKbdOpen(inputEl) {
             if (typeof lqHintHide === 'function') lqHintHide();
         var _gk = document.getElementById('gridKbd'); if (_gk) _gk.dataset.moved = '';
-        setTimeout(function () { if (window.lqKbdFollow) lqKbdFollow(); }, 220);
+        _kbdScrollLocked = false;   // kutular değişmiş olabilir; karar her açılışta yeniden verilir
+        if (window.lqKbdEnsureVisible) lqKbdEnsureVisible();
         setTimeout(function () { if (window.updateTemizleBtn) window.updateTemizleBtn(); }, 0);
         activeCharInput = inputEl || activeCharInput;
         if (!activeCharInput) return;
