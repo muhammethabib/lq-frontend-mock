@@ -6750,6 +6750,43 @@
             window.addEventListener('load', syncNavH);
             window.lqSyncNavH = syncNavH;
         })();
+        // Klavyeler hiçbir varsayılan durumda arama çubuğunun veya kutuların üstüne gelmez.
+        // Kullanıcı elle sürüklerse kural devre dışı kalır (kendi tercihi).
+        (function () {
+            function follow() {
+                var osm = document.getElementById('osmKbd');
+                if (osm && osm.classList.contains('open') && osm.dataset.moved !== '1') {
+                    var sw = document.getElementById('searchWrapper');
+                    if (sw) {
+                        var r = sw.getBoundingClientRect();
+                        var kw = osm.offsetWidth || 776;
+                        osm.style.top = (r.bottom + 10) + 'px';
+                        var caretX = r.right - 20;
+                        osm.style.left = Math.max(16 + kw / 2, Math.min(caretX, window.innerWidth - 16 - kw / 2)) + 'px';
+                    }
+                }
+                var gk = document.getElementById('gridKbd');
+                if (gk && gk.classList.contains('open') && gk.dataset.moved !== '1') {
+                    var core = document.getElementById('engineCore');
+                    if (core) {
+                        var cr = core.getBoundingClientRect();
+                        gk.style.top = (cr.bottom + 4) + 'px';
+                        var gw = gk.offsetWidth || 488;
+                        var cx = cr.left + cr.width / 2;
+                        gk.style.left = Math.max(8, Math.min(cx - gw / 2, window.innerWidth - gw - 8)) + 'px';
+                    }
+                }
+            }
+            window.addEventListener('scroll', follow, { passive: true });
+            window.addEventListener('resize', follow);
+            document.addEventListener('pointerdown', function (e) {
+                var t = e.target;
+                if (!t || !t.closest) return;
+                if (t.closest('#osmKbd .osm-kbd-hint')) { document.getElementById('osmKbd').dataset.moved = '1'; }
+                if (t.closest('#gridKbdDragBar')) { document.getElementById('gridKbd').dataset.moved = '1'; }
+            }, true);
+            window.lqKbdFollow = follow;
+        })();
         window.lqRevealPanel = function (el) {
             if (!el) return;
             [70, 420, 900].forEach(function (d) { setTimeout(function () { lqRevealStep(el); }, d); });
@@ -7586,6 +7623,8 @@
             kbd.style.left = left + 'px';
             kbd.style.top = (r.bottom + 10) + 'px';
             kbd.style.transform = 'translateX(-50%)';
+            kbd.dataset.moved = '';
+            if (window.lqKbdFollow) setTimeout(window.lqKbdFollow, 60);
         }
     function osmKbdHide() {
         document.getElementById('osmKbd').classList.remove('open');
@@ -7997,6 +8036,8 @@
 
     function gridKbdOpen(inputEl) {
             if (typeof lqHintHide === 'function') lqHintHide();
+        var _gk = document.getElementById('gridKbd'); if (_gk) _gk.dataset.moved = '';
+        setTimeout(function () { if (window.lqKbdFollow) lqKbdFollow(); }, 220);
         setTimeout(function () { if (window.updateTemizleBtn) window.updateTemizleBtn(); }, 0);
         activeCharInput = inputEl || activeCharInput;
         if (!activeCharInput) return;
@@ -8012,6 +8053,7 @@
         gridKbdOpen(inputEl);
     };
     window.gridKbdHide = function() {
+        gridKbd.dataset.moved = '';
         gridKbd.classList.remove('open');
         setTimeout(function () { if (window.updateTemizleBtn) window.updateTemizleBtn(); }, 0);
         activeCharInput = null;
