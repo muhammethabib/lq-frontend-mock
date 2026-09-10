@@ -1942,6 +1942,7 @@
         .section-header.desc-open .header-inline-desc { display: inline-flex; }
         .header-inline-desc .hid-example { color: #94a3b8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .header-inline-desc .hid-example b { color: #334155; font-weight: 700; }
+        .header-inline-desc .hid-example:empty, .tooltip-example:empty { display: none; }
         /* Osmanlıca örnek çifti: ok işareti soldan sağa okunsun diye dış kap LTR yalıtımlı,
            kelimeler ise kendi içlerinde RTL yalıtımlı. */
         .header-inline-desc .hid-example .ex-ltr { direction: ltr; unicode-bidi: isolate; }
@@ -3071,6 +3072,13 @@
 <span class="tooltip-example" data-i18n="exLexInflb" data-i18n-html="1">Ex: <b>civar</b> → <b>civarında</b></span>
 </div>
 </div>
+<div class="quick-link has-tooltip" data-target="sec-partial" onclick="scrollToSection('sec-partial', this)">
+                <span data-i18n="qlPartial">Similar Spellings</span>
+                <div class="custom-tooltip-source">
+<span class="tooltip-desc" data-i18n="hidPartialb">Results written with a spelling close to the search term</span>
+<span class="tooltip-example" data-i18n="exPartialb" data-i18n-html="1"></span>
+</div>
+</div>
 <div class="quick-link has-tooltip" data-target="sec-derived" onclick="scrollToSection('sec-derived', this)">
                 <span data-i18n="qlDerived">Derived Forms</span>
                 <div class="custom-tooltip-source">
@@ -3090,13 +3098,6 @@
                 <div class="custom-tooltip-source">
 <span class="tooltip-desc" data-i18n="hidPhrasesb">Phrases containing the search term as a component</span>
 <span class="tooltip-example" data-i18n="exPhrasesb" data-i18n-html="1">Ex: <b>nazar</b> → <b>nazar</b> değmek</span>
-</div>
-</div>
-<div class="quick-link has-tooltip" data-target="sec-partial" onclick="scrollToSection('sec-partial', this)">
-                <span data-i18n="qlPartial">Partial</span>
-                <div class="custom-tooltip-source">
-<span class="tooltip-desc" data-i18n="hidPartialb">Results containing the search term within a longer, semantically unrelated word</span>
-<span class="tooltip-example" data-i18n="exPartialb" data-i18n-html="1">Ex: <b>kalem</b> → bu<b>kalem</b>un</span>
 </div>
 </div>
 </div>
@@ -3649,6 +3650,20 @@
                 </div>
                 <div class="section-content" id="content-kc-lexicalized-inflected"></div>
             </div>
+            <div class="section-wrapper" id="kc-sec-partial">
+                <div class="section-header desc-open">
+                    <div class="header-clickable hover-blue" onclick="toggleKCSection('content-kc-partial', this.closest('.section-header'))">
+                        <div class="header-chevron"><svg fill="none" height="6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 10 6" width="10"><path d="M1 1L5 5L9 1"></path></svg></div>
+                        <div class="header-title" data-i18n="secPartial">SIMILAR SPELLINGS</div>
+                    </div>
+                    <span class="header-count">4</span>
+                    <span class="header-desc-pill"><span class="header-inline-desc"><span class="hid-text" data-i18n="hidPartialKc">Results written with a spelling close to the search term</span><span class="hid-example" data-i18n="exPartialKc" data-i18n-html="1"></span></span>
+                        <button class="header-info-toggle active" onclick="toggleHeaderDesc(this, event)" aria-label="Toggle description"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="hid-toggle-label">✕</span></button>
+                    </span>
+                </div>
+                <div class="section-content" id="content-kc-partial"></div>
+            </div>
+
             <div class="section-wrapper" id="kc-sec-derived">
                 <div class="section-header desc-open">
                     <div class="header-clickable hover-blue" onclick="toggleKCSection('content-kc-derived', this.closest('.section-header'))">
@@ -3690,19 +3705,6 @@
                 <div class="section-content" id="content-kc-phrases"></div>
             </div>
 
-            <div class="section-wrapper" id="kc-sec-partial">
-                <div class="section-header desc-open">
-                    <div class="header-clickable hover-blue" onclick="toggleKCSection('content-kc-partial', this.closest('.section-header'))">
-                        <div class="header-chevron"><svg fill="none" height="6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 10 6" width="10"><path d="M1 1L5 5L9 1"></path></svg></div>
-                        <div class="header-title" data-i18n="secPartial">PARTIAL MATCHES</div>
-                    </div>
-                    <span class="header-count">4</span>
-                    <span class="header-desc-pill"><span class="header-inline-desc"><span class="hid-text" data-i18n="hidPartialKc">Results partially matching the search term</span><span class="hid-example" data-i18n="exPartialKc" data-i18n-html="1">Ex: <b>kalem</b> → bu<b>kalem</b>un &nbsp;·&nbsp; <span class="ex-ltr"><b class="ott-ex">س**ل</b> → <b class="ott-ex">آراستەلك</b></span></span></span>
-                        <button class="header-info-toggle active" onclick="toggleHeaderDesc(this, event)" aria-label="Toggle description"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="hid-toggle-label">✕</span></button>
-                    </span>
-                </div>
-                <div class="section-content" id="content-kc-partial"></div>
-            </div>
 
             <div class="fuzzy-container">
                 <div class="fuzzy-row">
@@ -3806,6 +3808,10 @@
                         </div></div><span class="header-count">0</span><span class="header-desc-pill"><span class="header-inline-desc"><span class="hid-text" data-i18n="hidLexInfl">Inflected forms given a distinct meaning of their own in the dictionary</span><span class="hid-example" data-i18n="exLexInfl" data-i18n-html="1">Ex: <b>civar</b> → <b>civarında</b></span></span><button class="header-info-toggle active" onclick="toggleHeaderDesc(this, event)" aria-label="Toggle description"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="hid-toggle-label">✕</span></button></span></div>
 <div class="section-content" id="content-lexicalized-inflected"></div>
 </div>
+<div class="section-wrapper" id="sec-partial">
+<div class="section-header desc-open"><div class="header-clickable hover-blue" onclick="toggleSection('content-partial', this.closest('.section-header'))"><div class="header-chevron"><svg fill="none" height="6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 10 6" width="10"><path d="M1 1L5 5L9 1"></path></svg></div><div class="header-title" data-i18n="secPartial">SIMILAR SPELLINGS</div></div><span class="header-count">6</span><span class="header-desc-pill"><span class="header-inline-desc"><span class="hid-text" data-i18n="hidPartial">Results written with a spelling close to the search term</span><span class="hid-example" data-i18n="exPartial" data-i18n-html="1"></span></span><button class="header-info-toggle active" onclick="toggleHeaderDesc(this, event)" aria-label="Toggle description"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="hid-toggle-label">✕</span></button></span></div>
+<div class="section-content" id="content-partial"></div>
+</div>
 <div class="section-wrapper" id="sec-derived">
 <div class="section-header desc-open"><div class="header-clickable hover-blue" onclick="toggleSection('content-derived', this.closest('.section-header'))"><div class="header-chevron"><svg fill="none" height="6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 10 6" width="10"><path d="M1 1L5 5L9 1"></path></svg></div><div class="header-title" data-i18n="secDerived">
                             DERIVED FORMS
@@ -3823,12 +3829,6 @@
                             PHRASES
                         </div></div><span class="header-count">6</span><span class="header-desc-pill"><span class="header-inline-desc"><span class="hid-text" data-i18n="hidPhrases">Phrases containing the search term as a component</span><span class="hid-example" data-i18n="exPhrases" data-i18n-html="1">Ex: <b>nazar</b> → <b>nazar</b> değmek</span></span><button class="header-info-toggle active" onclick="toggleHeaderDesc(this, event)" aria-label="Toggle description"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="hid-toggle-label">✕</span></button></span></div>
 <div class="section-content" id="content-phrases"></div>
-</div>
-<div class="section-wrapper" id="sec-partial">
-<div class="section-header desc-open"><div class="header-clickable hover-blue" onclick="toggleSection('content-partial', this.closest('.section-header'))"><div class="header-chevron"><svg fill="none" height="6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 10 6" width="10"><path d="M1 1L5 5L9 1"></path></svg></div><div class="header-title" data-i18n="secPartial">
-                            PARTIAL MATCHES
-                        </div></div><span class="header-count">6</span><span class="header-desc-pill"><span class="header-inline-desc"><span class="hid-text" data-i18n="hidPartial">Results containing the search term within a longer, semantically unrelated word</span><span class="hid-example" data-i18n="exPartial" data-i18n-html="1">Ex: <b>kalem</b> → bu<b>kalem</b>un</span></span><button class="header-info-toggle active" onclick="toggleHeaderDesc(this, event)" aria-label="Toggle description"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="hid-toggle-label">✕</span></button></span></div>
-<div class="section-content" id="content-partial"></div>
 </div>
 <div class="fuzzy-container">
 <div class="fuzzy-row">
@@ -5233,14 +5233,14 @@
             qlDerived: 'Türemiş Biçimler',
             qlPhrases: 'İbareler',
             qlCompounds: 'Birleşik Kelimeler',
-            qlPartial: 'Kısmi Eşleşmeler',
+            qlPartial: 'Benzer İmlalar',
             secExact: 'LEMMA',
             secInflected: 'ÇEKİMLİ BİÇİMLER',
             secLexInfl: 'SÖZLÜKSELLEŞMİŞ ÇEKİMLİ FORMLAR',
             secDerived: 'TÜREMİŞ BİÇİMLER',
             secPhrases: 'İBARELER',
             secCompounds: 'BİRLEŞİK KELİMELER',
-            secPartial: 'KISMİ EŞLEŞMELER',
+            secPartial: 'BENZER İMLALAR',
             hidExact: 'Ek almamış sonuçlar; bir değerin temel veya tekil biçimi',
             hidExactb: 'Ek almamış sonuçlar; bir değerin temel veya tekil biçimi',
             hidInflected: 'Arama teriminin çekimli biçimlerini gösteren sonuçlar',
@@ -5253,9 +5253,9 @@
             hidPhrasesb: 'Arama terimini içeren ibareler',
             hidCompounds: 'Arama terimini içeren birleşik kelimeler',
             hidCompoundsb: 'Arama terimini içeren birleşik kelimeler',
-            hidPartial: 'Arama terimini anlam bakımından ilgisiz bir kelimenin içinde barındıran sonuçlar',
-            hidPartialKc: 'Arama terimiyle kısmen eşleşen sonuçlar',
-            hidPartialb: 'Arama terimini anlam bakımından ilgisiz bir kelimenin içinde barındıran sonuçlar',
+            hidPartial: 'Arama terimine yakın bir imlayla yazılmış sonuçlar',
+            hidPartialKc: 'Arama terimine yakın bir imlayla yazılmış sonuçlar',
+            hidPartialb: 'Arama terimine yakın bir imlayla yazılmış sonuçlar',
             exExact: 'Örnekler: <b>kalem</b>, <b>dost</b>',
             exExactb: 'Örnekler: <b>kalem</b>, <b>dost</b>',
             exInflected: 'Örnek: <b>kalem</b> → <b>kalem</b>i, <b>kalem</b>e, <b>kalem</b>de',
@@ -5268,9 +5268,9 @@
             exCompoundsb: 'Örnek: <b>nazar</b> → <b>nazar</b>gâh',
             exLexInfl: 'Örnek: <b>civar</b> → <b>civarında</b>',
             exLexInflb: 'Örnek: <b>civar</b> → <b>civarında</b>',
-            exPartial: 'Örnek: <b>kalem</b> → bu<b>kalem</b>un',
-            exPartialKc: 'Örnekler: <b>kalem</b> → bu<b>kalem</b>un &nbsp;·&nbsp; <span class="ex-ltr"><b class="ott-ex">س**ل</b> → <b class="ott-ex">آراستەلك</b></span>',
-            exPartialb: 'Örnek: <b>kalem</b> → bu<b>kalem</b>un',
+            exPartial: '',
+            exPartialKc: '',
+            exPartialb: '',
             spellingLabel: 'Yazılışa Göre Ara',
             colResult: 'Sonuç',
             colCategory: 'Kategori',
@@ -5287,7 +5287,7 @@
             chipPhrases: 'İbareler',
             chipCompounds: 'Birleşik Kelimeler',
             chipCompoundsDesc: 'Arama terimini içeren birleşik kelimeler.',
-            chipPartial: 'Kısmi Eşleşmeler',
+            chipPartial: 'Benzer İmlalar',
             fuzzyHint: 'Aradığınızı bulamadınız mı?',
             fuzzyMain: 'Benzer Eşleşmeleri Tara',
             kbdHintStrong: 'Kendi klavyenizden yazabilirsiniz',
@@ -5412,7 +5412,7 @@
             chipLexInflDesc: 'Sözlükte kendine ait ayrı bir anlam kazanmış çekimli biçimler.',
             chipDerivedDesc: 'Aranan kelimeden türemiş kelimeler.',
             chipPhrasesDesc: 'Arama terimini içeren ibareler.',
-            chipPartialDesc: 'Arama terimini anlam bakımından ilgisiz bir kelimenin içinde barındıran sonuçlar.'
+            chipPartialDesc: 'Arama terimine yakın bir imlayla yazılmış sonuçlar.'
         };
         let currentLang = 'en';
         const i18nOriginals = {};
@@ -5459,7 +5459,7 @@
             if (window.__kcReady) { try { kcRenderAll(); } catch(e) {} }
             // Re-render result sections so per-row strings (category pills, page labels) follow the language
             if (typeof renderSection === 'function' && typeof sectionShownCount !== 'undefined') {
-                ['content-exact', 'content-inflected', 'content-lexicalized-inflected', 'content-derived', 'content-compounds', 'content-phrases', 'content-partial'].forEach(id => {
+                ['content-exact', 'content-inflected', 'content-lexicalized-inflected', 'content-partial', 'content-derived', 'content-compounds', 'content-phrases'].forEach(id => {
                     const c = document.getElementById(id);
                     if (c && c._allData) renderSection(id, c._allData, sectionShownCount[id] || 25, true);
                 });
@@ -5853,7 +5853,7 @@
             mainTitle.textContent = word;
             // Yazılış değişince işaretlemeler de yeni terime göre yenilensin
             if (typeof renderSection === 'function' && typeof sectionShownCount !== 'undefined') {
-                ['content-exact','content-inflected','content-lexicalized-inflected','content-derived','content-compounds','content-phrases','content-partial'].forEach(id => {
+                ['content-exact','content-inflected','content-lexicalized-inflected','content-partial','content-derived','content-compounds','content-phrases'].forEach(id => {
                     const c = document.getElementById(id);
                     if (c && c._allData) renderSection(id, c._allData, sectionShownCount[id] || 25, true);
                 });
@@ -5882,7 +5882,7 @@
             }
         }
 
-        const sections = ['sec-exact', 'sec-inflected', 'sec-lexicalized-inflected', 'sec-derived', 'sec-compounds', 'sec-phrases', 'sec-partial'];
+        const sections = ['sec-exact', 'sec-inflected', 'sec-lexicalized-inflected', 'sec-partial', 'sec-derived', 'sec-compounds', 'sec-phrases'];
         let currentTabIdx = 1;
         function resolveSecId(id) { return currentTabIdx === 0 ? 'kc-' + id : id; }
         // Jump To'ya tıklanınca: yolculuk boyunca ve varışta spy seçim ezmesin,
@@ -6645,10 +6645,10 @@
             {name:"Lemma",       i18n:"chipExact",     type:"section", value:"sec-exact",     desc:"Results without an affix, including the base or singular form of a value."},
             {name:"Inflected Forms",     i18n:"chipInflected", type:"section", value:"sec-inflected", desc:"Inflected forms of the searched word."},
             {name:"Lexicalized Inflected Forms", i18n:"chipLexInfl", type:"section", value:"sec-lexicalized-inflected", desc:"Inflected forms given a distinct meaning of their own in the dictionary."},
+            {name:"Similar Spellings",   i18n:"chipPartial",   type:"section", value:"sec-partial",   desc:"Results written with a spelling close to the search term."},
             {name:"Derived Forms",       i18n:"chipDerived",   type:"section", value:"sec-derived",   desc:"Words derived from the searched word."},
             {name:"Compounds",           i18n:"chipCompounds", type:"section", value:"sec-compounds", desc:"Compounds containing the search term as a component."},
-            {name:"Phrases",             i18n:"chipPhrases",   type:"section", value:"sec-phrases",   desc:"Phrases containing the search term as a component."},
-            {name:"Partial Matches",     i18n:"chipPartial",   type:"section", value:"sec-partial",   desc:"Results containing the search term within a semantically unrelated word."}
+            {name:"Phrases",             i18n:"chipPhrases",   type:"section", value:"sec-phrases",   desc:"Phrases containing the search term as a component."}
         ];
         const gridWord = document.getElementById('chipListWord');
         const gridMatch = document.getElementById('chipListMatch');
