@@ -32,7 +32,7 @@ body {
 .lqbar {
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  padding: 11px clamp(16px, 4vw, 34px);
+  padding: 12px clamp(16px, 4vw, 34px);
   background: rgba(255, 255, 255, .86); backdrop-filter: blur(10px);
   border-bottom: 1px solid #dfe6ef;
 }
@@ -49,7 +49,7 @@ body {
 .lqbar-lang:hover { background: var(--brand-dark); color: #fff; border-color: var(--brand-dark); }
 
 /* ---------- kabuk ---------- */
-.page-shell { width: min(1060px, calc(100% - 32px)); margin: 34px auto 78px; }
+.page-shell { width: min(1060px, calc(100% - 32px)); margin: 34px auto 96px; }
 
 /* ---------- hero ---------- */
 .hero {
@@ -138,27 +138,6 @@ h2, h3, h4 { font-style: normal; }
 
 /* zaman çizgisi */
 .timeline .entry time { color: var(--brand); font-weight: 700; letter-spacing: .01em; }
-
-/* ---------- alt bant ---------- */
-.lqfoot {
-  position: relative; overflow: hidden; margin-top: 26px; padding: 34px clamp(24px, 5vw, 54px);
-  border-radius: 20px; color: #c9d6ef;
-  background: linear-gradient(135deg, #04143c, #082567 70%, #123a8c);
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px;
-}
-.lqfoot:after {
-  content: ""; position: absolute; left: -20px; bottom: -60px; width: 180px; height: 220px;
-  background: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='4020%20-140%201620%202160'><path%20d='M5222.374%2C1570.61c-113.564%2C75.906%20-249.281%2C119.653%20-398.76%2C120.598c-413.121%2C2.626%20-748.536%2C-364.106%20-748.536%2C-812.579c0%2C-448.478%20335.48%2C-805.436%20748.536%2C-812.583c426.224%2C-7.372%20753.184%2C356.733%20748.541%2C812.583c-2.343%2C229.954%20-83.895%2C434.136%20-219.211%2C580.305l309.115%2C402.246l-134.451%2C105.769l-305.234%2C-396.337l0%2C-0.002Zm22.696%2C-252.051c93.849%2C-115.546%20149.229%2C-271.135%20148.966%2C-442.195c-0.547%2C-352.422%20-248.109%2C-641.466%20-567.402%2C-645.488c-313.129%2C-3.946%20-567.402%2C289.233%20-567.402%2C645.488c0%2C356.255%20254.247%2C645.488%20567.402%2C645.488c108.369%2C0%20207.271%2C-31.745%20291.067%2C-87.155l-170.74%2C-221.697l132.525%2C-109.911l165.584%2C215.471l0%2C-0.001Z'%20fill='%2523ffffff'/></svg>") center/contain no-repeat; opacity: .06;
-}
-.lqfoot > * { position: relative; z-index: 1; }
-.lqfoot-word { font-size: 13px; font-weight: 800; letter-spacing: 2.4px; text-transform: uppercase; color: #fff; }
-.lqfoot-note { font-size: 12.5px; color: #93a8d0; margin-top: 5px; }
-.lqfoot-links { display: flex; flex-wrap: wrap; gap: 8px; }
-.lqfoot-links a {
-  font-size: 12.5px; font-weight: 700; text-decoration: none; color: #dbe6fb;
-  padding: 8px 14px; border-radius: 9px; border: 1px solid rgba(255, 255, 255, .18); transition: .15s;
-}
-.lqfoot-links a:hover { background: rgba(255, 255, 255, .12); color: #fff; }
 
 @media (max-width: 700px) {
   .page-shell { width: min(100% - 20px, 660px); margin-top: 16px; }
