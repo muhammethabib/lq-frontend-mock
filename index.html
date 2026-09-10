@@ -1881,7 +1881,7 @@
             padding: 0;
             font-size: 10px; font-weight: 800; color: #334155; 
             text-transform: uppercase; letter-spacing: 1.5px; 
-            margin-bottom: 0; position: sticky; top: 60px; z-index: 90; 
+            margin-bottom: 0; position: sticky; top: var(--lq-navh, 60px); z-index: 90; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
             overflow: hidden;
         }
@@ -6721,6 +6721,20 @@
             if (willOpen) lqRevealPanel(dd.querySelector('.filter-panel') || dd);
         }
         // Açılan pencere ekranın altına taşıyorsa sayfa oraya iner
+        // Sütun başlıkları, jump çubuğunun o anki yüksekliğine yapışsın
+        (function () {
+            function syncNavH() {
+                var bar = document.getElementById('stickyNav');
+                if (!bar) return;
+                var hgt = Math.round(bar.getBoundingClientRect().height);
+                document.documentElement.style.setProperty('--lq-navh', hgt + 'px');
+            }
+            window.addEventListener('resize', syncNavH);
+            window.addEventListener('scroll', syncNavH, { passive: true });
+            document.addEventListener('DOMContentLoaded', function () { setTimeout(syncNavH, 200); setTimeout(syncNavH, 900); });
+            window.addEventListener('load', syncNavH);
+            window.lqSyncNavH = syncNavH;
+        })();
         window.lqRevealPanel = function (el) {
             if (!el) return;
             [70, 420, 900].forEach(function (d) { setTimeout(function () { lqRevealStep(el); }, d); });
