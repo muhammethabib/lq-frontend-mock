@@ -7810,13 +7810,16 @@
             e.preventDefault();
             _osmInsert((key === 'y' || key === 'i') ? _resolveYe() : _OSM_MAP[key]);
             _echoKey(lowerKey, e.shiftKey ? 'shift' : null);
-        } else if (e.key.length === 1 && _LATIN.test(e.key)) {
-            e.preventDefault(); window._osmWarn();   // karşılığı olmayan Latin harf Osmanlıca tarafa girmez
+        } else if (e.key.length === 1 && !_OSM_ALLOWED.test(e.key)) { e.preventDefault(); window._osmWarn();   // karşılığı olmayan Latin harf Osmanlıca tarafa girmez
         }
     });
     // Osmanlıca tarafta Latin harf hiçbir yoldan kalmaz: yapıştırma, sürükleme,
     // otomatik doldurma, mobil klavye. Rakam, boşluk ve Arap harfleri serbest.
     var _LATIN_ALL = /\p{Script=Latin}/gu;
+    // Osmanlıca tarafta izin listesi: Arap yazısı harfleri ve işaretleri, görünmez
+    // birleştiriciler, boşluk ve joker. Rakam, noktalama, sembol, Latin harf girmez.
+    var _OSM_ALLOWED = /[\p{Script=Arabic}\p{Mn}\u200c\u200d \u00a0*]/u;
+    var _OSM_BLOCKED_ALL = /[^\p{Script=Arabic}\p{Mn}\u200c\u200d \u00a0*]/gu;
     window._osmWarn = function () {
         var w = document.getElementById('osmWarn');
         if (!w) return;
@@ -7824,14 +7827,11 @@
         clearTimeout(window.__osmWarnT);
         window.__osmWarnT = setTimeout(function () { w.classList.remove('show'); }, 2800);
     };
-    function _stripLatin() {
-        if (activeSide !== 'rtl' || currentSource !== 'osm') return;
-        var v = input.value;
-        if (!_LATIN.test(v)) return;
+    function _stripLatin() { if (activeSide !== 'rtl' || currentSource !== 'osm') return; var v = input.value; if (!_OSM_BLOCKED_ALL.test(v)) { _OSM_BLOCKED_ALL.lastIndex = 0; return; }
+        _OSM_BLOCKED_ALL.lastIndex = 0;
         window._osmWarn();
         var pos = input.selectionStart == null ? v.length : input.selectionStart;
-        var caret = v.slice(0, pos).replace(_LATIN_ALL, '').length;
-        input.value = v.replace(_LATIN_ALL, '');
+        var caret = v.slice(0, pos).replace(_OSM_BLOCKED_ALL, '').length; input.value = v.replace(_OSM_BLOCKED_ALL, '');
         input.setSelectionRange(caret, caret);
         _normalizeYe();
     }
