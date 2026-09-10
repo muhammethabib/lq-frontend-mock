@@ -3479,7 +3479,7 @@
 <input class="main-input" id="mainInput" onblur="handleBlur(this)" oninput="handleInput(this)" type="text"/>
 <div class="osm-warn" id="osmWarn" aria-live="polite">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-  <span class="osm-warn-lines"><span data-i18n="osmWarnText">Please enter a character in Ottoman script</span><span class="osm-warn-sub" data-i18n="osmWarnSub">No need to switch keyboards, use the one on screen</span></span>
+  <span class="osm-warn-lines"><span data-i18n="osmWarnText">Please enter a character in Ottoman script</span><span class="osm-warn-sub" data-i18n="osmWarnSub">On your keyboard, press the keys that match the letters below</span></span>
 </div>
 <div class="bidi-hint" id="bidiHint" aria-hidden="true">
   <span class="bidi-hint-tip"></span>
@@ -5261,7 +5261,7 @@
             allDicts: 'Tüm Sözlükler',
             wdOwnKeyboard: 'Kendi klavyenizle de yazabilirsiniz',
             osmWarnText: 'Lütfen Osmanlı harfli bir karakter giriniz',
-            osmWarnSub: 'Klavye değiştirmenize gerek yok, ekrandaki klavyeyi kullanabilirsiniz',
+            osmWarnSub: 'Klavyenizde, aşağıdaki harflere karşılık gelen tuşlara basınız',
             hintLat: 'Latin harfleriyle',
             hintOsm: 'Osmanlı harfleriyle',
             hintMid: 'tek çubuk, iki yön',
@@ -7826,6 +7826,8 @@
     window._osmWarn = function () {
         var w = document.getElementById('osmWarn');
         if (!w) return;
+        // "aşağıdaki harfler" ortada olsun: klavye kapalıysa açılır
+        if (!document.querySelector('#osmKbd.open') && typeof osmKbdShow === 'function') osmKbdShow();
         w.classList.add('show');
         clearTimeout(window.__osmWarnT);
         window.__osmWarnT = setTimeout(function () { w.classList.remove('show'); }, 2800);
