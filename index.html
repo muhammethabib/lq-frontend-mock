@@ -2685,7 +2685,7 @@
             box-shadow:0 12px 40px -8px rgba(0,0,0,0.18); }
         .osm-kbd.open { display:flex; }
         /* Osmanlıca tarafa Latin harf girilmeye çalışılınca çıkan uyarı */
-        .osm-warn { position: absolute; right: 18px; bottom: calc(100% + 12px); z-index: 60;
+        .osm-warn { position: fixed; z-index: 100000;
             display: inline-flex; align-items: center; gap: 9px; white-space: nowrap;
             background: #7f1d1d; color: #fff; border-radius: 10px; padding: 10px 16px;
             font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 600; line-height: 1;
@@ -7828,6 +7828,18 @@
         if (!w) return;
         // "aşağıdaki harfler" ortada olsun: klavye kapalıysa açılır
         if (!document.querySelector('#osmKbd.open') && typeof osmKbdShow === 'function') osmKbdShow();
+        // sekmelerin ve diğer katmanların üstünde kalsın diye gövdeye taşınır
+        if (w.parentElement !== document.body) document.body.appendChild(w);
+        var sw = document.getElementById('searchWrapper');
+        if (sw) {
+            var r = sw.getBoundingClientRect();
+            w.style.visibility = 'hidden';
+            w.classList.add('show');
+            var ww = w.offsetWidth, wh = w.offsetHeight;
+            w.style.left = Math.round(Math.max(12, r.right - 18 - ww)) + 'px';
+            w.style.top = Math.round(r.top - wh - 12) + 'px';
+            w.style.visibility = '';
+        }
         w.classList.add('show');
         clearTimeout(window.__osmWarnT);
         window.__osmWarnT = setTimeout(function () { w.classList.remove('show'); }, 2800);
