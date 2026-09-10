@@ -1486,15 +1486,15 @@
         /* --- STICKY NAV BAR --- */
         .sticky-nav-bar { 
             position: fixed; top: 0; left: 50%; transform: translateX(-50%) translateY(-100%); width: calc(100% - 2 * var(--lq-gutter)); max-width: var(--lq-max);
-            z-index: 100; min-height: 60px; height: auto; padding-top: 8px; padding-bottom: 8px; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px);
+            z-index: 100; min-height: 60px; height: auto; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px);
             border-bottom: 1px solid #cbd5e1; border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0;
-            border-radius: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.06); padding: 0 24px; 
+            border-radius: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.06); padding: 14px 24px; 
             display: flex; align-items: center; justify-content: flex-start;
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; opacity: 0; pointer-events: none;
         }
         .sticky-nav-bar.visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
         .sticky-nav-inner { width: 100%; display: flex; align-items: center; flex-direction: row;
-            flex-wrap: wrap; row-gap: 8px; }
+            flex-wrap: wrap; row-gap: 12px; }
         .sticky-label { font-size: 11px; font-weight: 800; color: #94a3b8; margin-right: 16px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
         .quick-link { 
             position: relative;
