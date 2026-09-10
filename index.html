@@ -1172,6 +1172,7 @@
         body.vs-home #lqStory { display: block; }
         body.team-page-open #lqStory, body.v3-page-open #lqStory { display: none !important; }
         body.tool-focus #lqStory, body.tool-focus #lqDiscover { display: none !important; }
+        #lqDiscover:focus, #lqDiscover:focus-visible { outline: none; box-shadow: none; }
         body.story-armed #lqStory { display: none !important; }
         body.lqs-fit { height: 100vh; overflow: hidden; }
         html:has(body.lqs-fit) { overflow: hidden; }
@@ -13126,6 +13127,8 @@ window.lqsStep = function (dir) {
     });
 })();
 window.lqsRevealStory = function () {
+    var d = document.getElementById('lqDiscover');
+    if (d && d.blur) d.blur();          // tıklamadan sonra odak çerçevesi kalmasın
     document.body.classList.remove('story-armed', 'lqs-fit');
     document.body.classList.add('story-open');
     if (typeof lqsFitStory === 'function') lqsFitStory();
