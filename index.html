@@ -1174,15 +1174,16 @@
         body.team-page-open #lqStory, body.v3-page-open #lqStory { display: none !important; }
         body.tool-focus #lqStory, body.tool-focus #lqDiscover { display: none !important; }
         #lqDiscover:focus, #lqDiscover:focus-visible { outline: none; box-shadow: none; }
-        body.story-armed #lqStory { display: none !important; }
         body.lqs-fit { height: 100vh; overflow: hidden; }
         html:has(body.lqs-fit) { overflow: hidden; }
         /* Akış modunda sayfa tek başına kalsın: üstteki sabit ögeler çekilir */
         body.in-story-view #menuBtn,
         body.in-story-view .legacy-link,
         body.in-story-view #langSwitch { opacity: 0; pointer-events: none; transition: opacity .25s ease; }
-        body.story-open { scrollbar-width: none; }
-        body.story-open::-webkit-scrollbar { width: 0; height: 0; }
+        /* Ana sayfa + akış: kaydırma serbest, çubuk görünmez */
+        html:has(body.vs-home:not(.tool-focus)), body.vs-home:not(.tool-focus) { scrollbar-width: none; }
+        html:has(body.vs-home:not(.tool-focus))::-webkit-scrollbar,
+        body.vs-home:not(.tool-focus)::-webkit-scrollbar { width: 0; height: 0; }
         #lqStory .snap-section { scroll-snap-align: none; height: 100vh; min-height: 620px; }
         /* Koleksiyon: altta beş, üstte dört; üst sıra aralara oturur */
         #lqStory .library-grid { display: flex; flex-direction: column; align-items: center; gap: 16px;
@@ -13048,13 +13049,14 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeEquival
 window.lqsTop = function () { window.scrollTo({ top: 0, behavior: 'smooth' }); };
 // Kullanıcı arama araçlarına dokununca alttaki tanıtım akışı çekilir;
 // ana sayfaya dönüşte veya yenilemede geri gelir.
-// Akış yalnızca davete tıklanınca açılır; tekerlek veya Page Down onu getirmez.
-// ---- Tam sayfa gezinme: serbest kaydırma yok, her hareket bir bölüm ----
+// ---- Serbest kaydırma + yumuşak oturma ----
+// Tekerlek, trackpad, dokunma ve klavye doğal çalışır; güçlü kaydırma birden
+// fazla bölüm geçebilir. Kaydırma durunca sayfa en yakın bölüme yumuşakça oturur.
+// Ekrandan uzun bir bölümün içinde okurken oturma devreye girmez.
 // Üstteki denetimler yalnız akış bölümlerindeyken çekilir; ana ekranda hep durur
 (function () {
     function sync() {
-        var inStory = document.body.classList.contains('story-open')
-            && window.scrollY > window.innerHeight * 0.35;
+        var inStory = lqsStoryOpen() && window.scrollY > window.innerHeight * 0.35;
         document.body.classList.toggle('in-story-view', inStory);
     }
     window.addEventListener('scroll', sync, { passive: true });
@@ -13067,15 +13069,20 @@ window.lqsStoryOpen = function () {
     var s = document.getElementById('lqStory');
     return !!s && getComputedStyle(s).display !== 'none';
 };
-var lqsBusy = false;
+// Oturma noktaları: ana ekran (0) ve her bölüm. Ekrandan uzun bölümde
+// üst ile alt kenar arası serbest bir aralıktır.
 function lqsStops() {
     var s = document.getElementById('lqStory');
-    if (!s) return [0];
-    var tops = [0];
-    s.querySelectorAll('.snap-section').forEach(function (sec) {
-        tops.push(Math.round(sec.getBoundingClientRect().top + window.scrollY));
+    var vh = window.innerHeight;
+    var max = Math.max(0, document.documentElement.scrollHeight - vh);
+    var out = [{ a: 0, b: 0 }];
+    if (s) s.querySelectorAll('.snap-section').forEach(function (sec) {
+        var top = Math.round(sec.getBoundingClientRect().top + window.scrollY);
+        var extra = Math.max(0, sec.offsetHeight - vh);
+        out.push({ a: Math.min(top, max), b: Math.min(top + extra, max) });
     });
-    return tops;
+    out.push({ a: max, b: max });
+    return out;
 }
 (function () {
     window.addEventListener('scroll', function () {
@@ -13083,54 +13090,46 @@ function lqsStops() {
         window.__lqsBadgeT = setTimeout(function () { if (window.lqsPlaceBadges) lqsPlaceBadges(); }, 120);
     }, { passive: true });
 })();
-window.lqsStep = function (dir) {
-    if (lqsBusy || !lqsStoryOpen()) return;
-    var stops = lqsStops(), y = window.scrollY, i = 0, best = 1e9;
-    stops.forEach(function (t, k) { var d = Math.abs(t - y); if (d < best) { best = d; i = k; } });
-    var t = stops[i + dir];
-    if (t === undefined) return;
-    lqsBusy = true;
-    window.scrollTo({ top: t, behavior: 'smooth' });
-    setTimeout(function () { lqsBusy = false; }, 620);
-};
 (function () {
-    window.addEventListener('wheel', function (e) {
+    var timer = null, settling = false, settleT = null, touching = false;
+    function canSettle() {
         var b = document.body;
-        if (!lqsStoryOpen()) {
-            // akış kilitliyken ana sayfa hiç oynamasın
-            if (b.classList.contains('story-armed') && b.classList.contains('vs-home')
-                && !b.classList.contains('tool-focus')) e.preventDefault();
-            return;
+        return lqsStoryOpen() && b.classList.contains('vs-home') && !b.classList.contains('tool-focus');
+    }
+    function settle() {
+        if (touching || !canSettle()) return;
+        var y = window.scrollY, best = null, bd = 1e9;
+        var stops = lqsStops();
+        for (var i = 0; i < stops.length; i++) {
+            var r = stops[i];
+            if (r.b > r.a && y > r.a + 1 && y < r.b - 1) return;   // uzun bölümün içinde
+            [r.a, r.b].forEach(function (p) { var d = Math.abs(p - y); if (d < bd) { bd = d; best = p; } });
         }
-        e.preventDefault();
-        if (Math.abs(e.deltaY) < 4) return;
-        lqsStep(e.deltaY > 0 ? 1 : -1);
-    }, { passive: false });
-    var touchY = null;
-    window.addEventListener('touchstart', function (e) { touchY = e.touches[0].clientY; }, { passive: true });
-    window.addEventListener('touchmove', function (e) { if (lqsStoryOpen()) e.preventDefault(); }, { passive: false });
-    window.addEventListener('touchend', function (e) {
-        if (!lqsStoryOpen() || touchY === null) return;
-        var dy = touchY - (e.changedTouches[0] ? e.changedTouches[0].clientY : touchY);
-        if (Math.abs(dy) > 40) lqsStep(dy > 0 ? 1 : -1);
-        touchY = null;
+        if (best === null || bd < 2) return;
+        settling = true;
+        window.scrollTo({ top: best, behavior: 'smooth' });
+        clearTimeout(settleT);
+        settleT = setTimeout(function () { settling = false; }, 900);
+    }
+    function schedule() {
+        if (settling) return;
+        clearTimeout(timer);
+        timer = setTimeout(settle, 180);
+    }
+    window.lqsSettle = settle;
+    window.addEventListener('scroll', schedule, { passive: true });
+    // Kullanıcı yeniden kaydırmaya başlarsa oturma hareketi ona bırakılır
+    ['wheel', 'keydown', 'pointerdown'].forEach(function (ev) {
+        window.addEventListener(ev, function () { settling = false; clearTimeout(timer); }, { passive: true, capture: true });
     });
-    document.addEventListener('keydown', function (e) {
-        if (!lqsStoryOpen()) return;
-        var t = e.target;
-        var down = ['PageDown', 'ArrowDown', ' ', 'Spacebar'].indexOf(e.key) !== -1;
-        var up = ['PageUp', 'ArrowUp'].indexOf(e.key) !== -1;
-        if (!down && !up) return;
-        if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)
-            && ['PageDown', 'PageUp'].indexOf(e.key) === -1) return;
-        e.preventDefault();
-        lqsStep(down ? 1 : -1);
-    });
+    window.addEventListener('touchstart', function () { touching = true; settling = false; clearTimeout(timer); }, { passive: true });
+    window.addEventListener('touchend', function () { touching = false; schedule(); }, { passive: true });
+    window.addEventListener('touchcancel', function () { touching = false; schedule(); }, { passive: true });
 })();
+// "Discover 2026 Innovations": doğrudan ve yumuşak biçimde ilk akış bölümüne
 window.lqsRevealStory = function () {
     var d = document.getElementById('lqDiscover');
     if (d && d.blur) d.blur();          // tıklamadan sonra odak çerçevesi kalmasın
-    document.body.classList.remove('story-armed', 'lqs-fit');
     document.body.classList.add('story-open');
     if (typeof lqsFitStory === 'function') lqsFitStory();
     var first = document.getElementById('sectionBuildLQ');
