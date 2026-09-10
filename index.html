@@ -13528,10 +13528,19 @@ document.addEventListener('click', function (e) {
             const el = document.getElementById(elementId); el.innerHTML = ''; const cursor = document.createElement('span'); cursor.className = 'typing-cursor'; el.appendChild(cursor);
             for (let i = 0; i < text.length; i++) { const char = text.charAt(i); cursor.insertAdjacentText('beforebegin', char); await wait(speed); } cursor.remove();
         }
+        function lqsStageScale() {
+            const st = document.querySelector('#sectionFlow .stage-container');
+            if (!st || !st.offsetWidth) return 1;
+            return st.getBoundingClientRect().width / st.offsetWidth;
+        }
         function createDynamicPath(sourceId, targetId, type) {
             const container = document.getElementById('pyramid-area'); const svg = document.getElementById('pyramid-svg'); const source = document.getElementById(sourceId); const target = document.getElementById(targetId);
             const cRect = container.getBoundingClientRect(); const sRect = source.getBoundingClientRect(); const tRect = target.getBoundingClientRect();
-            const x1 = (sRect.left + sRect.width / 2) - cRect.left; const y1 = (sRect.bottom - cRect.top) - 2; const x2 = (tRect.left + tRect.width / 2) - cRect.left; const y2 = (tRect.top - cRect.top);
+            const k = lqsStageScale();
+            const x1 = ((sRect.left + sRect.width / 2) - cRect.left) / k;
+            const y1 = ((sRect.bottom - cRect.top) - 2) / k;
+            const x2 = ((tRect.left + tRect.width / 2) - cRect.left) / k;
+            const y2 = (tRect.top - cRect.top) / k;
             const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
             const dy = y2 - y1; const cp1x = x1; const cp1y = y1 + dy * 0.45; const cp2x = x2; const cp2y = y2 - dy * 0.45;
             path.setAttribute("d", `M${x1},${y1} C${cp1x},${cp1y} ${cp2x},${cp2y} ${x2},${y2}`); path.setAttribute("class", `conn-path path-${type}`); path.id = 'path-to-' + targetId; svg.appendChild(path);
@@ -13549,11 +13558,16 @@ document.addEventListener('click', function (e) {
                 flashCont.appendChild(probe);
                 const hwRect = probe.getBoundingClientRect();   // kartın dönüşü dahil gerçek konum
                 probe.remove();
-                orb.style.left = (hwRect.left + hwRect.width / 2 - contRect.left - 6) + 'px';
-                orb.style.top = (hwRect.top + hwRect.height / 2 - contRect.top - 6) + 'px'; orb.style.opacity = '1'; orb.classList.add('orb-pulse'); await wait(1200); orb.classList.remove('orb-pulse');
+                const kS = lqsStageScale();
+                orb.style.left = ((hwRect.left + hwRect.width / 2 - contRect.left) / kS - 6) + 'px';
+                orb.style.top = ((hwRect.top + hwRect.height / 2 - contRect.top) / kS - 6) + 'px'; orb.style.opacity = '1'; orb.classList.add('orb-pulse'); await wait(1200); orb.classList.remove('orb-pulse');
             orb.style.transition = 'all 0.55s cubic-bezier(0.45, 0, 0.55, 1)';
-            const pyRect = document.getElementById('pyramid-area').getBoundingClientRect();
-            const destX = (pyRect.left - contRect.left) + (pyRect.width / 2); const destY = (pyRect.top - contRect.top) + 30; 
+            const nodeRect = mainNode.getBoundingClientRect();   // "hareket" düğümünün merkezi
+                const kD = lqsStageScale();
+                // düğüm daha boş; yazı gelince ~77px olacak, merkezi ona göre hesapla
+                const finalH = Math.max(nodeRect.height, 77);
+                const destX = (nodeRect.left + nodeRect.width / 2 - contRect.left) / kD - 6;
+                const destY = (nodeRect.top + finalH / 2 - contRect.top) / kD - 6; 
             orb.style.left = destX + 'px'; orb.style.top = destY + 'px'; await wait(1000); orb.style.opacity = '0'; 
             mainNode.style.opacity = '1'; mainNode.style.transform = 'translateX(-50%) scale(1)'; await wait(300);
             await typeWriter('main-osm', 'حركت', 150); await wait(200); await typeWriter('main-lat', 'hareket', 80); await wait(500);
