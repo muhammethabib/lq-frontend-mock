@@ -7620,8 +7620,8 @@
     });
 
     // Fiziksel klavye transliterasyon
-    // ALT kombinasyonları: Alt+Z=ظ, Alt+S=ث, Alt+T=ط
-    var _ALT_MAP = {'z':'\u0630','s':'\u062B','t':'\u0629'}; // Alt+Z=ذ(zel), Alt+S=ث(se), Alt+T=ة(te merbuta)
+    // ALT kombinasyonları ekrandaki klavyenin etiketinden okunur (_DUAL[x][3]),
+    // böylece EN ve TR düzeni kendi Alt atamalarıyla birebir çalışır.
 
     function _echoKey(lat, mod) {
         var keys = document.querySelectorAll('#osmKbd .osm-key');
@@ -7673,7 +7673,11 @@
         if (['Backspace','Delete','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End','Tab','Enter'].includes(e.key)) return;
         var lowerKey = e.key.toLowerCase();
         if (e.altKey) {
-            if (_ALT_MAP[lowerKey]) { e.preventDefault(); _osmInsert(_ALT_MAP[lowerKey]); _echoKey(lowerKey, 'alt'); }
+            // Mac'te Option+S "ß" üretir; harf tanınmazsa tuşun fiziksel yerine bakılır
+            var altLat = _DUAL[lowerKey] ? lowerKey
+                : (/^Key[A-Z]$/.test(e.code || '') ? e.code.slice(3).toLowerCase() : lowerKey);
+            var altCfg = _DUAL[altLat];
+            if (altCfg && altCfg[3]) { e.preventDefault(); _osmInsert(altCfg[3]); _echoKey(altLat, 'alt'); }
             return;
         }
         var key = e.shiftKey ? e.key.toUpperCase() : lowerKey;
