@@ -2684,7 +2684,22 @@
             background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:16px 20px 14px;
             box-shadow:0 12px 40px -8px rgba(0,0,0,0.18); }
         .osm-kbd.open { display:flex; }
-        .osm-kbd-row { display:flex; gap:6px; justify-content:center; }
+        .osm-kbd-row { display:flex; gap:6px; justify-content:center; flex-wrap:wrap; }
+        /* ===== Klavyeler ekrana göre esner (tablet alt sınır) ===== */
+        .osm-kbd, .grid-kbd { max-width: calc(100vw - 32px); box-sizing: border-box; }
+        .osm-kbd { width: max-content; }
+        @media (max-width: 1100px) {
+            .osm-key { width: 44px; height: 44px; }
+            .osm-kbd { padding: 14px 14px 12px; gap: 7px; }
+            .gk-cell { width: 44px; height: 44px; font-size: 20px; }
+        }
+        @media (max-width: 900px) {
+            .osm-kbd { padding: 12px 12px 10px; }
+            .osm-kbd-row { gap: 5px; }
+            .grid-kbd { padding: 12px; }
+            .grid-kbd-row { flex-wrap: wrap; row-gap: 5px; }
+        }
+
         .osm-key { display:flex; flex-direction:column; align-items:center; justify-content:center;
             width:46px; height:46px; border:1px solid #cbd5e1; border-radius:8px; background:#f8fafc;
             cursor:pointer; gap:2px; user-select:none; transition:all .12s; }
@@ -7564,11 +7579,14 @@
         // yazı alanının sağ iç kenarında yanıp söner — main-input'un padding-right'ı 20px.
         // Klavyenin sıfır konumunu artık bütün kutunun ortası değil, bu nokta belirliyor.
         var caretX = r.right - 20;
-        kbd.style.left = caretX + 'px';
-        kbd.style.top  = (r.bottom + 10) + 'px';
-        kbd.style.transform = 'translateX(-50%)';
-        kbd.classList.add('open');
-    }
+            kbd.classList.add('open');
+            // ekrandan taşmasın: dar ekranda kenara yaslanır
+            var kw = kbd.offsetWidth || 776;
+            var left = Math.max(16 + kw / 2, Math.min(caretX, window.innerWidth - 16 - kw / 2));
+            kbd.style.left = left + 'px';
+            kbd.style.top = (r.bottom + 10) + 'px';
+            kbd.style.transform = 'translateX(-50%)';
+        }
     function osmKbdHide() {
         document.getElementById('osmKbd').classList.remove('open');
         if (window.updateTemizleBtn) setTimeout(window.updateTemizleBtn, 0);
