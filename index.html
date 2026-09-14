@@ -6986,8 +6986,9 @@
             return '<span class="wb-word">' + String(text).slice(0, i) + '<span class="term-hl">' + term + '</span>' + String(text).slice(i + term.length) + '</span>';
         }
         function renderRow(w, isHidden, hl, index) {
-            // Geri bildirim düğmeleri her dört satırın üçünde çıkar
-            const showFb = ((index || 0) % 4) !== 3;
+            // Geri bildirim düğmeleri her dört satırın üçünde çıkar; ilk iki satır boş kalır
+            const _i = (index || 0);
+            const showFb = _i > 1 && (_i % 4) !== 3;
             const hoverClass = `hover-${w.type.toLowerCase()}`;
             const styleClass = w.type === 'ENTRY' ? 'style-ENTRY' : (w.type === 'SUBENTRY' ? 'style-SUBENTRY' : 'style-RELATED');
             const hiddenClass = isHidden ? 'hidden-row' : '';
