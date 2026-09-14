@@ -5334,7 +5334,7 @@
             aiGenerated: 'Otomatik üretilmiş okunuş',
             aiSuggest: 'Düzeltme öner',
             fixAuto: 'Otomatik üretildi',
-            fixVerified: 'Ekibimizce doğrulandı',
+            fixVerified: 'Ekibimizce girildi',
             fixOk: 'Okunuş doğru',
             rmWhy: 'Bu okunuşun neden yanlış olduğunu açıklayınız. Doğrusunu biliyorsanız ekleyebilirsiniz.',
             rmOk: 'Doğru',
@@ -7124,7 +7124,7 @@
             const _i = (index || 0);
             const isVerified = (_i % 7) === 2 || (_i % 11) === 5;
             const aiClass = isVerified ? '' : ' ai-reading';
-            const _fixLabel = isVerified ? t('fixVerified', 'Verified by our team') : t('fixAuto', 'Automatically generated');
+            const _fixLabel = isVerified ? t('fixVerified', 'Entered by our team') : t('fixAuto', 'Automatically generated');
             const verifiedMark =
                 '<span class="ai-fix">'
                 + '<span class="ai-fix-l1">' + _fixLabel + '</span>'
