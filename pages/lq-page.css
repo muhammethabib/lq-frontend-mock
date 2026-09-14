@@ -226,3 +226,10 @@ body { background: #fff; }
   .hero { border-radius: 0; }
   .content, .layout { border-radius: 0; width: calc(100% - 36px); }
 }
+
+/* Q filigranı: her sayfada aynı oranda dursun, üstten ve alttan kesilmesin */
+.hero:after {
+  top: 10% !important; bottom: 10% !important; height: auto !important;
+  right: 0 !important; transform: none !important;
+  width: clamp(180px, 26vw, 330px) !important;
+}

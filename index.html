@@ -555,12 +555,19 @@
             background: linear-gradient(90deg, #d97706, rgba(217,119,6,0) 62%);
         }
         .lqpage-hero:after {
-            content: ""; position: absolute; right: -3%; top: 50%; transform: translateY(-50%);
-            width: clamp(180px, 26vw, 330px); height: 120%;
+            content: ""; position: absolute; right: 0; top: 10%; bottom: 10%;
+            width: clamp(180px, 26vw, 330px);
             background: url("assets/q-watermark.svg") right center/contain no-repeat;
             opacity: .07; pointer-events: none;
         }
         .lqpage-hero { text-align: left !important; }
+        /* Ekip ve 3.0 açıkken ana sayfanın büyük logo bloğu görünmez;
+           bant doğrudan sayfanın üstüne oturur. */
+        body.team-page-open .logo-wrapper, body.v3-page-open .logo-wrapper,
+        body.team-page-open .logo-row, body.v3-page-open .logo-row,
+        body.team-page-open .logo-subtitle, body.v3-page-open .logo-subtitle { display: none !important; }
+        body.team-page-open .page-container,
+        body.v3-page-open .page-container { padding-top: 0 !important; }
         .lqpage-hero > * { position: relative; z-index: 1; }
         .lqpage-hero h1, .lqpage-hero h2, .lqpage-hero p { text-align: left !important; }
         .lqpage-eyebrow {
