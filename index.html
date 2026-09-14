@@ -2687,18 +2687,18 @@
         /* Üretilmiş okunuş biraz soluk basılır; doğrulanmış olan tam güçtedir */
         .latin-box.ai-reading { opacity: .72; }
         .col-lat:hover .latin-box.ai-reading { opacity: .9; }
-        /* Üzerine gelince: düzeltme imgesi ve iki satırlık açıklama, sağa doğru */
-        .ai-fix { display: inline-flex; align-items: center; gap: 7px; margin-inline-start: 8px;
-            flex: none; cursor: pointer; opacity: 0; transform: translateX(-4px);
-            transition: opacity .18s ease, transform .18s ease; vertical-align: middle; }
-        .col-lat:hover .ai-fix, .ai-fix:hover { opacity: 1; transform: translateX(0); }
+        /* Ünlem kelimenin dibinde değil, hücrenin sağ ucunda park eder */
+        .zone-interactive .flex-1.px-4, .head-cell { position: relative; }
+        .ai-fix { position: absolute; right: 10px; top: 50%; transform: translateY(-50%) translateX(-4px);
+            display: inline-flex; align-items: center; gap: 7px; margin: 0; flex: none; cursor: pointer;
+            opacity: 0; transition: opacity .18s ease, transform .18s ease; z-index: 30; }
+        .col-lat:hover ~ .ai-fix, .latin-box.ai-reading:hover ~ .ai-fix, .ai-fix:hover {
+            opacity: 1; transform: translateY(-50%) translateX(0); }
         .ai-fix-icon { display: inline-flex; align-items: center; justify-content: center;
             width: 22px; height: 22px; border-radius: 6px; flex: none;
             color: #94a3b8; background: #f8fafc; border: 1px solid #e2e8f0; transition: color .15s, border-color .15s; }
         .ai-fix-icon svg { width: 12px; height: 12px; }
         .ai-fix:hover .ai-fix-icon { color: #9d1c51; border-color: #f6cfdf; background: #fdf2f7; }
-        .ai-fix { position: relative; }
-        .col-lat { display: inline-flex; align-items: center; }
         .ai-fix-text { position: absolute; left: calc(100% + 8px); top: 50%; transform: translateY(-50%);
             display: flex; flex-direction: column; gap: 2px; line-height: 1.15; z-index: 40;
             font-family: 'Inter', sans-serif; white-space: nowrap; pointer-events: none;
@@ -2707,7 +2707,7 @@
         .ai-fix-l1 { font-size: 9.5px; font-weight: 700; letter-spacing: .3px; text-transform: uppercase; color: #b6c0cf; }
         .ai-fix-l2 { font-size: 10.5px; font-weight: 600; color: #8b97a8; }
         .ai-fix:hover .ai-fix-l2 { color: #9d1c51; }
-        @media (hover: none) { .ai-fix { opacity: 1; transform: none; } }
+        @media (hover: none) { .ai-fix { opacity: 1; transform: translateY(-50%); } }
 
         /* Osmanlıca tarafa Latin harf girilmeye çalışılınca çıkan uyarı */
         .osm-warn { position: fixed; z-index: 100000;
@@ -5289,7 +5289,7 @@
             osmWarnSub: 'Klavyenizde, aşağıdaki harflere karşılık gelen tuşlara basınız',
             fbYes: 'Bu okunuş doğru',
             fbNo: 'Bu okunuş yanlış',
-            aiGenerated: 'Otomatik üretilmiş',
+            aiGenerated: 'Otomatik üretilmiş okunuş',
             aiSuggest: 'Düzeltme öner',
             aiCorrect: 'Yapay zekâ üretimi okunuş \u00b7 Düzeltme öner',
             verifiedAria: 'Doğrulanmış okunuş',
@@ -7006,7 +7006,7 @@
                 + '<span class="ai-fix-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">'
                 + '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path>'
                 + '<line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>'
-                + '<span class="ai-fix-text"><span class="ai-fix-l1">' + t('aiGenerated', 'AI-generated') + '</span>'
+                + '<span class="ai-fix-text"><span class="ai-fix-l1">' + t('aiGenerated', 'Automated reading') + '</span>'
                 + '<span class="ai-fix-l2">' + t('aiSuggest', 'Suggest a correction') + '</span></span></span>');
             const hoverClass = `hover-${w.type.toLowerCase()}`;
             const styleClass = w.type === 'ENTRY' ? 'style-ENTRY' : (w.type === 'SUBENTRY' ? 'style-SUBENTRY' : 'style-RELATED');
@@ -7060,7 +7060,7 @@
                         <div class="word-pair-unit">
                             <div class="col-osm"><div class="word-box osm-box ottoman text-2xl pb-1 relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_o2, 'osm', hl)}</div></div>
                             <div class="col-gap"></div>
-                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group${aiClass}" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_l2, 'lat', hl)}</div>${verifiedMark}</div>
+                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group${aiClass}" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_l2, 'lat', hl)}</div></div>${verifiedMark}
                         </div>
                     </div>
                     <div class="w-[100px] flex justify-center items-center"><span class="category-pill shadow-sm">${catLabel(w.type)}</span></div>
@@ -7077,7 +7077,7 @@
                                 </div>
                             </div>
                             <div class="col-gap"></div>
-                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group${aiClass}" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" onclick="handleWordClick(event, this)">${w.e_l2}</div>${verifiedMark}</div>
+                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group${aiClass}" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" onclick="handleWordClick(event, this)">${w.e_l2}</div></div>${verifiedMark}
                         </div>
                     </div>
                     <div class="col-span-3 flex justify-end items-center pl-4">
