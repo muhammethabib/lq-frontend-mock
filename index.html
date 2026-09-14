@@ -2685,13 +2685,13 @@
             box-shadow:0 12px 40px -8px rgba(0,0,0,0.18); }
         .osm-kbd.open { display:flex; }
         /* Okunuş geri bildirimi: hep görünür ama soluk; üzerine gelince belirginleşir */
-        .fb-group { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: 8px;
+        .fb-group { display: inline-flex; align-items: center; gap: 0; margin-inline-start: 8px;
             vertical-align: middle; flex: none; }
-        .fb-btn { position: relative; width: 24px; height: 24px; border-radius: 6px; flex: none;
+        .fb-btn { position: relative; width: 21px; height: 21px; border-radius: 6px; flex: none;
             display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
             background: transparent; border: 1px solid transparent; color: #cbd5e1;
             transition: color .15s, border-color .15s, background .15s; }
-        .fb-btn:after { content: ''; position: absolute; left: -6px; right: -6px; top: -8px; bottom: -8px; }
+        .fb-btn:before { content: ''; position: absolute; left: -6px; right: -6px; top: -8px; bottom: -8px; }
         .fb-btn svg { width: 13px; height: 13px; }
         .fb-yes { color: #9ecfc8; }
         .fb-no { color: #e3b3c6; }
@@ -5287,6 +5287,9 @@
             wdOwnKeyboard: 'Kendi klavyenizle de yazabilirsiniz',
             osmWarnText: 'Lütfen Osmanlı harfli bir karakter giriniz',
             osmWarnSub: 'Klavyenizde, aşağıdaki harflere karşılık gelen tuşlara basınız',
+            fbYes: 'Bu okunuş doğru',
+            fbNo: 'Bu okunuş yanlış',
+            fbNote: 'Bu okunuş hakkında görüşünüzü paylaşın',
             hintLat: 'Latin harfleriyle',
             hintOsm: 'Osmanlı harfleriyle',
             hintMid: 'tek çubuk, iki yön',
@@ -7035,7 +7038,7 @@
                         <div class="word-pair-unit">
                             <div class="col-osm"><div class="word-box osm-box ottoman text-2xl pb-1 relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_o2, 'osm', hl)}</div></div>
                             <div class="col-gap"></div>
-                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_l2, 'lat', hl)}</div><span class="fb-group" onclick="event.stopPropagation()"><button type="button" class="fb-btn fb-yes" title="Dogru" onclick="lqFeedback(this,&#39;yes&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button><button type="button" class="fb-btn fb-no" title="Yanlis" onclick="lqFeedback(this,&#39;no&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button><button type="button" class="fb-btn fb-note" title="Not" onclick="lqFeedback(this,&#39;note&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"></path></svg></button></span></div>
+                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_l2, 'lat', hl)}</div><span class="fb-group" onclick="event.stopPropagation()"><button type="button" class="fb-btn fb-yes" data-tooltip="${t('fbYes', 'This pronunciation is correct')}" onclick="lqFeedback(this,&#39;yes&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button><button type="button" class="fb-btn fb-no" data-tooltip="${t('fbNo', 'This pronunciation is incorrect')}" onclick="lqFeedback(this,&#39;no&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button><button type="button" class="fb-btn fb-note" data-tooltip="${t('fbNote', 'Share your thoughts about this pronunciation')}" onclick="lqFeedback(this,&#39;note&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"></path></svg></button></span></div>
                         </div>
                     </div>
                     <div class="w-[100px] flex justify-center items-center"><span class="category-pill shadow-sm">${catLabel(w.type)}</span></div>
@@ -7052,7 +7055,7 @@
                                 </div>
                             </div>
                             <div class="col-gap"></div>
-                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" onclick="handleWordClick(event, this)">${w.e_l2}</div><span class="fb-group" onclick="event.stopPropagation()"><button type="button" class="fb-btn fb-yes" title="Dogru" onclick="lqFeedback(this,&#39;yes&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button><button type="button" class="fb-btn fb-no" title="Yanlis" onclick="lqFeedback(this,&#39;no&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button><button type="button" class="fb-btn fb-note" title="Not" onclick="lqFeedback(this,&#39;note&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"></path></svg></button></span></div>
+                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" onclick="handleWordClick(event, this)">${w.e_l2}</div><span class="fb-group" onclick="event.stopPropagation()"><button type="button" class="fb-btn fb-yes" data-tooltip="${t('fbYes', 'This pronunciation is correct')}" onclick="lqFeedback(this,&#39;yes&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button><button type="button" class="fb-btn fb-no" data-tooltip="${t('fbNo', 'This pronunciation is incorrect')}" onclick="lqFeedback(this,&#39;no&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button><button type="button" class="fb-btn fb-note" data-tooltip="${t('fbNote', 'Share your thoughts about this pronunciation')}" onclick="lqFeedback(this,&#39;note&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"></path></svg></button></span></div>
                         </div>
                     </div>
                     <div class="col-span-3 flex justify-end items-center pl-4">
