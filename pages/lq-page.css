@@ -258,3 +258,23 @@ body { background: #fff; }
   font-size: 1.3rem !important; line-height: 1.35 !important; margin-bottom: 6px !important;
 }
 .dictionary p, .coverage-card p, .sub-card li { font-size: 1rem !important; }
+
+/* ---------- tutarlılık: başlık kademeleri her sayfada aynı ölçü ---------- */
+/* h1 56px, alt başlık (.lead) 33px, bölüm başlığı (h2) 38px, ara başlık (h3) 21px lacivert */
+.hero h1, h1 { font-size: 3.5rem !important; }
+h2.lead, .lead { font-size: 2.05rem !important; line-height: 1.3 !important; margin-top: 0 !important; }
+.content h2:not(.lead), .layout h2:not(.lead), .article h2, .section-heading {
+  font-size: 2.4rem !important; line-height: 1.18 !important; color: var(--brand-dark) !important;
+}
+.content h3, .layout h3, .article h3, main h3 {
+  font-size: 1.3rem !important; line-height: 1.35 !important; color: var(--brand-dark) !important;
+  font-style: normal !important;
+}
+/* gövde listeleri de paragrafla aynı punto ve renk */
+.content li, .layout li, .article li { font-size: inherit; }
+.content li:not(.toc li):not(.sub-card li):not(.coverage-card li), .article li:not(.toc li) { color: var(--ink); }
+@media (max-width: 760px) {
+  .hero h1, h1 { font-size: 2.3rem !important; }
+  .content h2:not(.lead), .layout h2:not(.lead), .article h2, .section-heading { font-size: 1.8rem !important; }
+  h2.lead, .lead { font-size: 1.6rem !important; }
+}
