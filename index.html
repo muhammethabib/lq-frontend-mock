@@ -2687,13 +2687,13 @@
         /* Üretilmiş okunuş biraz soluk basılır; doğrulanmış olan tam güçtedir */
         .latin-box.ai-reading { opacity: .72; }
         .col-lat:hover .latin-box.ai-reading { opacity: .9; }
-        /* Ünlem kelimenin dibinde değil, hücrenin sağ ucunda park eder */
-        .zone-interactive .flex-1.px-4, .head-cell { position: relative; }
-        .ai-fix { position: absolute; right: 10px; top: 50%; transform: translateY(-50%) translateX(-4px);
-            display: inline-flex; align-items: center; gap: 7px; margin: 0; flex: none; cursor: pointer;
-            opacity: 0; transition: opacity .18s ease, transform .18s ease; z-index: 30; }
-        .col-lat:hover ~ .ai-fix, .latin-box.ai-reading:hover ~ .ai-fix, .ai-fix:hover {
-            opacity: 1; transform: translateY(-50%) translateX(0); }
+        /* Ünlem kelimenin içinden çıkıp hemen yanına yerleşir */
+        .ai-fix { position: relative; display: inline-flex; align-items: center; gap: 7px;
+            margin-inline-start: 6px; flex: none; cursor: pointer; z-index: 30;
+            opacity: 0; transform: translateX(-18px) scale(.9);
+            transition: opacity .24s ease-out, transform .26s cubic-bezier(.2,.8,.3,1); }
+        .col-lat:hover .ai-fix, .latin-box.ai-reading:hover + .ai-fix, .ai-fix:hover {
+            opacity: 1; transform: translateX(0) scale(1); }
         .ai-fix-icon { display: inline-flex; align-items: center; justify-content: center;
             width: 22px; height: 22px; border-radius: 6px; flex: none;
             color: #94a3b8; background: #f8fafc; border: 1px solid #e2e8f0; transition: color .15s, border-color .15s; }
@@ -2707,7 +2707,7 @@
         .ai-fix-l1 { font-size: 9.5px; font-weight: 700; letter-spacing: .3px; text-transform: uppercase; color: #b6c0cf; }
         .ai-fix-l2 { font-size: 10.5px; font-weight: 600; color: #8b97a8; }
         .ai-fix:hover .ai-fix-l2 { color: #9d1c51; }
-        @media (hover: none) { .ai-fix { opacity: 1; transform: translateY(-50%); } }
+        @media (hover: none) { .ai-fix { opacity: 1; transform: none; } }
 
         /* Osmanlıca tarafa Latin harf girilmeye çalışılınca çıkan uyarı */
         .osm-warn { position: fixed; z-index: 100000;
@@ -7060,7 +7060,7 @@
                         <div class="word-pair-unit">
                             <div class="col-osm"><div class="word-box osm-box ottoman text-2xl pb-1 relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_o2, 'osm', hl)}</div></div>
                             <div class="col-gap"></div>
-                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group${aiClass}" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_l2, 'lat', hl)}</div></div>${verifiedMark}
+                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group${aiClass}" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_l2, 'lat', hl)}</div>${verifiedMark}</div>
                         </div>
                     </div>
                     <div class="w-[100px] flex justify-center items-center"><span class="category-pill shadow-sm">${catLabel(w.type)}</span></div>
@@ -7077,7 +7077,7 @@
                                 </div>
                             </div>
                             <div class="col-gap"></div>
-                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group${aiClass}" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" onclick="handleWordClick(event, this)">${w.e_l2}</div></div>${verifiedMark}
+                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group${aiClass}" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" onclick="handleWordClick(event, this)">${w.e_l2}</div>${verifiedMark}</div>
                         </div>
                     </div>
                     <div class="col-span-3 flex justify-end items-center pl-4">
