@@ -2687,6 +2687,12 @@
         /* Üretilmiş okunuş biraz soluk basılır; doğrulanmış olan tam güçtedir */
         .latin-box.ai-reading { opacity: .72; }
         .latin-box.ai-reading:hover { opacity: .95; }
+        /* Bildirim penceresi: başlık kelimenin kendisidir */
+        .report-title.rt-word { display: flex; align-items: center; justify-content: center; gap: 14px; }
+        .rt-osm { font-family: 'Noto Naskh Arabic', serif; font-size: 26px; color: var(--brand-claret); line-height: 1.4; }
+        .rt-lat { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; color: #1e293b; }
+        .rt-sep { width: 1px; height: 22px; background: #e2e8f0; }
+
         /* Bildirim penceresi: üç seçenek */
         .rm-choice { display: flex; gap: 8px; justify-content: center; margin: 2px 0 14px; }
         .rm-opt { display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
@@ -2699,6 +2705,9 @@
         .rm-note:hover, .rm-note.on { color: #334155; border-color: #cbd5e1; background: #f1f5f9; }
         .rm-opt.on { box-shadow: inset 0 0 0 1px currentColor; }
 
+        /* Kelime kutuları dikeyde gerilmez */
+        .row-card .col-lat, .row-card .col-osm { display: flex !important; align-items: center !important; }
+
         /* Okunuş kartı: üstte kaynak etiketi, altında iki eylem */
         .latin-box.ai-reading { opacity: .72; }
         .latin-box.ai-reading:hover { opacity: .95; }
@@ -2709,8 +2718,21 @@
             opacity: 0; pointer-events: none; transform: translateX(-18px) scale(.92);
             transition: opacity .22s ease-out, transform .24s cubic-bezier(.2,.8,.3,1); }
         .ai-fix.show { opacity: 1; transform: translateX(0) scale(1); pointer-events: auto; }
+        body.lq-fix-open [data-tooltip]::after,
+        body.lq-fix-open #ghostTooltip,
+        body.lq-fix-open #visualGhostTooltip,
+        body.lq-fix-open #navTooltip,
+        body.lq-fix-open .ghost-tooltip,
+        body.lq-fix-open .visual-ghost-tooltip,
+        body.lq-fix-open .custom-tooltip-source,
+        body.lq-fix-open .tooltip-desc,
+        body.lq-fix-open .custom-tooltip-source,
+        body.lq-fix-open [class*="tooltip"],
+        body.lq-fix-open .word-hover-menu,
+        body.lq-fix-open .hover-menu { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
         .ai-fix-l1 { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 700;
-            letter-spacing: .35px; text-transform: uppercase; color: #bcc6d4; white-space: nowrap; }
+            letter-spacing: .35px; text-transform: uppercase; color: #bcc6d4; white-space: nowrap;
+            text-align: center; }
         .ai-fix-acts { display: inline-flex; align-items: center; gap: 6px; }
         .ai-act { display: inline-flex; align-items: center; gap: 5px; cursor: pointer;
             font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; white-space: nowrap;
@@ -6913,10 +6935,12 @@
                 openFix = fix;
                 if (fix) fix.classList.add('show');
             }
+            function quiet(on) { document.body.classList.toggle('lq-fix-open', !!on); }
             function hideSoon() {
                 clearTimeout(closeT);
                 closeT = setTimeout(function () {
                     if (openFix) { openFix.classList.remove('show'); openFix = null; }
+                    quiet(false);
                 }, 120);
             }
             document.addEventListener('mouseover', function (e) {
@@ -6928,7 +6952,8 @@
                     if (fix) show(fix);
                     return;
                 }
-                if (t.closest('.ai-fix')) { clearTimeout(closeT); return; }
+                if (t.closest('.ai-fix')) { clearTimeout(closeT); quiet(true); return; }
+                quiet(false);
                 hideSoon();
             }, true);
         })();
@@ -6956,8 +6981,11 @@
             var ttl = document.getElementById('reportTitle');
             if (ttl) {
                 if (!ttl.dataset.orig) ttl.dataset.orig = ttl.textContent;
-                ttl.textContent = t('aiSuggest', 'Suggest a correction');
+                ttl.innerHTML = '<span class="rt-osm">' + o + '</span><span class="rt-sep"></span><span class="rt-lat">' + l + '</span>';
+                ttl.classList.add('rt-word');
             }
+            var wc = document.querySelector('#reportForm .word-compare');
+            if (wc) wc.style.display = 'none';
             var ta = document.querySelector('#reportForm .report-textarea');
             if (ta && !ta.dataset.orig) ta.dataset.orig = ta.placeholder;
             var choice = document.querySelector('#rmChoice .rm-no');
@@ -6969,7 +6997,9 @@
                 var t2 = e.target;
                 if (!t2 || !t2.closest || t2.closest('.ai-fix')) return;
                 var ttl = document.getElementById('reportTitle');
-                if (ttl && ttl.dataset.orig) ttl.textContent = ttl.dataset.orig;
+                if (ttl && ttl.dataset.orig) { ttl.textContent = ttl.dataset.orig; ttl.classList.remove('rt-word'); }
+                var wc2 = document.querySelector('#reportForm .word-compare');
+                if (wc2) wc2.style.display = '';
                 var ta = document.querySelector('#reportForm .report-textarea');
                 if (ta && ta.dataset.orig) ta.placeholder = ta.dataset.orig;
             }, true);
