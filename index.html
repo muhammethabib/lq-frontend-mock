@@ -2684,6 +2684,15 @@
             background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:16px 20px 14px;
             box-shadow:0 12px 40px -8px rgba(0,0,0,0.18); }
         .osm-kbd.open { display:flex; }
+        /* Otomatik üretilmiş okunuş: yalnız satırın üzerine gelince beliren düzeltme imgesi */
+        .ai-mark { display: inline-flex; align-items: center; justify-content: center;
+            width: 14px; height: 14px; margin-inline-start: 6px; flex: none; cursor: pointer;
+            color: #cbd5e1; opacity: 0; transition: opacity .18s ease, color .15s ease; vertical-align: middle; }
+        .ai-mark svg { width: 12px; height: 12px; }
+        .row-card:hover .ai-mark { opacity: 1; }
+        .ai-mark:hover { color: #9d1c51; }
+        @media (hover: none) { .ai-mark { opacity: .45; } }
+
         /* Ekip tarafından doğrulanmış okunuş: küçük ve sessiz bir iz */
         .verified-mark { display: inline-flex; align-items: center; justify-content: center;
             width: 14px; height: 14px; margin-inline-start: 6px; flex: none;
@@ -5278,6 +5287,7 @@
             fbYes: 'Bu okunuş doğru',
             fbNo: 'Bu okunuş yanlış',
             verifiedLegend: 'ekibimizce doğrulanmış okunuş',
+            aiCorrect: 'Yapay zekâ üretimi okunuş \u00b7 Düzeltme öner',
             verifiedAria: 'Doğrulanmış okunuş',
             hintLat: 'Latin harfleriyle',
             hintOsm: 'Osmanlı harfleriyle',
@@ -6859,6 +6869,14 @@
             if (!already) btn.classList.add('on');
             g.classList.toggle('has-vote', !already);
         };
+        // Okunuş için düzeltme önerisi: mevcut bildirim penceresini açar
+        window.lqSuggestCorrection = function (el) {
+            var unit = el.closest('.word-pair-unit');
+            if (!unit) return;
+            var osm = unit.querySelector('.osm-box'), lat = unit.querySelector('.latin-box');
+            var o = osm ? osm.textContent.trim() : '', l = lat ? lat.textContent.trim() : '';
+            if (typeof openReportModal === 'function') openReportModal(o, l);
+        };
         window.lqRevealPanel = function (el) {
             if (!el) return;
             [70, 420, 900].forEach(function (d) { setTimeout(function () { lqRevealStep(el); }, d); });
@@ -6978,9 +6996,11 @@
             // Doğrulanmış okunuşlar azınlıktır: sessiz bir iz taşır, ötekiler hiçbir şey taşımaz
             const _i = (index || 0);
             const isVerified = (_i % 7) === 2 || (_i % 11) === 5;
+            const _fbTip = t('aiCorrect', 'AI-generated reading \u00b7 Suggest a correction');
             const verifiedMark = isVerified
                 ? '<span class="verified-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>'
-                : '';
+                : '<span class="ai-mark" data-tooltip="' + _fbTip + '" onclick="event.stopPropagation(); lqSuggestCorrection(this)">'
+                  + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>';
             const hoverClass = `hover-${w.type.toLowerCase()}`;
             const styleClass = w.type === 'ENTRY' ? 'style-ENTRY' : (w.type === 'SUBENTRY' ? 'style-SUBENTRY' : 'style-RELATED');
             const hiddenClass = isHidden ? 'hidden-row' : '';
