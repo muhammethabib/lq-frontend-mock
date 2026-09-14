@@ -2115,7 +2115,7 @@
             content: '';
             position: absolute;
             top: 100%;
-            left: 50%;
+            left: var(--wb-arrow, 50%);
             transform: translateX(-50%);
             border: 5px solid transparent;
             border-top-color: #1e293b;
@@ -2124,7 +2124,7 @@
         #wbMenu.wb-below::after {
             top: auto;
             bottom: 100%;
-            left: 50%;
+            left: var(--wb-arrow, 50%);
             transform: translateX(-50%);
             border: 5px solid transparent;
             border-top-color: transparent;
