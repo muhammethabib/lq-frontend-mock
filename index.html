@@ -733,6 +733,23 @@
         .v3-article p { font-size: 15px; color: #475569; line-height: 1.85; margin: 0 0 16px; }
         .v3-article { margin-bottom: 30px; }
 
+
+        /* ---- Ekip / 3.0: alt sayfalarla aynı ölçüler ---- */
+        .v3-page { max-width: none !important; margin: 0 !important; }
+        .lqpage-hero h1, .lqpage-hero h2 { font-size: 3.5rem !important; }
+        .lqpage-hero p { font-size: 1.02rem !important; }
+        .v3-page > .v3-draft-wrap { margin-top: clamp(28px, 4vw, 40px); }
+        .v3-draft-wrap .v3-draft-flag { margin-bottom: 0; }
+        .v3-page > .v3-article { margin-top: 18px; }
+        .v3-article p { font-size: 16.5px !important; line-height: 1.78 !important; color: #0f172a !important; margin: 0 0 1.15em !important; }
+        .v3-contact { font-size: 16.5px !important; color: #0f172a !important; margin-bottom: 72px; }
+        .team-name { font-size: 1.3rem !important; color: #082567 !important; }
+        .team-bio, .team-grid .team-bio { font-size: 16.5px !important; line-height: 1.78 !important; color: #0f172a !important; }
+        .team-bio p { margin: 0 0 1.15em !important; }
+        .team-bio p:last-child { margin-bottom: 0 !important; }
+        .team-role { font-size: 11px !important; letter-spacing: .17em !important; }
+        @media (max-width: 760px) { .lqpage-hero h1, .lqpage-hero h2 { font-size: 2.3rem !important; } }
+
         /* ---- Broşür sayfası ---- */
         .brochure { max-width: 900px; }
         .br-hero { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap: 34px; margin-bottom: 42px; align-items: start; }
@@ -3474,12 +3491,12 @@
 
 <section class="v3-page" id="v3Page" hidden>
   <div class="lqpage-topbar"><a href="#" onclick="lqGoHome(); return false;" aria-label="LexiQamus"><img src="assets/lexiqamus-logo.png" alt="LexiQamus"></a><a class="lqpage-lang" href="#" onclick="lqPageToggleLang(); return false;">TR</a></div>
-  <div class="v3-draft-flag" data-i18n="v3DraftFlag">Draft &middot; placeholder text</div>
   <div class="v3-head lqpage-hero">
     <span class="v3-kicker" data-i18n="v3ArtKicker">Version 3.0</span>
     <h2 data-i18n="v3ArtTitle">Ten years on, LexiQamus starts over</h2>
     <p class="v3-lead" data-i18n="v3ArtLead">A draft opening paragraph sits here until the real text arrives. It should say, in a few sentences, what LexiQamus set out to do in 2016 and why the tenth year seemed like the right moment to rebuild it from the ground up.</p>
   </div>
+  <div class="v3-draft-wrap"><div class="v3-draft-flag" data-i18n="v3DraftFlag">Draft &middot; placeholder text</div></div>
   <div class="v3-article">
     <p data-i18n="v3ArtP1">The first version answered a single question: what could this word be? You entered the letters you could make out, marked the ones you could not, and the tool listed every entry in the digitized dictionaries that fit. That question has not changed, but the answer can now be given in far greater detail.</p>
     <p data-i18n="v3ArtP2">In version 3.0 a word is no longer searched in one shape. Every inflected, derived, and compound form is scanned at once, and the results are laid out from the barest form to the fullest, so a reader can see at a glance whether what they hold is a root, an inflection, or a phrase that happens to look like one.</p>
