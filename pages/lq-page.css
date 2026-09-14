@@ -249,3 +249,10 @@ body { background: #fff; }
   .hero { height: auto; min-height: 260px; padding-top: 40px !important; padding-bottom: 40px !important; }
   .hero:after { width: 150px !important; height: 167px !important; right: 2% !important; }
 }
+
+/* ---------- kart ve liste başlıkları ---------- */
+/* Gövde metni 17px; kart başlıkları bunun altında kalıyordu. */
+.coverage-card h3, .dictionary h3, .sub-card h3, .entry-card h3, .card h3 {
+  font-size: 1.3rem !important; line-height: 1.35 !important; margin-bottom: 6px !important;
+}
+.dictionary p, .coverage-card p, .sub-card li { font-size: 1rem !important; }
