@@ -4398,7 +4398,7 @@
 <div class="report-modal-overlay" id="reportModal">
 <div class="report-card" onclick="event.stopPropagation()">
 <div id="reportForm">
-<div class="report-title">Report a Typo</div>
+<div class="report-title" id="reportTitle">Report a Typo</div>
 <div class="word-compare">
 <span class="wc-osm" id="osmTarget">...</span>
 <span class="wc-divider"></span>
@@ -5292,6 +5292,7 @@
             fbNo: 'Bu okunuş yanlış',
             aiGenerated: 'Otomatik üretilmiş okunuş',
             aiSuggest: 'Düzeltme öner',
+            aiSuggestPh: 'Lütfen doğru okunuşu yazınız',
             aiCorrect: 'Yapay zekâ üretimi okunuş \u00b7 Düzeltme öner',
             verifiedAria: 'Doğrulanmış okunuş',
             hintLat: 'Latin harfleriyle',
@@ -6881,7 +6882,29 @@
             var osm = unit.querySelector('.osm-box'), lat = unit.querySelector('.latin-box');
             var o = osm ? osm.textContent.trim() : '', l = lat ? lat.textContent.trim() : '';
             if (typeof openReportModal === 'function') openReportModal(o, l);
+            // Okunuştan açıldığında pencere "düzeltme öner" diline geçer
+            var ttl = document.getElementById('reportTitle');
+            if (ttl) {
+                if (!ttl.dataset.orig) ttl.dataset.orig = ttl.textContent;
+                ttl.textContent = t('aiSuggest', 'Suggest a correction');
+            }
+            var ta = document.querySelector('#reportForm .report-textarea');
+            if (ta) {
+                if (!ta.dataset.orig) ta.dataset.orig = ta.placeholder;
+                ta.placeholder = t('aiSuggestPh', 'Please write the correct reading');
+            }
         };
+        // Başka bir yerden açılırsa başlık eski haline döner
+        (function () {
+            document.addEventListener('click', function (e) {
+                var t2 = e.target;
+                if (!t2 || !t2.closest || t2.closest('.ai-fix')) return;
+                var ttl = document.getElementById('reportTitle');
+                if (ttl && ttl.dataset.orig) ttl.textContent = ttl.dataset.orig;
+                var ta = document.querySelector('#reportForm .report-textarea');
+                if (ta && ta.dataset.orig) ta.placeholder = ta.dataset.orig;
+            }, true);
+        })();
         window.lqRevealPanel = function (el) {
             if (!el) return;
             [70, 420, 900].forEach(function (d) { setTimeout(function () { lqRevealStep(el); }, d); });
