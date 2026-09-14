@@ -244,12 +244,12 @@ body { background: #fff; }
    eşit miktarda kesilir; her sayfada aynı yerde, aynı boyda. */
 .hero:after {
   top: 50% !important; bottom: auto !important; transform: translateY(-50%) !important;
-  right: 5% !important; width: 346px !important; height: 384px !important;
+  right: 5% !important; width: 360px !important; height: 384px !important;
   background-size: contain !important;
 }
 @media (max-width: 760px) {
   .hero { height: 260px; min-height: 260px; padding-top: 0 !important; padding-bottom: 0 !important; }
-  .hero:after { width: 264px !important; height: 294px !important; right: -6% !important; }
+  .hero:after { width: 275px !important; height: 294px !important; right: -6% !important; }
 }
 
 /* ---------- kart ve liste başlıkları ---------- */

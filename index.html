@@ -545,8 +545,8 @@
            Garamond başlıklar, gölgesiz kartlar. */
         .lqpage-hero {
             position: relative; overflow: hidden;
-            width: 100vw; margin-left: calc(50% - 50vw);
-            padding: 0 max(22px, calc((100vw - 860px) / 2));
+            width: 100%; margin-left: 0;
+            padding: 0 max(22px, calc((100% - 860px) / 2));
             min-height: 340px; height: 340px;
             display: flex; flex-direction: column; justify-content: center;
             color: #fff;
@@ -558,7 +558,7 @@
         }
         .lqpage-hero:after {
             content: ""; position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
-            width: 346px; height: 384px; /* şeridi (340px) hafif aşar, üst ve alttan kesilir */
+            width: 360px; height: 384px; /* şeridi (340px) hafif aşar, üst ve alttan kesilir */
             background: url("assets/q-watermark.svg") center/contain no-repeat;
             opacity: .07; pointer-events: none;
         }
@@ -588,7 +588,7 @@
             padding: 0 !important; }
         body.team-page-open .team-page, body.v3-page-open .v3-page { padding-top: 58px; margin-top: 0 !important; }
         body.team-page-open .page-container, body.v3-page-open .page-container {
-            padding: 0 !important; margin: 0 !important; }
+            padding: 0 !important; margin: 0 !important; max-width: none !important; }
         body.team-page-open .branding-area, body.v3-page-open .branding-area { display: none !important; }
         .lqpage-hero { text-align: left !important; }
         /* Ekip ve 3.0 açıkken ana sayfanın büyük logo bloğu görünmez;
