@@ -61,7 +61,7 @@ body {
 .hero:after {
   content: ""; position: absolute; right: -3%; top: 50%; transform: translateY(-50%);
   width: clamp(180px, 26vw, 330px); height: 120%;
-  background: url("../assets/q-watermark.svg") right center/contain no-repeat; opacity: .07; pointer-events: none;
+  background: url("../assets/q-watermark.svg?v=2") right center/contain no-repeat; opacity: .07; pointer-events: none;
 }
 .hero:before {
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
