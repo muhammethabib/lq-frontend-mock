@@ -546,7 +546,9 @@
         .lqpage-hero {
             position: relative; overflow: hidden;
             width: 100vw; margin-left: calc(50% - 50vw);
-            padding: clamp(44px, 6vw, 68px) max(22px, calc((100vw - 860px) / 2)) clamp(44px, 6vw, 62px);
+            padding: 0 max(22px, calc((100vw - 860px) / 2));
+            min-height: 340px; height: 340px;
+            display: flex; flex-direction: column; justify-content: center;
             color: #fff;
             background: linear-gradient(135deg, #04143c 0%, #082567 52%, #16388f 100%);
         }
@@ -555,9 +557,9 @@
             background: linear-gradient(90deg, #d97706, rgba(217,119,6,0) 62%);
         }
         .lqpage-hero:after {
-            content: ""; position: absolute; right: 0; top: 10%; bottom: 10%;
-            width: clamp(180px, 26vw, 330px);
-            background: url("assets/q-watermark.svg") right center/contain no-repeat;
+            content: ""; position: absolute; right: 6%; top: 50%; transform: translateY(-50%);
+            width: 234px; height: 260px;
+            background: url("assets/q-watermark.svg") center/contain no-repeat;
             opacity: .07; pointer-events: none;
         }
         /* Sayfa bölümleri açıkken üstte, diğer sayfalardaki gibi
@@ -570,11 +572,24 @@
         }
         body.team-page-open .lqpage-topbar,
         body.v3-page-open .lqpage-topbar { display: flex; }
+        .lqpage-topbar { justify-content: space-between; padding-left: clamp(16px, 4vw, 34px); }
         .lqpage-topbar img { height: 37px; width: auto; display: block; }
+        .lqpage-topbar .lqpage-lang {
+            font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .3px;
+            text-decoration: none; color: #082567; border: 1px solid #dbe4f0;
+            padding: 6px 12px; border-radius: 8px; transition: .15s;
+        }
+        .lqpage-topbar .lqpage-lang:hover { background: #082567; color: #fff; border-color: #082567; }
+        body.team-page-open .menu-btn, body.v3-page-open .menu-btn,
+        body.team-page-open .legacy-link, body.v3-page-open .legacy-link,
+        body.team-page-open #langSwitch, body.v3-page-open #langSwitch,
+        body.team-page-open .lang-switch, body.v3-page-open .lang-switch { display: none !important; }
         body.team-page-open, body.v3-page-open { background: #fff !important;
             padding: 0 !important; }
         body.team-page-open .team-page, body.v3-page-open .v3-page { padding-top: 58px; margin-top: 0 !important; }
-        body.team-page-open .page-container, body.v3-page-open .page-container { padding-top: 0 !important; margin-top: 0 !important; }
+        body.team-page-open .page-container, body.v3-page-open .page-container {
+            padding: 0 !important; margin: 0 !important; }
+        body.team-page-open .branding-area, body.v3-page-open .branding-area { display: none !important; }
         .lqpage-hero { text-align: left !important; }
         /* Ekip ve 3.0 açıkken ana sayfanın büyük logo bloğu görünmez;
            bant doğrudan sayfanın üstüne oturur. */
@@ -610,7 +625,11 @@
         .team-page > .team-grid { margin-bottom: 72px; }
         .team-name { font-family: 'EB Garamond', Garamond, Georgia, serif !important;
             font-weight: 600 !important; font-size: 1.3rem !important; color: #1b2a44 !important; }
-        .team-card { box-shadow: none !important; border: 1px solid #e2e8f0 !important; border-radius: 14px !important; }
+        .team-card { box-shadow: none !important; border: 0 !important; border-radius: 0 !important;
+            background: transparent !important; padding: 0 !important; }
+        .team-lead, .team-grid { gap: 0 !important; }
+        .team-lead > .team-card, .team-grid > .team-card { padding: 34px 0 !important; border-top: 1px solid #edf1f6 !important; }
+        .team-lead > .team-card:first-child { border-top: 0 !important; }
 
         .v3-page > .v3-head { max-width: none; }
         .v3-head { text-align: left; margin-bottom: 0; }
@@ -3377,7 +3396,7 @@
 </div>
 
 <section class="team-page" id="teamPage" hidden>
-  <div class="lqpage-topbar"><a href="#" onclick="lqGoHome(); return false;" aria-label="LexiQamus"><img src="assets/lexiqamus-logo.png" alt="LexiQamus"></a></div>
+  <div class="lqpage-topbar"><a href="#" onclick="lqGoHome(); return false;" aria-label="LexiQamus"><img src="assets/lexiqamus-logo.png" alt="LexiQamus"></a><a class="lqpage-lang" href="#" onclick="lqPageToggleLang(); return false;">TR</a></div>
   <header class="lqpage-hero">
     <div class="lqpage-eyebrow" data-i18n="teamHeroEyebrow">About the project</div>
     <h1 data-i18n="menuTeam">Team</h1>
@@ -3454,7 +3473,7 @@
 </section>
 
 <section class="v3-page" id="v3Page" hidden>
-  <div class="lqpage-topbar"><a href="#" onclick="lqGoHome(); return false;" aria-label="LexiQamus"><img src="assets/lexiqamus-logo.png" alt="LexiQamus"></a></div>
+  <div class="lqpage-topbar"><a href="#" onclick="lqGoHome(); return false;" aria-label="LexiQamus"><img src="assets/lexiqamus-logo.png" alt="LexiQamus"></a><a class="lqpage-lang" href="#" onclick="lqPageToggleLang(); return false;">TR</a></div>
   <div class="v3-draft-flag" data-i18n="v3DraftFlag">Draft &middot; placeholder text</div>
   <div class="v3-head lqpage-hero">
     <span class="v3-kicker" data-i18n="v3ArtKicker">Version 3.0</span>
@@ -9140,6 +9159,19 @@
         // ===================== YAN MENÜ =====================
         function lqToggleMenu() { document.body.classList.toggle('menu-open'); lqSyncMenuLang(); }
         function lqCloseMenu() { document.body.classList.remove('menu-open'); }
+
+        function lqPageToggleLang() {
+            var btns = Array.prototype.slice.call(document.querySelectorAll('.lang-btn'));
+            var target = btns.filter(function (b) { return !b.classList.contains('active'); })[0];
+            if (target) target.click();
+            setTimeout(lqPageSyncLang, 60);
+        }
+        function lqPageSyncLang() {
+            var act = document.querySelector('.lang-btn.active');
+            var other = act && act.textContent.trim().toUpperCase() === 'TR' ? 'EN' : 'TR';
+            document.querySelectorAll('.lqpage-lang').forEach(function (a) { a.textContent = other; });
+        }
+        document.addEventListener('DOMContentLoaded', lqPageSyncLang);
         function lqOpenTeam() {
             lqCloseMenu();
             if (typeof lqCloseV3 === 'function') lqCloseV3();

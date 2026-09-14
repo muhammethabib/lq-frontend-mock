@@ -233,3 +233,19 @@ body { background: #fff; }
   right: 0 !important; transform: none !important;
   width: clamp(180px, 26vw, 330px) !important;
 }
+
+/* ---------- başlık şeridi: her sayfada aynı boy, aynı Q ---------- */
+.hero {
+  min-height: 340px; height: 340px;
+  display: flex; flex-direction: column; justify-content: center;
+  padding-top: 0 !important; padding-bottom: 0 !important;
+}
+.hero:after {
+  top: 50% !important; bottom: auto !important; transform: translateY(-50%) !important;
+  right: 6% !important; width: 234px !important; height: 260px !important;
+  background-size: contain !important;
+}
+@media (max-width: 760px) {
+  .hero { height: auto; min-height: 260px; padding-top: 40px !important; padding-bottom: 40px !important; }
+  .hero:after { width: 150px !important; height: 167px !important; right: 2% !important; }
+}
