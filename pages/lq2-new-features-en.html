@@ -108,7 +108,7 @@
     .feature-list li::before { content: ""; position: absolute; left: 2px; top: .72em; width: 9px; height: 9px; background: var(--brand); border-radius: 50%; box-shadow: 0 0 0 4px var(--brand-soft); }
     figure { margin: 28px 0 38px; padding: 13px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 12px 32px rgba(23,33,43,.08); }
     figure img { width: 100%; border-radius: 8px; }
-    .section-kicker { display: inline-block; margin: 0 0 .5rem; color: var(--brand); font-family: 'EB Garamond', Garamond, Georgia, serif; font-size: 1.7rem; font-weight: 600; line-height: 1.2; }
+    .section-kicker { display: inline-block; margin: 0 0 .5rem; color: var(--brand); font-size: .78rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
     .publication { margin-top: 54px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
     [dir="rtl"] { font-family: "Noto Naskh Arabic", "Times New Roman", serif; font-size: 1.12em; }
     @media (max-width: 880px) {
@@ -138,7 +138,10 @@
       figure { break-inside: avoid; box-shadow: none; }
     }
   </style>
-  <link rel="stylesheet" href="lq-page.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lq-page.css?v=3">
 </head>
 <body>
 <div class="lqbar">
@@ -163,7 +166,7 @@
         <a href="#view-original">View Original</a>
       </nav>
 
-      <main>
+      <main class="guide-steps">
         <section id="introduction" class="intro-section">
           <span class="section-kicker">LexiQamus 2.0</span>
           <p>LexiQamus was first published June 7, 2016. To date, we have provided word solving services while only being able to provide links to words’ definitions. Over the past three and a half years, however, we have continued our efforts by digitizing every entry, subentry, English definition, and word from other languages of James Redhouse’s 1890 <em>A Turkish and English Lexicon</em>. Being one of the most formidable works in the field, we are therefore pleased to be able to present the fruits of our labor to you, our valuable subscribers, colleagues, and partners.</p>
