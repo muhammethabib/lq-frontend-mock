@@ -2686,17 +2686,16 @@
         .osm-kbd.open { display:flex; }
         /* Üretilmiş okunuş biraz soluk basılır; doğrulanmış olan tam güçtedir */
         .latin-box.ai-reading { opacity: .72; }
-        .col-lat:hover .latin-box.ai-reading { opacity: .9; }
+        .latin-box.ai-reading:hover { opacity: .95; }
         /* Ünlem ve iki satırlık açıklama tek kart: kelimenin içinden çıkıp yanına yerleşir */
         .ai-fix { position: relative; display: inline-flex; align-items: center; gap: 8px;
             margin-inline-start: 6px; flex: none; cursor: pointer; z-index: 30;
             background: #fff; border: 1px solid #e8edf4; border-radius: 9px; padding: 5px 11px 5px 9px;
             box-shadow: 0 8px 20px -14px rgba(15,23,42,.5);
-            opacity: 0; transform: translateX(-18px) scale(.92);
+            opacity: 0; pointer-events: none; transform: translateX(-18px) scale(.92);
             transition: opacity .24s ease-out, transform .26s cubic-bezier(.2,.8,.3,1),
                         border-color .15s ease, box-shadow .15s ease; }
-        .col-lat:hover .ai-fix, .latin-box.ai-reading:hover + .ai-fix, .ai-fix:hover {
-            opacity: 1; transform: translateX(0) scale(1); }
+        .ai-fix.show { opacity: 1; transform: translateX(0) scale(1); pointer-events: auto; }
         .ai-fix:hover { border-color: #f6cfdf; box-shadow: 0 10px 24px -14px rgba(157,28,81,.45); }
         .ai-fix-icon { display: inline-flex; align-items: center; justify-content: center;
             width: 15px; height: 15px; flex: none; color: #a9b6c8; background: none; border: 0;
@@ -2708,7 +2707,7 @@
         .ai-fix-l1 { font-size: 9px; font-weight: 700; letter-spacing: .35px; text-transform: uppercase; color: #bcc6d4; }
         .ai-fix-l2 { font-size: 12px; font-weight: 650; color: #64748b; }
         .ai-fix:hover .ai-fix-l2 { color: #9d1c51; }
-        @media (hover: none) { .ai-fix { opacity: 1; transform: none; } }
+        @media (hover: none) { .ai-fix { opacity: 1; transform: none; pointer-events: auto; } }
 
         /* Osmanlıca tarafa Latin harf girilmeye çalışılınca çıkan uyarı */
         .osm-warn { position: fixed; z-index: 100000;
@@ -6876,6 +6875,34 @@
             g.classList.toggle('has-vote', !already);
         };
         // Okunuş için düzeltme önerisi: mevcut bildirim penceresini açar
+        // Kart yalnız okunuşun üzerindeyken açılır; karta geçerken açık kalır
+        (function () {
+            var openFix = null, closeT = null;
+            function show(fix) {
+                clearTimeout(closeT);
+                if (openFix && openFix !== fix) openFix.classList.remove('show');
+                openFix = fix;
+                if (fix) fix.classList.add('show');
+            }
+            function hideSoon() {
+                clearTimeout(closeT);
+                closeT = setTimeout(function () {
+                    if (openFix) { openFix.classList.remove('show'); openFix = null; }
+                }, 120);
+            }
+            document.addEventListener('mouseover', function (e) {
+                var t = e.target;
+                if (!t || !t.closest) return;
+                var word = t.closest('.latin-box.ai-reading');
+                if (word) {
+                    var fix = word.parentElement && word.parentElement.querySelector('.ai-fix');
+                    if (fix) show(fix);
+                    return;
+                }
+                if (t.closest('.ai-fix')) { clearTimeout(closeT); return; }
+                hideSoon();
+            }, true);
+        })();
         window.lqSuggestCorrection = function (el) {
             var unit = el.closest('.word-pair-unit');
             if (!unit) return;
