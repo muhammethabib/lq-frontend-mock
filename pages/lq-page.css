@@ -311,3 +311,9 @@ h2.lead, .lead { font-size: 2.05rem !important; line-height: 1.3 !important; mar
 
 /* 2.0: giriş başlığı 'LexiQamus 2.0' bölüm başlığı ölçüsünde */
 .section-kicker { display: block !important; margin: 0 0 .6rem !important; color: var(--brand-dark) !important; font-family: 'EB Garamond', Garamond, Georgia, serif !important; font-size: 2.4rem !important; font-weight: 600 !important; letter-spacing: 0 !important; text-transform: none !important; line-height: 1.18 !important; }
+
+/* dijitalleştirme: gövde diğer sayfalarla aynı punto */
+.article { font-size: 1rem !important; }
+.article p, .article li { font-size: 16.5px !important; line-height: 1.78 !important; }
+.article .toc-title { font-size: 11px !important; }
+.article .bibliography, .article .footnotes { font-size: .94rem !important; }
