@@ -6985,7 +6985,9 @@
             // bitişmesi bozulur; bu yüzden kelimenin tamamını tek bir satır içi kapsayıcıya alıyoruz.
             return '<span class="wb-word">' + String(text).slice(0, i) + '<span class="term-hl">' + term + '</span>' + String(text).slice(i + term.length) + '</span>';
         }
-        function renderRow(w, isHidden, hl) {
+        function renderRow(w, isHidden, hl, index) {
+            // Geri bildirim düğmeleri her dört satırın üçünde çıkar
+            const showFb = ((index || 0) % 4) !== 3;
             const hoverClass = `hover-${w.type.toLowerCase()}`;
             const styleClass = w.type === 'ENTRY' ? 'style-ENTRY' : (w.type === 'SUBENTRY' ? 'style-SUBENTRY' : 'style-RELATED');
             const hiddenClass = isHidden ? 'hidden-row' : '';
@@ -7038,7 +7040,7 @@
                         <div class="word-pair-unit">
                             <div class="col-osm"><div class="word-box osm-box ottoman text-2xl pb-1 relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_o2, 'osm', hl)}</div></div>
                             <div class="col-gap"></div>
-                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_l2, 'lat', hl)}</div><span class="fb-group" onclick="event.stopPropagation()"><button type="button" class="fb-btn fb-yes" data-tooltip="${t('fbYes', 'This pronunciation is correct')}" onclick="lqFeedback(this,&#39;yes&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button><button type="button" class="fb-btn fb-no" data-tooltip="${t('fbNo', 'This pronunciation is incorrect')}" onclick="lqFeedback(this,&#39;no&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button><button type="button" class="fb-btn fb-note" data-tooltip="${t('fbNote', 'Share your thoughts about this pronunciation')}" onclick="lqFeedback(this,&#39;note&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"></path></svg></button></span></div>
+                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.r_o2}" data-wb-lat="${w.r_l2}" data-wb-morph="${resultMorphWord}" onclick="handleWordClick(event, this)">${hlTerm(w.r_l2, 'lat', hl)}</div>${showFb ? `<span class="fb-group" onclick="event.stopPropagation()"><button type="button" class="fb-btn fb-yes" data-tooltip="${t('fbYes', 'This pronunciation is correct')}" onclick="lqFeedback(this,&#39;yes&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button><button type="button" class="fb-btn fb-no" data-tooltip="${t('fbNo', 'This pronunciation is incorrect')}" onclick="lqFeedback(this,&#39;no&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button><button type="button" class="fb-btn fb-note" data-tooltip="${t('fbNote', 'Share your thoughts about this pronunciation')}" onclick="lqFeedback(this,&#39;note&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"></path></svg></button></span>` : ''}</div>
                         </div>
                     </div>
                     <div class="w-[100px] flex justify-center items-center"><span class="category-pill shadow-sm">${catLabel(w.type)}</span></div>
@@ -7055,7 +7057,7 @@
                                 </div>
                             </div>
                             <div class="col-gap"></div>
-                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" onclick="handleWordClick(event, this)">${w.e_l2}</div><span class="fb-group" onclick="event.stopPropagation()"><button type="button" class="fb-btn fb-yes" data-tooltip="${t('fbYes', 'This pronunciation is correct')}" onclick="lqFeedback(this,&#39;yes&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button><button type="button" class="fb-btn fb-no" data-tooltip="${t('fbNo', 'This pronunciation is incorrect')}" onclick="lqFeedback(this,&#39;no&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button><button type="button" class="fb-btn fb-note" data-tooltip="${t('fbNote', 'Share your thoughts about this pronunciation')}" onclick="lqFeedback(this,&#39;note&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"></path></svg></button></span></div>
+                            <div class="col-lat"><div class="word-box latin-box text-[15px] relative group" data-tooltip="${t('wbSearchWord', 'Search this word')}" data-wb-osm="${w.e_o2}" data-wb-lat="${w.e_l2}" data-wb-morph="${entryMorphWord}" onclick="handleWordClick(event, this)">${w.e_l2}</div>${showFb ? `<span class="fb-group" onclick="event.stopPropagation()"><button type="button" class="fb-btn fb-yes" data-tooltip="${t('fbYes', 'This pronunciation is correct')}" onclick="lqFeedback(this,&#39;yes&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></button><button type="button" class="fb-btn fb-no" data-tooltip="${t('fbNo', 'This pronunciation is incorrect')}" onclick="lqFeedback(this,&#39;no&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button><button type="button" class="fb-btn fb-note" data-tooltip="${t('fbNote', 'Share your thoughts about this pronunciation')}" onclick="lqFeedback(this,&#39;note&#39;)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"></path></svg></button></span>` : ''}</div>
                         </div>
                     </div>
                     <div class="col-span-3 flex justify-end items-center pl-4">
@@ -7107,10 +7109,7 @@
 
             let html = '';
             const hl = sectionId !== 'content-exact';   // TEMEL bölümünde işaretleme yok
-            sortedData.forEach((w, index) => {
-                const isHidden = index >= shown;
-                html += renderRow(w, isHidden, hl);
-            });
+            sortedData.forEach((w, index) => { const isHidden = index >= shown; html += renderRow(w, isHidden, hl, index); });
 
             if (shown < total) {
                 html += buildShowMoreControls(sectionId, shown, total);
