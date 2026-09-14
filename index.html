@@ -2712,7 +2712,7 @@
         .latin-box.ai-reading { opacity: .72; }
         .latin-box.ai-reading:hover { opacity: .95; }
         .ai-fix { position: relative; display: inline-flex; flex-direction: column; gap: 5px;
-            margin-inline-start: 30px; flex: none; z-index: 30; text-align: start;
+            margin-inline-start: 16px; flex: none; z-index: 30; text-align: start;
             background: #fff; border: 1px solid #e8edf4; border-radius: 10px; padding: 7px 11px 8px;
             box-shadow: 0 10px 24px -14px rgba(15,23,42,.5);
             opacity: 0; pointer-events: none; transform: translateX(-18px) scale(.92);
@@ -5661,8 +5661,7 @@
             
             let top = rect.top - tooltipRect.height - 10;
             let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-            // Okunuş kartı sağdan açıldığı için menü bir miktar sola alınır
-            if (trigger.closest && trigger.closest('.row-card') && trigger.classList.contains('latin-box')) left -= 46;
+
             
             // BOUNDARY DETECTION (Prevent Overflow)
             const padding = 10;
@@ -6936,7 +6935,18 @@
                 clearTimeout(closeT);
                 if (openFix && openFix !== fix) openFix.classList.remove('show');
                 openFix = fix;
-                if (fix) fix.classList.add('show');
+                if (fix) { fix.classList.add('show'); setTimeout(function () { keepClear(fix); }, 20); }
+            }
+            // Kelime menüsü kartla çakışmasın: kartın soluna alınır
+            function keepClear(fix) {
+                var menu = document.getElementById('wbMenu');
+                if (!menu || !fix) return;
+                var m = menu.getBoundingClientRect(), f = fix.getBoundingClientRect();
+                if (!m.width) return;
+                var overlap = !(m.right <= f.left - 6 || m.left >= f.right || m.bottom <= f.top || m.top >= f.bottom);
+                if (!overlap) return;
+                var want = Math.max(10, f.left - m.width - 10);
+                menu.style.left = want + 'px';
             }
             function quiet(on) { document.body.classList.toggle('lq-fix-open', !!on); }
             function hideSoon() {
