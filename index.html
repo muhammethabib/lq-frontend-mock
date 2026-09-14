@@ -6947,6 +6947,13 @@
                 if (!overlap) return;
                 var want = Math.max(10, f.left - m.width - 10);
                 menu.style.left = want + 'px';
+                // ok kelimenin ortasını göstersin
+                var word = fix.parentElement && fix.parentElement.querySelector('.latin-box');
+                if (word) {
+                    var w = word.getBoundingClientRect();
+                    var ax = Math.max(12, Math.min(m.width - 12, (w.left + w.width / 2) - want));
+                    menu.style.setProperty('--wb-arrow', ax + 'px');
+                }
             }
             function quiet(on) { document.body.classList.toggle('lq-fix-open', !!on); }
             function hideSoon() {
