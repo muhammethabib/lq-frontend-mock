@@ -6568,6 +6568,7 @@
                 // Position offscreen first to measure
                 menu.style.left = '-9999px';
                 menu.style.top = '-9999px';
+                menu.style.removeProperty('--wb-arrow');
                 menu.classList.add('visible');
 
                 // After paint, measure and reposition
@@ -6944,14 +6945,16 @@
                 var m = menu.getBoundingClientRect(), f = fix.getBoundingClientRect();
                 if (!m.width) return;
                 var overlap = !(m.right <= f.left - 6 || m.left >= f.right || m.bottom <= f.top || m.top >= f.bottom);
-                if (!overlap) return;
-                var want = Math.max(10, f.left - m.width - 10);
-                menu.style.left = want + 'px';
-                // ok kelimenin ortasını göstersin
+                var left = m.left;
+                if (overlap) {
+                    left = Math.max(10, f.left - m.width - 10);
+                    menu.style.left = left + 'px';
+                }
+                // ok her durumda kelimenin ortasını gösterir
                 var word = fix.parentElement && fix.parentElement.querySelector('.latin-box');
                 if (word) {
                     var w = word.getBoundingClientRect();
-                    var ax = Math.max(12, Math.min(m.width - 12, (w.left + w.width / 2) - want));
+                    var ax = Math.max(12, Math.min(m.width - 12, (w.left + w.width / 2) - left));
                     menu.style.setProperty('--wb-arrow', ax + 'px');
                 }
             }
