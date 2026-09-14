@@ -166,3 +166,49 @@ h2, h3, h4 { font-style: normal; }
 .section-heading { font-weight: 600 !important; letter-spacing: 0 !important; }
 .content h3, .block h3, .coverage-card h3, .dictionary h3 { font-weight: 600 !important; }
 .toc-title, .eyebrow, .lqbar-word { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+
+
+/* =========================================================
+   Sayfa kabuğu: kart görünümü kaldırıldı.
+   Üst bant beyaz ve ince; solda gerçek logo, sağda dil.
+   Hero sayfanın en üstüne yapışır, tam genişliktedir.
+   ========================================================= */
+.lqbar {
+  position: static;
+  padding: 10px clamp(16px, 4vw, 34px);
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  backdrop-filter: none;
+}
+.lqbar-brand { gap: 0; }
+.lqbar-q {
+  width: 54px; height: 37px;
+  background: url("../assets/lexiqamus-logo.png") left center/contain no-repeat;
+}
+.lqbar-word { display: none; }
+
+.page-shell { width: 100%; margin: 0; }
+.hero {
+  border-radius: 0;
+  padding-left: max(22px, calc((100% - 860px) / 2));
+  padding-right: max(22px, calc((100% - 860px) / 2));
+}
+.hero-subtitle { max-width: 60ch; }
+.hero:after { right: 0; }
+.content, .layout {
+  border-radius: 0; box-shadow: none;
+  width: min(860px, calc(100% - 44px));
+  margin: 0 auto;
+  padding-left: 0; padding-right: 0;
+  padding-top: clamp(36px, 5vw, 58px);
+  padding-bottom: clamp(56px, 7vw, 88px);
+  background: transparent;
+}
+.layout .content { width: 100%; }
+body { background: #fff; }
+
+@media (max-width: 700px) {
+  .page-shell { width: 100%; margin-top: 0; }
+  .hero { border-radius: 0; }
+  .content, .layout { border-radius: 0; width: calc(100% - 36px); }
+}
