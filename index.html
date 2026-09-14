@@ -2684,21 +2684,30 @@
             background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:16px 20px 14px;
             box-shadow:0 12px 40px -8px rgba(0,0,0,0.18); }
         .osm-kbd.open { display:flex; }
-        /* Okunuş geri bildirimi: küçük, sakin, satıra gelince belirginleşir */
-        .fb-group { display: inline-flex; align-items: center; gap: 6px; margin-inline-start: 10px;
-            opacity: 0; transition: opacity .18s ease; vertical-align: middle; }
-        .row-card:hover .fb-group, .fb-group:focus-within, .fb-group.has-vote { opacity: 1; }
-        .fb-btn { position: relative; width: 26px; height: 26px; border-radius: 7px; flex: none;
+        /* Okunuş geri bildirimi: hep görünür ama soluk; üzerine gelince belirginleşir */
+        .fb-group { display: inline-flex; align-items: center; gap: 2px; margin-inline-start: 8px;
+            vertical-align: middle; flex: none; }
+        .fb-btn { position: relative; width: 24px; height: 24px; border-radius: 6px; flex: none;
             display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
-            background: #fff; border: 1px solid #e2e8f0; color: #94a3b8;
+            background: transparent; border: 1px solid transparent; color: #cbd5e1;
             transition: color .15s, border-color .15s, background .15s; }
-        .fb-btn:after { content: ''; position: absolute; left: -7px; right: -7px; top: -7px; bottom: -7px; }
+        .fb-btn:after { content: ''; position: absolute; left: -6px; right: -6px; top: -8px; bottom: -8px; }
         .fb-btn svg { width: 13px; height: 13px; }
-        .fb-btn:hover { background: #f8fafc; }
+        .fb-yes { color: #9ecfc8; }
+        .fb-no { color: #e3b3c6; }
+        .fb-note { color: #cbd5e1; }
+        .row-card:hover .fb-yes { color: #5eb8ad; }
+        .row-card:hover .fb-no { color: #d489a8; }
+        .row-card:hover .fb-note { color: #a9b6c8; }
         .fb-yes:hover, .fb-yes.on { color: #0f766e; border-color: #99f6e4; background: #f0fdfa; }
         .fb-no:hover, .fb-no.on { color: #9d1c51; border-color: #f6cfdf; background: #fdf2f7; }
-        .fb-note:hover, .fb-note.on { color: #334155; border-color: #cbd5e1; }
-        @media (hover: none) { .fb-group { opacity: 1; } .fb-btn { width: 30px; height: 30px; } }
+        .fb-note:hover, .fb-note.on { color: #334155; border-color: #cbd5e1; background: #f8fafc; }
+        /* kelime ve kategori rozeti hiçbir zaman kesilmesin */
+        .word-pair-unit { min-width: 0; }
+        .word-pair-unit .col-lat { display: flex; align-items: center; min-width: 0; flex-wrap: nowrap; }
+        .word-pair-unit .col-lat .latin-box { min-width: 0; }
+        .category-pill { white-space: nowrap; }
+        @media (hover: none) { .fb-btn { width: 28px; height: 28px; } }
 
         /* Osmanlıca tarafa Latin harf girilmeye çalışılınca çıkan uyarı */
         .osm-warn { position: fixed; z-index: 100000;
