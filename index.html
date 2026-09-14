@@ -5661,6 +5661,8 @@
             
             let top = rect.top - tooltipRect.height - 10;
             let left = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+            // Okunuş kartı sağdan açıldığı için menü bir miktar sola alınır
+            if (trigger.closest && trigger.closest('.row-card') && trigger.classList.contains('latin-box')) left -= 46;
             
             // BOUNDARY DETECTION (Prevent Overflow)
             const padding = 10;
@@ -7135,7 +7137,7 @@
                 + '<span>' + t('fixOk', 'Correct') + '</span></button>'
                 + '<button type="button" class="ai-act ai-act-fix" onclick="event.stopPropagation(); lqSuggestCorrection(this)">'
                 + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
-                + '<span>' + t('fixEdit', 'Suggest fix') + '</span></button>'
+                + '<span>' + t('fixEdit', 'Suggest edit') + '</span></button>'
                 + '</span></span>';
             const hoverClass = `hover-${w.type.toLowerCase()}`;
             const styleClass = w.type === 'ENTRY' ? 'style-ENTRY' : (w.type === 'SUBENTRY' ? 'style-SUBENTRY' : 'style-RELATED');
