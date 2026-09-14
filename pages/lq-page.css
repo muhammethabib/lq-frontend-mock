@@ -61,7 +61,7 @@ body {
 .hero:after {
   content: ""; position: absolute; right: -3%; top: 50%; transform: translateY(-50%);
   width: clamp(180px, 26vw, 330px); height: 120%;
-  background: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='4020%20-140%201620%202160'><path%20d='M5222.374%2C1570.61c-113.564%2C75.906%20-249.281%2C119.653%20-398.76%2C120.598c-413.121%2C2.626%20-748.536%2C-364.106%20-748.536%2C-812.579c0%2C-448.478%20335.48%2C-805.436%20748.536%2C-812.583c426.224%2C-7.372%20753.184%2C356.733%20748.541%2C812.583c-2.343%2C229.954%20-83.895%2C434.136%20-219.211%2C580.305l309.115%2C402.246l-134.451%2C105.769l-305.234%2C-396.337l0%2C-0.002Zm22.696%2C-252.051c93.849%2C-115.546%20149.229%2C-271.135%20148.966%2C-442.195c-0.547%2C-352.422%20-248.109%2C-641.466%20-567.402%2C-645.488c-313.129%2C-3.946%20-567.402%2C289.233%20-567.402%2C645.488c0%2C356.255%20254.247%2C645.488%20567.402%2C645.488c108.369%2C0%20207.271%2C-31.745%20291.067%2C-87.155l-170.74%2C-221.697l132.525%2C-109.911l165.584%2C215.471l0%2C-0.001Z'%20fill='%2523ffffff'/></svg>") right center/contain no-repeat; opacity: .07; pointer-events: none;
+  background: url("../assets/q-watermark.svg") right center/contain no-repeat; opacity: .07; pointer-events: none;
 }
 .hero:before {
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;

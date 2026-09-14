@@ -9,7 +9,7 @@
 
 </script>
 <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&display=swap');
         
         :root {
             /* --- MAIN SITE COLORS --- */
@@ -538,6 +538,69 @@
             #langSwitch { position: fixed; top: 18px; right: 16px; }
             a.legacy-link { position: fixed; top: 18px; right: 104px; }
         }
+
+        /* ===================== ORTAK SAYFA DERİSİ =====================
+           Ekip ve 3.0 tanıtım bölümleri, pages/ altındaki sayfalarla
+           aynı dili konuşur: tam genişlikte koyu başlık bandı, EB
+           Garamond başlıklar, gölgesiz kartlar. */
+        .lqpage-hero {
+            position: relative; overflow: hidden;
+            width: 100vw; margin-left: calc(50% - 50vw);
+            padding: clamp(44px, 6vw, 68px) max(22px, calc((100vw - 860px) / 2)) clamp(44px, 6vw, 62px);
+            color: #fff;
+            background: linear-gradient(135deg, #04143c 0%, #082567 52%, #16388f 100%);
+        }
+        .lqpage-hero:before {
+            content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+            background: linear-gradient(90deg, #d97706, rgba(217,119,6,0) 62%);
+        }
+        .lqpage-hero:after {
+            content: ""; position: absolute; right: -3%; top: 50%; transform: translateY(-50%);
+            width: clamp(180px, 26vw, 330px); height: 120%;
+            background: url("assets/q-watermark.svg") right center/contain no-repeat;
+            opacity: .07; pointer-events: none;
+        }
+        .lqpage-hero { text-align: left !important; }
+        .lqpage-hero > * { position: relative; z-index: 1; }
+        .lqpage-hero h1, .lqpage-hero h2, .lqpage-hero p { text-align: left !important; }
+        .lqpage-eyebrow {
+            display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px;
+            color: #f0c48a; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 800;
+            letter-spacing: .17em; text-transform: uppercase;
+        }
+        .lqpage-eyebrow:before { content: ""; width: 26px; height: 2px; background: #d97706; }
+        .lqpage-hero h1, .lqpage-hero h2 {
+            margin: 0; color: #fff;
+            font-family: 'EB Garamond', Garamond, Georgia, serif; font-weight: 600;
+            font-size: clamp(2.3rem, 5vw, 3.6rem); line-height: 1.05; letter-spacing: -.005em;
+        }
+        .lqpage-hero p {
+            max-width: 60ch; margin: 18px 0 0; color: #c4d3ee;
+            font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 1.7; text-align: left;
+        }
+
+        .team-page, .v3-page { max-width: none; margin: 0; font-family: 'Inter', sans-serif; }
+        .team-page > :not(.lqpage-hero), .v3-page > :not(.lqpage-hero) {
+            max-width: 860px; margin-left: auto; margin-right: auto;
+        }
+        .team-page > .team-lead { margin-top: clamp(36px, 5vw, 56px); }
+        .team-page > .team-grid { margin-bottom: 72px; }
+        .team-name { font-family: 'EB Garamond', Garamond, Georgia, serif !important;
+            font-weight: 600 !important; font-size: 1.3rem !important; color: #1b2a44 !important; }
+        .team-card { box-shadow: none !important; border: 1px solid #e2e8f0 !important; border-radius: 14px !important; }
+
+        .v3-page > .v3-head { max-width: none; }
+        .v3-head { text-align: left; margin-bottom: 0; }
+        .v3-head .v3-kicker { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px;
+            color: #f0c48a; font-size: 11px; letter-spacing: .17em; }
+        .v3-head .v3-kicker:before { content: ""; width: 26px; height: 2px; background: #d97706; }
+        .v3-head h2 { color: #fff !important; font-family: 'EB Garamond', Garamond, Georgia, serif !important;
+            font-weight: 600 !important; font-size: clamp(2.3rem, 5vw, 3.6rem) !important; line-height: 1.05 !important;
+            letter-spacing: -.005em !important; margin: 0 !important; }
+        .v3-head .v3-lead { color: #c4d3ee !important; margin: 18px 0 0 !important; max-width: 60ch; }
+        .v3-page > .v3-article { margin-top: clamp(36px, 5vw, 56px); }
+        .v3-article h3, .v3-article h2 { font-family: 'EB Garamond', Garamond, Georgia, serif !important; font-weight: 600 !important; }
+
         /* ===================== LEXIQAMUS 3.0 TANITIM SAYFASI =====================
            Ekip sayfasıyla aynı mantık: ayrı katman değil, sayfa akışında bölüm. */
         .v3-page { max-width: 780px; margin: 24px auto 72px; font-family: 'Inter', sans-serif; }
@@ -3291,6 +3354,10 @@
 </div>
 
 <section class="team-page" id="teamPage" hidden>
+  <header class="lqpage-hero">
+    <div class="lqpage-eyebrow">LexiQamus</div>
+    <h1 data-i18n="menuTeam">Team</h1>
+  </header>
 
   <div class="team-lead">
     <div class="team-card is-founder">
@@ -3363,7 +3430,7 @@
 
 <section class="v3-page" id="v3Page" hidden>
   <div class="v3-draft-flag" data-i18n="v3DraftFlag">Draft &middot; placeholder text</div>
-  <div class="v3-head">
+  <div class="v3-head lqpage-hero">
     <span class="v3-kicker" data-i18n="v3ArtKicker">Version 3.0</span>
     <h2 data-i18n="v3ArtTitle">Ten years on, LexiQamus starts over</h2>
     <p class="v3-lead" data-i18n="v3ArtLead">A draft opening paragraph sits here until the real text arrives. It should say, in a few sentences, what LexiQamus set out to do in 2016 and why the tenth year seemed like the right moment to rebuild it from the ground up.</p>
