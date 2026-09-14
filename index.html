@@ -2686,18 +2686,19 @@
         .osm-kbd.open { display:flex; }
         /* Üretilmiş okunuş biraz soluk basılır; doğrulanmış olan tam güçtedir */
         .latin-box.ai-reading { opacity: .72; }
-        .row-card:hover .latin-box.ai-reading { opacity: .85; }
+        .col-lat:hover .latin-box.ai-reading { opacity: .9; }
         /* Üzerine gelince: düzeltme imgesi ve iki satırlık açıklama, sağa doğru */
         .ai-fix { display: inline-flex; align-items: center; gap: 7px; margin-inline-start: 8px;
             flex: none; cursor: pointer; opacity: 0; transform: translateX(-4px);
             transition: opacity .18s ease, transform .18s ease; vertical-align: middle; }
-        .row-card:hover .ai-fix { opacity: 1; transform: translateX(0); }
+        .col-lat:hover .ai-fix, .ai-fix:hover { opacity: 1; transform: translateX(0); }
         .ai-fix-icon { display: inline-flex; align-items: center; justify-content: center;
             width: 22px; height: 22px; border-radius: 6px; flex: none;
             color: #94a3b8; background: #f8fafc; border: 1px solid #e2e8f0; transition: color .15s, border-color .15s; }
         .ai-fix-icon svg { width: 12px; height: 12px; }
         .ai-fix:hover .ai-fix-icon { color: #9d1c51; border-color: #f6cfdf; background: #fdf2f7; }
         .ai-fix { position: relative; }
+        .col-lat { display: inline-flex; align-items: center; }
         .ai-fix-text { position: absolute; left: calc(100% + 8px); top: 50%; transform: translateY(-50%);
             display: flex; flex-direction: column; gap: 2px; line-height: 1.15; z-index: 40;
             font-family: 'Inter', sans-serif; white-space: nowrap; pointer-events: none;
