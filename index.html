@@ -560,6 +560,21 @@
             background: url("assets/q-watermark.svg") right center/contain no-repeat;
             opacity: .07; pointer-events: none;
         }
+        /* Sayfa bölümleri açıkken üstte, diğer sayfalardaki gibi
+           logo taşıyan ince beyaz bant durur. */
+        .lqpage-topbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 40; height: 58px;
+            display: none; align-items: center;
+            padding: 0 clamp(16px, 4vw, 34px) 0 72px;
+            background: #fff; border-bottom: 1px solid #e2e8f0;
+        }
+        body.team-page-open .lqpage-topbar,
+        body.v3-page-open .lqpage-topbar { display: flex; }
+        .lqpage-topbar img { height: 37px; width: auto; display: block; }
+        body.team-page-open, body.v3-page-open { background: #fff !important;
+            padding: 0 !important; }
+        body.team-page-open .team-page, body.v3-page-open .v3-page { padding-top: 58px; margin-top: 0 !important; }
+        body.team-page-open .page-container, body.v3-page-open .page-container { padding-top: 0 !important; margin-top: 0 !important; }
         .lqpage-hero { text-align: left !important; }
         /* Ekip ve 3.0 açıkken ana sayfanın büyük logo bloğu görünmez;
            bant doğrudan sayfanın üstüne oturur. */
@@ -587,7 +602,8 @@
         }
 
         .team-page, .v3-page { max-width: none; margin: 0; font-family: 'Inter', sans-serif; }
-        .team-page > :not(.lqpage-hero), .v3-page > :not(.lqpage-hero) {
+        .team-page > :not(.lqpage-hero):not(.lqpage-topbar),
+        .v3-page > :not(.lqpage-hero):not(.lqpage-topbar) {
             max-width: 860px; margin-left: auto; margin-right: auto;
         }
         .team-page > .team-lead { margin-top: clamp(36px, 5vw, 56px); }
@@ -3361,9 +3377,11 @@
 </div>
 
 <section class="team-page" id="teamPage" hidden>
+  <div class="lqpage-topbar"><a href="#" onclick="lqGoHome(); return false;" aria-label="LexiQamus"><img src="assets/lexiqamus-logo.png" alt="LexiQamus"></a></div>
   <header class="lqpage-hero">
-    <div class="lqpage-eyebrow">LexiQamus</div>
+    <div class="lqpage-eyebrow" data-i18n="teamHeroEyebrow">About the project</div>
     <h1 data-i18n="menuTeam">Team</h1>
+    <p data-i18n="teamHeroSub">The people who build and maintain LexiQamus.</p>
   </header>
 
   <div class="team-lead">
@@ -3436,6 +3454,7 @@
 </section>
 
 <section class="v3-page" id="v3Page" hidden>
+  <div class="lqpage-topbar"><a href="#" onclick="lqGoHome(); return false;" aria-label="LexiQamus"><img src="assets/lexiqamus-logo.png" alt="LexiQamus"></a></div>
   <div class="v3-draft-flag" data-i18n="v3DraftFlag">Draft &middot; placeholder text</div>
   <div class="v3-head lqpage-hero">
     <span class="v3-kicker" data-i18n="v3ArtKicker">Version 3.0</span>
@@ -5315,6 +5334,8 @@
             storySwitchHint: 'İki görünüm, tek tık',
             storyOpenOriginal: 'Orijinal sayfayı açın',
             storyHoverWords: 'İşaretli bir kelimenin üzerine gelin',
+            teamHeroEyebrow: 'Proje hakkında',
+            teamHeroSub: 'LexiQamus’u geliştiren ve sürdüren ekip.',
             menuWhat: 'LexiQamus Nedir?',
             menuGuide: 'Kullanım Kılavuzu',
             menuUpdates: 'Güncellemeler',
