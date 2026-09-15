@@ -219,6 +219,10 @@ h2, h3, h4 { font-style: normal; }
   background: transparent;
 }
 .layout .content { width: 100%; }
+/* içindekiler + metin sayfaları daha geniş akar (250px tablo + 760px metin) */
+.layout { width: min(1120px, calc(100% - 44px)); overflow: visible; }
+/* içindekiler kaydırırken solda sabit kalır; uzunsa kendi içinde kayar */
+.layout > .toc { max-height: calc(100vh - 48px); overflow-y: auto; }
 body { background: #fff; }
 
 @media (max-width: 700px) {
