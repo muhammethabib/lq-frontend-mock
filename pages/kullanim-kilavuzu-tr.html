@@ -36,14 +36,14 @@ h2{margin:3.1rem 0 1.05rem;padding-top:.25rem}
   .block{margin-bottom:26px}
 }
 
-/* Genel görünüm: görselin üstünde ve altında etiket bantları; ince çizgi hedefe iner.
+/* Genel görünüm (etiketler camgöbeği: arayüzdeki lacivert, bordo ve kategori renklerinden ayrışsın): görselin üstünde ve altında etiket bantları; ince çizgi hedefe iner.
    Etiketler kartlardaki kodlarla aynı ve o maddeye götürür. */
 .shot-map .map{position:relative;container-type:inline-size;padding:34px 0}
 .shot-map .map img{display:block;width:100%;border-radius:8px;cursor:zoom-in}
-.pin{--c:var(--brand);position:absolute;left:var(--x);z-index:2;display:grid;place-items:center;min-width:30px;height:24px;padding:0 7px;box-sizing:border-box;
+.pin{--c:#0e7490;position:absolute;left:var(--x);z-index:2;display:grid;place-items:center;min-width:30px;height:24px;padding:0 7px;box-sizing:border-box;
   transform:translateX(-50%);border-radius:12px;background:var(--c);color:#fff;font:700 12px/1 Inter,sans-serif;letter-spacing:.02em;text-decoration:none;
   box-shadow:0 0 0 2px #fff,0 3px 10px -3px rgba(8,37,103,.5)}
-.pin.pin-sec{--c:var(--brand-dark);border-radius:7px;min-width:26px}
+.pin.pin-sec{--c:#164e63;border-radius:7px;min-width:26px}
 .pin:after{content:"";position:absolute;left:50%;width:2px;margin-left:-1px;background:var(--c);opacity:.85}
 .pin:before{content:"";position:absolute;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--c);box-shadow:0 0 0 2px #fff}
 .pin-top{top:0}
@@ -52,8 +52,8 @@ h2{margin:3.1rem 0 1.05rem;padding-top:.25rem}
 .pin-bottom{bottom:0}
 .pin-bottom:after{bottom:100%;height:calc(10px + (1 - var(--ty)) * 100cqw / var(--ar))}
 .pin-bottom:before{bottom:calc(100% + 6px + (1 - var(--ty)) * 100cqw / var(--ar))}
-.pin:hover,.pin:focus-visible{--c:var(--brand-dark);outline:none}
-.pin.pin-sec:hover,.pin.pin-sec:focus-visible{--c:var(--brand)}
+.pin:hover,.pin:focus-visible{--c:#155e75;outline:none}
+.pin.pin-sec:hover,.pin.pin-sec:focus-visible{--c:#0e7490}
 @media (max-width:590px){.shot-map .map{padding:28px 0}.pin{min-width:26px;height:20px;padding:0 5px;font-size:10.5px;border-radius:10px}.pin.pin-sec{min-width:21px;border-radius:6px}.pin:before{width:6px;height:6px;margin-left:-3px}}
 #lightbox .map{position:relative;container-type:inline-size;padding:34px 0;width:min(100%, calc((100vh - 140px) * var(--ar)));background:#fff;border-radius:12px}
 #lightbox .map img{width:100%;max-height:none}
