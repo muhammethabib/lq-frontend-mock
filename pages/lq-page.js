@@ -211,6 +211,14 @@
       });
     });
 
+    /* görsellerdeki etiketler (a.pin) bağlandıkları başlığın kodunu kendiliğinden alır */
+    var codeOf = {};
+    entries.forEach(function (e) { if (e.code) codeOf[e.target.id] = e.code; e.subs.forEach(function (x) { if (x.code) codeOf[x.id] = x.code; }); });
+    doc.querySelectorAll('a.pin[href^="#"]').forEach(function (pin) {
+      var c = codeOf[decodeURIComponent(pin.getAttribute('href').slice(1))];
+      if (c) { pin.textContent = c; pin.setAttribute('aria-label', c); }
+    });
+
     var out = '<button class="toc-toggle" type="button" aria-expanded="false" aria-controls="lqTocList"><span class="toc-title">' + esc(tocTitle) + '</span><span class="toc-now"></span>' + CHEV + '</button>' +
       '<p class="toc-title">' + esc(tocTitle) + '</p><ol class="toc-list" id="lqTocList">';
     entries.forEach(function (e) {
