@@ -4575,8 +4575,8 @@
 <button type="button" class="rm-opt rm-note" onclick="lqReportChoice(this,'note')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"></path></svg><span data-i18n="rmNote">Comment</span></button>
 </div>
 <textarea class="report-textarea" placeholder="Please describe the error or suggest a correction..." onclick="this.placeholder=''" onblur="if(!this.value)this.placeholder='Please describe the error or suggest a correction...'"></textarea>
-<button class="report-submit-btn" onclick="submitReport()">Submit</button>
-<button class="mt-3 text-[11px] font-bold text-slate-400 hover:text-slate-600 transition" onclick="closeReportModal()">Cancel</button>
+<button class="report-submit-btn" onclick="submitReport()" data-i18n="rmSubmit">Submit</button>
+<button class="mt-3 text-[11px] font-bold text-slate-400 hover:text-slate-600 transition" onclick="closeReportModal()" data-i18n="rmCancel">Cancel</button>
 </div>
 <div class="success-view" id="reportSuccess">
 <svg class="success-icon" fill="none" id="finalIcon" stroke="#22c55e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
@@ -5468,13 +5468,15 @@
             aiGenerated: 'Otomatik üretilmiş okunuş',
             aiSuggest: 'Düzeltme öner',
             fixAuto: 'Otomatik üretim',
-            fixVerified: 'Ekip üretimi',
+            fixVerified: 'Elle girildi',
             fixOk: 'Doğru',
             fixEdit: 'Düzelt',
-            rmWhy: 'Bu okunuşun neden yanlış olduğunu açıklayınız. Doğrusunu biliyorsanız ekleyebilirsiniz.',
+            rmWhy: 'Bu okunuşun neden yanlış olduğunu lütfen açıklayınız. Doğrusunu biliyorsanız ekleyebilirsiniz.',
             rmOk: 'Doğru',
             rmNo: 'Yanlış',
             rmNote: 'Görüş',
+            rmSubmit: 'Gönder',
+            rmCancel: 'İptal',
             rmOkPh: 'Eklemek istediğiniz bir şey var mı? (isteğe bağlı)',
             rmNotePh: 'Bu okunuş hakkında görüşünüzü yazınız',
             aiSuggestPh: 'Lütfen doğru okunuşu yazınız',
@@ -7281,7 +7283,7 @@
             const _i = (index || 0);
             const isVerified = (_i % 7) === 2 || (_i % 11) === 5;
             const aiClass = isVerified ? '' : ' ai-reading';
-            const _fixLabel = isVerified ? t('fixVerified', 'Team-generated') : t('fixAuto', 'Auto-generated');
+            const _fixLabel = isVerified ? t('fixVerified', 'Manually entered') : t('fixAuto', 'Auto-generated');
             const verifiedMark =
                 '<span class="ai-fix">'
                 + '<span class="ai-fix-l1">' + _fixLabel + '</span>'
@@ -7291,7 +7293,7 @@
                 + '<span>' + t('fixOk', 'Correct') + '</span></button>'
                 + '<button type="button" class="ai-act ai-act-fix" onclick="event.stopPropagation(); lqSuggestCorrection(this)">'
                 + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
-                + '<span>' + t('fixEdit', 'Suggest edit') + '</span></button>'
+                + '<span>' + t('fixEdit', 'Edit') + '</span></button>'
                 + '</span></span>';
             const hoverClass = `hover-${w.type.toLowerCase()}`;
             const styleClass = w.type === 'ENTRY' ? 'style-ENTRY' : (w.type === 'SUBENTRY' ? 'style-SUBENTRY' : 'style-RELATED');
@@ -10673,8 +10675,8 @@
 <div class="report-title">Report a Typo</div>
 <div class="word-compare"><span class="wc-osm" id="osmTarget">...</span><span class="wc-divider"></span><span class="wc-lat" id="latTarget">...</span></div>
 <textarea class="report-textarea" placeholder="Please describe the error or suggest a correction..." onclick="this.placeholder=''" onblur="if(!this.value)this.placeholder='Please describe the error or suggest a correction...'"></textarea>
-<button class="report-submit-btn" onclick="submitReport()">Submit</button>
-<button class="mt-3 text-[11px] font-bold text-slate-400 hover:text-slate-600 transition" onclick="closeReportModal()">Cancel</button>
+<button class="report-submit-btn" onclick="submitReport()" data-i18n="rmSubmit">Submit</button>
+<button class="mt-3 text-[11px] font-bold text-slate-400 hover:text-slate-600 transition" onclick="closeReportModal()" data-i18n="rmCancel">Cancel</button>
 </div>
 <div class="success-view" id="reportSuccess">
 <svg class="success-icon" fill="none" id="finalIcon" stroke="#22c55e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline class="tick-mark" points="8 12 11 15 16 9"></polyline><path class="smile-path" d="M 8 14.5 Q 12 18 16 14.5"></path><circle class="eye-dot eye-l" cx="9" cy="10.5" fill="#22c55e" r="1.1" stroke="none"></circle><circle class="eye-dot eye-r" cx="15" cy="10.5" fill="#22c55e" r="1.1" stroke="none"></circle></svg>
