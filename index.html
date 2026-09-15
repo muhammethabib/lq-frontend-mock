@@ -9328,6 +9328,14 @@
         function lqSyncMenuLang() { var l = (typeof currentLang !== 'undefined') ? currentLang : 'en'; syncLangSwitches(l); }
         document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lqCloseMenu(); });
         document.addEventListener('DOMContentLoaded', lqSyncMenuLang);
+        // Alt sayfalardaki menüden gelişler: ?lang=tr dili Türkçe açar, #team ve #whats-new ilgili görünümü açar
+        window.addEventListener('load', function () {
+            var q = new URLSearchParams(location.search), h = location.hash;
+            if (q.get('lang') === 'tr' && typeof applyLanguage === 'function') { syncLangSwitches('tr'); applyLanguage('tr'); }
+            if (h === '#team' && typeof lqOpenTeam === 'function') lqOpenTeam();
+            else if (h === '#whats-new' && typeof lqOpenBrochure === 'function') lqOpenBrochure();
+            if (q.has('lang') || h === '#team' || h === '#whats-new') history.replaceState(null, '', location.pathname);
+        });
 
 
         // ===================== EKUAL AÇILIŞ DUYURUSU =====================
