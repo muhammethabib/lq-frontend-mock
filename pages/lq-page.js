@@ -36,7 +36,7 @@
     firstRelease: ['lq1-first-version-en.html', 'lq1-ilk-surum-tr.html'],
     lexicon: ['lexicon-digitization-en.html', 'lexicon-dijitallestirme-tr.html'],
     institutional: ['institutional-subscribers-en.html', 'kurumsal-uyeler-tr.html'],
-    _team: ['#', '#']
+    _team: ['team-en.html', 'ekip-tr.html']
   };
   function href(key) { return P[key][LANG === 'tr' ? 1 : 0]; }
   function isHere(key) { return P[key][0] === FILE || P[key][1] === FILE; }
@@ -95,7 +95,7 @@
         '</div>' +
         '<div class="side-nav">' +
           link('about', T.about, href('about'), ICON.about) +
-          link('_team', T.team, HOME + '#team', ICON.team) +
+          link('_team', T.team, href('_team'), ICON.team) +
           link('what', T.what, href('what'), ICON.what) +
           link('guide', T.guide, href('guide'), ICON.guide) +
           link('institutional', T.institutional, href('institutional'), ICON.institutional) +

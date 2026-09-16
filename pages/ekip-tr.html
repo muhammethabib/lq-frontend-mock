@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ekip · LexiQamus</title>
+  <style>
+:root{--ink:#1d2a36;--muted:#627180;--line:#d8e0e6;--paper:#fff;--soft:#f4f7f9;--brand:#681c23;--brand-dark:#451217;--brand-soft:#f7eeee;--blue:#2d668f;--blue-soft:#e8f1f7;--shadow:0 18px 55px rgba(22,35,47,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:linear-gradient(180deg,#eef2f4 0,#fafbfc 450px,#f3f6f7 100%);font:16px/1.7 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.page-shell{width:min(1080px,calc(100% - 32px));margin:42px auto 70px}.hero{position:relative;overflow:hidden;padding:58px clamp(28px,6vw,72px);color:#fff;background:linear-gradient(135deg,var(--brand-dark),var(--brand) 60%,#8c3139);border-radius:22px 22px 0 0}.hero:after{content:"";position:absolute;right:-60px;top:-110px;width:330px;height:330px;border:55px solid rgba(255,255,255,.055);border-radius:50%}.eyebrow{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;color:#efd7da;font-size:.76rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.eyebrow:before{content:"";width:25px;height:2px;background:currentColor}h1{position:relative;z-index:1;margin:0;font:700 clamp(2.6rem,6vw,5rem)/1.02 Georgia,"Times New Roman",serif;letter-spacing:-.04em}.hero-subtitle{position:relative;z-index:1;max-width:650px;margin:18px 0 0;color:rgba(255,255,255,.82);font-size:1.06rem}.content{padding:clamp(38px,6vw,72px);background:var(--paper);border-radius:0 0 22px 22px;box-shadow:var(--shadow)}.intro{max-width:810px}.lead{margin:0 0 1.1em;color:var(--brand-dark);font:700 clamp(1.55rem,3vw,2.2rem)/1.25 Georgia,"Times New Roman",serif}.intro p{margin:0 0 1.15em}.feature-note{margin:30px 0;padding:22px 24px;background:var(--blue-soft);border-left:5px solid var(--blue);border-radius:0 12px 12px 0}.feature-note p{margin:0}.section-heading{margin:52px 0 8px;color:var(--brand-dark);font:700 clamp(1.8rem,3.4vw,2.65rem)/1.15 Georgia,"Times New Roman",serif}.section-intro{max-width:760px;margin:0 0 24px;color:var(--muted)}.dictionary-list{display:grid;gap:13px;counter-reset:dictionary}.dictionary{position:relative;padding:20px 22px 19px 67px;background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:0 7px 22px rgba(25,41,55,.06);counter-increment:dictionary;transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease}.dictionary:hover{transform:translateY(-1px);border-color:#bdccd6;box-shadow:0 11px 28px rgba(25,41,55,.085)}.dictionary:before{content:counter(dictionary,decimal-leading-zero);position:absolute;left:21px;top:18px;color:var(--blue);font-size:.85rem;font-weight:800;letter-spacing:.04em}.dictionary h3{margin:0 0 3px;color:#293946;font:700 1.08rem/1.4 Georgia,"Times New Roman",serif}.dictionary p{margin:0;color:var(--muted);font-size:.94rem}.growth{margin-top:30px;padding:24px 26px;background:linear-gradient(90deg,var(--brand-soft),#fff);border:1px solid #eadadd;border-left:5px solid var(--brand);border-radius:0 13px 13px 0}.growth p{margin:0}.growth strong{color:var(--brand-dark)}
+@media(max-width:800px){.coverage-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.page-shell{width:min(100% - 18px,650px);margin-top:9px}.hero{padding:40px 25px 43px;border-radius:16px 16px 0 0}.content{padding:34px 22px 45px;border-radius:0 0 16px 16px}.dictionary{padding:18px 17px 17px 58px}.dictionary:before{left:17px;top:17px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dictionary{transition:none}.dictionary:hover{transform:none}}
+@media print{body{background:#fff}.page-shell{width:100%;margin:0}.hero,.content{box-shadow:none;border-radius:0}.content{padding:36px}.dictionary{break-inside:avoid;box-shadow:none}.dictionary:hover{transform:none}}
+.coverage-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:0 0 30px}.coverage-card{padding:20px 21px;background:var(--soft);border:1px solid var(--line);border-radius:13px}.coverage-card h3{margin:0 0 8px;color:var(--brand-dark);font:700 1rem/1.45 Georgia,"Times New Roman",serif}.coverage-card p{margin:0;color:#52616f;font-size:.92rem;line-height:1.62}@media(max-width:800px){.coverage-grid{grid-template-columns:1fr}}
+</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lq-page.css?v=12">
+<style>
+  .team-list-page .team-card{display:grid;grid-template-columns:96px 1fr;gap:26px;padding:34px 0;border-bottom:1px solid #e2e8f0}
+  .team-list-page .team-card:last-child{border-bottom:0}
+  .team-list-page .team-photo{width:96px;height:96px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px #fff,0 0 0 4px #e2e8f0}
+  .team-list-page .team-name{margin:4px 0 4px !important;font-size:1.3rem !important;color:#082567 !important}
+  .team-list-page .team-role{font:800 11px/1 Inter,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:#9d1c51;margin-bottom:14px}
+  .team-list-page .team-bio p{margin:0 0 1.15em} .team-list-page .team-bio p:last-child{margin-bottom:0}
+  @media (max-width:640px){.team-list-page .team-card{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="lqbar">
+  <a class="lqbar-brand" href="../index.html"><span class="lqbar-q"></span><span class="lqbar-word">LexiQamus</span></a>
+  <div class="lqbar-right"><a class="lqbar-link lqbar-lang" href="team-en.html">EN</a></div>
+</div>
+<div class="page-shell">
+  <header class="hero">
+    <div class="eyebrow">Proje hakkında</div>
+    <h1>Ekip</h1>
+    <p class="hero-subtitle">LexiQamus’u geliştiren ve sürdüren ekip.</p>
+  </header>
+  <main class="content team-list-page">
+      <article class="team-card">
+        <img class="team-photo" src="../assets/team/ahmet.jpg" alt="">
+        <div class="team-info">
+          <h3 class="team-name">Dr. Ahmet Abdullah Saçmalı</h3>
+          <div class="team-role">Kurucu</div>
+          <div class="team-bio"><p>Ahmet Abdullah Saçmalı, Osmanlı Türkçesi ile yazılmış metinler üzerine çalışan bir araştırmacı ve LexiQamus’un geliştiricisidir. Lisans eğitimini Boğaziçi Üniversitesi’nin Sosyoloji ve Tarih bölümlerinde tamamlamış, ardından Tarih alanındaki ilk yüksek lisans derecesini de yine bu üniversiteden almıştır.</p><p>2010 yılında Amerika Birleşik Devletleri’ndeki Arizona Üniversitesi’nin Middle Eastern and North African Studies programına kabul edilmiş ve burada ikinci yüksek lisansını tamamlamıştır. Dr. Saçmalı, 2014 yılında Birleşik Krallık’taki Durham Üniversitesi School of Government and International Affairs bünyesinde doktoraya başlamış; tezini 2019’da başarıyla savunarak 2020 yılında doktora derecesini almıştır.</p><p>Dr. Saçmalı, 2017 ile 2021 yılları arasında İbn Haldun Üniversitesi Sosyoloji Bölümünde araştırma görevlisi olarak çalışmıştır. Bu dönemin iki yılında çeşitli sosyoloji derslerinin yanı sıra Osmanlı Türkçesi dersleri de vermiştir.</p><p>Doktora çalışmaları sırasında, başlangıçta Osmanlı Türkçesi ile yazılmış metinlerde okunması güç kelimelerin çözümlenmesine yardımcı olacak çevrimiçi bir araç olarak tasarladığı LexiQamus’u geliştirmiştir. Proje zamanla, Türkçenin tarihsel söz varlığının ortaya çıkarılmasına adanmış çok daha kapsamlı bir dijital platforma dönüşmüştür. LexiQamus, dilbilimsel analiz ve kelime çözümleme araçlarının yanı sıra, tarihten günümüze yazılmış yazma ya da matbu bütün Türkçe sözlükleri yüksek bir bilimsel titizlikle dijitalleştirmeyi hedeflemektedir. Bu geniş sözlükbilimsel mirası tek bir dijital ortamda bir araya getirerek proje, Türk dilinin tarihsel derinliğini ve sözcük sınırlarını belgelemeyi ve keşfetmeyi amaçlamaktadır.</p><p>LexiQamus, dünyanın farklı ülkelerinden araştırmacıların ve akademik kurumların büyük ilgisini kazanmıştır. Çalışmalarını İstanbul, Türkiye merkezli olarak sürdüren Dr. Saçmalı ve ekibi, platformu geliştirmeye devam etmektedir.</p></div>
+        </div>
+      </article>
+      <article class="team-card">
+        <img class="team-photo" src="../assets/team/habib.jpg" alt="">
+        <div class="team-info">
+          <h3 class="team-name">Dr. Öğr. Üyesi Habib Saçmalı</h3>
+          <div class="team-role">Proje Koordinatörü</div>
+          <div class="team-bio"><p>Habib Saçmalı, Marmara Üniversitesi Tarih Bölümü’nde öğretim üyesi olarak görev yapmaktadır. Lisans öğrenimini Boğaziçi Üniversitesi’nde Sosyoloji ile Siyaset Bilimi ve Uluslararası İlişkiler bölümlerinde (Çift Anadal Programı), yüksek lisansını aynı üniversitenin Siyaset Bilimi ve Uluslararası İlişkiler bölümünde tamamlamıştır. Doktorasını 2021’de University of California, Davis’te, Osmanlı-İran ilişkileri ve Osmanlı hilafeti üzerine yazdığı tezle tamamlamıştır. Osmanlı-Safevi ilişkileri ve Avrasya diplomasisi üzerine makaleleri Journal of Early Modern History, Ab Imperio ve İslam Araştırmaları gibi ulusal ve uluslararası dergilerde yayımlanmıştır.</p></div>
+        </div>
+      </article>
+      <article class="team-card">
+        <img class="team-photo" src="../assets/team/buse.jpg" alt="">
+        <div class="team-info">
+          <h3 class="team-name">Buse Büyükkeskin</h3>
+          <div class="team-role">Proje Asistanı</div>
+          <div class="team-bio"><p>Buse Büyükkeskin, lisans ve yüksek lisans eğitimini Boğaziçi Üniversitesi Türk Dili ve Edebiyatı Bölümünde tamamlamıştır. Yüksek lisansını “Fransa Millî Kütüphanesine Kayıtlı ‘Supplément Turc 949’ Numaralı Hikâye Mecmuası: İnceleme ve Metin” başlıklı teziyle bitirmiştir. Erken modern dönem Osmanlı mensur hikâyeleri üzerine çalışmaktadır. Kasım 2023’ten bu yana LexiQamus projesinde görev almaktadır.</p></div>
+        </div>
+      </article>
+      <article class="team-card">
+        <img class="team-photo" src="../assets/team/hatice.jpg" alt="">
+        <div class="team-info">
+          <h3 class="team-name">Hatice Tüfekçi</h3>
+          <div class="team-role">Proje Asistanı</div>
+          <div class="team-bio"><p>Hatice Tüfekçi, Sivas Cumhuriyet Üniversitesi Türk Dili ve Edebiyatı Bölümü mezunudur. Yüksek lisans eğitimini aynı üniversitenin Eski Türk Edebiyatı Anabilim Dalı’nda “Türk Edebiyatında Manzum Tarikat Silsile-nâmeleri” başlıklı teziyle 2024 yılında tamamlayarak “Bilim Uzmanı” unvanını aldı. Ayrıca “Muhammed Vahyi Efendi’nin Gözden Kaçmış Bir Manzumesi: Sünbüliyye Silsile-nâmesi” başlıklı bir makalesi bulunmaktadır. Bir yıl kadar Sivas Cumhuriyet Üniversitesi’nde TÖMER biriminde “Yabancılara Türkçe Öğretimi” alanında öğretim görevlisi olarak çalıştı. Çalışma alanları özellikle Osmanlı Türkçesi metinlerinin dijitalleştirilmesi, sözlük projeleri (LexiQamus) ve yazma eser metin tenkididir. 2018 yılında başladığı bu projede 2022’den beri Proje Asistanı olarak araştırma ve veri yönetimi süreçlerini yürütmektedir.</p></div>
+        </div>
+      </article>
+      <article class="team-card">
+        <img class="team-photo" src="../assets/team/seher.jpg" alt="">
+        <div class="team-info">
+          <h3 class="team-name">Seher Bulut Köse</h3>
+          <div class="team-role">Proje Asistanı</div>
+          <div class="team-bio"><p>Seher Bulut Köse, Erzurumlu bir baba ile Malatyalı bir annenin ikinci çocuğu olarak 1992 yılında Medine’de doğdu. 2011 yılında başladığı Uludağ Üniversitesi İlahiyat Fakültesinden 2015 yılında mezun oldu. Türk İslâm Edebiyatı alanında Vadi Ahmet’in “Heşt Behişt Mesnevisi”ni çalıştı. Halihazırda LexiQamus bünyesinde çalışmaktadır. Evlidir; Bilâl, Hamza, Halîme ve Süheyla’nın annesidir.</p></div>
+        </div>
+      </article>
+      <article class="team-card">
+        <img class="team-photo" src="../assets/team/zeyneb.jpg" alt="">
+        <div class="team-info">
+          <h3 class="team-name">Zeyneb Odabaş</h3>
+          <div class="team-role">Proje Asistanı</div>
+          <div class="team-bio"><p>Zeyneb Odabaş, lisans eğitimini Marmara Üniversitesi İlahiyat Fakültesi’nde tamamlamıştır. Yüksek lisansını Ankara Sosyal Bilimler Üniversitesi Tefsir Anabilim Dalı’nda yapmış ve “Tefsire Metodik Bir Yaklaşım Olarak İbn Teymiyye ve Mukaddimesi: Eleştirel Bir Tahlil” başlıklı yüksek lisans tezini tamamlamıştır. Ekim 2023’ten bu yana LexiQamus projesinde çalışmaktadır.</p></div>
+        </div>
+      </article>
+      <article class="team-card">
+        <img class="team-photo" src="../assets/team/enis.jpg" alt="">
+        <div class="team-info">
+          <h3 class="team-name">Dr. Enis Tombul</h3>
+          <div class="team-role">Proje Asistanı</div>
+          <div class="team-bio"><p>Enis Tombul, lisans ve yüksek lisansını Boğaziçi Üniversitesi Türk Dili ve Edebiyatı Bölümünde tamamladı; “Beşiktaşlı Yahya Efendi Divanı” başlıklı yüksek lisans tezi Harvard Üniversitesi tarafından kitap olarak yayımlandı. Doktorasını aynı üniversitede Eski Türk Edebiyatı alanında “16. Yüzyıl Gazellerinde Dünyevi Sevgili” adlı teziyle tamamladı. Boğaziçi Üniversitesinde Türk edebiyatı, İstanbul Üniversitesi Devlet Konservatuvarında edebiyat ve prozodi dersleri verdi. İstanbul Üniversitesi OMAR bünyesindeki Tarihi Türk Müziği Araştırmaları ve Multimedya Arşivi Projesi’nde proje uzmanı ve proje koordinatörü olarak görev aldı. Türk edebiyatı ve musikisi üzerine makaleleri çeşitli dergi ve kitaplarda yayımlandı; çalışmalarına edebiyat danışmanı, araştırmacı, yazar ve editör olarak devam etmektedir.</p></div>
+        </div>
+      </article>
+  </main>
+</div>
+<script src="lq-page.js?v=9"></script>
+</body>
+</html>
