@@ -31,6 +31,7 @@
     guide: ['kullanim-kilavuzu-tr.html', 'kullanim-kilavuzu-tr.html'],
     updates: ['updates-en.html', 'guncellemeler-tr.html'],
     v3about: ['data-model-en.html', 'veri-modeli-tr.html'],
+    v3brochure: ['lq3-yenilikler-tr.html', 'lq3-yenilikler-tr.html'],
     newFeatures: ['lq2-new-features-en.html', 'lq2-yeni-ozellikler-tr.html'],
     firstRelease: ['lq1-ilk-surum-tr.html', 'lq1-ilk-surum-tr.html'],
     lexicon: ['lexicon-digitization-en.html', 'lexicon-dijitallestirme-tr.html'],
@@ -98,7 +99,7 @@
           link('what', T.what, href('what'), ICON.what) +
           link('guide', T.guide, href('guide'), ICON.guide) +
           link('updates', T.updates, href('updates'), ICON.updates) +
-          group('lqSub3', T.lq3, sublink('v3about', T.v3about, href('v3about')) + sublink(null, T.v3brochure, HOME + '#whats-new'), ['v3about'], '2026') +
+          group('lqSub3', T.lq3, sublink('v3about', T.v3about, href('v3about')) + sublink('v3brochure', T.v3brochure, href('v3brochure')), ['v3about', 'v3brochure'], '2026') +
           group('lqSub2', T.lq2, sublink('newFeatures', T.newFeatures, href('newFeatures')) + sublink('lexicon', T.lexicon, href('lexicon')), ['newFeatures', 'lexicon'], '2020') +
           link('firstRelease', T.lq1, href('firstRelease'), ICON.gear, '2016') +
           link('institutional', T.institutional, href('institutional'), ICON.institutional) +

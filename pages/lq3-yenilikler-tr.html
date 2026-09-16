@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LexiQamus 3.0: Yenilikler · LexiQamus</title>
+<style>
+    :root {
+      --ink: #17212b;
+      --muted: #66717d;
+      --line: #e5e9ed;
+      --paper: #ffffff;
+      --soft: #f6f8f9;
+      --brand: #681c23;
+      --brand-dark: #461217;
+      --brand-soft: #f8eeee;
+      --note: #fff8e7;
+      --note-line: #d6a83e;
+      --shadow: 0 18px 55px rgba(23, 33, 43, .10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f2f4f5 0, #fafbfb 420px, #f5f7f8 100%);
+      font: 16px/1.74 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: var(--brand); }
+    img { display: block; max-width: 100%; height: auto; }
+    .page-shell { width: min(1240px, calc(100% - 36px)); margin: 42px auto 70px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 58px clamp(28px, 6vw, 78px);
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand-dark), var(--brand) 58%, #8b3139);
+      border-radius: 22px 22px 0 0;
+    }
+    .hero::after {
+      content: "3.0";
+      position: absolute;
+      right: clamp(22px, 7vw, 88px);
+      top: 50%;
+      transform: translateY(-53%);
+      font: 800 clamp(90px, 18vw, 220px)/1 Georgia, serif;
+      color: rgba(255,255,255,.07);
+      letter-spacing: -.08em;
+    }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 18px;
+      font-size: .76rem;
+      font-weight: 750;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #f4dadd;
+    }
+    .eyebrow::before { content: ""; width: 25px; height: 2px; background: currentColor; }
+    h1 { position: relative; z-index: 1; max-width: 760px; margin: 0; font: 700 clamp(2.35rem, 5vw, 4.7rem)/1.04 Georgia, "Times New Roman", serif; letter-spacing: -.035em; }
+    .hero-subtitle { position: relative; z-index: 1; max-width: 650px; margin: 22px 0 0; font-size: clamp(1rem, 1.6vw, 1.18rem); color: rgba(255,255,255,.84); }
+    .layout {
+      display: grid;
+      grid-template-columns: 255px minmax(0, 1fr);
+      gap: 0;
+      align-items: start;
+      background: var(--paper);
+      border-radius: 0 0 22px 22px;
+      box-shadow: var(--shadow);
+    }
+    .toc {
+      position: sticky;
+      top: 22px;
+      padding: 42px 26px 44px;
+      border-right: 1px solid var(--line);
+    }
+    .toc-title { margin: 0 0 16px; color: var(--muted); font-size: .72rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .toc a { display: block; padding: 7px 0; color: #3e4853; text-decoration: none; font-size: .88rem; line-height: 1.35; }
+    .toc a:hover, .toc a:focus-visible { color: var(--brand); text-decoration: underline; text-underline-offset: 4px; }
+    main { min-width: 0; padding: clamp(38px, 6vw, 78px); }
+    .intro-section { font-size: 1.08rem; }
+    p { margin: 0 0 1.25em; }
+    h2 {
+      margin: 3.1rem 0 1.05rem;
+      padding-top: .25rem;
+      color: var(--brand-dark);
+      font: 700 clamp(1.75rem, 3vw, 2.35rem)/1.18 Georgia, "Times New Roman", serif;
+      letter-spacing: -.02em;
+    }
+    h3 { margin: 2.35rem 0 .75rem; font-size: 1.25rem; line-height: 1.3; color: #26323d; }
+    .archive-note {
+      margin: 30px 0 34px;
+      padding: 20px 22px 19px;
+      background: var(--note);
+      border: 1px solid #ecd99f;
+      border-left: 5px solid var(--note-line);
+      border-radius: 10px;
+    }
+    .archive-note strong { display: block; margin-bottom: 5px; color: #614b16; }
+    .archive-note p { margin: 0; color: #5e5338; }
+    .historical-offer { margin: 28px 0 12px; padding: 18px 20px; background: var(--soft); border: 1px solid var(--line); border-radius: 10px; color: #4b5661; }
+    .historical-offer::before { content: "2020 tarihli özgün duyuru"; display: block; margin-bottom: 7px; color: var(--muted); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .feature-list { list-style: none; margin: 1.2rem 0 0; padding: 0; }
+    .feature-list li { position: relative; margin: 0 0 12px; padding: 0 0 0 28px; }
+    .feature-list li::before { content: ""; position: absolute; left: 2px; top: .72em; width: 9px; height: 9px; background: var(--brand); border-radius: 50%; box-shadow: 0 0 0 4px var(--brand-soft); }
+    figure { margin: 28px 0 38px; padding: 13px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 12px 32px rgba(23,33,43,.08); }
+    figure img { width: 100%; border-radius: 8px; }
+    .section-kicker { display: inline-block; margin: 0 0 .5rem; color: var(--brand); font-size: .78rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    .publication { margin-top: 54px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+    [dir="rtl"] { font-family: "Noto Naskh Arabic", "Times New Roman", serif; font-size: 1.12em; }
+    @media (max-width: 880px) {
+      .page-shell { width: min(100% - 20px, 760px); margin-top: 10px; }
+      .hero { border-radius: 16px 16px 0 0; }
+      .layout { grid-template-columns: 1fr; border-radius: 0 0 16px 16px; }
+      .toc { position: static; padding: 24px 28px; border-right: 0; border-bottom: 1px solid var(--line); column-count: 2; column-gap: 30px; }
+      .toc-title { column-span: all; }
+      main { padding: 34px 28px 50px; }
+    }
+    @media (max-width: 560px) {
+      .hero { padding: 38px 24px 42px; }
+      .hero::after { display: none; }
+      .toc { column-count: 1; }
+      main { padding: 30px 20px 42px; }
+      h2 { margin-top: 2.5rem; }
+      figure { margin-left: -8px; margin-right: -8px; padding: 7px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media print {
+      body { background: #fff; }
+      .page-shell { width: 100%; margin: 0; }
+      .hero, .layout { box-shadow: none; border-radius: 0; }
+      .toc { display: none; }
+      .layout { display: block; }
+      main { padding: 36px; }
+      figure { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lq-page.css?v=11">
+<style>
+  main.guide-steps .v3-intro { margin: 0 0 38px; }
+  main.guide-steps .v3-block { margin-bottom: 46px; }
+  main.guide-steps h2.v3-sec-title { font: 800 22px/1.3 Inter, ui-sans-serif, system-ui, sans-serif !important; color: #082567 !important; letter-spacing: -0.2px !important; margin: 0 0 20px !important; padding: 0 !important; border: 0 !important; }
+  main.guide-steps h2.v3-sec-title::before, main.guide-steps h2.v3-sec-title::after { display: none !important; content: none !important; }
+  main.guide-steps h2.v3-sec-title em { font-style: normal; color: #9d1c51; }
+  .v3-feats { display: flex; flex-direction: column; gap: 14px; }
+  .v3-feat { background: #fff; border: 1px solid #e8edf4; border-radius: 12px; padding: 20px 24px; transition: box-shadow .15s, border-color .15s; }
+  .v3-feat:hover { border-color: #cbd5e1; box-shadow: 0 3px 12px rgba(8,37,103,0.07); }
+  main.guide-steps .v3-feat h3 { font: 700 16px/1.35 Inter, ui-sans-serif, system-ui, sans-serif !important; color: #0f172a !important; margin: 0 0 9px !important; display: flex; align-items: center; gap: 10px; letter-spacing: 0 !important; padding: 0 !important; border: 0 !important; }
+  main.guide-steps .v3-feat h3::before, main.guide-steps .v3-feat h3::after { display: none !important; content: none !important; }
+  main.guide-steps .v3-feat p { font-size: 15px !important; color: #64748b !important; line-height: 1.75 !important; margin: 0 !important; }
+  .v3-feat p b { color: #334155; font-weight: 700; }
+  .v3-feat .more { display: inline-block; margin-top: 10px; font: 600 13px Inter, ui-sans-serif, system-ui, sans-serif; color: #082567; text-decoration: none; }
+  .v3-feat .more:hover { color: #9d1c51; }
+  .br-ico { flex: none; width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; }
+  .br-ico svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+  .i-b { color: #2563eb; background: #eff6ff; }
+  .i-o { color: #d97706; background: #fffbeb; }
+  .i-p { color: #db2777; background: #fdf2f8; }
+  .i-r { color: #dc2626; background: #fef2f2; }
+  .i-t { color: #0d9488; background: #ecfdf5; }
+</style>
+</head>
+<body>
+<div class="lqbar">
+  <a class="lqbar-brand" href="../index.html"><span class="lqbar-q"></span><span class="lqbar-word">LexiQamus</span></a>
+  <div class="lqbar-right"></div>
+</div>
+<div class="page-shell">
+  <header class="hero">
+    <div class="eyebrow">LexiQamus 3.0 · 2026</div>
+    <h1>Yenilikler</h1>
+    <p class="hero-subtitle">Arama ekranından sonuç listesine, sözlük sayfasından Kelime Çözücü’ye, yeni sürümle gelen özellikler.</p>
+  </header>
+  <div class="layout" style="grid-template-columns:minmax(0,1fr)">
+    <main class="guide-steps">
+      <p class="v3-intro">LexiQamus 3.0 ile aracın bütün ekranları baştan tasarlandı. Aşağıda yeni sürümün öne çıkan özelliklerini bulabilirsiniz; her birinin ayrıntılı anlatımı <a href="kullanim-kilavuzu-tr.html">Kullanım Kılavuzu</a>’nda yer alıyor.</p>
+      <div class="v3-block"><h2 class="v3-sec-title">Arama</h2><div class="v3-feats"><div class="v3-feat"><h3><span class="br-ico i-b"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path></svg></span>İki arama biçimi</h3><p><b>Ara</b> sekmesiyle okuyabildiğiniz bir kelimeyi doğrudan ararsınız; <b>Kelime Çözücü</b> ile okuyamadığınız bir kelimeyi elinizdeki ipuçlarından yola çıkarak tespit edersiniz.</p><a class="more" href="kullanim-kilavuzu-tr.html#ana-sayfa">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-t"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"></rect><path d="M12 4.5v15"></path></svg></span>İki alfabeli arama kutusu</h3><p>Kelimeyi aynı kutunun bir yarısına Latin harfleriyle, öbür yarısına Osmanlı harfleriyle yazabilirsiniz.</p><a class="more" href="kullanim-kilavuzu-tr.html#iki-taraf">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-p"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"></path></svg></span>İngilizce tanımlarda arama</h3><p><b>İNG</b> seçildiğinde arama sözlüklerdeki İngilizce tanımların içinde yapılır; bir İngilizce kelimeyi tanımında geçiren bütün maddeler listelenir.</p><a class="more" href="kullanim-kilavuzu-tr.html#osm-ing">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-o"><svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2.5"></rect><path d="M6.5 10h.01M10 10h.01M13.5 10h.01M17 10h.01M8 14h8"></path></svg></span>Osmanlıca ekran klavyesi</h3><p>Harflere tıklayarak yazabilir ya da tuşların üzerinde yazan karşılıklarla kendi klavyenizi kullanabilirsiniz.</p><a class="more" href="kullanim-kilavuzu-tr.html#klavye">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-r"><svg viewBox="0 0 24 24"><path d="M5 4.5h11a3 3 0 0 1 3 3v12H8a3 3 0 0 1-3-3z"></path><path d="M5 16.5a3 3 0 0 1 3-3h11"></path></svg></span>Sözlük seçimi</h3><p>Aramayı bütün sözlüklerde yapabilir ya da listeden seçtiğiniz eserlerle sınırlayabilirsiniz.</p><a class="more" href="kullanim-kilavuzu-tr.html#sozlukler">Kılavuzda →</a></div></div></div><div class="v3-block"><h2 class="v3-sec-title">Sonuç <em>listesi</em></h2><div class="v3-feats"><div class="v3-feat"><h3><span class="br-ico i-b"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"></path><circle cx="4.5" cy="6" r="1"></circle><circle cx="4.5" cy="12" r="1"></circle><circle cx="4.5" cy="18" r="1"></circle></svg></span>Kaynağı belli sonuçlar</h3><p>Listenin başında kaç kayıt bulunduğu ve kaç sözlük ile cildin tarandığı yazar; her satırda kaydın alındığı sözlük ve sayfa numarası yer alır.</p><a class="more" href="kullanim-kilavuzu-tr.html#sonuclar">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-t"><svg viewBox="0 0 24 24"><path d="M4 18l4.5-12L13 18M5.8 13.5h5.4"></path><path d="M15 9h5M17.5 9v9"></path></svg></span>Yazılışa göre ara</h3><p>Aradığınız ifadenin muhtemel yazılış ve okunuşları düğmeler hâlinde gelir. Bunlar tahmin değil, sözlükleri dijitalleştirirken girilen verilerdir.</p><a class="more" href="kullanim-kilavuzu-tr.html#yazilis-okunus">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-p"><svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"></path><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"></path></svg></span>Benzer Okunuş</h3><p>Aramayı ses bakımından benzer harflerle genişletir; kelimeyi duyduğunuz gibi yazdığınızda sözlükteki farklı imlası da bulunur.</p><a class="more" href="kullanim-kilavuzu-tr.html#benzer-okunus">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-o"><svg viewBox="0 0 24 24"><path d="M3.5 12.5V4.5h8l9 9-8 8z"></path><circle cx="8" cy="9" r="1.4"></circle></svg></span>Kelime kategorileri</h3><p>Her sonuç <b>Madde Başı</b>, <b>Alt Madde Başı</b> ya da <b>İlişkili</b> olarak etiketlenir; satırın solundaki renkli çizgi aynı ayrımı gösterir.</p><a class="more" href="kullanim-kilavuzu-tr.html#kategoriler">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-r"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.3l2.7 2.7L16.5 9"></path></svg></span>Editör onaylı okunuşlar</h3><p>Latin okunuşların hangisinin editörlerce onaylandığı, hangisinin otomatik üretildiği görülür; okunuşu <b>Doğru</b> diye işaretleyebilir ya da düzeltme bildirebilirsiniz.</p><a class="more" href="kullanim-kilavuzu-tr.html#latin-okunuslar">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-b"><svg viewBox="0 0 24 24"><path d="M5 3.5l13 7-5.8 1.6L10 18z"></path><path d="M12.5 12.3l5 5"></path></svg></span>İki tıklama bölgesi</h3><p>Satırın solu sizi kelimenin geçtiği yere, sağı maddenin başına götürür; satırdaki bir kelimeye tıklayınca o kelime yeni sekmede aranır.</p><a class="more" href="kullanim-kilavuzu-tr.html#iki-bolge">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-t"><svg viewBox="0 0 24 24"><path d="M6 3.5h8l4 4v13H6z"></path><path d="M14 3.5V8h4"></path><path d="M9 12.5h6M9 16h4"></path></svg></span>Hazır künye</h3><p>Her kaydın künyesi <b>APA</b>, <b>Chicago</b> ve <b>Harvard</b> biçimlerinde tek tıkla kopyalanır.</p><a class="more" href="kullanim-kilavuzu-tr.html#sozluk-kunye">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-p"><svg viewBox="0 0 24 24"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"></path><path d="M8 12h8"></path></svg></span>Benzer Eşleşmeleri Tara</h3><p>Aradığınızı bulamazsanız, girdiğiniz yazılışa harf harf yakın kelimeler numaralı bir liste hâlinde gelir.</p><a class="more" href="kullanim-kilavuzu-tr.html#tara">Kılavuzda →</a></div></div></div><div class="v3-block"><h2 class="v3-sec-title">Sözlük <em>sayfası</em></h2><div class="v3-feats"><div class="v3-feat"><h3><span class="br-ico i-t"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"></rect><path d="M3 15.5l4.5-4 3.5 3 4-4.5 5 5.5"></path><circle cx="8.5" cy="9" r="1.4"></circle></svg></span>Görsel sözlük</h3><p>Madde, sözlüğün orijinal taraması üzerinde açılır. Dijitalleştirilmiş kelimeler renkli kutular içindedir; üzerine gelince Osmanlıca yazılışı ve okunuşu görünür, tıklayınca yeni arama başlar.</p><a class="more" href="kullanim-kilavuzu-tr.html#renkli-kutular">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-b"><svg viewBox="0 0 24 24"><path d="M12 4l8.5 4.5L12 13 3.5 8.5z"></path><path d="M3.5 12.5L12 17l8.5-4.5"></path></svg></span>Dilim, sütun ve sayfa</h3><p>Maddeyi tek başına, bulunduğu sütunun tamamıyla ya da bütün sayfayla birlikte görebilir; oklarla madde, sütun ya da sayfa atlayarak sözlükte gezinebilirsiniz.</p><a class="more" href="kullanim-kilavuzu-tr.html#dilim-sutun-sayfa">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-o"><svg viewBox="0 0 24 24"><path d="M12 4.5l8.5 15h-17z"></path><path d="M12 10.5v4"></path><circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none"></circle></svg></span>Hata bildirimi</h3><p>Dijitalleştirilmiş her kelimenin yanında bir uyarı işareti vardır; bir hata gördüğünüzde oradan bildirebilirsiniz.</p><a class="more" href="kullanim-kilavuzu-tr.html#hata-bildir">Kılavuzda →</a></div></div></div><div class="v3-block"><h2 class="v3-sec-title">Kelime <em>Çözücü</em></h2><div class="v3-feats"><div class="v3-feat"><h3><span class="br-ico i-b"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="5" height="10" rx="1.2"></rect><rect x="9.5" y="7" width="5" height="10" rx="1.2"></rect><rect x="16" y="7" width="5" height="10" rx="1.2"></rect></svg></span>Kutular ve zincirler</h3><p>Her harf için bir kutu; aralarına yeni kutu ekleyebilir, kutuları silebilirsiniz. Zincirlerle harflerin bitişik, ayrı ya da belirsiz olduğunu belirterek sonuçları daraltırsınız.</p><a class="more" href="kullanim-kilavuzu-tr.html#kutular">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-p"><svg viewBox="0 0 24 24"><path d="M12 4v16M5.1 8l13.8 8M5.1 16l13.8-8"></path></svg></span>* ve ∞, yıldızlı harfler</h3><p><b>*</b> okunamayan tek bir harfi, <b>∞</b> adedi bilinmeyen harfleri temsil eder. Yıldızlı tuşlar, yalnızca noktaları farklı olan harflerin hepsini birden arar.</p><a class="more" href="kullanim-kilavuzu-tr.html#cozucu-klavye">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-t"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"></rect><path d="M12 6v12" stroke-dasharray="2 2"></path></svg></span>Tek kutuda birden fazla harf</h3><p>Karışan harflerde ihtimallerin hepsini aynı kutuya koyabilirsiniz; boş bir alternatif, o yerde harf olmayabileceğini belirtir.</p><a class="more" href="kullanim-kilavuzu-tr.html#cozucu-klavye">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-o"><svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2.5"></rect><path d="M6.5 10h.01M10 10h.01M13.5 10h.01M17 10h.01M8 14h8"></path></svg></span>Temel ve gelişmiş klavye</h3><p>Temel klavye bütün aramalar için yeterlidir; gelişmiş klavye harflerin bütün yazım biçimlerini ve sıfır-boşluk karakterini ayrı tuşlarda sunar.</p><a class="more" href="kullanim-kilavuzu-tr.html#cozucu">Kılavuzda →</a></div><div class="v3-feat"><h3><span class="br-ico i-r"><svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2.5"></rect><path d="M9 10.5h6M12 10.5v4"></path></svg></span>Kendi klavyenizle yazma</h3><p>Tuşlara tıklamak zorunda değilsiniz; harfleri kutulara doğrudan kendi klavyenizle de yazabilirsiniz.</p><a class="more" href="kullanim-kilavuzu-tr.html#cozucu-klavye">Kılavuzda →</a></div></div></div>
+    </main>
+  </div>
+</div>
+<script src="lq-page.js?v=7"></script>
+</body>
+</html>
