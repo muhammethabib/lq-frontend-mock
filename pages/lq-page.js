@@ -15,11 +15,11 @@
   /* ---------------- 1. YAN MENÜ ---------------- */
   var T = {
     en: { signIn: 'Sign in', signUp: 'Sign up', about: 'About', team: 'Team', what: 'What is LexiQamus?', guide: 'Instructions',
-          updates: 'Suggestions and Corrections', lq3: 'LexiQamus 3.0', v3about: 'Digitization and Data Model', v3brochure: "What's New",
+          updates: 'History of Suggestions and Corrections', lq3: 'LexiQamus 3.0', v3about: 'Digitization and Data Model', v3brochure: "What's New",
           lq2: 'LexiQamus 2.0', newFeatures: "What's New", lq1: 'LexiQamus 1.0', firstRelease: 'First Release (2016)', lexicon: 'Lexicon Digitization Project',
           institutional: 'Institutional Subscribers', menu: 'Menu' },
     tr: { signIn: 'Giriş Yap', signUp: 'Kaydol', about: 'Hakkımızda', team: 'Ekip', what: 'LexiQamus Nedir?', guide: 'Kullanım Kılavuzu',
-          updates: 'Öneriler ve Düzeltmeler', lq3: 'LexiQamus 3.0', v3about: 'Dijitalleştirme ve Veri Modeli', v3brochure: 'Yenilikler',
+          updates: 'Öneri ve Düzeltme Geçmişi', lq3: 'LexiQamus 3.0', v3about: 'Dijitalleştirme ve Veri Modeli', v3brochure: 'Yenilikler',
           lq2: 'LexiQamus 2.0', newFeatures: 'Yenilikler', lq1: 'LexiQamus 1.0', firstRelease: 'İlk Sürüm (2016)', lexicon: 'Lexicon Dijitalleştirme Projesi',
           institutional: 'Kurumsal Üyeler', menu: 'Menü' }
   }[LANG];
