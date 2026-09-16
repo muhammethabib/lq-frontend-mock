@@ -15,12 +15,12 @@
   /* ---------------- 1. YAN MENÜ ---------------- */
   var T = {
     en: { signIn: 'Sign in', signUp: 'Sign up', about: 'About', team: 'Team', what: 'What is LexiQamus?', guide: 'Instructions',
-          updates: 'Updates', lq3: 'LexiQamus 3.0', v3about: 'Digitization and Data Model', v3brochure: "What's New",
-          lq2: 'LexiQamus 2.0', newFeatures: 'New Features & Improvements', lq1: 'LexiQamus 1.0', firstRelease: 'First Release (2016)', lexicon: 'Lexicon Digitization Project',
+          updates: 'Suggestions and Corrections', lq3: 'LexiQamus 3.0', v3about: 'Digitization and Data Model', v3brochure: "What's New",
+          lq2: 'LexiQamus 2.0', newFeatures: "What's New", lq1: 'LexiQamus 1.0', firstRelease: 'First Release (2016)', lexicon: 'Lexicon Digitization Project',
           institutional: 'Institutional Subscribers', menu: 'Menu' },
     tr: { signIn: 'Giriş Yap', signUp: 'Kaydol', about: 'Hakkımızda', team: 'Ekip', what: 'LexiQamus Nedir?', guide: 'Kullanım Kılavuzu',
-          updates: 'Güncellemeler', lq3: 'LexiQamus 3.0', v3about: 'Dijitalleştirme ve Veri Modeli', v3brochure: 'Yenilikler',
-          lq2: 'LexiQamus 2.0', newFeatures: 'Yeni Özellikler ve İyileştirmeler', lq1: 'LexiQamus 1.0', firstRelease: 'İlk Sürüm (2016)', lexicon: 'Lexicon Dijitalleştirme Projesi',
+          updates: 'Öneriler ve Düzeltmeler', lq3: 'LexiQamus 3.0', v3about: 'Dijitalleştirme ve Veri Modeli', v3brochure: 'Yenilikler',
+          lq2: 'LexiQamus 2.0', newFeatures: 'Yenilikler', lq1: 'LexiQamus 1.0', firstRelease: 'İlk Sürüm (2016)', lexicon: 'Lexicon Dijitalleştirme Projesi',
           institutional: 'Kurumsal Üyeler', menu: 'Menü' }
   }[LANG];
 
@@ -29,11 +29,11 @@
     about: ['about-en.html', 'hakkimizda-tr.html'],
     what: ['what-is-lexiqamus-en.html', 'lexiqamus-nedir-tr.html'],
     guide: ['kullanim-kilavuzu-tr.html', 'kullanim-kilavuzu-tr.html'],
-    updates: ['updates-en.html', 'guncellemeler-tr.html'],
+    updates: ['suggestions-corrections-en.html', 'oneriler-duzeltmeler-tr.html'],
     v3about: ['data-model-en.html', 'veri-modeli-tr.html'],
-    v3brochure: ['lq3-yenilikler-tr.html', 'lq3-yenilikler-tr.html'],
+    v3brochure: ['lq3-whats-new-en.html', 'lq3-yenilikler-tr.html'],
     newFeatures: ['lq2-new-features-en.html', 'lq2-yeni-ozellikler-tr.html'],
-    firstRelease: ['lq1-ilk-surum-tr.html', 'lq1-ilk-surum-tr.html'],
+    firstRelease: ['lq1-first-version-en.html', 'lq1-ilk-surum-tr.html'],
     lexicon: ['lexicon-digitization-en.html', 'lexicon-dijitallestirme-tr.html'],
     institutional: ['institutional-subscribers-en.html', 'kurumsal-uyeler-tr.html'],
     _team: ['#', '#']
@@ -98,11 +98,11 @@
           link('_team', T.team, HOME + '#team', ICON.team) +
           link('what', T.what, href('what'), ICON.what) +
           link('guide', T.guide, href('guide'), ICON.guide) +
-          link('updates', T.updates, href('updates'), ICON.updates) +
+          link('institutional', T.institutional, href('institutional'), ICON.institutional) +
           group('lqSub3', T.lq3, sublink('v3about', T.v3about, href('v3about')) + sublink('v3brochure', T.v3brochure, href('v3brochure')), ['v3about', 'v3brochure'], '2026') +
           group('lqSub2', T.lq2, sublink('newFeatures', T.newFeatures, href('newFeatures')) + sublink('lexicon', T.lexicon, href('lexicon')), ['newFeatures', 'lexicon'], '2020') +
           link('firstRelease', T.lq1, href('firstRelease'), ICON.gear, '2016') +
-          link('institutional', T.institutional, href('institutional'), ICON.institutional) +
+          link('updates', T.updates, href('updates'), ICON.updates) +
         '</div>' +
       '</nav>';
     doc.body.insertAdjacentHTML('beforeend', html);

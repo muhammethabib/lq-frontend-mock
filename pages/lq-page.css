@@ -461,3 +461,6 @@ a.side-link .side-year + .side-link-chev { margin-right: -1px; }
 @media (max-width: 760px) {
   .hero { height: auto !important; min-height: 260px; padding-top: 34px !important; padding-bottom: 34px !important; }
 }
+
+/* içindekilersiz tek sütunlu sayfalar: metin ortada, 860px */
+.layout > main:only-child, .layout > .article:only-child { max-width: 860px; margin: 0 auto; }
