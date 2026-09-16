@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LexiQamus 1.0: İlk Sürüm · LexiQamus</title>
+<style>
+    :root {
+      --ink: #17212b;
+      --muted: #66717d;
+      --line: #e5e9ed;
+      --paper: #ffffff;
+      --soft: #f6f8f9;
+      --brand: #681c23;
+      --brand-dark: #461217;
+      --brand-soft: #f8eeee;
+      --note: #fff8e7;
+      --note-line: #d6a83e;
+      --shadow: 0 18px 55px rgba(23, 33, 43, .10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f2f4f5 0, #fafbfb 420px, #f5f7f8 100%);
+      font: 16px/1.74 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: var(--brand); }
+    img { display: block; max-width: 100%; height: auto; }
+    .page-shell { width: min(1240px, calc(100% - 36px)); margin: 42px auto 70px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 58px clamp(28px, 6vw, 78px);
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand-dark), var(--brand) 58%, #8b3139);
+      border-radius: 22px 22px 0 0;
+    }
+    .hero::after {
+      content: "1.0";
+      position: absolute;
+      right: clamp(22px, 7vw, 88px);
+      top: 50%;
+      transform: translateY(-53%);
+      font: 800 clamp(90px, 18vw, 220px)/1 Georgia, serif;
+      color: rgba(255,255,255,.07);
+      letter-spacing: -.08em;
+    }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 18px;
+      font-size: .76rem;
+      font-weight: 750;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #f4dadd;
+    }
+    .eyebrow::before { content: ""; width: 25px; height: 2px; background: currentColor; }
+    h1 { position: relative; z-index: 1; max-width: 760px; margin: 0; font: 700 clamp(2.35rem, 5vw, 4.7rem)/1.04 Georgia, "Times New Roman", serif; letter-spacing: -.035em; }
+    .hero-subtitle { position: relative; z-index: 1; max-width: 650px; margin: 22px 0 0; font-size: clamp(1rem, 1.6vw, 1.18rem); color: rgba(255,255,255,.84); }
+    .layout {
+      display: grid;
+      grid-template-columns: 255px minmax(0, 1fr);
+      gap: 0;
+      align-items: start;
+      background: var(--paper);
+      border-radius: 0 0 22px 22px;
+      box-shadow: var(--shadow);
+    }
+    .toc {
+      position: sticky;
+      top: 22px;
+      padding: 42px 26px 44px;
+      border-right: 1px solid var(--line);
+    }
+    .toc-title { margin: 0 0 16px; color: var(--muted); font-size: .72rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .toc a { display: block; padding: 7px 0; color: #3e4853; text-decoration: none; font-size: .88rem; line-height: 1.35; }
+    .toc a:hover, .toc a:focus-visible { color: var(--brand); text-decoration: underline; text-underline-offset: 4px; }
+    main { min-width: 0; padding: clamp(38px, 6vw, 78px); }
+    .intro-section { font-size: 1.08rem; }
+    p { margin: 0 0 1.25em; }
+    h2 {
+      margin: 3.1rem 0 1.05rem;
+      padding-top: .25rem;
+      color: var(--brand-dark);
+      font: 700 clamp(1.75rem, 3vw, 2.35rem)/1.18 Georgia, "Times New Roman", serif;
+      letter-spacing: -.02em;
+    }
+    h3 { margin: 2.35rem 0 .75rem; font-size: 1.25rem; line-height: 1.3; color: #26323d; }
+    .archive-note {
+      margin: 30px 0 34px;
+      padding: 20px 22px 19px;
+      background: var(--note);
+      border: 1px solid #ecd99f;
+      border-left: 5px solid var(--note-line);
+      border-radius: 10px;
+    }
+    .archive-note strong { display: block; margin-bottom: 5px; color: #614b16; }
+    .archive-note p { margin: 0; color: #5e5338; }
+    .historical-offer { margin: 28px 0 12px; padding: 18px 20px; background: var(--soft); border: 1px solid var(--line); border-radius: 10px; color: #4b5661; }
+    .historical-offer::before { content: "2020 tarihli özgün duyuru"; display: block; margin-bottom: 7px; color: var(--muted); font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .feature-list { list-style: none; margin: 1.2rem 0 0; padding: 0; }
+    .feature-list li { position: relative; margin: 0 0 12px; padding: 0 0 0 28px; }
+    .feature-list li::before { content: ""; position: absolute; left: 2px; top: .72em; width: 9px; height: 9px; background: var(--brand); border-radius: 50%; box-shadow: 0 0 0 4px var(--brand-soft); }
+    figure { margin: 28px 0 38px; padding: 13px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 12px 32px rgba(23,33,43,.08); }
+    figure img { width: 100%; border-radius: 8px; }
+    .section-kicker { display: inline-block; margin: 0 0 .5rem; color: var(--brand); font-size: .78rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    .publication { margin-top: 54px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+    [dir="rtl"] { font-family: "Noto Naskh Arabic", "Times New Roman", serif; font-size: 1.12em; }
+    @media (max-width: 880px) {
+      .page-shell { width: min(100% - 20px, 760px); margin-top: 10px; }
+      .hero { border-radius: 16px 16px 0 0; }
+      .layout { grid-template-columns: 1fr; border-radius: 0 0 16px 16px; }
+      .toc { position: static; padding: 24px 28px; border-right: 0; border-bottom: 1px solid var(--line); column-count: 2; column-gap: 30px; }
+      .toc-title { column-span: all; }
+      main { padding: 34px 28px 50px; }
+    }
+    @media (max-width: 560px) {
+      .hero { padding: 38px 24px 42px; }
+      .hero::after { display: none; }
+      .toc { column-count: 1; }
+      main { padding: 30px 20px 42px; }
+      h2 { margin-top: 2.5rem; }
+      figure { margin-left: -8px; margin-right: -8px; padding: 7px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media print {
+      body { background: #fff; }
+      .page-shell { width: 100%; margin: 0; }
+      .hero, .layout { box-shadow: none; border-radius: 0; }
+      .toc { display: none; }
+      .layout { display: block; }
+      main { padding: 36px; }
+      figure { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lq-page.css?v=9">
+</head>
+<body data-toc="letters">
+<div class="lqbar">
+  <a class="lqbar-brand" href="../index.html"><span class="lqbar-q"></span><span class="lqbar-word">LexiQamus</span></a>
+  <div class="lqbar-right"></div>
+</div>
+<div class="page-shell">
+  <header class="hero">
+    <div class="eyebrow">Arşiv · 2016</div>
+    <h1>LexiQamus 1.0: İlk Sürüm</h1>
+    <p class="hero-subtitle">Okunamayan Osmanlıca kelimeleri çözmek için geliştirilen ilk dijital aracın 7 Haziran 2016’da yayınlanan ilk sürümü ve getirdiği yenilikler.</p>
+  </header>
+  <div class="layout">
+    <nav class="toc" aria-label="Bu sayfada">
+      <p class="toc-title">Bu sayfada</p>
+      <a href="#giris">Giriş</a>
+      <a href="#sorun">Çözülmek istenen sorun</a>
+      <a href="#kutular">Kutularla arama</a>
+      <a href="#isaretler">Okunamayan harfler için işaretler</a>
+      <a href="#klavye">Klavye ve yıldızlı harfler</a>
+      <a href="#sonuclar">Sonuçlar</a>
+      <a href="#sonra">Sonraki sürümler</a>
+    </nav>
+    <main class="guide-steps">
+      <section id="giris" class="intro-section">
+        <span class="section-kicker"><span lang="en">LexiQamus</span> 1.0</span>
+        <p>LexiQamus ilk defa 7 Haziran 2016 tarihinde yayınlandı. Osmanlı Türkçesi metinlerde okunamayan kelimeleri çözmek amacıyla geliştirilen ilk dijital araçtı ve bugün kullandığınız arama mantığının temelleri bu ilk sürümle atıldı.</p>
+        <aside class="archive-note" aria-label="Taslak sayfa">
+          <strong>Bu sayfa hazırlanma aşamasındadır.</strong>
+          <p>Aşağıdaki metin, ilk sürümün özelliklerini sonraki sürüm duyurularından ve bugünkü aracın işleyişinden hareketle özetleyen bir taslaktır; ayrıntılar zamanla eklenecektir.</p>
+        </aside>
+      </section>
+
+      <section id="sorun">
+        <h2>Çözülmek istenen sorun</h2>
+        <p>El yazması Osmanlıca metinlerle çalışan araştırmacılar, sık sık okunması güç harflerle karşılaşır. Yazı karışık olabilir; belgenin ilgili kısmı yırtılmış, yanmış, katlanmış ya da mürekkeple lekelenmiş olabilir.</p>
+        <p>Geleneksel lugatlar ancak kelimenin sonundaki harfler okunamadığında işe yarar, çünkü sözlükte kelimeyi baş harflerinden başlayarak ararız. Kelimenin başındaki ya da ortasındaki harfler belirsiz olduğunda lugatlar büyük ölçüde işlevsiz kalır. LexiQamus 1.0 tam da bu boşluğu doldurmak için geliştirildi.</p>
+      </section>
+
+      <section id="kutular">
+        <h2>Kutularla arama</h2>
+        <p>İlk sürümün temel yeniliği, kelimeyi harf harf kutulara ayırarak aramaktı. Her kutu kelimenin bir harfini temsil eder; araştırmacı okuyabildiği harfleri yerlerine yazar, okuyamadığı yerleri de işaretle bırakır.</p>
+        <p>Böylece arama, kelimenin başından değil, okunabilen harflerin kelime içindeki konumundan hareket eder. Kapsamlı lugatlar içinde aranarak bulunması günler sürebilecek bir kelime, bu sayede neredeyse anında tespit edilebilir hâle geldi.</p>
+      </section>
+
+      <section id="isaretler">
+        <h2>Okunamayan harfler için işaretler</h2>
+        <p>Okunamayan kısımlar için iki işaret tanımlandı:</p>
+        <ul class="feature-list">
+          <li><strong>*</strong> okunamayan tek bir harfi temsil eder.</li>
+          <li><strong>∞</strong> sayısı bilinmeyen, bir veya birden fazla okunamayan harfi temsil eder.</li>
+        </ul>
+        <p>Bu işaretler, arama ifadesinin tamamını bilmeden de sonuçları daraltmayı mümkün kıldı.</p>
+      </section>
+
+      <section id="klavye">
+        <h2>Klavye ve yıldızlı harfler</h2>
+        <p>Arama için özel bir Osmanlıca ekran klavyesi hazırlandı. Klavyede, harflerin yanı sıra LexiQamus’a özgü <strong>yıldızlı harfler</strong> de yer aldı.</p>
+        <p>Yıldızlı bir harf, aynı iskelete sahip ve yalnızca noktaları farklı olan harflerin hepsini birden arar. Örneğin noktaları seçilemeyen bir <span dir="rtl">س</span> ya da <span dir="rtl">ش</span> için yıldızlı sin tuşu, ikisini birlikte arar. Böylece harfin gövdesi okunabildiği hâlde noktaları okunamayan durumlarda da arama yapılabildi.</p>
+        <p>İlk sürümün klavyesinde 37 karakter bulunuyordu; 2.0 sürümünde bunlara beş yeni karakter eklendi.</p>
+      </section>
+
+      <section id="sonuclar">
+        <h2>Sonuçlar</h2>
+        <ul class="feature-list">
+          <li>İlk sürüm, arama ifadesiyle birebir eşleşen sonuçları listeliyordu.</li>
+          <li>Kelimelerin anlamları site içinde gösterilmiyor; anlamlar için ilgili sözlüklere bağlantı veriliyordu.</li>
+          <li>Tek harfli aramalara izin verilmiyordu.</li>
+        </ul>
+      </section>
+
+      <section id="sonra">
+        <h2>Sonraki sürümler</h2>
+        <p>2020’de yayınlanan LexiQamus 2.0 ile Redhouse’un <em>A Turkish and English Lexicon</em> adlı eseri dijitalleştirildi, arama birebir, kelime ve kısmî sekmelerine ayrıldı ve klavye genişletildi. Ayrıntılar için <a href="lq2-yeni-ozellikler-tr.html">LexiQamus 2.0: Yeni Özellikler ve İyileştirmeler</a> sayfasına bakabilirsiniz.</p>
+        <p>2026’da yayınlanan LexiQamus 3.0’ın kullanımı ise <a href="kullanim-kilavuzu-tr.html">Kullanım Kılavuzu</a>’nda anlatılmaktadır.</p>
+      </section>
+    </main>
+  </div>
+</div>
+<script src="lq-page.js?v=4"></script>
+</body>
+</html>

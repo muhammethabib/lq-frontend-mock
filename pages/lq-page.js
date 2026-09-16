@@ -16,11 +16,11 @@
   var T = {
     en: { signIn: 'Sign in', signUp: 'Sign up', about: 'About', team: 'Team', what: 'What is LexiQamus?', guide: 'Instructions',
           updates: 'Updates', lq3: 'LexiQamus 3.0', v3about: 'Digitization and Data Model', v3brochure: "What's New",
-          lq2: 'LexiQamus 2.0', newFeatures: 'New Features & Improvements', lexicon: 'Lexicon Digitization Project',
+          lq2: 'LexiQamus 2.0', newFeatures: 'New Features & Improvements', lq1: 'LexiQamus 1.0', firstRelease: 'First Release (2016)', lexicon: 'Lexicon Digitization Project',
           institutional: 'Institutional Subscribers', menu: 'Menu' },
     tr: { signIn: 'Giriş Yap', signUp: 'Kaydol', about: 'Hakkımızda', team: 'Ekip', what: 'LexiQamus Nedir?', guide: 'Kullanım Kılavuzu',
           updates: 'Güncellemeler', lq3: 'LexiQamus 3.0', v3about: 'Dijitalleştirme ve Veri Modeli', v3brochure: 'Yenilikler',
-          lq2: 'LexiQamus 2.0', newFeatures: 'Yeni Özellikler ve İyileştirmeler', lexicon: 'Lexicon Dijitalleştirme Projesi',
+          lq2: 'LexiQamus 2.0', newFeatures: 'Yeni Özellikler ve İyileştirmeler', lq1: 'LexiQamus 1.0', firstRelease: 'İlk Sürüm (2016)', lexicon: 'Lexicon Dijitalleştirme Projesi',
           institutional: 'Kurumsal Üyeler', menu: 'Menü' }
   }[LANG];
 
@@ -32,6 +32,7 @@
     updates: ['updates-en.html', 'guncellemeler-tr.html'],
     v3about: ['data-model-en.html', 'veri-modeli-tr.html'],
     newFeatures: ['lq2-new-features-en.html', 'lq2-yeni-ozellikler-tr.html'],
+    firstRelease: ['lq1-ilk-surum-tr.html', 'lq1-ilk-surum-tr.html'],
     lexicon: ['lexicon-digitization-en.html', 'lexicon-dijitallestirme-tr.html'],
     institutional: ['institutional-subscribers-en.html', 'kurumsal-uyeler-tr.html'],
     _team: ['#', '#']
@@ -98,6 +99,7 @@
           link('updates', T.updates, href('updates'), ICON.updates) +
           group('lqSub3', T.lq3, sublink('v3about', T.v3about, href('v3about')) + sublink(null, T.v3brochure, HOME + '#whats-new'), ['v3about']) +
           group('lqSub2', T.lq2, sublink('newFeatures', T.newFeatures, href('newFeatures')) + sublink('lexicon', T.lexicon, href('lexicon')), ['newFeatures', 'lexicon']) +
+          group('lqSub1', T.lq1, sublink('firstRelease', T.firstRelease, href('firstRelease')), ['firstRelease']) +
           link('institutional', T.institutional, href('institutional'), ICON.institutional) +
         '</div>' +
       '</nav>';
