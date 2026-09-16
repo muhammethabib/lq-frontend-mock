@@ -61,7 +61,7 @@
   function yearTag(y) { return y ? '<span class="side-year">' + y + '</span>' : ''; }
   function link(key, label, url, icon, year) {
     return '<a class="side-link' + (isHere(key) ? ' active' : '') + '" href="' + url + '"' + (isHere(key) ? ' aria-current="page"' : '') + '>' +
-      icon + '<span>' + esc(label) + '</span>' + yearTag(year) + '</a>';
+      icon + '<span>' + esc(label) + '</span>' + yearTag(year) + (year ? '<span class="side-link-chev" aria-hidden="true"></span>' : '') + '</a>';
   }
   function sublink(key, label, url) {
     return '<a class="side-sublink' + (key && isHere(key) ? ' active' : '') + '" href="' + url + '"' + (key && isHere(key) ? ' aria-current="page"' : '') + '><span>' + esc(label) + '</span></a>';
