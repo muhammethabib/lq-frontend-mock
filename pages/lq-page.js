@@ -218,6 +218,11 @@
       var c = codeOf[decodeURIComponent(pin.getAttribute('href').slice(1))];
       if (c) { pin.textContent = c; pin.setAttribute('aria-label', c); }
     });
+    /* metin içi bölüm bağlantıları (a.xref) hedefin kodunu küçük bir etiketle gösterir */
+    doc.querySelectorAll('a.xref[href^="#"]').forEach(function (a) {
+      var c = codeOf[decodeURIComponent(a.getAttribute('href').slice(1))];
+      if (c) a.setAttribute('data-code', c);
+    });
 
     var out = '<button class="toc-toggle" type="button" aria-expanded="false" aria-controls="lqTocList"><span class="toc-title">' + esc(tocTitle) + '</span><span class="toc-now"></span>' + CHEV + '</button>' +
       '<p class="toc-title">' + esc(tocTitle) + '</p><ol class="toc-list" id="lqTocList">';
