@@ -58,17 +58,18 @@
     burger: '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>'
   };
 
-  function link(key, label, url, icon) {
+  function yearTag(y) { return y ? '<span class="side-year">' + y + '</span>' : ''; }
+  function link(key, label, url, icon, year) {
     return '<a class="side-link' + (isHere(key) ? ' active' : '') + '" href="' + url + '"' + (isHere(key) ? ' aria-current="page"' : '') + '>' +
-      icon + '<span>' + esc(label) + '</span></a>';
+      icon + '<span>' + esc(label) + '</span>' + yearTag(year) + '</a>';
   }
   function sublink(key, label, url) {
     return '<a class="side-sublink' + (key && isHere(key) ? ' active' : '') + '" href="' + url + '"' + (key && isHere(key) ? ' aria-current="page"' : '') + '><span>' + esc(label) + '</span></a>';
   }
-  function group(id, label, items, keys) {
+  function group(id, label, items, keys, year) {
     var open = keys.some(isHere);
     return '<button type="button" class="side-link side-link-parent" id="' + id + 'Toggle" aria-expanded="' + open + '" aria-controls="' + id + '">' +
-      ICON.gear + '<span>' + esc(label) + '</span>' + ICON.chev + '</button>' +
+      ICON.gear + '<span>' + esc(label) + '</span>' + yearTag(year) + ICON.chev + '</button>' +
       '<div class="side-submenu' + (open ? ' open' : '') + '" id="' + id + '">' + items + '</div>';
   }
 
@@ -97,9 +98,9 @@
           link('what', T.what, href('what'), ICON.what) +
           link('guide', T.guide, href('guide'), ICON.guide) +
           link('updates', T.updates, href('updates'), ICON.updates) +
-          group('lqSub3', T.lq3, sublink('v3about', T.v3about, href('v3about')) + sublink(null, T.v3brochure, HOME + '#whats-new'), ['v3about']) +
-          group('lqSub2', T.lq2, sublink('newFeatures', T.newFeatures, href('newFeatures')) + sublink('lexicon', T.lexicon, href('lexicon')), ['newFeatures', 'lexicon']) +
-          group('lqSub1', T.lq1, sublink('firstRelease', T.firstRelease, href('firstRelease')), ['firstRelease']) +
+          group('lqSub3', T.lq3, sublink('v3about', T.v3about, href('v3about')) + sublink(null, T.v3brochure, HOME + '#whats-new'), ['v3about'], '2026') +
+          group('lqSub2', T.lq2, sublink('newFeatures', T.newFeatures, href('newFeatures')) + sublink('lexicon', T.lexicon, href('lexicon')), ['newFeatures', 'lexicon'], '2020') +
+          link('firstRelease', T.lq1, href('firstRelease'), ICON.gear, '2016') +
           link('institutional', T.institutional, href('institutional'), ICON.institutional) +
         '</div>' +
       '</nav>';
