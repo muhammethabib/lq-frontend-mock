@@ -9488,6 +9488,11 @@
         .breadcrumb .entry-link { color: var(--col-entry); font-weight: 700; font-size: 15px; cursor: pointer; transition: opacity 0.2s; }
         .breadcrumb .entry-link:hover { opacity: 0.7; }
         .breadcrumb b { color: var(--col-related); font-weight: 700; font-size: 15px; }
+        /* Künye satırı: madde başı ve alt madde, Osmanlıca | Latin çifti olarak. Yalnız madde başı tıklanır (iki parçası ayrı ayrı). */
+        .breadcrumb .bc-pair { display: inline-flex; align-items: center; gap: 8px; }
+        .breadcrumb .bc-osm { font-family: 'Noto Naskh Arabic', serif; font-size: 22px; line-height: 1; font-weight: 600; }
+        .breadcrumb .bc-sep { width: 1px; height: 18px; background: #cbd5e1; display: inline-block; }
+        .breadcrumb b { cursor: default; }
 
         /* ── LANGUAGE TABS ── */
         .lang-tabs {
@@ -10087,9 +10092,9 @@
         <div class="header-top">
             <span class="dict-badge">Kamus-ı Türkî</span>
             <div class="breadcrumb">
-                <span class="entry-link">manzar</span>
+                <span class="bc-pair"><span class="entry-link bc-osm" dir="rtl" lang="ota">منظر</span><span class="bc-sep"></span><span class="entry-link bc-lat">manzar</span></span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                <b>nazar</b>
+                <span class="bc-pair"><b class="bc-osm" dir="rtl" lang="ota">نظر</b><span class="bc-sep"></span><b class="bc-lat">nazar</b></span>
             </div>
         </div>
 
@@ -11457,6 +11462,11 @@
         .breadcrumb .entry-link { color: var(--col-entry); font-weight: 700; font-size: 15px; cursor: pointer; transition: opacity 0.2s; }
         .breadcrumb .entry-link:hover { opacity: 0.7; }
         .breadcrumb b { color: var(--col-related); font-weight: 700; font-size: 15px; }
+        /* Künye satırı: madde başı ve alt madde, Osmanlıca | Latin çifti olarak. Yalnız madde başı tıklanır (iki parçası ayrı ayrı). */
+        .breadcrumb .bc-pair { display: inline-flex; align-items: center; gap: 8px; }
+        .breadcrumb .bc-osm { font-family: 'Noto Naskh Arabic', serif; font-size: 22px; line-height: 1; font-weight: 600; }
+        .breadcrumb .bc-sep { width: 1px; height: 18px; background: #cbd5e1; display: inline-block; }
+        .breadcrumb b { cursor: default; }
 
         /* ── LANGUAGE TABS ── */
         .lang-tabs {
@@ -12056,9 +12066,9 @@
         <div class="header-top">
             <span class="dict-badge">Kamus-ı Türkî</span>
             <div class="breadcrumb">
-                <span class="entry-link">manzar</span>
+                <span class="bc-pair"><span class="entry-link bc-osm" dir="rtl" lang="ota">منظر</span><span class="bc-sep"></span><span class="entry-link bc-lat">manzar</span></span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                <b>nazar</b>
+                <span class="bc-pair"><b class="bc-osm" dir="rtl" lang="ota">نظر</b><span class="bc-sep"></span><b class="bc-lat">nazar</b></span>
             </div>
         </div>
 
@@ -13757,7 +13767,7 @@ window.lqsTrimPopup = function (fr) {
         }
         // Künye satırı Osmanlıca görünsün, punto büyüsün
         var bcMap = { 'manzar': 'منظر', 'nazar': 'نظر', 'kerîh': 'كريه', 'el-manzar': 'المنظر' };
-        doc.querySelectorAll('.breadcrumb .entry-link, .breadcrumb b').forEach(function (el) {
+        if (!doc.querySelector('.breadcrumb .bc-osm')) doc.querySelectorAll('.breadcrumb .entry-link, .breadcrumb b').forEach(function (el) {
             var key = (el.textContent || '').trim();
             if (bcMap[key]) { el.dataset.lqsLat = key; el.textContent = bcMap[key]; }
         });
@@ -13770,7 +13780,7 @@ window.lqsTrimPopup = function (fr) {
             '.view-original .section-body { flex: 1 1 auto !important; min-height: 0 !important; display: flex !important; padding-bottom: 14px !important; }' +
             '.image-viewport, .image-wrapper { max-height: 100% !important; }' +
             '.lex-popup { height: 700px !important; }' +
-            '.breadcrumb .entry-link, .breadcrumb b { font-size: 26px !important; line-height: 1.35 !important; font-family: "Noto Naskh Arabic", serif !important; }' +
+            '.breadcrumb .entry-link:not(.bc-lat), .breadcrumb b:not(.bc-lat) { font-size: 26px !important; line-height: 1.35 !important; font-family: "Noto Naskh Arabic", serif !important; }' +
             '.breadcrumb { gap: 12px !important; }' +
             '.popup-header .header-top { align-items: center !important; }' +
             '.content-area::-webkit-scrollbar { width: 0 !important; height: 0 !important; }' +
