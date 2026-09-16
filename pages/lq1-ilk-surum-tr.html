@@ -152,71 +152,62 @@
   <header class="hero">
     <div class="eyebrow">Arşiv · 2016</div>
     <h1>LexiQamus 1.0: İlk Sürüm</h1>
-    <p class="hero-subtitle">Okunamayan Osmanlıca kelimeleri çözmek için geliştirilen ilk dijital aracın 7 Haziran 2016’da yayınlanan ilk sürümü ve getirdiği yenilikler.</p>
+    <p class="hero-subtitle">7 Haziran 2016’da yayına çıkan ilk sürümün kaydı: nelerle başladığı ve sonraki yıllarda nelerin eklendiği.</p>
   </header>
   <div class="layout">
     <nav class="toc" aria-label="Bu sayfada">
       <p class="toc-title">Bu sayfada</p>
       <a href="#giris">Giriş</a>
-      <a href="#sorun">Çözülmek istenen sorun</a>
-      <a href="#kutular">Kutularla arama</a>
-      <a href="#isaretler">Okunamayan harfler için işaretler</a>
-      <a href="#klavye">Klavye ve yıldızlı harfler</a>
+      <a href="#kelime-cozucu">Kelime Çözücü</a>
       <a href="#sonuclar">Sonuçlar</a>
-      <a href="#sonra">Sonraki sürümler</a>
+      <a href="#sonra-eklenenler">Sonradan eklenenler</a>
     </nav>
     <main class="guide-steps">
       <section id="giris" class="intro-section">
         <span class="section-kicker"><span lang="en">LexiQamus</span> 1.0</span>
-        <p>LexiQamus ilk defa 7 Haziran 2016 tarihinde yayınlandı. Osmanlı Türkçesi metinlerde okunamayan kelimeleri çözmek amacıyla geliştirilen ilk dijital araçtı ve bugün kullandığınız arama mantığının temelleri bu ilk sürümle atıldı.</p>
+        <p>LexiQamus, 7 Haziran 2016 tarihinde yayına çıktı. İlk sürüm tek bir araçtan, <strong>Kelime Çözücü</strong>’den oluşuyordu.</p>
+        <p>El yazması Osmanlıca metinlerle çalışan araştırmacılar, sık sık okunması güç harflerle karşılaşırlar. Geleneksel lugatlar, kelimenin yalnızca sonundaki harflerin okunamadığı durumlarda yardımcı olabilir; kelimenin başındaki veya ortasındaki harfler eksik ya da belirsiz olduğunda ise büyük ölçüde işlevsiz kalırlar. LexiQamus bu soruna çözüm bulmak amacıyla geliştirildi.</p>
         <aside class="archive-note" aria-label="Taslak sayfa">
           <strong>Bu sayfa hazırlanma aşamasındadır.</strong>
-          <p>Aşağıdaki metin, ilk sürümün özelliklerini sonraki sürüm duyurularından ve bugünkü aracın işleyişinden hareketle özetleyen bir taslaktır; ayrıntılar zamanla eklenecektir.</p>
+          <p>Aşağıdaki bilgiler, LexiQamus 2.0 duyurusundan ve Güncellemeler sayfasındaki kayıtlardan derlenmiştir.</p>
         </aside>
       </section>
 
-      <section id="sorun">
-        <h2>Çözülmek istenen sorun</h2>
-        <p>El yazması Osmanlıca metinlerle çalışan araştırmacılar, sık sık okunması güç harflerle karşılaşır. Yazı karışık olabilir; belgenin ilgili kısmı yırtılmış, yanmış, katlanmış ya da mürekkeple lekelenmiş olabilir.</p>
-        <p>Geleneksel lugatlar ancak kelimenin sonundaki harfler okunamadığında işe yarar, çünkü sözlükte kelimeyi baş harflerinden başlayarak ararız. Kelimenin başındaki ya da ortasındaki harfler belirsiz olduğunda lugatlar büyük ölçüde işlevsiz kalır. LexiQamus 1.0 tam da bu boşluğu doldurmak için geliştirildi.</p>
-      </section>
-
-      <section id="kutular">
-        <h2>Kutularla arama</h2>
-        <p>İlk sürümün temel yeniliği, kelimeyi harf harf kutulara ayırarak aramaktı. Her kutu kelimenin bir harfini temsil eder; araştırmacı okuyabildiği harfleri yerlerine yazar, okuyamadığı yerleri de işaretle bırakır.</p>
-        <p>Böylece arama, kelimenin başından değil, okunabilen harflerin kelime içindeki konumundan hareket eder. Kapsamlı lugatlar içinde aranarak bulunması günler sürebilecek bir kelime, bu sayede neredeyse anında tespit edilebilir hâle geldi.</p>
-      </section>
-
-      <section id="isaretler">
-        <h2>Okunamayan harfler için işaretler</h2>
-        <p>Okunamayan kısımlar için iki işaret tanımlandı:</p>
+      <section id="kelime-cozucu">
+        <h2>Kelime Çözücü</h2>
+        <p>Araştırmacı, okuyabildiği harfleri kelimedeki yerlerine göre kutulara girer; okuyamadığı yerler için işaret bırakır. Arama algoritması, okunabilen harfleri ve okunamayan karakterler için girilen sembolleri esas alarak ölçütlere uyan muhtemel kelimeleri listeler.</p>
+        <figure><img src="../assets/sayfalar/lq1-arayuz.webp" alt="İlk sürümlerdeki Kelime Çözücü: kutular ve ekran klavyesi" loading="lazy"></figure>
         <ul class="feature-list">
-          <li><strong>*</strong> okunamayan tek bir harfi temsil eder.</li>
-          <li><strong>∞</strong> sayısı bilinmeyen, bir veya birden fazla okunamayan harfi temsil eder.</li>
+          <li>Harfler kutulara ekran klavyesiyle giriliyordu. Klavyede 37 karakter bulunuyordu; 2.0 sürümünde beş karakter eklenerek bu sayı 42’ye çıktı.</li>
+          <li>Okunamayan harfler için <strong>*</strong> ve <strong>∞</strong> işaretleri kullanılıyordu: <strong>*</strong> tek bir harfi, <strong>∞</strong> adedi bilinmeyen harfleri temsil eder.</li>
+          <li>Klavyenin alt satırında, noktaları okunamayan diş harfleri için yıldızlı karakterler yer alıyordu.</li>
+          <li>Klavyede <span dir="rtl">ه</span> harfinin yalnızca birleşen biçimi vardı; <span dir="rtl">ی</span> harfi ise noktalı olarak yer alıyordu.</li>
         </ul>
-        <p>Bu işaretler, arama ifadesinin tamamını bilmeden de sonuçları daraltmayı mümkün kıldı.</p>
-      </section>
-
-      <section id="klavye">
-        <h2>Klavye ve yıldızlı harfler</h2>
-        <p>Arama için özel bir Osmanlıca ekran klavyesi hazırlandı. Klavyede, harflerin yanı sıra LexiQamus’a özgü <strong>yıldızlı harfler</strong> de yer aldı.</p>
-        <p>Yıldızlı bir harf, aynı iskelete sahip ve yalnızca noktaları farklı olan harflerin hepsini birden arar. Örneğin noktaları seçilemeyen bir <span dir="rtl">س</span> ya da <span dir="rtl">ش</span> için yıldızlı sin tuşu, ikisini birlikte arar. Böylece harfin gövdesi okunabildiği hâlde noktaları okunamayan durumlarda da arama yapılabildi.</p>
-        <p>İlk sürümün klavyesinde 37 karakter bulunuyordu; 2.0 sürümünde bunlara beş yeni karakter eklendi.</p>
       </section>
 
       <section id="sonuclar">
         <h2>Sonuçlar</h2>
         <ul class="feature-list">
-          <li>İlk sürüm, arama ifadesiyle birebir eşleşen sonuçları listeliyordu.</li>
-          <li>Kelimelerin anlamları site içinde gösterilmiyor; anlamlar için ilgili sözlüklere bağlantı veriliyordu.</li>
+          <li>Yalnızca arama ifadesiyle birebir eşleşen sonuçlar listeleniyordu.</li>
+          <li>Kelime çözümleme hizmeti veriliyor, kelimelerin anlamları için ise yalnızca bağlantı verilebiliyordu.</li>
+          <li>Bazı kelimelerin üzerine tıklandığında “Bu kelimenin anlamını veremiyoruz” uyarısıyla karşılaşılabiliyordu.</li>
           <li>Tek harfli aramalara izin verilmiyordu.</li>
         </ul>
       </section>
 
-      <section id="sonra">
-        <h2>Sonraki sürümler</h2>
-        <p>2020’de yayınlanan LexiQamus 2.0 ile Redhouse’un <em>A Turkish and English Lexicon</em> adlı eseri dijitalleştirildi, arama birebir, kelime ve kısmî sekmelerine ayrıldı ve klavye genişletildi. Ayrıntılar için <a href="lq2-yeni-ozellikler-tr.html">LexiQamus 2.0: Yeni Özellikler ve İyileştirmeler</a> sayfasına bakabilirsiniz.</p>
-        <p>2026’da yayınlanan LexiQamus 3.0’ın kullanımı ise <a href="kullanim-kilavuzu-tr.html">Kullanım Kılavuzu</a>’nda anlatılmaktadır.</p>
+      <section id="sonra-eklenenler">
+        <h2>Sonradan eklenenler</h2>
+        <p>İlk sürümde bulunmayan başlıca özellikler ve eklendikleri tarihler:</p>
+        <ul class="feature-list">
+          <li><strong>Mart 2020, LexiQamus 2.0:</strong> Redhouse’un <em>A Turkish and English Lexicon</em>’u dijitalleştirilerek tanımlar site içinde gösterilmeye başlandı; sonuçlar Birebir, Kelime ve Kısmî sekmelerine ayrıldı; klavyeye beş yeni karakter eklendi. (<a href="lq2-yeni-ozellikler-tr.html">LexiQamus 2.0: Yeni Özellikler</a>)</li>
+          <li><strong>Ekim 2021:</strong> Arama çubuğu, kutulara fiziksel klavyeyle harf girişi, şekli benzeyen harfleri ve benzer sesli sonuçları gösteren sekmeler, arama geçmişi ve aramayı paylaşma.</li>
+          <li><strong>Ocak 2022:</strong> Şekil olarak birbirine benzeyen harfler için ekran klavyesine yeni karakterler.</li>
+          <li><strong>Nisan 2022:</strong> Benzer harfli sonuçlarda Rika ve Divani sekmeleri; bir kutuya alternatif harflerin yanında boş kutu girilebilmesi.</li>
+          <li><strong>Mayıs 2022:</strong> İlk kutunun önüne boş kutu eklemeyi sağlayan + butonu.</li>
+          <li><strong>Temmuz 2022:</strong> Önceki ve sonraki maddeye geçiş için ok tuşları.</li>
+          <li><strong>Eylül 2022:</strong> Kutuların arasına harflerin bitişiklik durumunu gösteren zincirler.</li>
+        </ul>
+        <p>Bütün kayıtlar için <a href="guncellemeler-tr.html">Güncellemeler</a> sayfasına, LexiQamus 3.0’ın kullanımı için <a href="kullanim-kilavuzu-tr.html">Kullanım Kılavuzu</a>’na bakabilirsiniz.</p>
       </section>
     </main>
   </div>
