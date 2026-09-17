@@ -209,7 +209,16 @@ a.xref[data-code]::after{content:attr(data-code);display:inline-block;margin-lef
     window.scrollTo({top:from, behavior:'smooth'});
     from=null; armed=false; hide();
   }
-  function hide(){ if(btn) btn.classList.remove('show'); }
+  var timer=null;
+  function hide(){ if(btn) btn.classList.remove('show'); if(timer){clearTimeout(timer); timer=null;} }
+  function autoHide(){
+    if(timer) clearTimeout(timer);
+    timer=setTimeout(function(){ from=null; armed=false; hide(); }, 5000);
+  }
+  function dismiss(e){
+    if(e && btn && e.target && e.target.closest && e.target.closest('.jump-back')) return;
+    if(btn && btn.classList.contains('show')){ from=null; armed=false; hide(); }
+  }
   document.addEventListener('click', function(e){
     var a=e.target.closest('a[href^="#"]');
     if(!a) return;
@@ -222,9 +231,13 @@ a.xref[data-code]::after{content:attr(data-code);display:inline-block;margin-lef
     host.classList.remove('jump-target'); void host.offsetWidth; host.classList.add('jump-target');
     setTimeout(function(){ if(host) host.classList.remove('jump-target'); }, 2400);
     setTimeout(function(){ place(host); }, 120);
-    setTimeout(function(){ if(host) place(host); }, 650);
+    setTimeout(function(){ if(host) place(host); autoHide(); }, 650);
   });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') back(); });
+  /* okur sayfayla ilgilenmeye başlarsa düğme kaybolur */
+  ['mousedown','wheel','touchstart'].forEach(function(ev){
+    document.addEventListener(ev, dismiss, {passive:true, capture:true});
+  });
   window.addEventListener('scroll', function(){
     if(from==null) return;
     var d=Math.abs(window.scrollY-from);
