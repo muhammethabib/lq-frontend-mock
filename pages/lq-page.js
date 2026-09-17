@@ -28,7 +28,7 @@
   var P = {
     about: ['about-en.html', 'hakkimizda-tr.html'],
     what: ['what-is-lexiqamus-en.html', 'lexiqamus-nedir-tr.html'],
-    guide: ['kullanim-kilavuzu-tr.html', 'kullanim-kilavuzu-tr.html'],
+    guide: ['user-guide-en.html', 'kullanim-kilavuzu-tr.html'],
     updates: ['suggestions-corrections-history-en.html', 'oneri-duzeltme-gecmisi-tr.html'],
     v3about: ['data-model-en.html', 'veri-modeli-tr.html'],
     v3brochure: ['lq3-whats-new-en.html', 'lq3-yenilikler-tr.html'],
