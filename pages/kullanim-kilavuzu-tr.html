@@ -122,6 +122,19 @@ a.xref[data-code]::after{content:attr(data-code);display:inline-block;margin-lef
 .guide-end .ge-dia.a{right:calc(50% + 41.07px)}
 .guide-end .ge-dia.b{left:calc(50% + 41.07px)}
 @media (max-width:640px){.guide-end{position:relative;display:flex;justify-content:center;align-items:flex-start;height:74px;margin:80px 0 0} .guide-end .ge-mark{position:relative;flex:none;width:61px;height:66.39px;background:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0yLjk2IC0yLjM2IDE2Mi4wNiAxNzUuNTYiPjxjaXJjbGUgY3g9IjcyLjUiIGN5PSI3My4xIiByPSI2Ny44MyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWQyYzViIiBzdHJva2Utd2lkdGg9IjEzLjI2Ii8+PHBhdGggZmlsbD0iIzFkMmM1YiIgZD0iTTkwLjUxIDEwNC40MCBMMTQ2LjQzIDE2OS44NyBMMTU2LjUxIDE2MS4yNiBMMTAwLjYwIDk1Ljc5IFoiLz48cGF0aCBmaWxsPSIjMWQyYzViIiBkPSJNODAuNzEgMjYuNTIgQTQ5LjUxIDQ5LjUxIDAgMCAxIDExOS4wOCA4MS4zMSBBNDAuMzQgNDAuMzQgMCAwIDAgODAuNzEgMjYuNTIgWiIvPjwvc3ZnPg==") center/contain no-repeat;transform:translateX(2.12px)} .guide-end .ge-line{position:absolute;height:2px;top:28.36px} .guide-end .ge-line.a{left:0;right:calc(50% + 46.81px);background:linear-gradient(90deg,rgba(29,44,91,0),#1d2c5b)} .guide-end .ge-line.b{right:0;left:calc(50% + 46.81px);background:linear-gradient(90deg,#1d2c5b,rgba(29,44,91,0))} .guide-end .ge-dia{position:absolute;width:6px;height:6px;background:#d97706;transform:rotate(45deg);top:26.36px} .guide-end .ge-dia.a{right:calc(50% + 34.91px)} .guide-end .ge-dia.b{left:calc(50% + 34.91px)}}
+
+/* kılavuz içi atlayışlarda dönüş düğmesi ve hedef vurgusu */
+.jump-back{position:fixed;right:22px;bottom:22px;z-index:9999;display:inline-flex;align-items:center;gap:9px;
+  padding:11px 17px;border-radius:999px;border:1px solid #e2e8f0;background:#fff;color:#082567;
+  font:700 14px/1 Inter,system-ui,sans-serif;box-shadow:0 10px 26px rgba(15,23,42,.16);cursor:pointer;
+  opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+.jump-back.show{opacity:1;transform:none;pointer-events:auto}
+.jump-back svg{width:16px;height:16px;stroke:#9d1c51;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.jump-back:hover{border-color:#cbd5e1}
+@media (max-width:640px){.jump-back{right:14px;bottom:14px;padding:10px 15px;font-size:13px}}
+@keyframes jumpFlash{0%{background:rgba(157,28,81,.10)}100%{background:transparent}}
+.jump-target{animation:jumpFlash 1.4s ease-out 1;border-radius:14px}
+@media (prefers-reduced-motion:reduce){.jump-target{animation:none}.jump-back{transition:none}}
 </style>
 <link rel="stylesheet" href="lq-page.css?v=12">
 </head>
@@ -166,5 +179,46 @@ a.xref[data-code]::after{content:attr(data-code);display:inline-block;margin-lef
 })();
 </script>
 <script src="lq-page.js?v=12"></script>
+<script>
+(function(){
+  var btn=null, from=null;
+  function ensure(){
+    if(btn) return btn;
+    btn=document.createElement('button');
+    btn.className='jump-back'; btn.type='button';
+    btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg>Geri dön';
+    btn.addEventListener('click', back);
+    document.body.appendChild(btn);
+    return btn;
+  }
+  function back(){
+    if(from==null) return;
+    window.scrollTo({top:from, behavior:'smooth'});
+    from=null; hide();
+  }
+  function hide(){ if(btn) btn.classList.remove('show'); }
+  document.addEventListener('click', function(e){
+    var a=e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var id=decodeURIComponent(a.getAttribute('href').slice(1));
+    if(!id) return;
+    var t=document.getElementById(id);
+    if(!t) return;
+    from=window.scrollY; armed=false;
+    ensure().classList.add('show');
+    var host=t.closest('.block')||t;
+    host.classList.remove('jump-target'); void host.offsetWidth; host.classList.add('jump-target');
+    setTimeout(function(){ host.classList.remove('jump-target'); }, 1600);
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') back(); });
+  var armed=false;
+  window.addEventListener('scroll', function(){
+    if(from==null) return;
+    var d=Math.abs(window.scrollY-from);
+    if(d>240) armed=true;
+    else if(armed && d<120){ from=null; armed=false; hide(); }
+  }, {passive:true});
+})();
+</script>
 </body>
 </html>
