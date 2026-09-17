@@ -144,13 +144,11 @@ figure.jump-host>.jump-back.show{transform:translateY(0) scale(1)}
 @media (prefers-reduced-motion:reduce){.jump-target{animation:none;box-shadow:0 0 0 3px rgba(157,28,81,.45)}.jump-back{transition:none}}
 
 /* sekme değişimini belirten ayraç */
-.sec-divider{display:flex;align-items:center;justify-content:center;gap:12px;margin:104px 0 96px}
+.sec-divider{display:flex;align-items:center;justify-content:center;gap:10px;margin:104px 0 96px}
 .sec-divider .ln{position:relative;height:2px;flex:1;max-width:340px}
-.sec-divider .ln::after{content:"";position:absolute;top:50%;width:5px;height:10px;background:#1d2c5b;transform:translateY(-50%)}
-.sec-divider .ln.a::after{right:-5px;clip-path:polygon(0 0,100% 50%,0 100%)}
-.sec-divider .ln.b::after{left:-5px;clip-path:polygon(100% 0,0 50%,100% 100%)}
-.sec-divider .ln.a{background:linear-gradient(90deg,rgba(29,44,91,0),#1d2c5b)}
-.sec-divider .ln.b{background:linear-gradient(90deg,#1d2c5b,rgba(29,44,91,0))}
+
+.sec-divider .ln.a{background:linear-gradient(90deg,rgba(29,44,91,0),#1d2c5b);clip-path:polygon(0 0,calc(100% - 1px) 0,100% 50%,calc(100% - 1px) 100%,0 100%)}
+.sec-divider .ln.b{background:linear-gradient(90deg,#1d2c5b,rgba(29,44,91,0));clip-path:polygon(1px 0,100% 0,100% 100%,1px 100%,0 50%)}
 .sec-divider .dia{width:8px;height:8px;background:#d97706;transform:rotate(45deg);flex:none}
 @media (max-width:640px){.sec-divider{margin:72px 0 64px}.sec-divider .ln{max-width:120px}}
 </style>
