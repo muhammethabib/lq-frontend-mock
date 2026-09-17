@@ -1,0 +1,4 @@
+fonts/
+rcache/
+_jobs_*.json
+__pycache__/
