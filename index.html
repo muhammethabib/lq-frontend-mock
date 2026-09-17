@@ -1747,6 +1747,31 @@
             box-shadow: 0 4px 10px rgba(8,37,103,0.2);
         }
 
+        /* --- Geri donus butonu: genisletme kutusunun DISINDA, solunda --- */
+        .expand-zone { display: flex; align-items: center; gap: 16px; margin-top: 29px; }
+        .expand-zone .expand-row { margin-top: 0; }
+        .back-results-btn {
+            display: none;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 16px 8px 13px;
+            border-radius: 99px;
+            border: 1px solid #cbd5e1;
+            background: #fff;
+            color: #334155;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.15s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+        .back-results-btn.visible { display: inline-flex; }
+        .back-results-btn:hover { background: var(--btn-hover); color: #0f172a; transform: translateY(-1px); }
+        .back-results-btn svg { flex-shrink: 0; }
+
         /* --- İÇERİK KABI ---
            Akışkan: dar ekranda kenardan 24px boşlukla genişler, 1440px'de durur ve ortalanır. */
         :root { --lq-max: 1440px; --lq-gutter: 24px; }
@@ -3908,6 +3933,11 @@
         <button class="script-btn lat" onclick="toggleScript('lat', this)">nazar</button>
         <button class="script-btn lat" onclick="toggleScript('lat2', this)">nazır</button>
     </div>
+    <div class="expand-zone">
+    <button class="back-results-btn" id="backResultsBtn" onclick="backToResults()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        <span data-i18n="backToResults">RESULTS</span>
+    </button>
     <div class="expand-row">
         <span class="spelling-section-label" data-i18n="expandLabel">EXPAND SEARCH</span>
         <button class="sounds-like-btn has-tooltip" id="soundsLikeBtn" onclick="toggleSoundsLike(this)">
@@ -3919,6 +3949,7 @@
                 <span class="tooltip-example" data-i18n="chipSoundsEx" data-i18n-html="1">Ex: <span class="pill-badge"><b class="osm">ث</b> ≈ <b class="osm">س</b></span> <span class="pill-badge"><b class="osm">ت</b> ≈ <b class="osm">ط</b></span></span>
             </div>
         </button>
+    </div>
     </div>
 </div>
 </div>
@@ -5405,7 +5436,8 @@
             recordsFound: ' Sonuç Bulundu.',
             dictsScanned: ' Sözlük (17 Cilt) Tarandı.',
             expandLabel: 'Aramayı Genişlet',
-            soundsLike: 'BENZER TELAFFUZ',
+            soundsLike: 'BENZER OKUNUŞ',
+            backToResults: 'SONUÇLAR',
             jumpTo: 'GİT:',
             qlExact: 'Lemma',
             qlInflected: 'Çekimli Biçimler',
@@ -6815,6 +6847,14 @@
         /* --- SOUNDS LIKE TOGGLE --- */
         function toggleSoundsLike(btn) {
             btn.classList.toggle('active');
+            const back = document.getElementById('backResultsBtn');
+            if (back) back.classList.toggle('visible', btn.classList.contains('active'));
+        }
+        function backToResults() {
+            const btn = document.getElementById('soundsLikeBtn');
+            if (btn) btn.classList.remove('active');
+            const back = document.getElementById('backResultsBtn');
+            if (back) back.classList.remove('visible');
         }
 
         /* --- FILTERS DROPDOWN (source design logic, wired to this page's filtering) --- */
