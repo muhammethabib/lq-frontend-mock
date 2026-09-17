@@ -100,7 +100,7 @@
           link('guide', T.guide, href('guide'), ICON.guide) +
           link('institutional', T.institutional, href('institutional'), ICON.institutional) +
           group('lqSub3', T.lq3, sublink('v3about', T.v3about, href('v3about')) + sublink('v3brochure', T.v3brochure, href('v3brochure')), ['v3about', 'v3brochure'], '2026') +
-          group('lqSub2', T.lq2, sublink('newFeatures', T.newFeatures, href('newFeatures')) + sublink('lexicon', T.lexicon, href('lexicon')), ['newFeatures', 'lexicon'], '2020') +
+          group('lqSub2', T.lq2, sublink('lexicon', T.lexicon, href('lexicon')) + sublink('newFeatures', T.newFeatures, href('newFeatures')), ['newFeatures', 'lexicon'], '2020') +
           link('firstRelease', T.lq1, href('firstRelease'), ICON.gear, '2016') +
           link('updates', T.updates, href('updates'), ICON.updates) +
         '</div>' +
