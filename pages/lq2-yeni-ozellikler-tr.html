@@ -90,6 +90,15 @@
       font: 700 clamp(1.75rem, 3vw, 2.35rem)/1.18 Georgia, "Times New Roman", serif;
       letter-spacing: -.02em;
     }
+
+    .later { margin-top: 1.2rem; }
+    .later h3 { margin: 2.1rem 0 .9rem; }
+    .later-item { display: grid; grid-template-columns: 116px 1fr; gap: 18px; padding: 13px 0; }
+    .later-item + .later-item { border-top: 1px dashed #e2e8f0; }
+    .later-date { font: 600 13px/1.6 Inter, system-ui, sans-serif; color: #64748b; white-space: nowrap; }
+    .later-item p { margin: 0; }
+    .later-item b { color: #26323d; }
+    @media (max-width: 700px) { .later-item { grid-template-columns: 1fr; gap: 3px; } }
     h3 { margin: 2.35rem 0 .75rem; font-size: 1.25rem; line-height: 1.3; color: #26323d; }
     .archive-note {
       margin: 30px 0 34px;
@@ -165,6 +174,7 @@
         <a href="#butonlar">Butonlar</a>
         <a href="#orijinali-goruntule">Orijinali Görüntüle</a>
         <a href="#klavye">Klavyedeki Yenilikler</a>
+        <a href="#sonraki-eklemeler">2.0 Döneminde Eklenenler</a>
       </nav>
 
       <main class="guide-steps">
@@ -270,6 +280,37 @@
             <li><span dir="rtl">ی</span> : Bu harfin harfin müstakil yazılışından noktaları çıkardık.</li>
           </ul>
         </section>
+        <section id="sonraki-eklemeler">
+          <h2>2.0 Döneminde Eklenenler</h2>
+          <p>Yukarıdaki duyurudan sonra, 2.0 yürürlükteyken araca eklediğimiz özellikler ve yaptığımız iyileştirmeler. Kullanıcılarımızın önerileriyle gelen eklemeleri <a href="oneri-duzeltme-gecmisi-tr.html">Öneri ve Düzeltme Geçmişi</a> sayfasında bulabilirsiniz.</p>
+
+          <h3>Arama ve sonuçlar</h3>
+          <div class="later">
+            <div class="later-item"><div class="later-date">28 Ekim 2021</div><p><b>Şekli benzeyen ve sesi benzeyen harfler.</b> Arama sonuçlarına, girdiğiniz harflere şekil bakımından benzeyen ve telaffuz bakımından yakın olan kelimeleri gösteren sekmeler eklendi.</p></div>
+            <div class="later-item"><div class="later-date">28 Ekim 2021</div><p><b>Arama geçmişi.</b> Profilinizdeki <i>Arama Geçmişim</i> düğmesiyle daha önce yaptığınız aramalara ulaşabilir hâle geldiniz.</p></div>
+            <div class="later-item"><div class="later-date">8 Ocak 2022</div><p><b>İngilizce tanım içinde arama.</b> O güne kadar yalnızca Osmanlıca ibareler aranabiliyordu; bu güncellemeyle bir İngilizce kelimeyi tanımında geçiren bütün maddeler listelenmeye başladı ve kelimenin geçtiği yer kutunun görünen kısmına getirildi.</p></div>
+            <div class="later-item"><div class="later-date">15 Nisan 2022</div><p><b>Rika ve Divani sekmeleri.</b> Farklı yazı biçimlerinde birbirine benzeyen harfler değiştiği için, benzer harfli sonuçlar bu iki hat için ayrı sekmelerde gösterilmeye başlandı.</p></div>
+            <div class="later-item"><div class="later-date">3 Mayıs 2022</div><p><b>Konuma göre benzer harf.</b> Benzer harf araması, harfin kelimedeki yerini hesaba katar oldu: <span dir="rtl">لبیب</span> aranırken baştaki <span dir="rtl">ب</span> için <span dir="rtl">ی</span> de aranıyor, sondaki için aranmıyor.</p></div>
+            <div class="later-item"><div class="later-date">26 Mayıs 2022</div><p><b>Bütün Tanımları Göster / Gizle.</b> Sonuç listesinin sağ üstüne eklenen düğmelerle sayfadaki bütün tanımlar tek seferde açılıp kapanabilir hâle geldi.</p></div>
+          </div>
+
+          <h3>Madde ve sözlük görünümü</h3>
+          <div class="later">
+            <div class="later-item"><div class="later-date">8 Ocak 2022</div><p><b>Osmanlıca kelimelerin orijinali.</b> Maddelerin, alt maddelerin ve tanım içinde geçen kelimelerin üzerine gelindiğinde sözlükteki orijinal görüntüsü gösterilmeye; görsele tıklandığında da kelimenin bulunduğu sütuna gidilmeye başlandı.</p></div>
+            <div class="later-item"><div class="later-date">8 Ocak 2022</div><p><b>İçerenler kutusuna Madde sekmesi.</b> Bulunan sonucun kısmen içinde geçtiği diğer maddeler bu sekmede listelenir oldu.</p></div>
+            <div class="later-item"><div class="later-date">8 Ocak 2022</div><p><b>Transliterasyonlardaki özel karakterler.</b> Okunuşlar orijinal metne şekil bakımından da yaklaştırıldı; rakamlar asıl metindeki gibi harflerin üzerine yerleştirildi.</p></div>
+            <div class="later-item"><div class="later-date">1 Temmuz 2022</div><p><b>Sadeleşen tanım kutuları ve gezinme okları.</b> Tanım kutularının tasarımı sadeleştirildi; bir önceki ve bir sonraki maddeye geçmeyi sağlayan ok tuşları eklendi.</p></div>
+          </div>
+
+          <h3>Kelime Çözücü ve klavye</h3>
+          <div class="later">
+            <div class="later-item"><div class="later-date">28 Ekim 2021</div><p><b>Kutulara kendi klavyenizle giriş.</b> Harfler, ekran klavyesine tıklamadan fiziksel klavyeyle de girilebilir oldu.</p></div>
+            <div class="later-item"><div class="later-date">28 Ekim 2021</div><p><b>Aramayı paylaşma.</b> Kutuların altındaki düğmeyle aramaya özel bağlantı kopyalanabiliyor; bağlantıyı açan kişi kutulardaki karakterleri aynı dizilimle görüyor.</p></div>
+            <div class="later-item"><div class="later-date">28 Ekim 2021</div><p><b>Tuş açıklamalarını gizleme.</b> Klavyede tuşların üzerine gelindiğinde çıkan açıklamalar isteğe bağlı olarak kapatılabilir hâle geldi.</p></div>
+            <div class="later-item"><div class="later-date">8 Eylül 2022</div><p><b>Bitişiklik zincirleri.</b> Kutuların arasına, harflerin bitişik olup olmadığını belirten zincirler eklendi; soru işaretli zincire tıklayıp bu bilgiyi verdiğinizde sonuçlar daralıyor.</p></div>
+          </div>
+        </section>
+
       </main>
     </div>
   
