@@ -17,11 +17,11 @@
     en: { signIn: 'Sign in', signUp: 'Sign up', about: 'About', team: 'Team', what: 'What is LexiQamus?', guide: 'Instructions',
           updates: 'History of Suggestions and Corrections', lq3: 'LexiQamus 3.0', v3about: 'Digitization and Data Model', v3brochure: "What's New",
           lq2: 'LexiQamus 2.0', newFeatures: "What's New", lq1: 'LexiQamus 1.0', firstRelease: 'First Release (2016)', lexicon: 'Lexicon Digitization Project',
-          institutional: 'Institutional Subscribers', menu: 'Menu' },
+          institutional: 'Institutional Subscribers', menu: 'Menu', backTop: 'Back to top' },
     tr: { signIn: 'Giriş Yap', signUp: 'Kaydol', about: 'Hakkımızda', team: 'Ekip', what: 'LexiQamus Nedir?', guide: 'Kullanım Kılavuzu',
           updates: 'Öneri ve Düzeltme Geçmişi', lq3: 'LexiQamus 3.0', v3about: 'Dijitalleştirme ve Veri Modeli', v3brochure: 'Yenilikler',
           lq2: 'LexiQamus 2.0', newFeatures: 'Yenilikler', lq1: 'LexiQamus 1.0', firstRelease: 'İlk Sürüm (2016)', lexicon: 'Lexicon Dijitalleştirme Projesi',
-          institutional: 'Kurumsal Üyeler', menu: 'Menü' }
+          institutional: 'Kurumsal Üyeler', menu: 'Menü', backTop: 'Başa dön' }
   }[LANG];
 
   /* [en dosyası, tr dosyası] */
@@ -56,6 +56,7 @@
     gear: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6" fill="currentColor"></circle><path d="M12 2.2v4.2M12 17.6v4.2M2.2 12h4.2M17.6 12h4.2M5.1 5.1l3 3M15.9 15.9l3 3M18.9 5.1l-3 3M8.1 15.9l-3 3" fill="none" stroke="currentColor" stroke-width="2.7"></path></svg>',
     institutional: '<svg viewBox="0 0 24 24"><path d="M4.3 20.4V8.4L12 3.6l7.7 4.8v12z" fill="currentColor"></path><path d="M9.9 20.4v-4.2a2.1 2.1 0 0 1 4.2 0v4.2" fill="none" stroke="var(--cut)" stroke-width="1.7"></path><circle cx="9.2" cy="11" r="1.1" fill="var(--cut)"></circle><circle cx="14.8" cy="11" r="1.1" fill="var(--cut)"></circle><path d="M2.4 21h19.2" fill="none" stroke="currentColor" stroke-width="2.3"></path></svg>',
     chev: '<span class="side-link-chev"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>',
+    up: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>',
     burger: '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>'
   };
 
@@ -310,6 +311,25 @@
     if (location.hash) { var h = doc.getElementById(decodeURIComponent(location.hash.slice(1))); if (h) setTimeout(function () { h.scrollIntoView(); }, 30); }
   }
 
-  function init() { buildMenu(); buildToc(); }
+  /* ---------------- 3. UZUN SAYFALARDA "BAŞA DÖN" ---------------- */
+  function buildBackTop() {
+    if (doc.getElementById('lqBackTop')) return;
+    var shell = doc.querySelector('.page-shell') || doc.body;
+    if (!shell) return;
+    /* kısa sayfada gereksiz: en az iki ekran boyu içerik olsun */
+    if (doc.documentElement.scrollHeight < window.innerHeight * 2) return;
+    var a = doc.createElement('a');
+    a.id = 'lqBackTop'; a.className = 'lq-backtop'; a.href = '#';
+    a.innerHTML = ICON.up + '<span>' + esc(T.backTop) + '</span>';
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      var b = doc.querySelector('.lqbar-brand');
+      if (b) b.focus({ preventScroll: true });          /* klavye odağı da başa dönsün */
+    });
+    shell.appendChild(a);
+  }
+
+  function init() { buildMenu(); buildToc(); buildBackTop(); }
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init); else init();
 })();

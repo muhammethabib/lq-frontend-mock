@@ -48,6 +48,19 @@ body {
 .lqbar-lang { border: 1px solid #dbe4f0; color: var(--brand-dark); }
 .lqbar-lang:hover { background: var(--brand-dark); color: #fff; border-color: var(--brand-dark); }
 
+/* Uzun sayfalarin sonundaki "Başa dön" */
+.lq-backtop {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: max-content; margin: 26px auto 44px; padding: 10px 20px;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--paper);
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 13px; font-weight: 600;
+  color: #5a687d; text-decoration: none; box-shadow: 0 10px 24px -20px rgba(8, 37, 103, .5);
+  transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s ease;
+}
+.lq-backtop:hover { color: var(--brand-dark); border-color: #cbd5e1; background: #f8fafc; transform: translateY(-1px); }
+.lq-backtop svg { flex: none; }
+@media print { .lq-backtop { display: none; } }
+
 /* Ust cubukta ikili dil anahtari (sitenin geri kalaniyla ayni) */
 .lqbar .lang-switch {
   position: relative; display: inline-flex; align-items: center;
