@@ -311,23 +311,33 @@
     if (location.hash) { var h = doc.getElementById(decodeURIComponent(location.hash.slice(1))); if (h) setTimeout(function () { h.scrollIntoView(); }, 30); }
   }
 
-  /* ---------------- 3. UZUN SAYFALARDA "BAŞA DÖN" ---------------- */
+  /* ---------------- 3. UZUN SAYFALARDA YÜZEN "BAŞA DÖN" ----------------
+     Sağ altta, kullanıcı ~1.5 ekran kaydırınca belirir, tepeye dönünce kaybolur.
+     Kısa sayfalarda (iki ekran boyundan az) hiç kurulmaz. */
   function buildBackTop() {
     if (doc.getElementById('lqBackTop')) return;
-    var shell = doc.querySelector('.page-shell') || doc.body;
-    if (!shell) return;
-    /* kısa sayfada gereksiz: en az iki ekran boyu içerik olsun */
     if (doc.documentElement.scrollHeight < window.innerHeight * 2) return;
-    var a = doc.createElement('a');
-    a.id = 'lqBackTop'; a.className = 'lq-backtop'; a.href = '#';
-    a.innerHTML = ICON.up + '<span>' + esc(T.backTop) + '</span>';
-    a.addEventListener('click', function (e) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      var b = doc.querySelector('.lqbar-brand');
-      if (b) b.focus({ preventScroll: true });          /* klavye odağı da başa dönsün */
+    var b = doc.createElement('button');
+    b.type = 'button'; b.id = 'lqBackTop'; b.className = 'lq-backtop';
+    b.setAttribute('aria-label', T.backTop); b.setAttribute('title', T.backTop);
+    b.innerHTML = ICON.up + '<span>' + esc(T.backTop) + '</span>';
+    b.setAttribute('aria-hidden', 'true'); b.tabIndex = -1;                /* tepedeyken gizli */
+    b.addEventListener('click', function () {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      var brand = doc.querySelector('.lqbar-brand');
+      if (brand) brand.focus({ preventScroll: true });          /* klavye odağı da başa dönsün */
     });
-    shell.appendChild(a);
+    doc.body.appendChild(b);
+    var shown = false, ticking = false;
+    function update() {
+      ticking = false;
+      var want = window.scrollY > window.innerHeight * 1.5;
+      if (want !== shown) { shown = want; b.classList.toggle('show', shown); b.setAttribute('aria-hidden', shown ? 'false' : 'true'); b.tabIndex = shown ? 0 : -1; }
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   }
 
   /* ---------------- 4. OSMANLICA PARÇALAR ----------------
