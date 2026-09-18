@@ -330,6 +330,41 @@
     shell.appendChild(a);
   }
 
-  function init() { buildMenu(); buildToc(); buildBackTop(); }
+  /* ---------------- 4. OSMANLICA PARÇALAR ----------------
+     Düz metin içinde işaretsiz kalan Arap harfli parçaları <span class="ota" lang="ota" dir="rtl">
+     ile sarar: doğru font/boyut (CSS) ve ekran okuyucu için dil bilgisi (WCAG 3.1.2). */
+  var AR = '؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿';
+  var AR_RUN = new RegExp('[' + AR + '](?:[' + AR + '‌‍]|\\s+(?=[' + AR + ']))*', 'g');
+  var SKIP = 'script,style,textarea,code,pre,[dir="rtl"],[lang^="ar"],[lang^="ota"],.ota,.lqbar,.side-menu,.seq,.kk,.bk';
+  function wrapArabic() {
+    var root = doc.querySelector('.page-shell') || doc.body;
+    /* zaten [dir=rtl] işaretli parçalara dil bilgisi (kılavuz dahil) */
+    root.querySelectorAll('[dir="rtl"]:not([lang])').forEach(function (el) { el.setAttribute('lang', 'ota'); });
+    if (doc.body.classList.contains('lq-guide')) return;      /* kılavuzun özel düzenine dokunma */
+    var walker = doc.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        if (!n.nodeValue || !new RegExp('[' + AR + ']').test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+        return n.parentElement && n.parentElement.closest(SKIP) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var nodes = [], n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    nodes.forEach(function (node) {
+      var text = node.nodeValue, frag = doc.createDocumentFragment(), last = 0, m;
+      AR_RUN.lastIndex = 0;
+      while ((m = AR_RUN.exec(text))) {
+        if (m.index > last) frag.appendChild(doc.createTextNode(text.slice(last, m.index)));
+        var s = doc.createElement('span');
+        s.className = 'ota'; s.setAttribute('lang', 'ota'); s.setAttribute('dir', 'rtl');
+        s.textContent = m[0];
+        frag.appendChild(s);
+        last = m.index + m[0].length;
+      }
+      if (last < text.length) frag.appendChild(doc.createTextNode(text.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  }
+
+  function init() { buildMenu(); buildToc(); buildBackTop(); wrapArabic(); }
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init); else init();
 })();

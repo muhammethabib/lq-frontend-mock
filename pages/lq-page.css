@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
 
 /* =========================================================
    LexiQamus · ortak sayfa dili
@@ -47,6 +47,16 @@ body {
 .lqbar-link:hover { background: #eef3fa; color: var(--brand-dark); }
 .lqbar-lang { border: 1px solid #dbe4f0; color: var(--brand-dark); }
 .lqbar-lang:hover { background: var(--brand-dark); color: #fff; border-color: var(--brand-dark); }
+
+/* Osmanlıca metin: her sayfada sitenin kendi fontu (Noto Naskh Arabic), okunur boyut.
+   Sayfa içindeki [dir=rtl] işaretli parçalar ve lq-page.js'in sardığı .ota parçaları.
+   Kılavuz (body.lq-guide) kendi özel Osmanlıca düzenini korur. */
+body:not(.lq-guide) .page-shell [dir="rtl"], body:not(.lq-guide) .page-shell .ota {
+  font-family: 'Noto Naskh Arabic', serif !important; font-size: 1.2em !important; line-height: 1;
+}
+body:not(.lq-guide) .page-shell [dir="rtl"] [dir="rtl"], body:not(.lq-guide) .page-shell .ota .ota,
+body:not(.lq-guide) .page-shell [dir="rtl"] .ota { font-size: 1em !important; }
+.ota { unicode-bidi: isolate; }
 
 /* Baska sayfaya gonderen metin baglantilari: alti cizili + "↗" (yeni sekmede acilir) */
 .xlink { color: var(--brand-dark, #082567); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px;
