@@ -9030,7 +9030,12 @@
 
         // ===================== YAN MENÜ =====================
         function lqToggleMenu() { document.body.classList.toggle('menu-open'); lqSyncMenuLang(); }
-        function lqCloseMenu() { document.body.classList.remove('menu-open'); }
+        function lqCloseMenu() {
+            document.body.classList.remove('menu-open');
+            // Menüden çıkınca açık alt başlıklar sıfırlanır; bir sonraki açılış temiz başlar
+            document.querySelectorAll('.side-submenu.open').forEach(function (s) { s.classList.remove('open'); });
+            document.querySelectorAll('.side-link-parent[aria-expanded="true"]').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+        }
 
         function lqPageToggleLang() {
             var btns = Array.prototype.slice.call(document.querySelectorAll('.lang-btn'));

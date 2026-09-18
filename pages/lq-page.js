@@ -137,11 +137,21 @@
     }
 
     var menu = doc.getElementById('sideMenu'), scrim = doc.querySelector('.menu-scrim');
+    function resetSubmenus() {
+      /* Menüden çıkınca alt başlıklar varsayılana döner: yalnızca bulunulan sayfanın grubu açık kalır */
+      menu.querySelectorAll('.side-link-parent').forEach(function (b) {
+        var sub = doc.getElementById(b.getAttribute('aria-controls'));
+        var keep = !!(sub && sub.querySelector('[aria-current="page"]'));
+        if (sub) sub.classList.toggle('open', keep);
+        b.setAttribute('aria-expanded', keep ? 'true' : 'false');
+      });
+    }
     function setMenu(open) {
       doc.body.classList.toggle('menu-open', open);
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       menu.setAttribute('aria-hidden', open ? 'false' : 'true');
       if (open) { var a = menu.querySelector('.side-link'); if (a) a.focus({ preventScroll: true }); }
+      else resetSubmenus();
     }
     btn.addEventListener('click', function () { setMenu(!doc.body.classList.contains('menu-open')); });
     scrim.addEventListener('click', function () { setMenu(false); });
