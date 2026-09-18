@@ -115,6 +115,26 @@
     var brand = bar.querySelector('.lqbar-brand');
     bar.insertBefore(left, brand); left.appendChild(btn); left.appendChild(brand);
 
+    /* Ust cubuktaki dil dugmesi: sitenin geri kalanindaki gibi ikili anahtar */
+    var right = bar.querySelector('.lqbar-right');
+    if (right) {
+      right.innerHTML =
+        '<div class="lang-switch bar-lang' + (LANG === 'tr' ? ' tr-active' : '') + '" role="group" aria-label="' + (LANG === 'tr' ? 'Dil' : 'Language') + '">' +
+          '<span class="lang-thumb"></span>' +
+          '<button type="button" class="lang-btn' + (LANG === 'en' ? ' active' : '') + '" data-lang="en" data-go="' + (enTarget || '') + '"' +
+            (LANG === 'en' ? ' aria-current="true"' : '') + '>EN</button>' +
+          '<button type="button" class="lang-btn' + (LANG === 'tr' ? ' active' : '') + '" data-lang="tr" data-go="' + (trTarget || '') + '"' +
+            (LANG === 'tr' ? ' aria-current="true"' : '') + '>TR</button>' +
+        '</div>';
+      right.querySelectorAll('.lang-btn').forEach(function (b) {
+        b.addEventListener('click', function () { if (b.dataset.go) location.href = b.dataset.go; });
+        if (!b.classList.contains('active') && !b.dataset.go) {
+          b.disabled = true;
+          b.title = LANG === 'tr' ? 'Bu sayfanın İngilizcesi henüz yok' : 'Not available in this language yet';
+        }
+      });
+    }
+
     var menu = doc.getElementById('sideMenu'), scrim = doc.querySelector('.menu-scrim');
     function setMenu(open) {
       doc.body.classList.toggle('menu-open', open);
