@@ -118,7 +118,7 @@
 
     /* Ust cubuktaki dil dugmesi: sitenin geri kalanindaki gibi ikili anahtar */
     var right = bar.querySelector('.lqbar-right');
-    if (right) {
+    if (right && !right.querySelector('.lang-switch')) {     /* HTML'de yoksa kur (eski sayfalar) */
       right.innerHTML =
         '<div class="lang-switch bar-lang' + (LANG === 'tr' ? ' tr-active' : '') + '" role="group" aria-label="' + (LANG === 'tr' ? 'Dil' : 'Language') + '">' +
           '<span class="lang-thumb"></span>' +
