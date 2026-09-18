@@ -13709,14 +13709,23 @@ document.addEventListener('DOMContentLoaded', function () { setTimeout(lqsMountP
         window.applyLanguage = function () { var r = orig.apply(this, arguments); setTimeout(lqsMountPopup, 0); return r; };
     }
 })();
-// Keşfet göstergesi, akış kilitli olsa da ana sayfanın tabanına yakın durur
+// Keşfet göstergesi: ilk ekranın alt kenarına sabitlenir (alt boşluk 24 px);
+// ekran 680 px'ten kısaysa sabitleme yapılmaz, içeriğin altında normal boşlukla durur.
+var LQS_DISCOVER_GAP = 24;
 window.lqsPlaceDiscover = function () {
     var d = document.getElementById('lqDiscover');
     if (!d || getComputedStyle(d).display === 'none') return;
     d.style.marginTop = '0px';
     var dTop = d.getBoundingClientRect().top + window.scrollY;
-    var wanted = window.innerHeight - d.offsetHeight - 6;
-    d.style.marginTop = Math.max(24, Math.round(wanted - dTop)) + 'px';
+    var wanted = window.innerHeight - d.offsetHeight - LQS_DISCOVER_GAP;
+    var m = window.innerHeight < 680 ? 46 : Math.max(46, Math.round(wanted - dTop));
+    d.style.marginTop = m + 'px';
+    if (window.innerHeight >= 680) {
+        // Üstteki kartın alt marjıyla çakışan (collapse) marj yüzünden sapma olursa bir kez düzelt
+        var bottom = d.getBoundingClientRect().bottom + window.scrollY;
+        var delta = Math.round((window.innerHeight - LQS_DISCOVER_GAP) - bottom);
+        if (delta) d.style.marginTop = Math.max(46, m + delta) + 'px';
+    }
 };
 window.addEventListener('resize', lqsPlaceDiscover);
 window.addEventListener('load', lqsPlaceDiscover);
@@ -13726,15 +13735,25 @@ window.lqsFitStory = function () {
     var s = document.getElementById('lqStory');
     if (!s || getComputedStyle(s).display === 'none') return;
     s.style.marginTop = '0px';
+    var floor = window.innerHeight < 680 ? 40 : 0;      // sabitlenmişken bant tam katlamada başlar
     var top = s.getBoundingClientRect().top + window.scrollY;
-    var m = Math.max(40, Math.round(window.innerHeight - top));
+    var m = Math.max(floor, Math.round(window.innerHeight - top));
     s.style.marginTop = m + 'px';
     var delta = Math.round(window.innerHeight - (s.getBoundingClientRect().top + window.scrollY));
-    if (delta) s.style.marginTop = Math.max(40, m + delta) + 'px';
+    if (delta) s.style.marginTop = Math.max(floor, m + delta) + 'px';
 };
 window.addEventListener('load', lqsFitStory);
 window.addEventListener('resize', lqsFitStory);
 document.addEventListener('DOMContentLoaded', function () { setTimeout(lqsFitStory, 60); setTimeout(lqsFitStory, 600); });
+// Geç gelen düzen değişikliklerine (Tailwind'in sonradan yüklenmesi, fontlar, görseller)
+// karşı yerleşimi yeniden hesapla; aynı değerler tekrar yazılınca gövde boyu değişmez, döngü oluşmaz.
+(function () {
+    var raf = 0;
+    function again() { if (raf) return; raf = requestAnimationFrame(function () { raf = 0; lqsFitStory(); }); }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(again);
+    if (window.ResizeObserver) new ResizeObserver(again).observe(document.body);
+    if (window.MutationObserver) new MutationObserver(again).observe(document.head, { childList: true });
+})();
 (function () {
     var orig = window.setViewState;
     if (typeof orig === 'function') {
