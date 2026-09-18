@@ -48,6 +48,13 @@ body {
 .lqbar-lang { border: 1px solid #dbe4f0; color: var(--brand-dark); }
 .lqbar-lang:hover { background: var(--brand-dark); color: #fff; border-color: var(--brand-dark); }
 
+/* Baska sayfaya gonderen metin baglantilari: alti cizili + "↗" (yeni sekmede acilir) */
+.xlink { color: var(--brand-dark, #082567); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px;
+  text-decoration-color: rgba(8, 37, 103, .35); text-underline-offset: 3px; }
+.xlink:hover { color: #9d1c51; text-decoration-color: currentColor; }
+.xlink::after, .more[target="_blank"]::after { content: "↗"; display: inline-block; margin-left: 3px; font-size: .85em;
+  text-decoration: none; color: #8a5200; }
+
 /* Uzun sayfalarin sonundaki "Başa dön" */
 .lq-backtop {
   display: flex; align-items: center; justify-content: center; gap: 8px;
