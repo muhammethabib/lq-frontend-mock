@@ -449,10 +449,10 @@ body.menu-open .side-menu { transform: none; visibility: visible; }
 .side-link.active { background: #fff; color: #082567; font-weight: 700; border-color: #cbd5e1; box-shadow: 0 1px 3px rgba(8,37,103,0.06); }
 .side-link.active svg { background: var(--brand-sapphire); border-color: var(--brand-sapphire); color: #fff; --cut: var(--brand-sapphire); box-shadow: 0 2px 6px rgba(8,37,103,0.28); }
 .side-link-parent { width: 100%; text-align: left; background: none; border: none; cursor: pointer; font-family: inherit; }
-.side-year { margin-left: auto; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-style: normal; font-weight: 400; font-size: 12.5px; letter-spacing: .02em; font-variant-numeric: tabular-nums; color: #5e718d; line-height: 1; }
+.side-year { margin-left: auto; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-style: normal; font-weight: 500; font-size: 12.5px; letter-spacing: .02em; font-variant-numeric: tabular-nums; color: #5a687d; line-height: 1; }
 .side-year + .side-link-chev { margin-left: 0; }
 a.side-link .side-year + .side-link-chev { margin-right: -1px; }
-.side-link:hover .side-year, .side-link.active .side-year { color: #334155; font-weight: 400; }
+.side-link:hover .side-year, .side-link.active .side-year { color: #334155; font-weight: 500; }
 .side-link-chev { margin-left: auto; width: 16px; height: 16px; flex: none; display: flex; }
 .side-link-chev svg, .side-link:hover .side-link-chev svg { width: 14px; height: 14px; padding: 0; border: 0; background: transparent; box-shadow: none; }
 .side-link-chev svg { width: 14px; height: 14px; stroke: #94a3b8; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
@@ -460,7 +460,7 @@ a.side-link .side-year + .side-link-chev { margin-right: -1px; }
 .side-link-parent[aria-expanded="true"] .side-link-chev svg { transform: rotate(180deg); stroke: #082567; }
 .side-submenu { max-height: 0; overflow: hidden; margin-left: 20px; padding-left: 14px; border-left: 2px solid #e2e8f0; transition: max-height .25s ease; }
 .side-submenu.open { max-height: 160px; }
-.side-sublink { display: block; padding: 9px 10px; margin: 2px 0; border-radius: 7px; text-decoration: none; font-size: 13.5px; font-weight: 500; color: #5e718d; transition: background .15s, color .15s; }
+.side-sublink { display: block; padding: 9px 10px; margin: 2px 0; border-radius: 7px; text-decoration: none; font-size: 13.5px; font-weight: 500; color: #5f6d81; transition: background .15s, color .15s; }
 .side-sublink:hover { background: #fff; color: #082567; font-weight: 600; }
 .side-sublink.active { background: #fff; color: #082567; font-weight: 600; }
 .side-link:focus-visible, .side-sublink:focus-visible, .side-btn:focus-visible { outline: 2px solid #082567; outline-offset: 1px; }
