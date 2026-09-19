@@ -422,7 +422,7 @@ body.menu-open .menu-btn svg { color: #123a8c; }
 .menu-btn:focus-visible { outline: 2px solid #082567; outline-offset: 2px; }
 .menu-scrim { position: fixed; inset: 0; background: rgba(15,23,42,0.45); opacity: 0; visibility: hidden; transition: opacity .28s ease, visibility .28s; z-index: 6800; }
 body.menu-open .menu-scrim { opacity: 1; visibility: visible; }
-.side-menu { position: fixed; top: 0; left: 0; bottom: 0; width: 292px; max-width: 86vw; z-index: 6900; background: #f1f5f9; border-right: 1px solid #cbd5e1; box-shadow: 18px 0 50px -30px rgba(15,23,42,0.35); transform: translateX(-100%); visibility: hidden; transition: transform .3s cubic-bezier(.4,0,.2,1), visibility .3s; display: flex; flex-direction: column; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: normal; }
+.side-menu { position: fixed; top: 0; left: 0; bottom: 0; width: 292px; max-width: 86vw; z-index: 6900; background: #f1f5f9; border-right: 1px solid #cbd5e1; box-shadow: 18px 0 50px -30px rgba(15,23,42,0.35); transform: translateX(-100%); visibility: hidden; transition: transform .3s cubic-bezier(.4,0,.2,1), visibility .3s; display: flex; flex-direction: column; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; line-height: normal; }
 body.menu-open .side-menu { transform: none; visibility: visible; }
 .side-menu-top { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 16px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .side-logo { height: 45px; width: auto; max-width: 100%; display: block; }
