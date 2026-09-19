@@ -53,10 +53,12 @@
     what: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><path d="M9.3 9.1a2.8 2.8 0 0 1 5.4.9c0 1.9-2.7 2.3-2.7 4" fill="none" stroke="var(--cut)" stroke-width="2.1"></path><circle cx="12" cy="17.3" r="1.4" fill="var(--cut)"></circle></svg>',
     guide: '<svg viewBox="0 0 24 24"><path d="M5.5 3.8A1.8 1.8 0 0 1 7.3 2h6.9l4.3 4.3V20a1.8 1.8 0 0 1-1.8 1.8H7.3A1.8 1.8 0 0 1 5.5 20z" fill="currentColor"></path><path d="M14 2.4V7h4.4" fill="none" stroke="var(--cut)" stroke-width="1.5"></path><path d="M9 12.5h6M9 16h6" fill="none" stroke="var(--cut)" stroke-width="1.8"></path></svg>',
     updates: '<svg viewBox="0 0 24 24"><path d="M3 21l1.2-4.8L15.4 5l3.6 3.6L7.8 19.8 3 21z" fill="currentColor"></path><path d="M16.6 3.8l1-1a1.9 1.9 0 0 1 2.7 0l.9.9a1.9 1.9 0 0 1 0 2.7l-1 1z" fill="currentColor"></path><path d="M14.2 6.2l3.6 3.6" fill="none" stroke="var(--cut)" stroke-width="1.5"></path></svg>',
-    gear: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6" fill="currentColor"></circle><path d="M12 2.2v4.2M12 17.6v4.2M2.2 12h4.2M17.6 12h4.2M5.1 5.1l3 3M15.9 15.9l3 3M18.9 5.1l-3 3M8.1 15.9l-3 3" fill="none" stroke="currentColor" stroke-width="2.7"></path></svg>',
+    v3: '<svg viewBox="0 0 24 24"><circle cx="10" cy="11" r="9" fill="currentColor"></circle><circle cx="10" cy="11" r="6.4" fill="var(--cut)"></circle><path d="M16.4 17.4l4.4 4.4" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" fill="none"></path><path d="M10 7.4L6.9 12.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"></path><path d="M6.9 12.8L13.1 12.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"></path><path d="M13.1 12.8L10 7.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"></path><circle cx="10" cy="7.4" r="2.0" fill="currentColor"></circle><circle cx="6.9" cy="12.8" r="2.0" fill="currentColor"></circle><circle cx="13.1" cy="12.8" r="2.0" fill="currentColor"></circle></svg>',
     institutional: '<svg viewBox="0 0 24 24"><path d="M4.3 20.4V8.4L12 3.6l7.7 4.8v12z" fill="currentColor"></path><path d="M9.9 20.4v-4.2a2.1 2.1 0 0 1 4.2 0v4.2" fill="none" stroke="var(--cut)" stroke-width="1.7"></path><circle cx="9.2" cy="11" r="1.1" fill="var(--cut)"></circle><circle cx="14.8" cy="11" r="1.1" fill="var(--cut)"></circle><path d="M2.4 21h19.2" fill="none" stroke="currentColor" stroke-width="2.3"></path></svg>',
     chev: '<span class="side-link-chev"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>',
     up: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>',
+    v2: '<svg viewBox="0 0 24 24"><circle cx="10" cy="11" r="9" fill="currentColor"></circle><circle cx="10" cy="11" r="6.4" fill="var(--cut)"></circle><path d="M16.4 17.4l4.4 4.4" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" fill="none"></path><path d="M7.2 12.9L12.8 9.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"></path><circle cx="7.2" cy="12.9" r="2.1" fill="currentColor"></circle><circle cx="12.8" cy="9.1" r="2.1" fill="currentColor"></circle></svg>',
+    v1: '<svg viewBox="0 0 24 24"><circle cx="10" cy="11" r="9" fill="currentColor"></circle><circle cx="10" cy="11" r="6.4" fill="var(--cut)"></circle><path d="M16.4 17.4l4.4 4.4" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" fill="none"></path><circle cx="10" cy="11" r="2.4" fill="currentColor"></circle></svg>',
     burger: '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>'
   };
 
@@ -68,10 +70,10 @@
   function sublink(key, label, url) {
     return '<a class="side-sublink' + (key && isHere(key) ? ' active' : '') + '" href="' + url + '"' + (key && isHere(key) ? ' aria-current="page"' : '') + '><span>' + esc(label) + '</span></a>';
   }
-  function group(id, label, items, keys, year) {
+  function group(id, label, items, keys, year, icon) {
     var open = keys.some(isHere);
     return '<button type="button" class="side-link side-link-parent" id="' + id + 'Toggle" aria-expanded="' + open + '" aria-controls="' + id + '">' +
-      ICON.gear + '<span>' + esc(label) + '</span>' + yearTag(year) + ICON.chev + '</button>' +
+      (icon || ICON.v3) + '<span>' + esc(label) + '</span>' + yearTag(year) + ICON.chev + '</button>' +
       '<div class="side-submenu' + (open ? ' open' : '') + '" id="' + id + '">' + items + '</div>';
   }
 
@@ -100,9 +102,9 @@
           link('what', T.what, href('what'), ICON.what) +
           link('guide', T.guide, href('guide'), ICON.guide) +
           link('institutional', T.institutional, href('institutional'), ICON.institutional) +
-          group('lqSub3', T.lq3, sublink('v3about', T.v3about, href('v3about')) + sublink('v3brochure', T.v3brochure, href('v3brochure')), ['v3about', 'v3brochure'], '2026') +
-          group('lqSub2', T.lq2, sublink('lexicon', T.lexicon, href('lexicon')) + sublink('newFeatures', T.newFeatures, href('newFeatures')), ['newFeatures', 'lexicon'], '2020') +
-          link('firstRelease', T.lq1, href('firstRelease'), ICON.gear, '2016') +
+          group('lqSub3', T.lq3, sublink('v3about', T.v3about, href('v3about')) + sublink('v3brochure', T.v3brochure, href('v3brochure')), ['v3about', 'v3brochure'], '2026', ICON.v3) +
+          group('lqSub2', T.lq2, sublink('lexicon', T.lexicon, href('lexicon')) + sublink('newFeatures', T.newFeatures, href('newFeatures')), ['newFeatures', 'lexicon'], '2020', ICON.v2) +
+          link('firstRelease', T.lq1, href('firstRelease'), ICON.v1, '2016') +
           link('updates', T.updates, href('updates'), ICON.updates) +
         '</div>' +
       '</nav>';
