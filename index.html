@@ -2039,7 +2039,9 @@
         /* Sol kenar — Result rengiyle */
         .column-headers-bar::before {
             content: ''; position: absolute; top: 0; left: 0; bottom: 0;
-            width: 16px; background: #eff6ff;
+            /* seridin sol boslugunun tamami: Result hucresiyle kesintisiz birlessin,
+               arada serit renginde bir bosluk kalmasin */
+            width: calc(max(24px, (100% - 1240px) * 0.34) + 3px); background: #eff6ff;
         }
         /* Sağ kenar — Dict rengiyle */
         .column-headers-bar::after {
@@ -2115,7 +2117,11 @@
         .row-card.hidden-row { display: none; }
         .row-card:last-child { border-bottom: none; margin-bottom: 0; }
         .row-card:hover { transform: scale(1.005); box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.08); z-index: 50; border-color: #cbd5e1; background-color: #fff; }
-        .zone-interactive { transition: background-color 0.2s ease; cursor: pointer; position: relative; border-radius: 6px; }
+        /* Bolge satirin ucuna kadar gitsin: kose yaricapi kartin ic yaricapina
+           (8px cerceve - 1px = 7px) esitlenir, ara kenarlar duz kalir. */
+        .zone-interactive { transition: background-color 0.2s ease; cursor: pointer; position: relative; border-radius: 0; }
+        .row-card > .zone-interactive:first-child { border-top-left-radius: 7px; border-bottom-left-radius: 7px; }
+        .row-card > .zone-interactive:last-child { border-top-right-radius: 7px; border-bottom-right-radius: 7px; }
         .hover-entry:hover { background-color: var(--col-entry-bg) !important; } 
         .hover-subentry:hover { background-color: var(--col-sub-bg) !important; } 
         .hover-related:hover { background-color: var(--col-rel-bg) !important; } 
@@ -2127,15 +2133,16 @@
         /* Satirin sol serisi kategori rengine ayrilmis durumda; isaret bu yuzden
            yumusak bir zemin + ince cerceve + sag ust kosede kucuk bir rozetle
            veriliyor. Cerceve outline oldugu icin yerlesimi kaydirmaz. */
-        .row-card.row-visited { background-color: #f5f9ff; outline: 1.5px solid #93b4f5; outline-offset: -1px; }
-        .row-visited-tag { position: absolute; top: -8px; right: 16px; z-index: 60; display: inline-flex; align-items: center; gap: 4px; height: 17px; padding: 0 8px; border-radius: 9px; background: var(--brand-sapphire); color: #fff; font-size: 9px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 2px 6px -1px rgba(8,37,103,0.35); pointer-events: none; white-space: nowrap; }
+        .row-card.row-visited { background-color: #f5f9ff; outline: 1.5px solid #93b4f5; outline-offset: -1px; transition: background-color 0.5s ease, outline-color 0.5s ease; }
+        .row-card.row-visited.row-fading { background-color: transparent; outline-color: rgba(147,180,245,0); }
         @keyframes rowReturnPulse { 0% { box-shadow: 0 0 0 0 rgba(8,37,103,0.28); } 100% { box-shadow: 0 0 0 12px rgba(8,37,103,0); } }
         .row-card.row-returned { animation: rowReturnPulse 1.4s ease-out; z-index: 55; }
         @media (prefers-reduced-motion: reduce) { .row-card.row-returned { animation: none; } }
 
-        #rowEntryOverlay { position: fixed; inset: 0; z-index: 9500; background: #e5e5e5; }
+        /* Pencere acikken asil sayfa gorunur ama bulanik kalir. */
+        #rowEntryOverlay { position: fixed; inset: 0; z-index: 9500; background: rgba(15, 23, 42, 0.30); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); }
         #rowEntryOverlay[hidden] { display: none; }
-        #rowEntryFrame { width: 100%; height: 100%; border: 0; display: block; }
+        #rowEntryFrame { width: 100%; height: 100%; border: 0; display: block; background: transparent; }
 
         .show-more-row { width: 100%; display: flex; justify-content: center; gap: 10px; margin-top: 8px; }
         .show-more-btn { background-color: #f1f5f9; border: 1px solid #e2e8f0; color: #5a687d; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 8px 24px; border-radius: 20px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; }
@@ -2414,7 +2421,6 @@
             background: var(--brand-red);
             border-color: var(--brand-red);
             color: white;
-            transform: rotate(90deg);
         }
         .cognates-body {
             padding: 20px 22px 12px 28px;
@@ -2659,7 +2665,7 @@
         .modal-overlay.active .analysis-card { transform: translateY(0) scale(1); opacity: 1; }
         .close-modal { position: absolute; top: 14px; right: 18px; width: 32px; height: 32px; border-radius: 50%; background: white; border: 1px solid var(--border-color); color: #64748b; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; z-index: 60; }
         .close-modal svg { width: 16px; height: 16px; }
-        .close-modal:hover { background: var(--brand-red) !important; border-color: var(--brand-red) !important; color: white !important; transform: rotate(90deg); }
+        .close-modal:hover { background: var(--brand-red) !important; border-color: var(--brand-red) !important; color: white !important; }
         /* --- Citation modal --- */
         .cite-card { background: #fff; width: 90%; max-width: 620px; border-radius: 20px; box-shadow: 0 25px 60px -10px rgba(0,0,0,0.3); border: 1px solid #e2e8f0; padding: 0; position: relative; transform: translateY(30px) scale(0.95); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; }
         .cite-head { padding: 36px 40px 0; flex-shrink: 0; }
@@ -5472,7 +5478,6 @@
             citeCopy: 'Künyeyi kopyala',
             citeCopied: 'Kopyalandı!',
             scanCite: 'Atıf',
-            rowVisited: 'Görüldü',
             /* Same Root popup */
             cogTitle: 'Aynı Kök',
             cogTabRoot: 'Kök',
@@ -6704,23 +6709,19 @@
                 markRowEntrySource();
             }
 
-            // Donuste kaynak satiri isaretle: kalici serit + tek seferlik nabiz,
-            // satir ekran disindaysa ortaya kaydir.
+            // Donuste kaynak satiri isaretle: birkac saniye gorunur kalir, sonra
+            // solup kaybolur ve satir digerleri gibi olur. Ekran disindaysa ortaya kaydir.
+            const ROW_MARK_MS = 3200;      // isaretin gorunur kaldigi sure
             function markRowEntrySource() {
                 const row = rowEntrySource;
                 if (!row || !row.isConnected) return;
                 document.querySelectorAll('.row-card.row-visited').forEach(function (r) {
-                    r.classList.remove('row-visited');
-                    const old = r.querySelector('.row-visited-tag');
-                    if (old) old.remove();
+                    r.classList.remove('row-visited', 'row-fading');
+                    clearTimeout(r._fadeTimer); clearTimeout(r._clearTimer);
                 });
                 row.classList.add('row-visited');
-                if (!row.querySelector('.row-visited-tag')) {
-                    const tag = document.createElement('span');
-                    tag.className = 'row-visited-tag';
-                    tag.textContent = t('rowVisited', 'Viewed');
-                    row.appendChild(tag);
-                }
+                row._fadeTimer = setTimeout(function () { row.classList.add('row-fading'); }, ROW_MARK_MS);
+                row._clearTimer = setTimeout(function () { row.classList.remove('row-visited', 'row-fading'); }, ROW_MARK_MS + 600);
                 const r = row.getBoundingClientRect();
                 if (r.top < 90 || r.bottom > window.innerHeight - 20) {
                     row.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -6742,7 +6743,13 @@
             });
 
             window.addEventListener('message', function (ev) {
-                if (ev.data && ev.data.lq === 'close') closeRowEntry();
+                if (!ev.data) return;
+                if (ev.data.lq === 'close') closeRowEntry();
+                // Pencere icindeki Atif dugmesi: satirdakiyle ayni kunye penceresi
+                if (ev.data.lq === 'cite' && rowEntrySource) {
+                    const btn = rowEntrySource.querySelector('.copy-btn[data-cite-dict]');
+                    if (btn) openCiteModal({ stopPropagation: function () {} }, btn);
+                }
             });
             document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') closeRowEntry();
@@ -9419,7 +9426,7 @@
         }
 
         .close-modal-btn { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; background: white; border: 1px solid var(--border-color); color: #64748b; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; z-index: 100; }
-        .close-modal-btn:hover { background: var(--danger-red) !important; border-color: var(--danger-red) !important; color: white !important; transform: rotate(90deg); }
+        .close-modal-btn:hover { background: var(--danger-red) !important; border-color: var(--danger-red) !important; color: white !important; }
 
         /* ── HEADER ── */
         .popup-header {
@@ -10865,6 +10872,10 @@
     };
     /* Alt seritteki Atif dugmesi: bicim listesini acar, secilen bicimi kopyalar. */
     function toggleScanCite(btn) {
+        if (lqEmbedded && window.parent !== window) {
+            // Sonuc satirindan acildiysa kunye ust sayfada, satirdakiyle ayni pencerede acilir
+            try { window.parent.postMessage({ lq: 'cite' }, '*'); return; } catch (_) {}
+        }
         var kutu = btn.parentNode.querySelector('.scan-cite-pop');
         if (!kutu) return;
         var acilacak = kutu.hasAttribute('hidden');
@@ -11412,7 +11423,12 @@
     window.addEventListener('message', function (ev) {
         var d = ev.data;
         if (!d || d.lq !== 'focus') return;
-        if (d.embedded) lqEmbedded = true;
+        if (d.embedded && !lqEmbedded) {
+            lqEmbedded = true;
+            // Ust sayfa arkada bulanik gorunsun diye pencerenin zemini kaldirilir
+            document.documentElement.style.background = 'transparent';
+            document.body.style.background = 'transparent';
+        }
         // Gorsel hentiz yerlesmemis olabilir; bir de yerlesme sonrasi tekrarla.
         lqFocusEntry(d.target);
         setTimeout(function () { lqFocusEntry(d.target); }, 260);
@@ -11484,7 +11500,7 @@
         }
 
         .close-modal-btn { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; background: white; border: 1px solid var(--border-color); color: #64748b; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; z-index: 100; }
-        .close-modal-btn:hover { background: var(--danger-red) !important; border-color: var(--danger-red) !important; color: white !important; transform: rotate(90deg); }
+        .close-modal-btn:hover { background: var(--danger-red) !important; border-color: var(--danger-red) !important; color: white !important; }
 
         /* ── HEADER ── */
         .popup-header {
@@ -12930,6 +12946,10 @@
     };
     /* Alt seritteki Atif dugmesi: bicim listesini acar, secilen bicimi kopyalar. */
     function toggleScanCite(btn) {
+        if (lqEmbedded && window.parent !== window) {
+            // Sonuc satirindan acildiysa kunye ust sayfada, satirdakiyle ayni pencerede acilir
+            try { window.parent.postMessage({ lq: 'cite' }, '*'); return; } catch (_) {}
+        }
         var kutu = btn.parentNode.querySelector('.scan-cite-pop');
         if (!kutu) return;
         var acilacak = kutu.hasAttribute('hidden');
@@ -13477,7 +13497,12 @@
     window.addEventListener('message', function (ev) {
         var d = ev.data;
         if (!d || d.lq !== 'focus') return;
-        if (d.embedded) lqEmbedded = true;
+        if (d.embedded && !lqEmbedded) {
+            lqEmbedded = true;
+            // Ust sayfa arkada bulanik gorunsun diye pencerenin zemini kaldirilir
+            document.documentElement.style.background = 'transparent';
+            document.body.style.background = 'transparent';
+        }
         // Gorsel hentiz yerlesmemis olabilir; bir de yerlesme sonrasi tekrarla.
         lqFocusEntry(d.target);
         setTimeout(function () { lqFocusEntry(d.target); }, 260);
@@ -13512,7 +13537,7 @@
 :root{--blue:#082567;--red:#be123c;--ink:#1e293b;--muted:#64748b;--line:#e2e8f0;--soft:#f8fafc;--paper:#fff;--bg:#e7e7e5}
 *{box-sizing:border-box}body{margin:0;height:100vh;overflow:hidden;background:var(--bg);font-family:Inter,sans-serif;color:var(--ink);display:flex;align-items:center;justify-content:center}
 button{font:inherit}.popup{width:min(1180px,96vw);height:92vh;background:var(--paper);border:1px solid rgba(255,255,255,.7);border-radius:22px;box-shadow:0 28px 70px rgba(15,23,42,.22);display:flex;flex-direction:column;overflow:hidden;position:relative}
-.close{position:absolute;right:16px;top:14px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;color:#64748b;display:grid;place-items:center;cursor:pointer;z-index:30;transition:.2s}.close:hover{background:var(--red);color:#fff;border-color:var(--red);transform:rotate(90deg)}
+.close{position:absolute;right:16px;top:14px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;color:#64748b;display:grid;place-items:center;cursor:pointer;z-index:30;transition:.2s}.close:hover{background:var(--red);color:#fff;border-color:var(--red)}
 .header{background:rgba(255,255,255,.94);border-bottom:1px solid var(--line);z-index:20}.header-top{height:54px;display:flex;align-items:center;padding:0 62px 0 24px;gap:10px}.dict{font-size:10px;font-weight:800;letter-spacing:.08em;background:#27272a;color:#fff;border-radius:6px;padding:5px 9px}.crumb{font-size:13px;color:#64748b}.crumb strong{color:var(--red);font-family:'Noto Naskh Arabic',serif;font-size:22px;margin:0 4px}.crumb b{color:var(--blue)}
 .tabs{height:42px;display:flex;align-items:stretch;overflow-x:auto;padding:0 18px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto;border:0;background:transparent;color:#71717a;font-size:10px;font-weight:700;padding:0 10px;cursor:pointer;display:flex;align-items:center;gap:5px;position:relative;white-space:nowrap}.tab:hover{color:#18181b}.tab.active{color:var(--blue)}.tab.active:after{content:"";position:absolute;left:8px;right:8px;bottom:0;height:2px;background:var(--blue);border-radius:2px}.tab-flag-img{width:14px;height:14px;border-radius:50%;object-fit:cover;object-position:center;display:inline-block;vertical-align:middle;box-shadow:0 0 0 1px rgba(0,0,0,.1);flex-shrink:0;filter:grayscale(100%) opacity(.4);transition:filter .2s}
 .tab.active .tab-flag-img,.tab:hover .tab-flag-img{filter:none}
