@@ -1638,6 +1638,35 @@
            kartın iki kenarı arasındaki alanın tamamını kullanabiliyor. */
         .sticky-nav-inner { width: 100%; display: flex; align-items: center; flex-direction: row;
             flex-wrap: wrap; row-gap: 12px; box-sizing: border-box; }
+        /* Uzun sayfalarda sağ altta yüzen "Başa dön". Alt sayfalardaki
+           (pages/lq-page.css) düğmenin aynısı; iki yüzey de aynı davransın diye
+           ölçüleri, rengi ve eşiği birebir taşındı. Yapışkan şerit üstte, bu
+           altta durduğu için çakışma ihtimali yok; sol alttaki geliştirme
+           çubuğuyla da karşı köşede. */
+        .lq-backtop {
+            position: fixed; right: 24px; bottom: 24px; z-index: 6500;
+            display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px 0 14px;
+            border: 0; border-radius: 999px; background: var(--brand-sapphire); color: #fff;
+            font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; line-height: 1;
+            box-shadow: 0 10px 28px -12px rgba(8, 37, 103, .55), 0 2px 6px rgba(15, 23, 42, .12);
+            cursor: pointer; opacity: 0; visibility: hidden; transform: translateY(12px);
+            transition: opacity .22s ease, transform .22s ease, visibility 0s linear .22s, background .18s ease;
+        }
+        .lq-backtop.show { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+        .lq-backtop:hover { background: #0b3286; }
+        .lq-backtop:focus-visible { outline: 3px solid #f59e0b; outline-offset: 3px; }
+        .lq-backtop svg { flex: none; width: 16px; height: 16px; }
+        /* Yazılı hap ancak sonuç kartının sağında boş pay varken sığıyor; 1580px
+           altında kartın üstüne binip cite düğmesini kapatıyordu. O genişlikten
+           itibaren yazı gizlenip yuvarlak düğmeye dönüşüyor: ok işareti tek
+           başına anlaşılıyor, anlam aria-label ve title'da duruyor. */
+        @media (max-width: 1579px) {
+            .lq-backtop { width: 48px; height: 48px; padding: 0; justify-content: center; border-radius: 50%; }
+            .lq-backtop span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+            .lq-backtop svg { width: 20px; height: 20px; }
+        }
+        /* Telefonda kenar payı daralıyor (alt sayfalardaki ölçüyle aynı) */
+        @media (max-width: 760px) { .lq-backtop { right: 16px; bottom: 16px; } }
         .sticky-label { font-size: 11px; font-weight: 800; color: #94a3b8; margin-right: 16px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
         .quick-link { 
             position: relative;
@@ -3428,6 +3457,7 @@
     </style>
 </head>
 <body class="p-4 md:p-8">
+<button type="button" id="lqBackTop" class="lq-backtop" aria-hidden="true" tabindex="-1" data-i18n-aria="backTop" data-i18n-title="backTop" aria-label="Back to top" title="Back to top"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg><span data-i18n="backTop">Back to top</span></button>
 <div class="dev-state-bar" id="devStateBar">
     <button class="dev-state-btn" data-state="home" onclick="setViewState('home')">Home</button>
     <button class="dev-state-btn" data-state="fe-home" onclick="setViewState('fe-home')">Home &ndash; New Visitor</button>
@@ -5263,6 +5293,7 @@
         const I18N_TR = {
             subtitle: 'OSMANLI TÜRKÇESİ DİLBİLİMSEL ANALİZ ARACI',
             legacyLink: 'Klasik sürüm',
+            backTop: 'Başa dön',
             ekBadge: 'TÜBİTAK ULAKBİM · EKUAL',
             ekTitle: 'Müjde: Türkiye ve KKTC\'deki Tüm Üniversiteler için Tam Erişim!',
             ekBody: 'LexiQamus, 2026 yılı başından itibaren <b>TÜBİTAK ULAKBİM EKUAL Projesi</b> kapsamında Türkiye ve KKTC\'deki tüm üniversitelerin erişimine açılmıştır. Okunması zor kelimelerin çözümünden farklı sözlüklerdeki anlamlarına kadar tüm içeriklerden sınırsız olarak yararlanabilirsiniz.',
@@ -14505,6 +14536,39 @@ document.addEventListener('click', function (e) {
         initNetParticles(); animateNet();
     
 })();
+
+    /* ---- SAĞ ALTTA "BAŞA DÖN" ----
+       Alt sayfalardaki (pages/lq-page.js) davranışın aynısı: 1.5 ekran
+       kaydırılınca beliriyor, tepeye dönünce kayboluyor. Kısa sayfada eşik
+       hiç aşılmadığı için düğme de hiç görünmüyor; ana sayfa da sonuç sayfası
+       da aynı kurala tabi. Gizliyken klavye sırasından ve ekran okuyucudan
+       çıkarılıyor. */
+    (function () {
+        const btn = document.getElementById('lqBackTop');
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+            const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+            const menu = document.getElementById('menuBtn');
+            if (menu) menu.focus({ preventScroll: true });   /* klavye odağı da başa dönsün */
+        });
+        let acik = false, bekliyor = false;
+        function guncelle() {
+            bekliyor = false;
+            const olmali = window.scrollY > window.innerHeight * 1.5;
+            if (olmali === acik) return;
+            acik = olmali;
+            btn.classList.toggle('show', acik);
+            btn.setAttribute('aria-hidden', acik ? 'false' : 'true');
+            btn.tabIndex = acik ? 0 : -1;
+        }
+        window.addEventListener('scroll', function () {
+            if (!bekliyor) { bekliyor = true; requestAnimationFrame(guncelle); }
+        }, { passive: true });
+        window.addEventListener('resize', guncelle);
+        guncelle();
+    })();
+
 </script>
 </body>
 </html>
