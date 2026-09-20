@@ -2122,6 +2122,21 @@
         .arrow-icon { transition: all 0.4s; opacity: 0.35; transform: translateX(0) scale(1); color: #94a3b8; }
         .zone-interactive:hover .arrow-icon { opacity: 1; transform: translateX(6px) scale(1.15); color: #334155; }
 
+        /* Giris penceresi kapaninca: kullanici hangi satirdan gittigini gozle
+           aramasin diye o satir isaretli kalir; donus aninda bir kez nabiz atar. */
+        /* Satirin sol serisi kategori rengine ayrilmis durumda; isaret bu yuzden
+           yumusak bir zemin + ince cerceve + sag ust kosede kucuk bir rozetle
+           veriliyor. Cerceve outline oldugu icin yerlesimi kaydirmaz. */
+        .row-card.row-visited { background-color: #f5f9ff; outline: 1.5px solid #93b4f5; outline-offset: -1px; }
+        .row-visited-tag { position: absolute; top: -8px; right: 16px; z-index: 60; display: inline-flex; align-items: center; gap: 4px; height: 17px; padding: 0 8px; border-radius: 9px; background: var(--brand-sapphire); color: #fff; font-size: 9px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: 0 2px 6px -1px rgba(8,37,103,0.35); pointer-events: none; white-space: nowrap; }
+        @keyframes rowReturnPulse { 0% { box-shadow: 0 0 0 0 rgba(8,37,103,0.28); } 100% { box-shadow: 0 0 0 12px rgba(8,37,103,0); } }
+        .row-card.row-returned { animation: rowReturnPulse 1.4s ease-out; z-index: 55; }
+        @media (prefers-reduced-motion: reduce) { .row-card.row-returned { animation: none; } }
+
+        #rowEntryOverlay { position: fixed; inset: 0; z-index: 9500; background: #e5e5e5; }
+        #rowEntryOverlay[hidden] { display: none; }
+        #rowEntryFrame { width: 100%; height: 100%; border: 0; display: block; }
+
         .show-more-row { width: 100%; display: flex; justify-content: center; gap: 10px; margin-top: 8px; }
         .show-more-btn { background-color: #f1f5f9; border: 1px solid #e2e8f0; color: #5a687d; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 8px 24px; border-radius: 20px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; }
         .show-more-btn:hover { background-color: #e2e8f0; color: var(--brand-sapphire); border-color: #cbd5e1; }
@@ -3296,6 +3311,10 @@
     <button class="dev-state-btn active" data-state="results" onclick="setViewState('results')">Results</button>
     <button class="dev-state-btn" data-state="popup" onclick="setViewState('popup')">Popup</button>
     <button class="dev-state-btn" data-state="redhouse" onclick="setViewState('redhouse')">Redhouse</button>
+</div>
+
+<div id="rowEntryOverlay" hidden>
+<iframe id="rowEntryFrame" title="Dictionary entry"></iframe>
 </div>
 
 <div id="embedSurface" style="display:none;">
@@ -5453,6 +5472,7 @@
             citeCopy: 'Künyeyi kopyala',
             citeCopied: 'Kopyalandı!',
             scanCite: 'Atıf',
+            rowVisited: 'Görüldü',
             /* Same Root popup */
             cogTitle: 'Aynı Kök',
             cogTabRoot: 'Kök',
@@ -6645,6 +6665,88 @@
                 });
                 document.addEventListener('scroll', hideZoneTip, true);
             })();
+
+            /* --- Satirdan giris penceresi ---------------------------------
+               Satirin sol bolgesi "sonuc", sag bolgesi "madde basi" demek.
+               Bolgeye basinca giris penceresi tam ekran acilir; hangi bolgeden
+               gelindigi pencereye bildirilir, pencere de icerigi ona gore
+               konumlandirir. Ustteki ipucu balonuyla ayni dislama listesi
+               kullanilir, boylece "tiklanabilir" gorunen alan neyse o calisir. */
+            const ROW_ZONE_SKIP = '.word-box, .analysis-badge, .typo-indicator, .typo-hover-card, .category-pill, .copy-btn, button, a';
+            let rowEntrySource = null;   // pencereyi acan satir
+
+            function openRowEntry(zone) {
+                const frame = document.getElementById('rowEntryFrame');
+                const overlay = document.getElementById('rowEntryOverlay');
+                if (!frame || !overlay || typeof getEmbedTpl !== 'function') return;
+                rowEntrySource = zone.closest('.row-card');
+                const target = zone.classList.contains('col-span-5') ? 'result' : 'headword';
+                const tpl = (typeof currentLang !== 'undefined' && currentLang === 'tr') ? 'tplPopupTr' : 'tplPopupEn';
+                const send = function () {
+                    try { frame.contentWindow.postMessage({ lq: 'focus', target: target, embedded: true }, '*'); } catch (_) {}
+                };
+                if (frame.dataset.cur !== tpl) {
+                    frame.dataset.cur = tpl;
+                    frame.onload = send;
+                    frame.srcdoc = getEmbedTpl(tpl);
+                } else {
+                    send();
+                }
+                overlay.hidden = false;
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeRowEntry() {
+                const overlay = document.getElementById('rowEntryOverlay');
+                if (!overlay || overlay.hidden) return;
+                overlay.hidden = true;
+                document.body.style.overflow = '';
+                markRowEntrySource();
+            }
+
+            // Donuste kaynak satiri isaretle: kalici serit + tek seferlik nabiz,
+            // satir ekran disindaysa ortaya kaydir.
+            function markRowEntrySource() {
+                const row = rowEntrySource;
+                if (!row || !row.isConnected) return;
+                document.querySelectorAll('.row-card.row-visited').forEach(function (r) {
+                    r.classList.remove('row-visited');
+                    const old = r.querySelector('.row-visited-tag');
+                    if (old) old.remove();
+                });
+                row.classList.add('row-visited');
+                if (!row.querySelector('.row-visited-tag')) {
+                    const tag = document.createElement('span');
+                    tag.className = 'row-visited-tag';
+                    tag.textContent = t('rowVisited', 'Viewed');
+                    row.appendChild(tag);
+                }
+                const r = row.getBoundingClientRect();
+                if (r.top < 90 || r.bottom > window.innerHeight - 20) {
+                    row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                row.classList.remove('row-returned');
+                void row.offsetWidth;            // animasyonu bastan baslat
+                row.classList.add('row-returned');
+                clearTimeout(row._returnTimer);
+                row._returnTimer = setTimeout(function () { row.classList.remove('row-returned'); }, 1500);
+            }
+
+            document.addEventListener('click', function (e) {
+                const zone = e.target.closest('.zone-interactive');
+                if (!zone || !zone.closest('.row-card')) return;
+                if (e.target.closest(ROW_ZONE_SKIP)) return;
+                const gt = document.getElementById('ghostTooltip');
+                if (gt) gt.classList.remove('active');
+                openRowEntry(zone);
+            });
+
+            window.addEventListener('message', function (ev) {
+                if (ev.data && ev.data.lq === 'close') closeRowEntry();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeRowEntry();
+            });
 
             document.addEventListener('mouseover', function(e) {
                 if (e.target.closest('#wbMenu')) { clearTimeout(hideTimer); return; }
@@ -11273,7 +11375,53 @@
     function handleOkay() { finalIcon.classList.add('morph'); setTimeout(() => { closeReportModal(); }, 800); }
     reportModal.addEventListener('click', (e) => { if (reportSuccess.style.display === 'flex') return; if(e.target === reportModal) closeReportModal(); });
 
-    function closeMainPopup() { document.querySelector('.lex-popup').style.display = 'none'; }
+    /* Bu sayfa sonuc satirindan tam ekran acildiginda ust sayfa "embedded"
+       bilgisini yollar; o durumda kapatma ustteki katmana devredilir. */
+    var lqEmbedded = false;
+    function closeMainPopup() {
+        if (lqEmbedded && window.parent !== window) {
+            try { window.parent.postMessage({ lq: 'close' }, '*'); return; } catch (_) {}
+        }
+        document.querySelector('.lex-popup').style.display = 'none';
+    }
+    /* Odak: "result" ise alt madde (kerih el-manzar) kutulari gorunur alanin
+       ortasina getirilir ve kisa sure vurgulanir; "headword" ise varsayilan
+       konum, yani madde basi en ustte. Kaydirma alanin sinirlarina kirpilir. */
+    function lqFocusEntry(target) {
+        var area = document.querySelector('.content-area');
+        if (!area) return;
+        if (target !== 'result') { area.scrollTop = 0; return; }
+        var boxes = document.querySelectorAll('.box[data-pair="sub"]');
+        if (!boxes.length) { area.scrollTop = 0; return; }
+        var top = Infinity, bottom = -Infinity;
+        boxes.forEach(function (b) {
+            var r = b.getBoundingClientRect();
+            top = Math.min(top, r.top);
+            bottom = Math.max(bottom, r.bottom);
+        });
+        var ar = area.getBoundingClientRect();
+        var center = (top + bottom) / 2 - ar.top + area.scrollTop;
+        var limit = Math.max(0, area.scrollHeight - area.clientHeight);
+        area.scrollTop = Math.max(0, Math.min(center - area.clientHeight / 2, limit));
+        boxes.forEach(function (b) { b.classList.add('group-active'); });
+        clearTimeout(window._lqFocusTimer);
+        window._lqFocusTimer = setTimeout(function () {
+            boxes.forEach(function (b) { b.classList.remove('group-active'); });
+        }, 2600);
+    }
+    window.addEventListener('message', function (ev) {
+        var d = ev.data;
+        if (!d || d.lq !== 'focus') return;
+        if (d.embedded) lqEmbedded = true;
+        // Gorsel hentiz yerlesmemis olabilir; bir de yerlesme sonrasi tekrarla.
+        lqFocusEntry(d.target);
+        setTimeout(function () { lqFocusEntry(d.target); }, 260);
+    });
+    document.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Escape' && lqEmbedded && window.parent !== window) {
+            try { window.parent.postMessage({ lq: 'close' }, '*'); } catch (_) {}
+        }
+    });
     document.addEventListener('click', (e) => {
         const popup = document.querySelector('.lex-popup');
         if (popup.contains(e.target)) return;
@@ -13292,7 +13440,53 @@
     function handleOkay() { finalIcon.classList.add('morph'); setTimeout(() => { closeReportModal(); }, 800); }
     reportModal.addEventListener('click', (e) => { if (reportSuccess.style.display === 'flex') return; if(e.target === reportModal) closeReportModal(); });
 
-    function closeMainPopup() { document.querySelector('.lex-popup').style.display = 'none'; }
+    /* Bu sayfa sonuc satirindan tam ekran acildiginda ust sayfa "embedded"
+       bilgisini yollar; o durumda kapatma ustteki katmana devredilir. */
+    var lqEmbedded = false;
+    function closeMainPopup() {
+        if (lqEmbedded && window.parent !== window) {
+            try { window.parent.postMessage({ lq: 'close' }, '*'); return; } catch (_) {}
+        }
+        document.querySelector('.lex-popup').style.display = 'none';
+    }
+    /* Odak: "result" ise alt madde (kerih el-manzar) kutulari gorunur alanin
+       ortasina getirilir ve kisa sure vurgulanir; "headword" ise varsayilan
+       konum, yani madde basi en ustte. Kaydirma alanin sinirlarina kirpilir. */
+    function lqFocusEntry(target) {
+        var area = document.querySelector('.content-area');
+        if (!area) return;
+        if (target !== 'result') { area.scrollTop = 0; return; }
+        var boxes = document.querySelectorAll('.box[data-pair="sub"]');
+        if (!boxes.length) { area.scrollTop = 0; return; }
+        var top = Infinity, bottom = -Infinity;
+        boxes.forEach(function (b) {
+            var r = b.getBoundingClientRect();
+            top = Math.min(top, r.top);
+            bottom = Math.max(bottom, r.bottom);
+        });
+        var ar = area.getBoundingClientRect();
+        var center = (top + bottom) / 2 - ar.top + area.scrollTop;
+        var limit = Math.max(0, area.scrollHeight - area.clientHeight);
+        area.scrollTop = Math.max(0, Math.min(center - area.clientHeight / 2, limit));
+        boxes.forEach(function (b) { b.classList.add('group-active'); });
+        clearTimeout(window._lqFocusTimer);
+        window._lqFocusTimer = setTimeout(function () {
+            boxes.forEach(function (b) { b.classList.remove('group-active'); });
+        }, 2600);
+    }
+    window.addEventListener('message', function (ev) {
+        var d = ev.data;
+        if (!d || d.lq !== 'focus') return;
+        if (d.embedded) lqEmbedded = true;
+        // Gorsel hentiz yerlesmemis olabilir; bir de yerlesme sonrasi tekrarla.
+        lqFocusEntry(d.target);
+        setTimeout(function () { lqFocusEntry(d.target); }, 260);
+    });
+    document.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Escape' && lqEmbedded && window.parent !== window) {
+            try { window.parent.postMessage({ lq: 'close' }, '*'); } catch (_) {}
+        }
+    });
     document.addEventListener('click', (e) => {
         const popup = document.querySelector('.lex-popup');
         if (popup.contains(e.target)) return;
