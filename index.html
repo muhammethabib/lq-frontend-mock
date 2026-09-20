@@ -1779,18 +1779,15 @@
         /* Sonuç tablosu kabı genişlese de satır içeriği belli bir noktadan sonra yayılmasın:
            kart tam genişlikte kalır, satırlar en fazla 1240px'e kadar açılır ve ortalanır. */
         /* --- KART İÇİ YAN BOŞLUKLAR ---
-           Başlık şeridi, arama kutusu ve satırlar aynı kutuyu paylaşır: hepsi içerik
-           kabının tam genişliğini kullanır. Sayfa kenarıyla arasındaki boşluğu tek
-           başına .page-container verir, o da iki yana eşit dağıttığı için sol ve sağ
-           boşluk birbirine eşit kalır. (Önce sağa 2/3, sola 1/3 dağıtılıyordu; şerit
-           satırlardan geniş kaldığı ve boşluklar eşitlenmediği için kaldırıldı.) */
+           İçerik en fazla 1240px; artan pay sola 1/3, sağa 2/3 dağıtılır (sol kenardaki renkli şerit
+           güçlü bir çapa olduğu için sol boşluk daha dar olunca denge kuruluyor). Dar ekranlarda taban 24px. */
         .unified-result-surface .surface-header,
         .unified-result-surface .surface-list-area,
         .unified-result-surface .column-headers-bar,
         .kcx-surface-header,
         .search-container {
-            padding-left: 0;
-            padding-right: 0;
+            padding-left: max(24px, (100% - 1240px) * 0.34);
+            padding-right: max(24px, (100% - 1240px) * 0.66);
         }
         body.p-4 { padding-left: var(--lq-gutter); padding-right: var(--lq-gutter); }
         @media (max-width: 640px) { :root { --lq-gutter: 16px; } }
@@ -2038,6 +2035,18 @@
             margin-bottom: 0; position: sticky; top: var(--lq-navh, 60px); z-index: 90; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
             overflow: hidden;
+        }
+        /* Sol kenar — Result rengiyle */
+        .column-headers-bar::before {
+            content: ''; position: absolute; top: 0; left: 0; bottom: 0;
+            /* seridin sol boslugunun tamami: Result hucresiyle kesintisiz birlessin,
+               arada serit renginde bir bosluk kalmasin */
+            width: calc(max(24px, (100% - 1240px) * 0.34) + 3px); background: #eff6ff;
+        }
+        /* Sağ kenar — Dict rengiyle */
+        .column-headers-bar::after {
+            content: ''; position: absolute; top: 0; right: 0; bottom: 0;
+            width: 16px; background: #f8fafc;
         }
         .col-header-inner { 
             display: grid; 
