@@ -2811,6 +2811,7 @@
         .nav-container { position: relative; display: flex; background: #f4f4f5; padding: 2px; border-radius: 11px; width: 340px; height: 36px; }
         /* --- Atıf düğmesi: tarama görüntüleyicinin alt şeridi --- */
         .scan-cite { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }
+        .scan-cite[hidden] { display: none; }
         .scan-cite-btn { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid #cbd5e1; background: #fff; color: #334155; font-size: 12.5px; font-weight: 700; cursor: pointer; transition: background .15s, color .15s, border-color .15s; }
         .scan-cite-btn svg { width: 15px; height: 15px; flex: none; }
         .scan-cite-btn:hover { color: #082567; background: #eff6ff; border-color: #bfdbfe; }
@@ -4464,8 +4465,8 @@
 <button class="nav-item" onclick="updateNav(this, 2, 'Page')"><span class="nav-text">Page</span><span class="nav-divider"></span><span class="nav-count">1417</span></button>
 </div>
 <div class="scan-cite">
-<button type="button" class="scan-cite-btn" onclick="openScanCite(event, this)"><!-- kunye penceresini bu taramanin verisiyle acar -->
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 6H5.5v5.5h4c0 3-1.6 4.7-4 5.2"></path><path d="M18.5 6h-4v5.5h4c0 3-1.6 4.7-4 5.2"></path></svg><span data-i18n="scanCite">Cite</span>
+<button type="button" class="scan-cite-btn" onclick="openScanCite(event)"><!-- satirdaki kunye dugmesinin actigi pencerenin aynisini acar -->
+<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="1.6" y="10.8" width="8.4" height="8.4" rx="3"></rect><path d="M3.5 14.6V10.3C3.5 7.4 4.8 6 7.2 5.2" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path><rect x="13.2" y="10.8" width="8.4" height="8.4" rx="3"></rect><path d="M15.1 14.6V10.3C15.1 7.4 16.4 6 18.8 5.2" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span data-i18n="scanCite">Cite</span>
 </button>
 </div>
 </footer>
@@ -6681,8 +6682,16 @@
         }
 
         // --- VISUAL POPUP LOGIC ---
+        // Taramayi acan satirin kunye dugmesi. Alt seritteki Atif dugmesi
+        // ayni dugmeyi kullanir, boylece iki yerden de birebir ayni kunye
+        // penceresi acilir.
+        let visualCiteKaynak = null;
         function openVisualPopup(e) {
             e.stopPropagation(); 
+            const satir = e.target.closest ? e.target.closest('.row-card') : null;
+            visualCiteKaynak = satir ? satir.querySelector('.copy-btn[data-cite-dict]') : null;
+            const scanCite = document.querySelector('#visualDictModal .scan-cite');
+            if (scanCite) scanCite.hidden = !visualCiteKaynak;
             const activeItem = document.querySelector('.lex-popup .nav-item.active');
             if(activeItem) updateNav(activeItem, 0, 'Headword');
             document.getElementById('visualDictModal').classList.add('active');
@@ -7239,7 +7248,7 @@
                     </div>
                     <div class="col-span-3 flex justify-end items-center pl-4">
                         <div class="text-right mr-3"><div class="text-[13px] font-bold text-slate-700 leading-tight">${dictLabel(w.dict)}</div><div class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-widest text-right">${t('pageLabel', 'Page')} ${w.p}</div></div>
-                        <button class="copy-btn" aria-label="${t('citeTooltip', 'Cite')}: ${w.e_l2}" data-tooltip="${t('citeTooltip', 'Cite')}" data-cite-osm="${w.e_o2}" data-cite-lat="${w.e_l2}" data-cite-dict="${w.dict}" data-cite-page="${w.p}" onclick="openCiteModal(event, this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+                        <button class="copy-btn" aria-label="${t('citeTooltip', 'Cite')}: ${w.e_l2}" data-tooltip="${t('citeTooltip', 'Cite')}" data-cite-osm="${w.e_o2}" data-cite-lat="${w.e_l2}" data-cite-dict="${w.dict}" data-cite-page="${w.p}" onclick="openCiteModal(event, this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="1.6" y="10.8" width="8.4" height="8.4" rx="3"></rect><path d="M3.5 14.6V10.3C3.5 7.4 4.8 6 7.2 5.2" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path><rect x="13.2" y="10.8" width="8.4" height="8.4" rx="3"></rect><path d="M15.1 14.6V10.3C15.1 7.4 16.4 6 18.8 5.2" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
                     </div>
                 </div>
             </div>`;
@@ -7415,42 +7424,12 @@
             'Şemseddin Sami, 1899': { title: 'Şemseddin Sami', author: 'Şemseddin Sami', year: '1899', volume: '1', publisher: 'İkdam Matbaası', city: 'İstanbul' },
         };
         let citeFormats = { apa: '', chicago: '', harvard: '' };
-        /* Tarama goruntuleyicinin alt seridindeki Atif dugmesi.
-           Sozluk adini, sayfa numarasini ve madde basini ekrandaki ogelerden okur,
-           sonra sitenin mevcut kunye penceresini (openCiteModal) calistirir.
-           Backend tarafinda bu degerler sunucudan gelecegi icin okuma noktalari
-           tek yerde toplandi. */
-        function lqResolveDictKey(name) {
-            if (!name) return '';
-            var raw = String(name).trim();
-            if (citeDictMeta[raw]) return raw;
-            var norm = function (x) {
-                return String(x).toLowerCase()
-                    .replace(/,\s*\d{4}\s*$/, '')
-                    .replace(/[\u0130\u0131\u00ee\u00ef\u00ec\u00ed]/g, 'i')
-                    .replace(/[\u015f\u015e]/g, 's')
-                    .replace(/[\u011f\u011e]/g, 'g')
-                    .replace(/[\u00fc\u00dc]/g, 'u')
-                    .replace(/[\u00f6\u00d6]/g, 'o')
-                    .replace(/[\u00e7\u00c7]/g, 'c')
-                    .replace(/[^a-z0-9]+/g, '');
-            };
-            var hedef = norm(raw);
-            for (var k in citeDictMeta) { if (norm(k) === hedef) return k; }
-            return raw;
-        }
-        function openScanCite(e, btn) {
-            var pop = btn.closest('.lex-popup');
-            var badge = pop ? pop.querySelector('.dict-badge') : null;
-            var crumb = pop ? pop.querySelector('.breadcrumb') : null;
-            var giris = pop ? pop.querySelector('.box-entry') : null;
-            var satirlar = pop ? pop.querySelectorAll('.popup-footer .nav-item') : [];
-            var sayfa = satirlar.length ? satirlar[satirlar.length - 1].querySelector('.nav-count') : null;
-            btn.dataset.citeDict = lqResolveDictKey(badge ? badge.textContent : '');
-            btn.dataset.citePage = sayfa ? sayfa.textContent.trim() : '';
-            btn.dataset.citeOsm  = giris && giris.dataset.osm ? giris.dataset.osm : '';
-            btn.dataset.citeLat  = crumb ? crumb.textContent.trim() : (giris && giris.dataset.lat ? giris.dataset.lat : '');
-            openCiteModal(e, btn);
+        /* Tarama goruntuleyicinin alt seridindeki Atif dugmesi:
+           taramayi acan satirin kunye dugmesini oldugu gibi devreder,
+           boylece acilan pencere satirdakiyle birebir ayni olur. */
+        function openScanCite(e) {
+            if (!visualCiteKaynak) return;
+            openCiteModal(e, visualCiteKaynak);
         }
         function openCiteModal(e, btn) {
             e.stopPropagation();
@@ -8990,7 +8969,7 @@
                     </div>
                     <div class="col-span-3 flex justify-end items-center pl-4">
                         <div class="text-right mr-3"><div class="text-[13px] font-bold text-slate-700 leading-tight">${dictLabel(w.dict)}</div><div class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-widest text-right">${t('pageLabel', 'Page')} ${w.p}</div></div>
-                        <button class="copy-btn" aria-label="${t('citeTooltip', 'Cite')}: ${w.e_l2}" data-tooltip="${t('citeTooltip', 'Cite')}" data-cite-osm="${w.e_o2}" data-cite-lat="${w.e_l2}" data-cite-dict="${w.dict}" data-cite-page="${w.p}" onclick="openCiteModal(event, this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+                        <button class="copy-btn" aria-label="${t('citeTooltip', 'Cite')}: ${w.e_l2}" data-tooltip="${t('citeTooltip', 'Cite')}" data-cite-osm="${w.e_o2}" data-cite-lat="${w.e_l2}" data-cite-dict="${w.dict}" data-cite-page="${w.p}" onclick="openCiteModal(event, this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="1.6" y="10.8" width="8.4" height="8.4" rx="3"></rect><path d="M3.5 14.6V10.3C3.5 7.4 4.8 6 7.2 5.2" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path><rect x="13.2" y="10.8" width="8.4" height="8.4" rx="3"></rect><path d="M15.1 14.6V10.3C15.1 7.4 16.4 6 18.8 5.2" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
                     </div>
                 </div>
             </div>`;
@@ -10543,7 +10522,7 @@
         </div>
         <div class="scan-cite">
             <button type="button" class="scan-cite-btn" aria-haspopup="true" aria-expanded="false" onclick="toggleScanCite(this)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 6H5.5v5.5h4c0 3-1.6 4.7-4 5.2"></path><path d="M18.5 6h-4v5.5h4c0 3-1.6 4.7-4 5.2"></path></svg><span>Cite</span>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="1.6" y="10.8" width="8.4" height="8.4" rx="3"></rect><path d="M3.5 14.6V10.3C3.5 7.4 4.8 6 7.2 5.2" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path><rect x="13.2" y="10.8" width="8.4" height="8.4" rx="3"></rect><path d="M15.1 14.6V10.3C15.1 7.4 16.4 6 18.8 5.2" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Cite</span>
             </button>
             <div class="scan-cite-pop" hidden>
                 <button type="button" onclick="copyCitation(this, 'chicago')">Chicago</button>
@@ -12562,7 +12541,7 @@
         </div>
         <div class="scan-cite">
             <button type="button" class="scan-cite-btn" aria-haspopup="true" aria-expanded="false" onclick="toggleScanCite(this)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 6H5.5v5.5h4c0 3-1.6 4.7-4 5.2"></path><path d="M18.5 6h-4v5.5h4c0 3-1.6 4.7-4 5.2"></path></svg><span>Atıf</span>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="1.6" y="10.8" width="8.4" height="8.4" rx="3"></rect><path d="M3.5 14.6V10.3C3.5 7.4 4.8 6 7.2 5.2" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path><rect x="13.2" y="10.8" width="8.4" height="8.4" rx="3"></rect><path d="M15.1 14.6V10.3C15.1 7.4 16.4 6 18.8 5.2" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Atıf</span>
             </button>
             <div class="scan-cite-pop" hidden>
                 <button type="button" onclick="copyCitation(this, 'chicago')">Chicago</button>
