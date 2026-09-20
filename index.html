@@ -1624,16 +1624,16 @@
            (Phrases) tamamen bu düğmelerin altında kalıp erişilemez oluyordu.
            İki uçta da o düğmeler kadar yer ayrılıyor: yer daralınca bağlantılar
            alt satıra iniyor, üst üste binmiyor. */
+        /* Sol pay her genişlikte gerekli: şeridin içi menü düğmesinin solundan
+           başlıyor, pay olmayınca "JUMP TO" yazısı düğmenin altında kalıyor.
+           Sağ pay ise yalnız bağlantıların "Classic version" ve dil düğmesine
+           yetiştiği genişliklerde; koşulsuz verilince geniş ekranda şerit
+           boşuna iki satıra düşüyordu. */
         .sticky-nav-inner { width: 100%; display: flex; align-items: center; flex-direction: row;
-            flex-wrap: wrap; row-gap: 12px; box-sizing: border-box; }
-        /* Geniş ekranda şerit, sağ üstteki düğmelere zaten yetişmiyor; pay yalnız
-           yetiştiği genişliklerde ayrılıyor, yoksa boşuna alt satıra iniyordu. */
-        @media (max-width: 1400px) {
-            .sticky-nav-inner { padding-left: 44px; padding-right: 180px; }
-        }
-        @media (max-width: 900px) {
-            .sticky-nav-inner { padding-left: 44px; padding-right: 44px; }
-        }
+            flex-wrap: wrap; row-gap: 12px; box-sizing: border-box;
+            padding-left: 30px; padding-right: 180px; }
+        /* 900px altinda sag ustteki dugmeler sabit konumdan cikiyor, pay gerekmiyor */
+        @media (max-width: 900px) { .sticky-nav-inner { padding-right: 44px; } }
         .sticky-label { font-size: 11px; font-weight: 800; color: #94a3b8; margin-right: 16px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
         .quick-link { 
             position: relative;
