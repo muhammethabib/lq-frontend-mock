@@ -1779,15 +1779,16 @@
         /* Sonuç tablosu kabı genişlese de satır içeriği belli bir noktadan sonra yayılmasın:
            kart tam genişlikte kalır, satırlar en fazla 1240px'e kadar açılır ve ortalanır. */
         /* --- KART İÇİ YAN BOŞLUKLAR ---
-           İçerik en fazla 1240px; artan pay iki yana eşit dağıtılır, böylece sayfa kenarına olan
-           sol ve sağ boşluk birbirine eşit kalır. Dar ekranlarda taban 24px. */
+           Artan payın yarısı satıra veriliyor, kalan yarısı iki yana eşit bölünüyor; böylece
+           sol ve sağ boşluk birbirine eşit kalırken satır da geniş ekranda uzuyor.
+           Dar ekranlarda taban 24px. */
         .unified-result-surface .surface-header,
         .unified-result-surface .surface-list-area,
         .unified-result-surface .column-headers-bar,
         .kcx-surface-header,
         .search-container {
-            padding-left: max(24px, (100% - 1240px) * 0.5);
-            padding-right: max(24px, (100% - 1240px) * 0.5);
+            padding-left: max(24px, (100% - 1240px) * 0.25);
+            padding-right: max(24px, (100% - 1240px) * 0.25);
         }
         body.p-4 { padding-left: var(--lq-gutter); padding-right: var(--lq-gutter); }
         @media (max-width: 640px) { :root { --lq-gutter: 16px; } }
@@ -2043,7 +2044,7 @@
             content: ''; position: absolute; top: 0; left: 0; bottom: 0;
             /* seridin sol boslugunun tamami: Result hucresiyle kesintisiz birlessin,
                arada serit renginde bir bosluk kalmasin */
-            width: calc(max(24px, (100% - 1240px) * 0.5) + 2px); background: #eff6ff;
+            width: calc(max(24px, (100% - 1240px) * 0.25) + 2px); background: #eff6ff;
         }
         /* Sağ kenar — Dict rengiyle */
         .column-headers-bar::after {
