@@ -1611,7 +1611,7 @@
 
         /* --- STICKY NAV BAR --- */
         .sticky-nav-bar { 
-            position: fixed; top: 0; left: 50%; transform: translateX(-50%) translateY(-100%); width: calc(100% - 2 * var(--lq-gutter)); max-width: var(--lq-max);
+            position: fixed; top: 0; left: 50%; transform: translateX(-50%) translateY(-100%); width: min(100% - 64px - 2 * var(--lq-gutter), 1300px);
             z-index: 100; min-height: 60px; height: auto; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px);
             border-bottom: 1px solid #cbd5e1; border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0;
             border-radius: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.06); padding: 14px 24px; 
@@ -1619,17 +1619,25 @@
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; opacity: 0; pointer-events: none;
         }
         .sticky-nav-bar.visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
-        /* Şerit, sayfanın kalanıyla aynı ölçüyü kullanır: "JUMP TO" sonuç
-           kartının sol kenarında başlar, son bağlantı da kartın sağ kenarını
-           geçmez (16px, şeridin kendi 24px'lik yan payını dengeler).
-           Sağdaki pay, bağlantılar sağ üstteki sabit "Classic version" ve dil
-           düğmelerinin altında kalmasın diye duruyor: yer daralınca alt satıra
-           iniyorlar, üst üste binmiyorlar. */
-        .sticky-nav-inner { width: min(100% - 16px, 1300px); margin-left: auto; margin-right: auto;
-            display: flex; align-items: center; flex-direction: row;
-            flex-wrap: wrap; row-gap: 12px; box-sizing: border-box; padding-right: 170px; }
-        /* 900px altinda sag ustteki dugmeler sabit konumdan cikiyor, pay gerekmiyor */
-        @media (max-width: 900px) { .sticky-nav-inner { padding-right: 44px; } }
+        /* Şeridin çerçevesi sonuç kartıyla birebir aynı ölçüde: eskiden 1440px'e
+           kadar açılıp kartın iki yanından ~70px taşıyordu. Şerit pencereye göre
+           konumlandığı için kartın kendi payını (body 8px kenar boşluğu + sayfa
+           payı + kartın 24px'i) elle toplamak gerekiyor; sonuç, kartla aynı
+           min(..., 1300px). Şeridin 24px'lik iç payı da satırların 4px kenarlık
+           + 20px iç payına denk geldiğinden "JUMP TO" tam "RESULT" sütununun
+           hizasından başlıyor. */
+        .sticky-nav-inner { width: 100%; display: flex; align-items: center; flex-direction: row;
+            flex-wrap: wrap; row-gap: 12px; box-sizing: border-box; }
+        /* Sağ üstteki "Classic version" ve dil düğmesi yalnız 1200px üstünde
+           pencere kenarına sabitleniyor; şeridin sağ payı da yalnız orada
+           gerekli. Şerit ortalanıp 1300px'te durduğu için gereken pay ekran
+           genişledikçe kendiliğinden azalıyor ve 1758px üstünde sıfırlanıyor;
+           böylece bağlantılar geniş ekranda boşuna alt satıra inmiyor.
+           Solda pay yok: şerit kartla aynı ölçüde olduğu için "JUMP TO" zaten
+           menü düğmesinin sağında kalıyor ve "RESULT" ile hizalı duruyor. */
+        @media (min-width: 1200px) {
+            .sticky-nav-inner { padding-right: clamp(0px, calc(892px - 50vw), 180px); }
+        }
         .sticky-label { font-size: 11px; font-weight: 800; color: #94a3b8; margin-right: 16px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
         .quick-link { 
             position: relative;
