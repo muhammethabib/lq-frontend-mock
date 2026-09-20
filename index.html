@@ -2233,7 +2233,7 @@
         /* Madde başı çifti sabit genişlikte ve bölgesinde ortalı: Osmanlıca kutunun sağ kenarı ile
            Latin kutunun sol kenarı bütün satırlarda aynı hizada kalır (soldaki sütunla aynı mantık),
            sütun başlığı da doğal olarak üstüne denk gelir. */
-        .head-cell .word-pair-unit { width: 100%; max-width: 320px; }
+        .head-cell .word-pair-unit { width: 100%; max-width: 400px; }
         /* --- SATIR İÇİ BOŞLUK DAĞILIMI ---
            Sonuç çifti sabit genişlikte ve sola yaslı. Kategori kutusuyla ok arasında biriken
            pay fazlaydı; büyük kısmı sonuç çiftine verildi, iki yarıyı ayıracak kadarı kaldı.
@@ -2247,6 +2247,16 @@
         .col-header-inner .col-span-5 > .col-result { flex: 0 1 430px; padding-left: 24px; padding-right: 0; }
         .col-header-inner .col-span-7 > .col-span-6 { grid-column: span 5 / span 5; }
         .col-header-inner .col-span-7 > .col-span-3 { grid-column: span 4 / span 4; }
+        /* Sozluk sutunu ihtiyacindan genisti: en uzun sozluk adi, sayfa satiri ve
+           kunye dugmesi 193px tutuyor, sutun 311px'ti. Yeri olan ekranlarda bir
+           sutunluk pay madde basina aktariliyor; 1360'in altinda eski dagilim
+           kaliyor, cunku orada en uzun sozluk adi iki satira dusuyor. */
+        @media (min-width: 1360px) {
+            .row-card .col-span-7 > .col-span-6,
+            .col-header-inner .col-span-7 > .col-span-6 { grid-column: span 6 / span 6; }
+            .row-card .col-span-7 > .col-span-3,
+            .col-header-inner .col-span-7 > .col-span-3 { grid-column: span 3 / span 3; }
+        }
         .col-span-7 .latin-box { font-size: 14.5px !important; color: #475569 !important; }
         .col-span-7 .word-box:hover { transform: translateY(-1px) scale(1.02); background: rgba(15,23,42,0.035) !important; box-shadow: none !important; }
         .col-span-7 .osm-box:hover { color: var(--brand-red) !important; }
@@ -6117,7 +6127,7 @@
                    sutununda alt satira iner. Sarma davranisi burada gorulsun diye duruyorlar. */
                 {type: "ENTRY",   r_l2: "nazar-ı müsamaha ile bakılmak", r_o2: "نظر مسامحه ايله باقيلمق", e_l2: "nazar", e_o2: "نظر", dict: "Lugat-ı Naci",  p: "813",  misspelled: false},
                 {type: "ENTRY",   r_l2: "nazar-ı dikkate alınmasını rica etmek", r_o2: "نظر دقته آلينمه‌سنی رجا ايتمك", e_l2: "nazar", e_o2: "نظر", dict: "Kamus-ı Türki", p: "1452", misspelled: false},
-                {type: "ENTRY",   r_l2: "nazar",  r_o2: "نظر", e_l2: "hüsn-i nazarla bakmak", e_o2: "حسن نظرله باقمق", dict: "Redhouse", p: "2022", misspelled: false},
+                {type: "ENTRY",   r_l2: "nazar",  r_o2: "نظر", e_l2: "hüsn-i nazarla muamele etmek", e_o2: "حسن نظرله معامله ايتمك", dict: "Redhouse", p: "2022", misspelled: false},
                 {type: "ENTRY",   r_l2: "nazar",  r_o2: "نظر", e_l2: "nazar-ı itibara alınmamasını rica etmek", e_o2: "نظر اعتباره آلينمامه‌سنی رجا ايتمك", dict: "Lehçe-i Osmani", p: "901", misspelled: false},
                 {type: "SUBENTRY",r_l2: "nazar",  r_o2: "نظر", e_l2: "halbuki",        e_o2: "حالبوکی",       dict: "Redhouse",         p: "2021", misspelled: false},
                 {type: "RELATED", r_l2: "nazar",  r_o2: "نظر", e_l2: "iskara",         e_o2: "اسقارە",        dict: "Ahteri-i Kebir",   p: "940",  misspelled: false},
