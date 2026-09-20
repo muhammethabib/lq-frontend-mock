@@ -1778,17 +1778,21 @@
         .page-container { position: relative; width: 100%; max-width: var(--lq-max); margin-left: auto; margin-right: auto; }
         /* Sonuç tablosu kabı genişlese de satır içeriği belli bir noktadan sonra yayılmasın:
            kart tam genişlikte kalır, satırlar en fazla 1240px'e kadar açılır ve ortalanır. */
-        /* --- KART İÇİ YAN BOŞLUKLAR ---
-           Artan payın yarısı satıra veriliyor, kalan yarısı iki yana eşit bölünüyor; böylece
-           sol ve sağ boşluk birbirine eşit kalırken satır da geniş ekranda uzuyor.
-           Dar ekranlarda taban 24px. */
+        /* --- TEK ÖLÇÜ ---
+           Başlık şeridi, arama kutusu ve satırlar tek bir genişliği paylaşır: sütun başlığı
+           başlığı olduğu sütunla aynı ölçüde olmak zorunda, iki ayrı çerçeve olmamalı.
+           Satır 1340px'de durur; altındaki genişliklerde kabın tamamını kullanır, iki
+           yanında 24px kalır. Ortalama kabın kendisinden gelir, boşluklar hep eşittir. */
         .unified-result-surface .surface-header,
         .unified-result-surface .surface-list-area,
         .unified-result-surface .column-headers-bar,
         .kcx-surface-header,
         .search-container {
-            padding-left: max(24px, (100% - 1240px) * 0.25);
-            padding-right: max(24px, (100% - 1240px) * 0.25);
+            width: min(100% - 48px, 1340px);
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 0;
+            padding-right: 0;
         }
         body.p-4 { padding-left: var(--lq-gutter); padding-right: var(--lq-gutter); }
         @media (max-width: 640px) { :root { --lq-gutter: 16px; } }
@@ -2039,18 +2043,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
             overflow: hidden;
         }
-        /* Sol kenar — Result rengiyle */
-        .column-headers-bar::before {
-            content: ''; position: absolute; top: 0; left: 0; bottom: 0;
-            /* seridin sol boslugunun tamami: Result hucresiyle kesintisiz birlessin,
-               arada serit renginde bir bosluk kalmasin */
-            width: calc(max(24px, (100% - 1240px) * 0.25) + 2px); background: #eff6ff;
-        }
-        /* Sağ kenar — Dict rengiyle */
-        .column-headers-bar::after {
-            content: ''; position: absolute; top: 0; right: 0; bottom: 0;
-            width: 16px; background: #f8fafc;
-        }
         .col-header-inner { 
             display: grid; 
             /* sütunlar satırların ızgarasını birebir izler */
@@ -2261,6 +2253,67 @@
         .col-span-7 .word-box:hover { transform: translateY(-1px) scale(1.02); background: rgba(15,23,42,0.035) !important; box-shadow: none !important; }
         .col-span-7 .osm-box:hover { color: var(--brand-red) !important; }
         .col-span-7 .word-box.misspelled { background: transparent !important; }
+
+        /* --- DAR EKRAN: SATIR YIĞILIR ---
+           12 sütunlu satır telefonda çalışmıyor: 480px'de madde başı hücresi 111px'e,
+           sözlük 88px'e düşüyor, kelime kutularının 82px'lik tabanı ise inmiyor, yani
+           kutular hücreden taşıyor. 900px'in altında satır tek sütuna iniyor:
+           üstte sonuç ve kategori, altında ok ile madde başı, en altta sözlük satırı.
+           Sütun başlığı şeridinin de bu düzende karşılığı kalmadığı için gizleniyor. */
+        @media (max-width: 899px) {
+            .column-headers-bar { display: none; }
+
+            .row-card { grid-template-columns: minmax(0, 1fr); padding: 4px 0 6px; }
+            .row-card > .col-span-5,
+            .row-card > .col-span-7 { grid-column: 1 / -1; }
+
+            /* 1. satır: sonuç çifti + kategori */
+            .row-card > .col-span-5 { padding: 8px 14px 6px 16px; gap: 10px; }
+            .row-card .col-span-5 > .flex-1 { flex: 1 1 auto; padding-left: 0; }
+            .row-card .col-span-5 .word-pair-unit { max-width: none; }
+            .row-card .col-span-5 > .w-\[100px\] { width: auto; flex: none; }
+
+            /* 2. satır: ok + madde başı, 3. satır: sözlük */
+            .row-card > .col-span-7 { grid-template-columns: 30px minmax(0, 1fr); row-gap: 2px; padding: 0 14px 4px 16px; }
+            .row-card .col-span-7 > .col-span-1 { grid-column: 1; grid-row: 1; }
+            .row-card .col-span-7 > .col-span-6 { grid-column: 2; grid-row: 1; justify-content: flex-start; padding: 2px 0; }
+            .row-card .col-span-7 > .col-span-3 { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; padding-left: 30px; }
+            .row-card .col-span-7 .head-cell .word-pair-unit { max-width: none; justify-content: flex-start; }
+            /* Ok artık aşağıyı gösteriyor: sonuçtan madde başına iniliyor */
+            .row-card .col-span-7 .arrow-icon { transform: rotate(90deg); opacity: 0.55; }
+            .row-card .zone-interactive:hover .arrow-icon { transform: rotate(90deg) translateX(3px) scale(1.1); }
+
+            /* Sözlük satırı: ad, sayfa ve künye düğmesi yan yana */
+            .row-card .col-span-3 > .text-right { text-align: left; margin-right: 10px; display: flex; align-items: baseline; gap: 8px; }
+            .row-card .col-span-3 > .text-right > div:last-child { margin-top: 0; }
+
+            /* Yığılmış düzende köşeler: bölgeler üst üste, yan yana değil */
+            .row-card > .zone-interactive:first-child { border-radius: 7px 7px 0 0; }
+            .row-card > .zone-interactive:last-child { border-radius: 0 0 7px 7px; }
+
+            /* Kategori rozeti sonuç bloğunun tepesine hizalanır, ortasına değil */
+            .row-card > .col-span-5 { align-items: flex-start; }
+            .row-card .col-span-5 > .w-\[100px\] { padding-top: 5px; }
+
+            /* Osmanlıca ile Latin karşılığı %48'er paya bölünüyordu; hücre genişleyince
+               ikisi ortada buluşup aralarında büyük bir boşluk bırakıyordu. Yığılmış
+               düzende çift sola yaslanıyor, kutular kendi genişliklerini alıyor. */
+            .row-card .word-pair-unit { justify-content: flex-start; }
+            .row-card .col-osm,
+            .row-card .col-lat { width: auto; max-width: 100%; justify-content: flex-start; }
+            .row-card .col-gap { width: 12px; }
+        }
+
+        /* Telefon: Osmanlıca ile Latin harfli karşılık yan yana sığmıyor. 294px'lik
+           kartta iki kutuya %48'er pay düşüyor ve uzun bir değer dört satıra iniyor.
+           Bu genişlikte çift alt alta diziliyor, her biri kartın tamamını kullanıyor. */
+        @media (max-width: 640px) {
+            .row-card .word-pair-unit { flex-direction: column; align-items: flex-start; }
+            .row-card .col-osm,
+            .row-card .col-lat { width: auto; max-width: 100%; justify-content: flex-start; }
+            .row-card .col-gap { width: 100%; height: 2px; }
+            .row-card .col-span-7 > .col-span-3 { padding-left: 30px; }
+        }
         .word-pair-unit { display: flex; align-items: stretch; justify-content: center; width: 100%; }
         .col-osm { width: 48%; display: flex; justify-content: flex-end; }
         .col-lat { width: 48%; display: flex; justify-content: flex-start; position: relative; }
