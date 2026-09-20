@@ -1779,20 +1779,23 @@
         /* Sonuç tablosu kabı genişlese de satır içeriği belli bir noktadan sonra yayılmasın:
            kart tam genişlikte kalır, satırlar en fazla 1240px'e kadar açılır ve ortalanır. */
         /* --- TEK ÖLÇÜ ---
-           Başlık şeridi, arama kutusu ve satırlar tek bir genişliği paylaşır: sütun başlığı
-           başlığı olduğu sütunla aynı ölçüde olmak zorunda, iki ayrı çerçeve olmamalı.
-           Satır 1340px'de durur; altındaki genişliklerde kabın tamamını kullanır, iki
-           yanında 24px kalır. Ortalama kabın kendisinden gelir, boşluklar hep eşittir. */
-        .unified-result-surface .surface-header,
-        .unified-result-surface .surface-list-area,
-        .unified-result-surface .column-headers-bar,
-        .kcx-surface-header,
-        .search-container {
-            width: min(100% - 48px, 1340px);
+           Genişliği kartlar taşır: arama kartı ile sonuç kartı aynı ölçüde, böylece
+           üst ve alt blok aynı dikey hizada durur. Kartların içindeki öğeler kendi
+           dolgularını korur, o yüzden arama kutusu kartın kenarına dayanmaz.
+           Sütun başlığı şeridi de satırlarla aynı payı alır (16px), yani tablonun
+           tek çerçevesi olur. Kart 1280px'de durur; altında kabın tamamını kullanır. */
+        .search-container,
+        .unified-result-surface {
+            width: min(100% - 48px, 1280px);
             margin-left: auto;
             margin-right: auto;
-            padding-left: 0;
-            padding-right: 0;
+        }
+        /* Şerit, satır listesiyle aynı hizada başlayıp bitsin: liste alanının
+           16px'lik dolgusunun karşılığı şeritte kenar boşluğu olarak veriliyor,
+           böylece şeridin zemini de satırların hizasında kalıyor. */
+        .unified-result-surface .column-headers-bar {
+            margin-left: 16px;
+            margin-right: 16px;
         }
         body.p-4 { padding-left: var(--lq-gutter); padding-right: var(--lq-gutter); }
         @media (max-width: 640px) { :root { --lq-gutter: 16px; } }
