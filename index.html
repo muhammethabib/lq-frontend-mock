@@ -14538,11 +14538,13 @@ document.addEventListener('click', function (e) {
 })();
 
     /* ---- SAĞ ALTTA "BAŞA DÖN" ----
-       Alt sayfalardaki (pages/lq-page.js) davranışın aynısı: 1.5 ekran
-       kaydırılınca beliriyor, tepeye dönünce kayboluyor. Kısa sayfada eşik
-       hiç aşılmadığı için düğme de hiç görünmüyor; ana sayfa da sonuç sayfası
-       da aynı kurala tabi. Gizliyken klavye sırasından ve ekran okuyucudan
-       çıkarılıyor. */
+       Tam bir ekran boyu kaydırılınca beliriyor, tepeye dönünce kayboluyor:
+       o noktada üstteki başlık (arama çubuğu, menü, dil) görüş alanından
+       tamamen çıkmış oluyor, yani başa dönmek gerçekten kaydırma işi haline
+       geliyor. Alt sayfalardaki 1.5 ekranlık eşik burada geç kalıyordu; üstteki
+       yapışkan şerit zaten 250px'te çıkıyor. Kısa sayfada eşik hiç aşılmadığı
+       için düğme de hiç görünmüyor; ana sayfa da sonuç sayfası da aynı kurala
+       tabi. Gizliyken klavye sırasından ve ekran okuyucudan çıkarılıyor. */
     (function () {
         const btn = document.getElementById('lqBackTop');
         if (!btn) return;
@@ -14555,7 +14557,7 @@ document.addEventListener('click', function (e) {
         let acik = false, bekliyor = false;
         function guncelle() {
             bekliyor = false;
-            const olmali = window.scrollY > window.innerHeight * 1.5;
+            const olmali = window.scrollY > window.innerHeight;
             if (olmali === acik) return;
             acik = olmali;
             btn.classList.toggle('show', acik);
