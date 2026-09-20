@@ -2782,6 +2782,7 @@
         .okay-btn:active { transform: scale(0.96); background: #cbd5e1; }
 
         /* --- VISUAL DICTIONARY MODAL STYLES (FROM MERGE9) --- */
+        #citeModal { z-index: 10000020; }
         .visual-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 10000000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
         .visual-modal-overlay.active { opacity: 1; visibility: visible; }
         .lex-popup { width: 95vw; max-width: 1100px; height: 90vh; background: var(--bg-card); border-radius: 24px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border: 1px solid rgba(255,255,255,0.5); position: relative; }
@@ -2808,6 +2809,19 @@
         
         .popup-footer { height: 60px; background: #ffffff; border-top: 1px solid #e4e4e7; display: flex; justify-content: center; align-items: center; z-index: 20; position: relative; }
         .nav-container { position: relative; display: flex; background: #f4f4f5; padding: 2px; border-radius: 11px; width: 340px; height: 36px; }
+        /* --- Atıf düğmesi: tarama görüntüleyicinin alt şeridi --- */
+        .scan-cite { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }
+        .scan-cite-btn { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid #cbd5e1; background: #fff; color: #334155; font-size: 12.5px; font-weight: 700; cursor: pointer; transition: background .15s, color .15s, border-color .15s; }
+        .scan-cite-btn svg { width: 15px; height: 15px; flex: none; }
+        .scan-cite-btn:hover { color: #082567; background: #eff6ff; border-color: #bfdbfe; }
+        .scan-cite-btn:focus-visible { outline: 2px solid #b45309; outline-offset: 2px; }
+        .scan-cite-pop { position: absolute; right: 0; bottom: calc(100% + 8px); min-width: 152px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; box-shadow: 0 14px 30px -12px rgba(15,23,42,0.4); padding: 6px; display: flex; flex-direction: column; gap: 2px; }
+        .scan-cite-pop[hidden] { display: none; }
+        .scan-cite-pop button { text-align: left; border: 0; background: transparent; border-radius: 7px; padding: 8px 10px; font-size: 12.5px; font-weight: 600; color: #334155; cursor: pointer; }
+        .scan-cite-pop button:hover { background: #f1f5f9; color: #082567; }
+        .scan-cite-pop button:focus-visible { outline: 2px solid #b45309; outline-offset: -2px; }
+        .scan-cite-pop button.copied { color: #047857; background: #ecfdf5; }
+        @media (max-width: 560px) { .scan-cite-btn span { display: none; } .scan-cite-btn { padding: 0 9px; } }
         .nav-indicator { position: absolute; top: 2px; bottom: 2px; left: 2px; background: white; border-radius: 9px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1; }
         .nav-item { flex: 1; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; transition: all 0.2s; border-radius: 9px; }
         .nav-item:hover { background: rgba(0,0,0,0.04); }
@@ -4449,6 +4463,11 @@
 <button class="nav-item" onclick="updateNav(this, 1, 'Column')"><span class="nav-text">Column</span><span class="nav-divider"></span><span class="nav-count">3</span></button>
 <button class="nav-item" onclick="updateNav(this, 2, 'Page')"><span class="nav-text">Page</span><span class="nav-divider"></span><span class="nav-count">1417</span></button>
 </div>
+<div class="scan-cite">
+<button type="button" class="scan-cite-btn" onclick="openScanCite(event, this)"><!-- kunye penceresini bu taramanin verisiyle acar -->
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 6H5.5v5.5h4c0 3-1.6 4.7-4 5.2"></path><path d="M18.5 6h-4v5.5h4c0 3-1.6 4.7-4 5.2"></path></svg><span data-i18n="scanCite">Cite</span>
+</button>
+</div>
 </footer>
 </div>
 </div>
@@ -5432,6 +5451,7 @@
             citeFormats: 'Künye Formatları',
             citeCopy: 'Künyeyi kopyala',
             citeCopied: 'Kopyalandı!',
+            scanCite: 'Atıf',
             /* Same Root popup */
             cogTitle: 'Aynı Kök',
             cogTabRoot: 'Kök',
@@ -7395,6 +7415,43 @@
             'Şemseddin Sami, 1899': { title: 'Şemseddin Sami', author: 'Şemseddin Sami', year: '1899', volume: '1', publisher: 'İkdam Matbaası', city: 'İstanbul' },
         };
         let citeFormats = { apa: '', chicago: '', harvard: '' };
+        /* Tarama goruntuleyicinin alt seridindeki Atif dugmesi.
+           Sozluk adini, sayfa numarasini ve madde basini ekrandaki ogelerden okur,
+           sonra sitenin mevcut kunye penceresini (openCiteModal) calistirir.
+           Backend tarafinda bu degerler sunucudan gelecegi icin okuma noktalari
+           tek yerde toplandi. */
+        function lqResolveDictKey(name) {
+            if (!name) return '';
+            var raw = String(name).trim();
+            if (citeDictMeta[raw]) return raw;
+            var norm = function (x) {
+                return String(x).toLowerCase()
+                    .replace(/,\s*\d{4}\s*$/, '')
+                    .replace(/[\u0130\u0131\u00ee\u00ef\u00ec\u00ed]/g, 'i')
+                    .replace(/[\u015f\u015e]/g, 's')
+                    .replace(/[\u011f\u011e]/g, 'g')
+                    .replace(/[\u00fc\u00dc]/g, 'u')
+                    .replace(/[\u00f6\u00d6]/g, 'o')
+                    .replace(/[\u00e7\u00c7]/g, 'c')
+                    .replace(/[^a-z0-9]+/g, '');
+            };
+            var hedef = norm(raw);
+            for (var k in citeDictMeta) { if (norm(k) === hedef) return k; }
+            return raw;
+        }
+        function openScanCite(e, btn) {
+            var pop = btn.closest('.lex-popup');
+            var badge = pop ? pop.querySelector('.dict-badge') : null;
+            var crumb = pop ? pop.querySelector('.breadcrumb') : null;
+            var giris = pop ? pop.querySelector('.box-entry') : null;
+            var satirlar = pop ? pop.querySelectorAll('.popup-footer .nav-item') : [];
+            var sayfa = satirlar.length ? satirlar[satirlar.length - 1].querySelector('.nav-count') : null;
+            btn.dataset.citeDict = lqResolveDictKey(badge ? badge.textContent : '');
+            btn.dataset.citePage = sayfa ? sayfa.textContent.trim() : '';
+            btn.dataset.citeOsm  = giris && giris.dataset.osm ? giris.dataset.osm : '';
+            btn.dataset.citeLat  = crumb ? crumb.textContent.trim() : (giris && giris.dataset.lat ? giris.dataset.lat : '');
+            openCiteModal(e, btn);
+        }
         function openCiteModal(e, btn) {
             e.stopPropagation();
             const dict = btn.dataset.citeDict || '...';
@@ -9793,6 +9850,19 @@
         /* ── FOOTER NAV ── */
         .popup-footer { height: 60px; background: #ffffff; border-top: 1px solid #e4e4e7; display: flex; justify-content: center; align-items: center; z-index: 20; position: relative; }
         .nav-container { position: relative; display: flex; background: #f4f4f5; padding: 2px; border-radius: 11px; width: 340px; height: 36px; }
+        /* --- Atıf düğmesi: tarama görüntüleyicinin alt şeridi --- */
+        .scan-cite { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }
+        .scan-cite-btn { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid #cbd5e1; background: #fff; color: #334155; font-size: 12.5px; font-weight: 700; cursor: pointer; transition: background .15s, color .15s, border-color .15s; }
+        .scan-cite-btn svg { width: 15px; height: 15px; flex: none; }
+        .scan-cite-btn:hover { color: #082567; background: #eff6ff; border-color: #bfdbfe; }
+        .scan-cite-btn:focus-visible { outline: 2px solid #b45309; outline-offset: 2px; }
+        .scan-cite-pop { position: absolute; right: 0; bottom: calc(100% + 8px); min-width: 152px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; box-shadow: 0 14px 30px -12px rgba(15,23,42,0.4); padding: 6px; display: flex; flex-direction: column; gap: 2px; }
+        .scan-cite-pop[hidden] { display: none; }
+        .scan-cite-pop button { text-align: left; border: 0; background: transparent; border-radius: 7px; padding: 8px 10px; font-size: 12.5px; font-weight: 600; color: #334155; cursor: pointer; }
+        .scan-cite-pop button:hover { background: #f1f5f9; color: #082567; }
+        .scan-cite-pop button:focus-visible { outline: 2px solid #b45309; outline-offset: -2px; }
+        .scan-cite-pop button.copied { color: #047857; background: #ecfdf5; }
+        @media (max-width: 560px) { .scan-cite-btn span { display: none; } .scan-cite-btn { padding: 0 9px; } }
         .nav-indicator { position: absolute; top: 2px; bottom: 2px; left: 2px; background: white; border-radius: 9px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1; }
         .nav-item { flex: 1; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; transition: all 0.2s; border-radius: 9px; }
         .nav-item:hover { background: rgba(0,0,0,0.04); }
@@ -10471,6 +10541,16 @@
                 <span class="nav-text">Page</span><span class="nav-divider"></span><span class="nav-count">1417</span>
             </button>
         </div>
+        <div class="scan-cite">
+            <button type="button" class="scan-cite-btn" aria-haspopup="true" aria-expanded="false" onclick="toggleScanCite(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 6H5.5v5.5h4c0 3-1.6 4.7-4 5.2"></path><path d="M18.5 6h-4v5.5h4c0 3-1.6 4.7-4 5.2"></path></svg><span>Cite</span>
+            </button>
+            <div class="scan-cite-pop" hidden>
+                <button type="button" onclick="copyCitation(this, 'chicago')">Chicago</button>
+                <button type="button" onclick="copyCitation(this, 'harvard')">Harvard</button>
+                <button type="button" onclick="copyCitation(this, 'apa')">APA</button>
+            </div>
+        </div>
     </footer>
 </div>
 
@@ -10702,6 +10782,28 @@
         harvard: "Sami, Ş. (1901) Kamus-ı Türkî. İstanbul, p. 1417.",
         apa: "Sami, Ş. (1901). Kamus-ı Türkî (p. 1417). İstanbul."
     };
+    /* Alt seritteki Atif dugmesi: bicim listesini acar, secilen bicimi kopyalar. */
+    function toggleScanCite(btn) {
+        var kutu = btn.parentNode.querySelector('.scan-cite-pop');
+        if (!kutu) return;
+        var acilacak = kutu.hasAttribute('hidden');
+        kutu.hidden = !acilacak;
+        btn.setAttribute('aria-expanded', acilacak ? 'true' : 'false');
+    }
+    function kapatScanCite() {
+        document.querySelectorAll('.scan-cite-pop').forEach(function (k) { k.hidden = true; });
+        document.querySelectorAll('.scan-cite-btn').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+    }
+    document.addEventListener('click', function (ev) {
+        if (ev.target.closest && ev.target.closest('.scan-cite')) return;
+        kapatScanCite();
+    }, true);
+    document.addEventListener('keydown', function (ev) {
+        if (ev.key !== 'Escape') return;
+        if (!document.querySelector('.scan-cite-pop:not([hidden])')) return;
+        kapatScanCite();
+        ev.stopPropagation();
+    }, true);
     function copyCitation(btn, style) {
         const text = CITATIONS[style];
         if (!text) return;
@@ -11767,6 +11869,19 @@
         /* ── FOOTER NAV ── */
         .popup-footer { height: 60px; background: #ffffff; border-top: 1px solid #e4e4e7; display: flex; justify-content: center; align-items: center; z-index: 20; position: relative; }
         .nav-container { position: relative; display: flex; background: #f4f4f5; padding: 2px; border-radius: 11px; width: 340px; height: 36px; }
+        /* --- Atıf düğmesi: tarama görüntüleyicinin alt şeridi --- */
+        .scan-cite { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }
+        .scan-cite-btn { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid #cbd5e1; background: #fff; color: #334155; font-size: 12.5px; font-weight: 700; cursor: pointer; transition: background .15s, color .15s, border-color .15s; }
+        .scan-cite-btn svg { width: 15px; height: 15px; flex: none; }
+        .scan-cite-btn:hover { color: #082567; background: #eff6ff; border-color: #bfdbfe; }
+        .scan-cite-btn:focus-visible { outline: 2px solid #b45309; outline-offset: 2px; }
+        .scan-cite-pop { position: absolute; right: 0; bottom: calc(100% + 8px); min-width: 152px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; box-shadow: 0 14px 30px -12px rgba(15,23,42,0.4); padding: 6px; display: flex; flex-direction: column; gap: 2px; }
+        .scan-cite-pop[hidden] { display: none; }
+        .scan-cite-pop button { text-align: left; border: 0; background: transparent; border-radius: 7px; padding: 8px 10px; font-size: 12.5px; font-weight: 600; color: #334155; cursor: pointer; }
+        .scan-cite-pop button:hover { background: #f1f5f9; color: #082567; }
+        .scan-cite-pop button:focus-visible { outline: 2px solid #b45309; outline-offset: -2px; }
+        .scan-cite-pop button.copied { color: #047857; background: #ecfdf5; }
+        @media (max-width: 560px) { .scan-cite-btn span { display: none; } .scan-cite-btn { padding: 0 9px; } }
         .nav-indicator { position: absolute; top: 2px; bottom: 2px; left: 2px; background: white; border-radius: 9px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1; }
         .nav-item { flex: 1; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; transition: all 0.2s; border-radius: 9px; }
         .nav-item:hover { background: rgba(0,0,0,0.04); }
@@ -12445,6 +12560,16 @@
                 <span class="nav-text">Sayfa</span><span class="nav-divider"></span><span class="nav-count">1417</span>
             </button>
         </div>
+        <div class="scan-cite">
+            <button type="button" class="scan-cite-btn" aria-haspopup="true" aria-expanded="false" onclick="toggleScanCite(this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 6H5.5v5.5h4c0 3-1.6 4.7-4 5.2"></path><path d="M18.5 6h-4v5.5h4c0 3-1.6 4.7-4 5.2"></path></svg><span>Atıf</span>
+            </button>
+            <div class="scan-cite-pop" hidden>
+                <button type="button" onclick="copyCitation(this, 'chicago')">Chicago</button>
+                <button type="button" onclick="copyCitation(this, 'harvard')">Harvard</button>
+                <button type="button" onclick="copyCitation(this, 'apa')">APA</button>
+            </div>
+        </div>
     </footer>
 </div>
 
@@ -12676,6 +12801,28 @@
         harvard: "Sami, Ş. (1901) Kamus-ı Türkî. İstanbul, p. 1417.",
         apa: "Sami, Ş. (1901). Kamus-ı Türkî (p. 1417). İstanbul."
     };
+    /* Alt seritteki Atif dugmesi: bicim listesini acar, secilen bicimi kopyalar. */
+    function toggleScanCite(btn) {
+        var kutu = btn.parentNode.querySelector('.scan-cite-pop');
+        if (!kutu) return;
+        var acilacak = kutu.hasAttribute('hidden');
+        kutu.hidden = !acilacak;
+        btn.setAttribute('aria-expanded', acilacak ? 'true' : 'false');
+    }
+    function kapatScanCite() {
+        document.querySelectorAll('.scan-cite-pop').forEach(function (k) { k.hidden = true; });
+        document.querySelectorAll('.scan-cite-btn').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+    }
+    document.addEventListener('click', function (ev) {
+        if (ev.target.closest && ev.target.closest('.scan-cite')) return;
+        kapatScanCite();
+    }, true);
+    document.addEventListener('keydown', function (ev) {
+        if (ev.key !== 'Escape') return;
+        if (!document.querySelector('.scan-cite-pop:not([hidden])')) return;
+        kapatScanCite();
+        ev.stopPropagation();
+    }, true);
     function copyCitation(btn, style) {
         const text = CITATIONS[style];
         if (!text) return;
