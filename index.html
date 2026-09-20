@@ -2113,6 +2113,14 @@
         .section-content { display: block; overflow: visible; transition: all 0.3s ease; padding-bottom: 8px; }
         .section-content.collapsed { display: none; }
 
+        /* Erişilebilirlik: text-slate-400 (#94a3b8) beyaz zeminde 2,56:1 kontrast
+           veriyor, küçük yazı için gereken ise 4,5:1. Sayfa numarası satırı, "Search
+           Results" etiketi ve İptal düğmeleri bu sınıfı kullanıyor ve hepsi açık
+           zeminde duruyor, o yüzden ton tek yerden bir kademe koyulaştırıldı
+           (#64748b, 4,76:1). Gövde seçicisi Tailwind'in kendi sınıfını geçmek için;
+           hover varyantları daha yüksek özgüllükte olduğu için etkilenmiyor. */
+        body .text-slate-400 { color: #64748b; }
+
         .row-card { margin-bottom: 4px; background-color: var(--white); border: 1px solid transparent; border-bottom: 1px solid #f1f5f9; border-radius: 8px; transition: all 0.2s ease; position: relative; }
         .row-card.hidden-row { display: none; }
         .row-card:last-child { border-bottom: none; margin-bottom: 0; }
