@@ -1268,6 +1268,14 @@
 #lqStory .brand-footer{ margin-top: 60px; font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 800; color: #fbbf24; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
 
     
+        /* Arama kartının altındaki "kütüphaneniz üye mi" düğmesi: canlı sürümdeki
+           gibi yalnız ana sayfada, tek başına ve ortada duruyor. Görünürlük
+           kuralları keşfet göstergesiyle aynı, böylece sonuç ekranına geçilince
+           birlikte kayboluyorlar (sonuç sayfalarının kendi DML düğmesi var). */
+        #dmlHome { display: none; justify-content: center; margin: 34px auto 0; }
+        body.vs-home #dmlHome { display: flex; }
+        body.team-page-open #dmlHome, body.v3-page-open #dmlHome { display: none !important; }
+
         /* Ana sayfadaki keşfet göstergesi: akış sayfalarının kendi tasarımı */
         #lqDiscover { display: none; position: relative; margin: 46px auto 8px; width: fit-content;
             flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s; }
@@ -4058,6 +4066,10 @@
 </div>
 </div>
 
+<div id="dmlHome">
+  <button class="dml-btn" data-i18n="dmlBtn">Does My Library Subscribe?</button>
+</div>
+
 <div class="scroll-indicator-wrapper" id="lqDiscover" onclick="lqsRevealStory()" role="button" tabindex="0">
   <div class="si-text" data-i18n="discoverStory">DISCOVER 2026 INNOVATIONS</div>
   <div class="si-arrow-container"><div class="si-chevron"></div><div class="si-chevron"></div></div>
@@ -5620,7 +5632,7 @@
             /* Sonuç bulunamadı durumu */
             nrIntro: '<span class="nri-left"></span><span class="nri-term"><b class="dym-term dym-term-word">نظر</b><span class="dym-term-pattern"><span class="p-slot">حا</span></span></span><span class="nri-right">için sonuç bulunamadı.</span>',
             dymHeader: 'Şunlardan birini mi aradınız?',
-            dmlBtn: 'Kütüphaneniz LexiQamus\'a üye mi?',
+            dmlBtn: 'Kütüphaneniz LexiQamus’a üye mi?',
             nrFuzzyHint: 'Hâlâ bulamadınız mı?',
             nrFuzzyMain: 'Aramayı Daha da Genişlet',
             /* Satır bölgesi tooltipleri */
