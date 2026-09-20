@@ -3012,9 +3012,15 @@
         body.lq-fix-open [class*="tooltip"],
         body.lq-fix-open .word-hover-menu,
         body.lq-fix-open .hover-menu { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
-        .ai-fix-l1 { font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 600;
-            letter-spacing: .5px; text-transform: uppercase; color: #b3bfcf; white-space: nowrap;
+        /* Okunuşun kaynağını söyleyen etiket. Eskiden #b3bfcf idi: beyaz zeminde
+           1,86:1, yani küçük yazı için gerekenin yarısından az. Etiketin yanındaki
+           düğmelerden sessiz kalması doğru ama bunu okunmazlıkla değil boyut, konum
+           ve düğmelerin kendi zemini sağlıyor. Renk ayrıca durumu taşıyor: editör
+           onaylı okunuş teal, otomatik okunuş nötr gri. */
+        .ai-fix-l1 { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
+            letter-spacing: .5px; text-transform: uppercase; color: #64748b; white-space: nowrap;
             text-align: center; }
+        .ai-fix-l1.ai-fix-ok { color: #0f766e; }
         .ai-fix-acts { display: inline-flex; align-items: center; gap: 6px; }
         .ai-act { display: inline-flex; align-items: center; gap: 5px; cursor: pointer;
             font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; white-space: nowrap;
@@ -7383,7 +7389,7 @@
             const _fixLabel = isVerified ? t('fixVerified', 'Editor-approved') : t('fixAuto', 'Auto-generated');
             const verifiedMark =
                 '<span class="ai-fix">'
-                + '<span class="ai-fix-l1">' + _fixLabel + '</span>'
+                + '<span class="ai-fix-l1' + (isVerified ? ' ai-fix-ok' : '') + '">' + _fixLabel + '</span>'
                 + '<span class="ai-fix-acts">'
                 + '<button type="button" class="ai-act ai-act-ok" onclick="event.stopPropagation(); lqMarkCorrect(this)">'
                 + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
