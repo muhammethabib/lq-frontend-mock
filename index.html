@@ -536,6 +536,18 @@
             .is-founder .team-photo { width: 82px; height: 82px; font-size: 20px; }
         }
 
+        /* Dar ekranda "Klasik sürüm" ile dil anahtarı yan yana sığmıyor: ikisi
+           birlikte ~213px yer kaplıyor, ortalanmış logonun sağ kenarı ise
+           W/2+210'a kadar geliyor; 910px altında üst üste biniyorlardı (logonun
+           son harfi düğmenin altında kalıyordu). O genişlikten itibaren ikisi de
+           sağ kenara yaslanıp alt alta iniyor: üstte klasik sürüm, altında
+           diller. Böylece sağdaki blok 213px yerine 125px yer kaplıyor. */
+        @media (max-width: 909px) {
+            .legacy-link { top: 0; right: 0; }
+            #langSwitch { top: 38px; right: 0; }
+            .branding-area { padding-top: 26px; }
+        }
+
         /* Üst köşe öğeleri (menü, klasik sürüm, dil) sayfayla birlikte kayar.
            Eskiden geniş ekranda pencere kenarına sabitleniyorlardı; böylece
            sayfanın tepesindeki tek sabit katman olmaktan çıkıp yapışkan GİT
