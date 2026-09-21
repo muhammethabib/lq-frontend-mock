@@ -131,6 +131,32 @@
 
         .search-command-center { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0; width: 100%; gap: 24px; position: relative; z-index: 40; }
         .search-left-group { display: flex; align-items: stretch; gap: 8px; flex: 1; }
+        /* Dar ekranda arama satırı iki/üç kata iner. Tek satırda kalması için
+           gereken yer ~980px; altında arama kutusu kendi alt sınırına (122px)
+           çöküyor, sözlük listesi de kartın dışına taşıyordu (390px'te 485px
+           dışarıda). 1023px altında arama çubuğu tam genişlikte kendi satırına
+           çıkıyor, filtreler ve sözlükler altına geçiyor; 560px altında o ikisi
+           de alt alta iniyor, yoksa sözlük listesine 82px kalıyordu. */
+        @media (max-width: 1023px) {
+            .search-command-center { flex-wrap: wrap; justify-content: flex-start; gap: 14px 12px; }
+            .search-left-group { flex: 1 0 100%; }
+            .filter-dropdown { flex: 0 0 auto; }
+            .custom-dropdown-container { flex: 1 1 200px; width: auto; min-width: 0; }
+        }
+        @media (max-width: 560px) {
+            .filter-dropdown, .custom-dropdown-container { flex: 1 0 100%; }
+            /* kutu tam genişlikte, içindeki düğme de: yoksa "Filtreler" tek
+               başına dar kalıp alttaki sözlük kutusuyla hizasız duruyordu */
+            .filter-trigger { width: 100%; justify-content: flex-start; }
+        }
+        /* En dar ekranda "Ara" düğmesi de alt satıra, tam genişlikte: yan yana
+           kaldıklarında arama kutusuna 122px'lik alt sınırından fazlası
+           kalmıyordu (390px'te satır kartın içine sığmıyordu bile). */
+        @media (max-width: 430px) {
+            .search-left-group { flex-wrap: wrap; gap: 10px; }
+            .search-left-group > .ana20-input-wrapper,
+            .search-left-group > #main-search-btn { flex: 1 0 100%; }
+        }
 
 
         /* ==== DEV STATE SWITCHER (üç durum: ana sayfa / sonuç yok / sonuçlar) ==== */
@@ -1533,6 +1559,10 @@
             box-shadow: 0 20px 40px -10px rgba(8,37,103,0.06), 0 0 1px rgba(0,0,0,0.05);
             margin-bottom: 32px; box-sizing: border-box; position: relative; z-index: 5;
         }
+        /* Telefonda 40px'lik yan pay kartın dörtte birini yiyordu. Bu kural
+           .search-container tanımından SONRA gelmeli; önce yazıldığında
+           yukarıdaki padding kısayolu onu eziyor. */
+        @media (max-width: 560px) { .search-container { padding-left: 20px; padding-right: 20px; } }
         .search-mode { display: none; width: 100%; }
         .search-mode.active { display: flex; }
         .search-mode.mode-engine { flex-direction: column; align-items: center; gap: 20px; padding-top: 20px; padding-bottom: 20px; }
@@ -1972,6 +2002,17 @@
             pointer-events:none;
             transition:opacity .15s ease, transform .15s ease;
             text-align:left;
+        }
+        /* Yığılmış düzende "Filtreler" ikinci satırın soluna geçiyor; panel
+           sağa yaslı kaldığı için 308px'i sola doğru açılıp ekranın dışına
+           taşıyordu (900-640 arasında -59px). O düzende sola yaslanıyor.
+           Telefonda ise iki panel de sabit genişliğiyle sığmıyor; kartın
+           içinde kalacak şekilde sınırlanıyorlar. */
+        @media (max-width: 1023px) {
+            .filter-panel { right: auto; left: 0; }
+        }
+        @media (max-width: 560px) {
+            .filter-panel, .dropdown-menu { width: auto; left: 0; right: 0; max-width: none; }
         }
         .filter-dropdown.open .filter-panel{
             opacity:1;
