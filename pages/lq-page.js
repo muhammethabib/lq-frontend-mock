@@ -168,10 +168,31 @@
     menu.querySelectorAll('a[aria-current="page"]').forEach(function (a) {
       a.addEventListener('click', function (e) { e.preventDefault(); setMenu(false); });
     });
+    /* Menü içindeki dil anahtarı ana sayfadaki gibi davransın: orada çeviri
+       yerinde yapıldığı için menü açık kalıyor, burada ise dilin karşılığı
+       ayrı bir dosya olduğundan sayfa yeniden yükleniyor ve menü kapanıyordu.
+       Açık olduğu bilgisini yeni sayfaya taşıyoruz; menü orada animasyonsuz,
+       yani ilk boyamadan önce açılıyor, kullanıcı için kapanmamış oluyor. */
     menu.querySelectorAll('.lang-btn').forEach(function (b) {
-      b.addEventListener('click', function () { if (b.dataset.go) location.href = b.dataset.go; });
+      b.addEventListener('click', function () {
+        if (!b.dataset.go) return;
+        if (doc.body.classList.contains('menu-open')) {
+          try { sessionStorage.setItem('lqMenuOpen', '1'); } catch (e) {}
+        }
+        location.href = b.dataset.go;
+      });
       if (!b.classList.contains('active') && !b.dataset.go) { b.disabled = true; b.title = LANG === 'tr' ? 'Bu sayfanın İngilizcesi henüz yok' : 'Not available in this language yet'; }
     });
+
+    var devam = false;
+    try { devam = sessionStorage.getItem('lqMenuOpen') === '1'; sessionStorage.removeItem('lqMenuOpen'); } catch (e) {}
+    if (devam) {
+      doc.body.classList.add('menu-no-anim');
+      setMenu(true);
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { doc.body.classList.remove('menu-no-anim'); });
+      });
+    }
   }
 
   /* ---------------- 2. İÇİNDEKİLER ---------------- */
