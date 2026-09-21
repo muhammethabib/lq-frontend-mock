@@ -167,6 +167,16 @@ def replace_scaled(shot, y, x, tpath, r, en_text, style, color=None, bg=None, an
     bgc = tuple(int(v) for v in (bg if bg is not None else bc))
     box=(max(0,x-pad), max(0,y-pad), min(shot.rgb.width,x+w+pad), min(shot.rgb.height,y+h+pad))
     shot.rgb.paste(_I.new('RGB',(box[2]-box[0],box[3]-box[1]), bgc), box[:2])
+    # Saydam zeminde yazı: harf şekilleri RGB'de değil ALFA'da duruyor. save()
+    # özgün alfayı geri koyduğu için, yalnız RGB'yi silmek eski yazıyı silmiyor;
+    # yenisi üstüne biniyordu. Kutunun alfası da burada sıfırlanır, yeni metnin
+    # alfası aşağıda eklenir. Opak zeminde kutu tamamen opak yapılır.
+    alfa_kutu = None
+    if shot.a is not None:
+        alfa_kutu = box
+        ea = np.asarray(shot.a.crop(box), dtype=np.float32)/255.0
+        seffaf = float((ea < 0.04).mean())
+        shot.a.paste(0 if seffaf > 0.5 else 255, box)
     sp = dict(style); sp.update(text=en_text, dsf=2, color=color)
     np_ = render_many([sp])[0]
     nim = _I.open(np_).convert('RGBA')
@@ -178,6 +188,11 @@ def replace_scaled(shot, y, x, tpath, r, en_text, style, color=None, bg=None, an
     else: px = x + (w-nw)//2
     py = y + (h-nh)//2
     shot.rgb.paste(nim, (px+dx, py+dy), nim)
+    if alfa_kutu is not None:
+        # yeni metnin alfası kutudaki mevcut alfayla birleştirilir (opakta no-op)
+        na = nim.split()[3]
+        cur = shot.a.crop((px+dx, py+dy, px+dx+nw, py+dy+nh))
+        shot.a.paste(_I.fromarray(np.maximum(np.asarray(cur), np.asarray(na))), (px+dx, py+dy))
     shot.arr = np.asarray(shot.rgb, dtype=np.float32)
     if not hasattr(shot,'dirty'): shot.dirty=[]
     shot.dirty.append((max(0,min(box[0],px+dx)-4), max(0,min(box[1],py+dy)-4),
