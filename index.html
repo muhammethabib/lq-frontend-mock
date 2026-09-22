@@ -2286,10 +2286,11 @@
         .su-close:hover { background: #f1f5f9; color: #0f172a; border-color: #e2e8f0; }
         .su-close svg { width: 17px; height: 17px; stroke: currentColor; stroke-width: 2.2; fill: none;
             stroke-linecap: round; }
-        /* Playfair serifi forma ağır geliyordu; sitenin arayüz yazı tipiyle,
-           .ekual-title ile aynı ağırlık ve harf aralığında */
-        .su-title { font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 800;
-            color: var(--brand-sapphire); text-align: center; margin: 4px 0 24px; letter-spacing: -.4px; }
+        /* Sitenin kendi display serifi. Kabalık serifden değil 800 ağırlığından
+           geliyordu; 600'de başlık düğmeyle yarışmadan siteyle aynı sesi kuruyor
+           (aynı aile "2026 YENİLİKLERİNİ KEŞFET"te de kullanılıyor). */
+        .su-title { font-family: 'Playfair Display', serif; font-size: 29px; font-weight: 600;
+            color: var(--brand-sapphire); text-align: center; margin: 4px 0 24px; letter-spacing: 0; }
 
         .su-alan { margin-bottom: 16px; }
         /* Etiket ve gövde metinleri canlı taslaktaki soluk tonda (ölçüldü:
