@@ -17,11 +17,11 @@
     en: { signIn: 'Sign in', signUp: 'Sign up', about: 'About', team: 'Team', what: 'What is LexiQamus?', guide: 'Instructions',
           updates: 'History of Suggestions and Corrections', lq3: 'LexiQamus 3.0', v3about: 'Digitization and Data Model', v3brochure: "What's New",
           lq2: 'LexiQamus 2.0', newFeatures: "What's New", lq1: 'LexiQamus 1.0', firstRelease: 'First Release (2016)', lexicon: 'Lexicon Digitization Project',
-          institutional: 'Institutional Subscribers', menu: 'Menu', backTop: 'Back to top' },
+          institutional: 'Institutional Subscribers', pricing: 'Pricing', menu: 'Menu', backTop: 'Back to top' },
     tr: { signIn: 'Giriş Yap', signUp: 'Kaydol', about: 'Hakkımızda', team: 'Ekip', what: 'LexiQamus Nedir?', guide: 'Kullanım Kılavuzu',
           updates: 'Öneri ve Düzeltme Geçmişi', lq3: 'LexiQamus 3.0', v3about: 'Dijitalleştirme ve Veri Modeli', v3brochure: 'Yenilikler',
           lq2: 'LexiQamus 2.0', newFeatures: 'Yenilikler', lq1: 'LexiQamus 1.0', firstRelease: 'İlk Sürüm (2016)', lexicon: 'Lexicon Dijitalleştirme Projesi',
-          institutional: 'Kurumsal Üyeler', menu: 'Menü', backTop: 'Başa dön' }
+          institutional: 'Kurumsal Üyeler', pricing: 'Fiyatlar', menu: 'Menü', backTop: 'Başa dön' }
   }[LANG];
 
   /* [en dosyası, tr dosyası] */
@@ -36,6 +36,7 @@
     firstRelease: ['lq1-first-version-en.html', 'lq1-ilk-surum-tr.html'],
     lexicon: ['lexicon-digitization-en.html', 'lexicon-dijitallestirme-tr.html'],
     institutional: ['institutional-subscribers-en.html', 'kurumsal-uyeler-tr.html'],
+    pricing: ['pricing-en.html', 'fiyatlar-tr.html'],
     _team: ['team-en.html', 'ekip-tr.html']
   };
   function href(key) { return P[key][LANG === 'tr' ? 1 : 0]; }
@@ -56,6 +57,7 @@
     v3: '<svg viewBox="0 0 24 24"><circle cx="10" cy="11" r="9" fill="currentColor"></circle><circle cx="10" cy="11" r="6.4" fill="var(--cut)"></circle><path d="M16.4 17.4l4.4 4.4" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" fill="none"></path><path d="M5.77 10.25L12.76 7.71" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"></path><path d="M12.76 7.71L11.47 15.04" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"></path><path d="M11.47 15.04L5.77 10.25" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"></path><circle cx="5.77" cy="10.25" r="2.1" fill="currentColor"></circle><circle cx="12.76" cy="7.71" r="2.1" fill="currentColor"></circle><circle cx="11.47" cy="15.04" r="2.1" fill="currentColor"></circle></svg>',
     institutional: '<svg viewBox="0 0 24 24"><path d="M12 3.2L21.8 8.6H2.2z" fill="currentColor"></path><rect x="2.2" y="8.6" width="19.6" height="1.5" fill="currentColor"></rect><rect x="5.90" y="9.6" width="2.6" height="9.2" fill="currentColor"></rect><rect x="10.70" y="9.6" width="2.6" height="9.2" fill="currentColor"></rect><rect x="15.50" y="9.6" width="2.6" height="9.2" fill="currentColor"></rect><rect x="2.2" y="18.8" width="19.6" height="1.6" fill="currentColor"></rect><path d="M2.4 21h19.2" fill="none" stroke="currentColor" stroke-width="2.3"></path></svg>',
     chev: '<span class="side-link-chev"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>',
+    pricing: '<svg viewBox="0 0 24 24"><path d="M3.6 5.4A1.8 1.8 0 0 1 5.4 3.6h6.2a1.8 1.8 0 0 1 1.3.5l7 7a1.8 1.8 0 0 1 0 2.6l-6.2 6.2a1.8 1.8 0 0 1-2.6 0l-7-7a1.8 1.8 0 0 1-.5-1.3z" fill="currentColor"></path><circle cx="8.4" cy="8.4" r="1.9" fill="var(--cut)"></circle></svg>',
     up: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>',
     v2: '<svg viewBox="0 0 24 24"><circle cx="10" cy="11" r="9" fill="currentColor"></circle><circle cx="10" cy="11" r="6.4" fill="var(--cut)"></circle><path d="M16.4 17.4l4.4 4.4" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" fill="none"></path><path d="M7.2 12.9L12.8 9.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none"></path><circle cx="7.2" cy="12.9" r="2.1" fill="currentColor"></circle><circle cx="12.8" cy="9.1" r="2.1" fill="currentColor"></circle></svg>',
     v1: '<svg viewBox="0 0 24 24"><circle cx="10" cy="11" r="9" fill="currentColor"></circle><circle cx="10" cy="11" r="6.4" fill="var(--cut)"></circle><path d="M16.4 17.4l4.4 4.4" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" fill="none"></path><circle cx="10" cy="11" r="2.1" fill="currentColor"></circle></svg>',
@@ -106,6 +108,7 @@
           group('lqSub2', T.lq2, sublink('lexicon', T.lexicon, href('lexicon')) + sublink('newFeatures', T.newFeatures, href('newFeatures')), ['newFeatures', 'lexicon'], '2020', ICON.v2) +
           link('firstRelease', T.lq1, href('firstRelease'), ICON.v1, '2016') +
           link('updates', T.updates, href('updates'), ICON.updates) +
+          link('pricing', T.pricing, href('pricing'), ICON.pricing) +
         '</div>' +
       '</nav>';
     doc.body.insertAdjacentHTML('beforeend', html);

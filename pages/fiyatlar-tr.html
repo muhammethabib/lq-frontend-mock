@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fiyatlar · LexiQamus</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.7 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+
+/* ---------- planlar ---------- */
+.plan-shell{margin:34px 0 0}
+/* Süre seçici: canlıda her plan içinde dört ayrı satır ve sekiz "Satın Al"
+   düğmesi vardı; süre yukarı alınınca kartlar sadeleşti ve fiyatlar
+   karşılaştırılabilir oldu. */
+.term{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;
+  background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:6px;margin:0 auto 26px;width:fit-content}
+.term button{position:relative;border:0;background:transparent;border-radius:10px;cursor:pointer;
+  font:inherit;font-size:13px;font-weight:700;color:#5d6b80;padding:9px 16px;transition:all .15s}
+.term button:hover{color:var(--brand-dark)}
+.term button[aria-pressed=true]{background:var(--brand-dark);color:#fff}
+.term .save{display:block;font-size:10px;font-weight:700;letter-spacing:.03em;margin-top:2px;
+  color:#0f766e}
+.term button[aria-pressed=true] .save{color:#7dd3c0}
+
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.plan{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.plan.öne{border-color:var(--brand-dark);box-shadow:0 18px 40px -24px rgba(8,37,103,.45)}
+.plan-head{padding:22px 22px 20px;border-bottom:1px solid var(--line);position:relative}
+.plan.öne .plan-head{background:var(--blue-soft)}
+.plan-ad{margin:0;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-dark)}
+/* Sayfa derisi .content h2'ye EB Garamond ve büyük punto dayatıyor (!important);
+   plan adı onun değil formun dilinde olmalı, o yüzden daha yüksek özgüllükle. */
+.content .plan .plan-ad{font-family:Inter,ui-sans-serif,system-ui,sans-serif!important;font-size:13px!important;line-height:1.5!important;font-weight:800!important;letter-spacing:.12em!important;margin:0!important;color:var(--brand-dark)!important}
+.plan-rozet{display:inline-block;margin:0 0 8px;font-size:10px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:#fff;background:var(--brand-dark);border-radius:999px;padding:3px 9px}
+.plan-fiyat{display:flex;align-items:baseline;gap:6px;margin:14px 0 2px;color:var(--ink)}
+.plan-fiyat b{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1}
+/* #64748b, soluk zeminlerde 4.5:1'in altında kalıyor (4.46 ve 4.34); bir ton koyu */
+.plan-fiyat span{font-size:13px;color:#5d6b80;font-weight:600}
+.plan-alt{margin:0;font-size:12px;color:var(--muted);min-height:18px}
+.plan-btn{display:block;width:100%;margin:16px 0 0;padding:12px 16px;border-radius:10px;
+  font:inherit;font-size:14px;font-weight:700;text-align:center;text-decoration:none;cursor:pointer;
+  border:1.5px solid var(--brand-dark);background:#fff;color:var(--brand-dark);transition:all .15s}
+.plan-btn:hover{background:var(--blue-soft)}
+.plan-btn.dolu{background:var(--brand-dark);color:#fff}
+.plan-btn.dolu:hover{filter:brightness(1.12)}
+/* Sayfa derisi .content a'ya bordo marka rengini veriyor; ücretsiz kartın
+   düğmesi bağlantı olduğu için ondan etkileniyordu. Üç düğme de aynı renk. */
+.content .plan a.plan-btn{color:var(--brand-dark);text-decoration:none}
+.content .plan a.plan-btn:hover{color:var(--brand-dark)}
+
+.plan-liste{margin:0;padding:6px 0 10px;list-style:none;flex:1}
+.plan-liste li{display:flex;align-items:flex-start;gap:10px;padding:9px 22px;font-size:13.5px;
+  line-height:1.45;color:var(--ink);border-bottom:1px solid #f1f5f9}
+.plan-liste li:last-child{border-bottom:0}
+.plan-liste .im{flex:none;width:17px;height:17px;margin-top:1px}
+.plan-liste .yok{color:#94a3b8}
+.plan-liste .deger{margin-left:auto;font-weight:700;font-size:13px;color:var(--brand-dark);white-space:nowrap}
+.plan-liste .yok .deger{color:#94a3b8;font-weight:600}
+@media(max-width:900px){.plans{grid-template-columns:1fr}.plan.öne{order:-1}}
+
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lq-page.css?v=38">
+</head>
+<body>
+<div class="lqbar">
+  <a class="lqbar-brand" href="../index.html" aria-label="LexiQamus"><span class="lqbar-q"></span><span class="lqbar-word" lang="en">LexiQamus</span></a>
+  <div class="lqbar-right"><div class="lang-switch bar-lang tr-active" role="group" aria-label="Dil"><span class="lang-thumb" aria-hidden="true"></span><a class="lang-btn" href="pricing-en.html" hreflang="en">EN</a><span class="lang-btn active" aria-current="true">TR</span></div></div>
+</div>
+
+<div class="page-shell">
+  <header class="hero">
+    <div class="eyebrow">Abonelik</div>
+    <h1>Fiyatlar</h1>
+    <p class="hero-subtitle">Bireysel kullanıcılar için üç plan. Kurumsal abonelik ayrıca ele alınır.</p>
+  </header>
+  <main class="content">
+    <div class="plan-shell">
+      <div class="term" role="group" aria-label="Abonelik süresi">
+      <button type="button" data-sure="1" aria-pressed="true">1 ay</button>
+      <button type="button" data-sure="3" aria-pressed="false">3 ay<span class="save">%33</span></button>
+      <button type="button" data-sure="6" aria-pressed="false">6 ay<span class="save">%42</span></button>
+      <button type="button" data-sure="12" aria-pressed="false">1 yıl<span class="save">%53</span></button>
+      </div>
+      <div class="plans">
+      <article class="plan">
+        <div class="plan-head">
+          <h2 class="plan-ad">Ücretsiz</h2>
+          <div class="plan-fiyat"><b>0 TL</b><span>/ ay</span></div><p class="plan-alt">Kayıt olmak yeterli</p>
+          <a class="plan-btn" href="../index.html">Hesap oluştur</a>
+        </div>
+        <ul class="plan-liste">
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Günlük arama sınırı</span><span class="deger">1</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Arama başına sonuç</span><span class="deger">3</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Eşleşen madde</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Arama çubuğu</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Zincirler</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Birebir eşleşenler</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Kelimesi eşleşenler</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Kısmen eşleşenler</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Redhouse Lexicon’undan tanımlar</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>İngilizce tanım içinde arama</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Ana madde</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Sonucu içeren maddeler</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Benzer şekilli harfleri içeren sonuçlar</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Benzer sesli harfleri içeren sonuçlar</span></li>
+        </ul>
+      </article>
+
+      <article class="plan">
+        <div class="plan-head">
+          <h2 class="plan-ad">Standart</h2>
+          <div class="plan-fiyat"><b data-fiyat="standart">1.500 TL</b><span data-sure>/ ay</span></div><p class="plan-alt" data-tasarruf></p>
+          <button type="button" class="plan-btn">Satın al</button>
+        </div>
+        <ul class="plan-liste">
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Günlük arama sınırı</span><span class="deger">Sınırsız</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Arama başına sonuç</span><span class="deger">200</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Eşleşen madde</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Arama çubuğu</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Zincirler</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Birebir eşleşenler</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Kelimesi eşleşenler</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Kısmen eşleşenler</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Redhouse Lexicon’undan tanımlar</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>İngilizce tanım içinde arama</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Ana madde</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Sonucu içeren maddeler</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Benzer şekilli harfleri içeren sonuçlar</span></li>
+        <li class="yok"><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#eef2f7"/><path d="M8 12h8" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linecap="round"/></svg><span>Benzer sesli harfleri içeren sonuçlar</span></li>
+        </ul>
+      </article>
+
+      <article class="plan öne">
+        <div class="plan-head"><span class="plan-rozet">En kapsamlı</span>
+          <h2 class="plan-ad">Premium</h2>
+          <div class="plan-fiyat"><b data-fiyat="premium">2.250 TL</b><span data-sure>/ ay</span></div><p class="plan-alt" data-tasarruf></p>
+          <button type="button" class="plan-btn dolu">Satın al</button>
+        </div>
+        <ul class="plan-liste">
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Günlük arama sınırı</span><span class="deger">Sınırsız</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Arama başına sonuç</span><span class="deger">Sınırsız</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Eşleşen madde</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Arama çubuğu</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Zincirler</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Birebir eşleşenler</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Kelimesi eşleşenler</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Kısmen eşleşenler</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Redhouse Lexicon’undan tanımlar</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>İngilizce tanım içinde arama</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Ana madde</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Sonucu içeren maddeler</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Benzer şekilli harfleri içeren sonuçlar</span></li>
+        <li><svg class="im" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"/><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Benzer sesli harfleri içeren sonuçlar</span></li>
+        </ul>
+      </article>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="lq-page.js?v=38"></script>
+<script>
+(function(){
+  /* Fiyatlar: [1 ay, 3 ay, 6 ay, 1 yıl] toplam TL ve aya bölünmüş hâli. */
+  var F = {"standart": {"1": [1500, 0], "3": [3000, 33], "6": [5250, 42], "12": [8400, 53]}, "premium": {"1": [2250, 0], "3": [4350, 36], "6": [7500, 44], "12": [12750, 53]}};
+  var SURE = ['1','3','6','12'];
+  var kutu = document.querySelector('.term');
+  if (!kutu) return;
+  function bicim(n){ return n.toLocaleString('tr-TR'); }
+  function uygula(s){
+    kutu.querySelectorAll('button').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.sure === s));
+    });
+    document.querySelectorAll('[data-fiyat]').forEach(function(e){
+      var p = F[e.dataset.fiyat][s];
+      e.textContent = bicim(p[0]) + ' TL';
+      var kart = e.closest('.plan');
+      var alt = kart.querySelector('[data-tasarruf]');
+      var ay = kart.querySelector('[data-sure]');
+      ay.textContent = (s === '1') ? AY1 : (s === '12' ? YIL : AYN.replace('%s', s));
+      alt.textContent = p[1] ? TASARRUF.replace('%s', p[1]) : '';
+    });
+  }
+  var AY1 = "/ ay", AYN = "/ %s ay", YIL = "/ yıl", TASARRUF = "%s% tasarruf";
+  kutu.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (b) uygula(b.dataset.sure);
+  });
+  uygula('1');
+})();
+</script>
+</body>
+</html>
