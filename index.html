@@ -2261,6 +2261,72 @@
         #rowEntryOverlay[hidden] { display: none; }
         #rowEntryFrame { width: 100%; height: 100%; border: 0; display: block; background: transparent; }
 
+        /* ===================== KAYDOL EKRANI =====================
+           Canlı taslaktaki form sitenin diline çevrildi. Renk kararı: bordo
+           yalnız "Ara" düğmesine ait kalsın diye burada kullanılmıyor; birincil
+           eylem, yan menüdeki "Kaydol" düğmesiyle aynı lacivert. Onay kutuları
+           da aynı aileden, böylece form tek renkle konuşuyor. Alanlar arama
+           çubuğunun biçimini alıyor (beyaz zemin, 1.5px kenarlık, 10px yuvarlak,
+           odakta lacivert halka); canlıdaki mavi dolgulu, kenarlıksız kutular
+           sitenin hiçbir yerinde yok. */
+        #signUpOverlay { position: fixed; inset: 0; z-index: 9600; display: flex;
+            align-items: center; justify-content: center; padding: 24px 16px;
+            background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); }
+        #signUpOverlay[hidden] { display: none; }
+        .su-card { position: relative; width: 100%; max-width: 468px; max-height: calc(100vh - 48px);
+            overflow-y: auto; background: #fff; border: 1px solid var(--border-color); border-radius: 20px;
+            box-shadow: 0 24px 48px -12px rgba(8,37,103,.28), 0 0 1px rgba(0,0,0,.05);
+            padding: 34px 34px 30px; }
+        @media (max-width: 480px) { .su-card { padding: 28px 20px 24px; border-radius: 16px; } }
+        .su-card .header-accent { border-radius: 20px 20px 0 0; }
+        .su-close { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border-radius: 9px;
+            border: 1px solid transparent; background: transparent; color: #64748b; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: all .15s; }
+        .su-close:hover { background: #f1f5f9; color: #0f172a; border-color: #e2e8f0; }
+        .su-close svg { width: 17px; height: 17px; stroke: currentColor; stroke-width: 2.2; fill: none;
+            stroke-linecap: round; }
+        .su-title { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 800;
+            color: var(--brand-sapphire); text-align: center; margin: 6px 0 22px; letter-spacing: -.3px; }
+
+        .su-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 420px) { .su-row { grid-template-columns: 1fr; } }
+        .su-alan { margin-bottom: 14px; }
+        .su-alan label { display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px; }
+        .su-alan input[type=text], .su-alan input[type=email], .su-alan input[type=password] {
+            width: 100%; height: 48px; padding: 0 14px; font-family: 'Inter', sans-serif; font-size: 15px;
+            color: #0f172a; background: #fff; border: 1.5px solid var(--border-color); border-radius: 10px;
+            box-sizing: border-box; transition: border-color .15s, box-shadow .15s; }
+        .su-alan input::placeholder { color: #94a3b8; }
+        .su-alan input:focus { outline: none; border-color: var(--brand-sapphire);
+            box-shadow: 0 0 0 3px rgba(8,37,103,.12); }
+        .su-ipucu { margin: 7px 0 0; font-size: 12px; line-height: 1.5; color: #64748b; }
+
+        .su-onay { display: flex; align-items: flex-start; gap: 10px; margin: 14px 0; }
+        .su-onay input[type=checkbox] { width: 18px; height: 18px; margin: 1px 0 0; flex: none;
+            accent-color: var(--brand-sapphire); cursor: pointer; }
+        .su-onay label { font-size: 13px; line-height: 1.5; color: #334155; cursor: pointer; }
+        .su-onay a { color: var(--brand-sapphire); font-weight: 600; text-decoration: underline;
+            text-underline-offset: 2px; }
+
+        .su-dogrula { display: flex; align-items: center; gap: 10px; margin: 18px 0;
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px;
+            font-size: 13px; font-weight: 600; color: #334155; }
+        .su-dogrula svg { width: 19px; height: 19px; flex: none; }
+        /* #94a3b8 bu zeminde 2.45:1 kalıyordu; sitenin geri kalanıyla aynı
+           erişilebilir tona alındı */
+        .su-dogrula .marka { margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: .6px;
+            text-transform: uppercase; color: #64748b; }
+
+        .su-gonder { width: 100%; height: 52px; border: 0; border-radius: 10px;
+            background: var(--brand-sapphire); color: #fff; font-family: 'Inter', sans-serif;
+            font-size: 15px; font-weight: 700; cursor: pointer; transition: filter .15s, transform .1s; }
+        .su-gonder:hover { filter: brightness(1.12); }
+        .su-gonder:active { transform: scale(.99); }
+        .su-gonder:focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
+        .su-alt { margin: 16px 0 0; text-align: center; font-size: 13px; color: #64748b; }
+        .su-alt a { color: var(--brand-sapphire); font-weight: 700; text-decoration: none; }
+        .su-alt a:hover { text-decoration: underline; }
+
         .show-more-row { width: 100%; display: flex; justify-content: center; gap: 10px; margin-top: 8px; }
         .show-more-btn { background-color: #f1f5f9; border: 1px solid #e2e8f0; color: #5a687d; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 8px 24px; border-radius: 20px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; }
         .show-more-btn:hover { background-color: #e2e8f0; color: var(--brand-sapphire); border-color: #cbd5e1; }
@@ -3525,6 +3591,60 @@
     <button class="dev-state-btn" data-state="redhouse" onclick="setViewState('redhouse')">Redhouse</button>
 </div>
 
+<div id="signUpOverlay" hidden>
+  <div class="su-card" role="dialog" aria-modal="true" aria-labelledby="suTitle">
+    <div class="header-accent"></div>
+    <button type="button" class="su-close" onclick="closeSignUp()" aria-label="Close" data-i18n-aria="suClose">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <h2 class="su-title" id="suTitle" data-i18n="suTitle">Sign up</h2>
+    <form onsubmit="return false;">
+      <div class="su-row">
+        <div class="su-alan">
+          <label for="suFirst" data-i18n="suFirst">First name</label>
+          <input type="text" id="suFirst" autocomplete="given-name">
+        </div>
+        <div class="su-alan">
+          <label for="suLast" data-i18n="suLast">Last name</label>
+          <input type="text" id="suLast" autocomplete="family-name">
+        </div>
+      </div>
+      <div class="su-alan">
+        <label for="suEmail" data-i18n="suEmail">Email</label>
+        <input type="email" id="suEmail" autocomplete="email">
+      </div>
+      <div class="su-alan">
+        <label for="suPass" data-i18n="suPass">Password</label>
+        <input type="password" id="suPass" autocomplete="new-password" aria-describedby="suPassHint">
+        <p class="su-ipucu" id="suPassHint" data-i18n="suPassHint">Must be at least 8 characters, alphanumeric, and include at least one capital letter.</p>
+      </div>
+      <div class="su-alan">
+        <label for="suPass2" data-i18n="suPass2">Password (again)</label>
+        <input type="password" id="suPass2" autocomplete="new-password">
+      </div>
+
+      <div class="su-onay">
+        <input type="checkbox" id="suNews" checked>
+        <label for="suNews" data-i18n="suNews">I would like to receive news about LexiQamus by email.</label>
+      </div>
+      <div class="su-onay">
+        <input type="checkbox" id="suTerms">
+        <label for="suTerms" data-i18n="suTerms" data-i18n-html="1">I have read and accept the <a href="#" onclick="return false;">membership agreement</a>.</label>
+      </div>
+
+      <div class="su-dogrula">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#0f766e"></circle><path d="M7.6 12.4l2.9 2.9 5.9-5.9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <span data-i18n="suVerified">Verified</span>
+        <span class="marka">Cloudflare</span>
+      </div>
+
+      <button type="submit" class="su-gonder" data-i18n="suSubmit">Create account</button>
+      <p class="su-alt"><span data-i18n="suHaveAcc">Already a member?</span>
+        <a href="#" onclick="return false;" data-i18n="suSignIn">Sign in</a></p>
+    </form>
+  </div>
+</div>
+
 <div id="rowEntryOverlay" hidden>
 <iframe id="rowEntryFrame" title="Dictionary entry"></iframe>
 </div>
@@ -3628,7 +3748,7 @@
   </div>
   <div class="side-auth">
     <button class="side-btn ghost" data-i18n="menuSignIn">Sign in</button>
-    <button class="side-btn primary" data-i18n="menuSignUp">Sign up</button>
+    <button class="side-btn primary" data-i18n="menuSignUp" onclick="openSignUp()">Sign up</button>
   </div>
   <div class="side-nav">
     <a class="side-link" href="#" onclick="lqOpenPage('pages/about-en.html','pages/hakkimizda-tr.html'); return false;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"></circle><circle cx="12" cy="7.6" r="1.5" fill="var(--cut)"></circle><path d="M12 11.2v6" fill="none" stroke="var(--cut)" stroke-width="2.4"></path></svg><span data-i18n="menuAbout">About</span>
@@ -5363,6 +5483,20 @@
             ekCta: 'Hesabınızı Oluşturun',
             ekLater: 'Daha sonra',
             menuSignUp: 'Kaydol',
+            suTitle: 'Kaydol',
+            suFirst: 'Ad',
+            suLast: 'Soyad',
+            suEmail: 'E-posta',
+            suPass: 'Şifre',
+            suPassHint: 'En az 8 karakter olmalı, alfanümerik olmalı ve en az bir büyük harf içermelidir.',
+            suPass2: 'Şifre (Tekrar)',
+            suNews: 'LexiQamus ile ilgili gelişmelerden e-posta yoluyla haberdar olmak istiyorum.',
+            suTerms: '<a href="#" onclick="return false;">Üyelik sözleşmesini</a> okudum ve kabul ediyorum.',
+            suVerified: 'Doğrulandı',
+            suSubmit: 'Kaydol',
+            suHaveAcc: 'Zaten üye misiniz?',
+            suSignIn: 'Giriş yapın',
+            suClose: 'Kapat',
             menuSignIn: 'Giriş Yap',
             menuAbout: 'Hakkımızda',
             menuTeam: 'Ekip',
@@ -14602,6 +14736,36 @@ document.addEventListener('click', function (e) {
         initNetParticles(); animateNet();
     
 })();
+
+    /* ---- KAYDOL EKRANI ----
+       Yan menüdeki "Kaydol" düğmesi bu katmanı açar; menü de kapanır ki
+       arkada iki katman üst üste kalmasın. Kapatma: çarpı, karartıya tıklama
+       veya Esc. Açılınca odak ilk alana gider, kapanınca düğmeye döner. */
+    function openSignUp() {
+        const ov = document.getElementById('signUpOverlay');
+        if (!ov) return;
+        if (typeof lqToggleMenu === 'function' && document.body.classList.contains('menu-open')) lqToggleMenu();
+        ov.hidden = false;
+        document.body.style.overflow = 'hidden';
+        const ilk = document.getElementById('suFirst');
+        if (ilk) ilk.focus({ preventScroll: true });
+    }
+    function closeSignUp() {
+        const ov = document.getElementById('signUpOverlay');
+        if (!ov || ov.hidden) return;
+        ov.hidden = true;
+        document.body.style.overflow = '';
+        const btn = document.querySelector('.side-btn.primary');
+        if (btn) btn.focus({ preventScroll: true });
+    }
+    (function () {
+        const ov = document.getElementById('signUpOverlay');
+        if (!ov) return;
+        ov.addEventListener('mousedown', function (e) { if (e.target === ov) closeSignUp(); });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && !ov.hidden) { e.stopPropagation(); closeSignUp(); }
+        }, true);
+    })();
 
     /* ---- SAĞ ALTTA "BAŞA DÖN" ----
        Tam bir ekran boyu kaydırılınca beliriyor, tepeye dönünce kayboluyor:
