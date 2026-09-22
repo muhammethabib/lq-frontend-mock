@@ -2292,10 +2292,13 @@
             color: var(--brand-sapphire); text-align: center; margin: 4px 0 24px; letter-spacing: -.4px; }
 
         .su-alan { margin-bottom: 16px; }
-        .su-alan label { display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px; }
+        /* Etiket ve gövde metinleri canlı taslaktaki soluk tonda (ölçüldü:
+           rgb(96,106,122) ve rgb(112,127,148)); sitenin erişilebilir slate'i
+           #64748b ikisine de denk düşüyor, beyaz üstünde 4.76:1. */
+        .su-alan label { display: block; font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 6px; }
         /* Dolgu ve kenarlık canlı taslaktan (ölçüldü: #eef2fc / #d2d9ee) */
         .su-alan input[type=text], .su-alan input[type=email], .su-alan input[type=password] {
-            width: 100%; height: 52px; padding: 0 14px; font-family: 'Inter', sans-serif; font-size: 15px;
+            width: 100%; height: 48px; padding: 0 14px; font-family: 'Inter', sans-serif; font-size: 15px;
             color: #0f172a; background: #eef2fc; border: 1px solid #d2d9ee; border-radius: 10px;
             box-sizing: border-box; transition: border-color .15s, box-shadow .15s; }
         .su-alan input::placeholder { color: #94a3b8; }
@@ -2306,7 +2309,7 @@
         .su-onay { display: flex; align-items: flex-start; gap: 10px; margin: 14px 0; }
         .su-onay input[type=checkbox] { width: 18px; height: 18px; margin: 1px 0 0; flex: none;
             accent-color: var(--brand-sapphire); cursor: pointer; }
-        .su-onay label { font-size: 13px; line-height: 1.5; color: #334155; cursor: pointer; }
+        .su-onay label { font-size: 13px; line-height: 1.5; color: #64748b; cursor: pointer; }
         .su-onay a { color: var(--brand-sapphire); font-weight: 600; text-decoration: underline;
             text-underline-offset: 2px; }
 
