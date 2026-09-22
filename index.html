@@ -126,7 +126,9 @@
             text-align: center; white-space: nowrap;
             transform: translateY(-5px);
         }
-        body.vs-home .logo-subtitle { transform: translateY(-9px); }
+        /* Slogan, marka yazısına kilitlenir. Alt sınır taban çizgisi değil,
+           Q'nun sapının ucudur: -13px'te sap ile slogan arasında 9px kalır. */
+        body.vs-home .logo-subtitle { transform: translateY(-13px); }
         .vector-shadow { filter: drop-shadow(4px 20px 40px rgba(0, 0, 0, 0.25)); }
 
         .search-command-center { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0; width: 100%; gap: 24px; position: relative; z-index: 40; }
