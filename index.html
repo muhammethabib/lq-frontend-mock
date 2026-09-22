@@ -9,7 +9,7 @@
 
 </script>
 <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Merriweather:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&display=swap');
         
         :root {
             /* --- MAIN SITE COLORS --- */
@@ -2286,12 +2286,13 @@
         .su-close:hover { background: #f1f5f9; color: #0f172a; border-color: #e2e8f0; }
         .su-close svg { width: 17px; height: 17px; stroke: currentColor; stroke-width: 2.2; fill: none;
             stroke-linecap: round; }
-        /* Oturaklı, iri gövdeli bir serif: Playfair'in ince-kalın geçişleri ve
-           Noto Serif'in sola kıvrılan 'y' kuyruğu fazla hareketli kalıyordu.
-           Merriweather'ın kuyruğu kısa ve neredeyse düz. Punto, iri gövdesi
-           yüzünden Playfair'e göre düşürüldü; optik boy aynı kalsın diye. */
-        .su-title { font-family: 'Merriweather', serif; font-size: 25px; font-weight: 700;
-            color: var(--brand-sapphire); text-align: center; margin: 4px 0 24px; letter-spacing: -.2px; }
+        /* Başlık sitenin kendi arayüz fontunda. Üç serif denemesi de tutmadı
+           (Playfair fazla süslü, Noto Serif'in 'y' kuyruğu savruk, Merriweather
+           eski) — kayıt formu bir marka anı değil, iş ekranı; etiketleri,
+           ipucu metni ve düğmesi zaten Inter olduğu için kart böyle tek sesle
+           konuşuyor. 800 ağırlık kaba kalıyordu, 600 yeterli. */
+        .su-title { font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 600;
+            color: var(--brand-sapphire); text-align: center; margin: 4px 0 24px; letter-spacing: -.3px; }
 
         .su-alan { margin-bottom: 16px; }
         /* Etiket ve gövde metinleri canlı taslaktaki soluk tonda (ölçüldü:
