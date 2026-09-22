@@ -195,7 +195,10 @@
         /* Ana sayfa durumu: büyük logo (MainPage_NoResults ölçüleri) */
         body.vs-home .branding-area { transform: translateY(14px); }
         body.vs-home .logo-wrapper { width: 420px; margin-bottom: 12px; }
-        body.vs-home .logo-subtitle { font-size: 12.5px; letter-spacing: 2.8px; }
+        /* Slogan marka yazısının altında bir tanımlayıcıdır, ikinci bir satır değil:
+           punto küçük, harf arası bol. letter-spacing'i fitSlogan() çalışma anında
+           yeniden hesaplar (11.5px'te ~3.2px = 0.28em); buradaki değer ilk boyama içindir. */
+        body.vs-home .logo-subtitle { font-size: 11.5px; font-weight: 600; letter-spacing: 3.2px; }
         body.vs-home .v3-badge { font-size: 10px; padding: 3px 8px; bottom: 5px; }
 
         /* Did You Mean listesi (şekil özellikleri ekran görüntüsünden örneklendi) */
