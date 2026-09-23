@@ -3295,6 +3295,17 @@
         .osm-kbd-hint-drag:active { cursor:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2222%22 height=%2222%22 viewBox=%220 0 180 180%22><path d=%22M69.39,96.012L69.363,70.128C69.093,57.879 89.19,57.015 89.424,70.2L89.442,83.313L89.424,70.2C89.334,69.03 89.415,67.995 89.397,66.888C89.118,50.139 109.152,48.24 109.188,67.023L109.179,83.385L109.188,69.822C108.414,55.89 127.71,55.089 128.745,68.607C128.817,69.543 128.763,83.115 128.763,83.115L128.781,76.554C128.889,64.458 148.212,63.099 148.959,76.284L148.689,114.984C148.689,114.984 148.599,118.116 148.284,121.311C148.014,123.957 147.546,126.612 147.249,127.773C138.141,164.196 99.0,172.584 74.889,150.741C73.539,149.517 68.76,144.756 67.743,143.658C54.981,129.96 49.797,117.54 47.52,104.265C45.702,93.636 57.168,67.824 69.327,78.714L69.39,96.012Z%22 fill=%22white%22 stroke=%22black%22 stroke-width=%225%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>') 11 21, grabbing; }
         .osm-kbd-x { width:22px; height:22px; border:1px solid #e2e8f0; border-radius:6px; background:#f8fafc; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:12px; flex-shrink:0; font-family:'Apple Symbols','Segoe UI Symbol','Noto Sans Symbols',sans-serif; }
         .osm-kbd-x:hover { background:#fee2e2; border-color:#fca5a5; color:#ef4444; }
+        /* Alfabetik düzen geçişi: silme/kapatma gibi kırmızı değil, mavi (mod değişimi) */
+        .osm-kbd-abc { width:auto; padding:0 8px; font-family:'Noto Naskh Arabic',serif; font-size:12px; font-weight:700; letter-spacing:2px; color:#64748b; }
+        .osm-kbd-abc .abc-when-abc { font-family:'Inter',sans-serif; font-size:9px; letter-spacing:1px; }
+        .osm-kbd-abc:hover { background:#eff6ff; border-color:#bfdbfe; color:#1d4ed8; }
+        .osm-kbd .abc-when-abc { display:none; }
+        .osm-kbd.abc .abc-when-abc { display:inline; }
+        .osm-kbd.abc .abc-when-qwerty { display:none; }
+        /* Alfabetik düzen: satırlar sağdan sola (elif sağ üstte), Latin karşılık küçük harf */
+        .osm-kbd.abc .osm-kbd-row { direction:rtl; }
+        .osm-kbd.abc .osm-key .ok-l { text-transform:none; font-size:10px; letter-spacing:0; }
+        .osm-kbd.abc .osm-key .ok-l-mod { font-size:15px; line-height:9px; color:#64748b; }
         .lam-row { justify-content: space-between; }
         .lam-row .gk-gelismis-cell { margin-right: auto; }
 
@@ -4857,7 +4868,7 @@
 </div>
 
 <div class="osm-kbd" id="osmKbd">
-    <div class="osm-kbd-hint"><span class="osm-kbd-hint-drag" id="osmKbdHintDrag"><span class="kbd-demo"><span class="kbd-demo-key">K</span><span class="kbd-demo-arrow">&rarr;</span><span class="kbd-demo-out">&#x0643;</span></span><span class="kbd-hint-text"><b data-i18n="kbdHintStrong">Use your own keyboard</b>&nbsp;<span data-i18n="kbdHintRest">or click the keys below</span></span></span><div style="display:flex;gap:5px;"><div class="osm-kbd-x has-tooltip" id="osmKbdBS">&#x2326;<div class="custom-tooltip-source"><span class="tooltip-desc" style="white-space:nowrap;" data-i18n="wdDelChar">Delete character</span></div></div><div class="osm-kbd-x has-tooltip" id="osmKbdX">&#x2715;<div class="custom-tooltip-source"><span class="tooltip-desc" data-i18n="wdClose">Close</span></div></div></div></div>
+    <div class="osm-kbd-hint"><span class="osm-kbd-hint-drag" id="osmKbdHintDrag"><span class="kbd-demo"><span class="kbd-demo-key">K</span><span class="kbd-demo-arrow">&rarr;</span><span class="kbd-demo-out">&#x0643;</span></span><span class="kbd-hint-text"><b data-i18n="kbdHintStrong">Use your own keyboard</b>&nbsp;<span data-i18n="kbdHintRest">or click the keys below</span></span></span><div style="display:flex;gap:5px;"><div class="osm-kbd-x osm-kbd-abc has-tooltip" id="osmKbdAbc" role="button" tabindex="0" aria-pressed="false"><span class="abc-when-qwerty">ا ب ت</span><span class="abc-when-abc">Q W E</span><div class="custom-tooltip-source"><span class="tooltip-desc" style="white-space:nowrap;" data-i18n="kbdAbcOn">Alphabetical order (elif, be, te…)</span></div></div><div class="osm-kbd-x has-tooltip" id="osmKbdBS">&#x2326;<div class="custom-tooltip-source"><span class="tooltip-desc" style="white-space:nowrap;" data-i18n="wdDelChar">Delete character</span></div></div><div class="osm-kbd-x has-tooltip" id="osmKbdX">&#x2715;<div class="custom-tooltip-source"><span class="tooltip-desc" data-i18n="wdClose">Close</span></div></div></div></div>
     <div class="osm-kbd-row" id="okr1"></div>
     <div class="osm-kbd-row" id="okr2"></div>
     <div class="osm-kbd-row" id="okr3"></div>
@@ -5781,6 +5792,8 @@
             fuzzyHint: 'Aradığınızı bulamadınız mı?',
             fuzzyMain: 'Benzer Eşleşmeleri Tara',
             kbdHintStrong: 'Kendi klavyenizden yazabilirsiniz',
+            kbdAbcOn: 'Alfabetik s\u0131ra (elif, be, te\u2026)',
+            kbdAbcOff: 'Klavye dizili\u015Fine d\u00F6n',
             kbdHintRest: 'veya aşağıdaki tuşlara tıklayın',
             clearBtn: 'Temizle',
             advLabel: 'Gelişmiş',
@@ -8261,8 +8274,53 @@
         }
     }
 
+    // ---- Alfabetik düzen: fiziksel klavyeden bağımsız, elif-be-te sırası ----
+    // Her tuş [harf, Latin karşılık]; satırlar CSS ile sağdan sola dizilir.
+    // ي tuşu ye kuralına uyar (_osmInsert '_ye_' -> _resolveYe).
+    var _OSM_ABC_ROWS = [
+        [['\u0627','a'],['\u0628','b'],['\u067E','p'],['\u062A','t'],['\u062B','s\u0331'],['\u062C','c'],['\u0686','\u00E7'],['\u062D','\u1E25'],['\u062E','\u1E2B'],['\u062F','d'],['\u0630','\u1E95'],['\u0631','r']],
+        [['\u0632','z'],['\u0698','j'],['\u0633','s'],['\u0634','\u015F'],['\u0635','\u1E63'],['\u0636','\u017C'],['\u0637','\u1E6D'],['\u0638','\u1E93'],['\u0639','\u02BF'],['\u063A','\u0121'],['\u0641','f'],['\u0642','\u1E33']],
+        [['\u0643','k'],['\u06AF','g'],['\u06AD','\u00F1'],['\u0644','l'],['\u0645','m'],['\u0646','n'],['\u0648','v'],['\u0647','h'],['\u06D5','e'],['_ye_','y'],['\u0621','\u02BE'],['\u0629','t']]
+    ];
+    var _kbdMode = 'qwerty';
+    try { if (localStorage.getItem('lqOsmKbdMode') === 'abc') _kbdMode = 'abc'; } catch (e) {}
+    function _buildAbcKeys() {
+        for (var r = 1; r <= 3; r++) { var rowEl = document.getElementById('okr' + r); if (rowEl) rowEl.innerHTML = ''; }
+        _OSM_ABC_ROWS.forEach(function(row, i) {
+            var el = document.getElementById('okr' + (i+1));
+            if (!el) return;
+            row.forEach(function(k) {
+                var ch = k[0], lat = k[1], shown = ch === '_ye_' ? '\u064A' : ch;
+                var d = document.createElement('div');
+                d.className = 'osm-key';
+                d.dataset.ch = shown;
+                // ʿ (ayn) ve ʾ (hemze) değiştirici harfleri 10px'te silik kalıyor; biraz büyük
+                var latCls = /^[\u02BF\u02BE]$/.test(lat) ? 'ok-l ok-l-mod' : 'ok-l';
+                d.innerHTML = '<span class="' + latCls + '">' + lat + '</span><span class="ok-a">' + shown + '</span>';
+                d.addEventListener('pointerdown', function(e) { e.preventDefault(); _osmInsert(ch); });
+                el.appendChild(d);
+            });
+        });
+    }
+    function _setOsmKbdMode(mode) {
+        _kbdMode = mode === 'abc' ? 'abc' : 'qwerty';
+        try { localStorage.setItem('lqOsmKbdMode', _kbdMode); } catch (e) {}
+        var kbd = document.getElementById('osmKbd');
+        if (kbd) kbd.classList.toggle('abc', _kbdMode === 'abc');
+        var btn = document.getElementById('osmKbdAbc');
+        if (btn) {
+            btn.setAttribute('aria-pressed', _kbdMode === 'abc' ? 'true' : 'false');
+            // Tooltip metni: ghost tooltip kaynağı kopyaladığı için CSS ile değil, metin değiştirilerek
+            var desc = btn.querySelector('.tooltip-desc'), key = _kbdMode === 'abc' ? 'kbdAbcOff' : 'kbdAbcOn';
+            if (desc) { desc.dataset.i18n = key; desc.textContent = (currentLang === 'tr' && I18N_TR[key]) ? I18N_TR[key] : i18nOriginals[key]; }
+        }
+        _buildKbdKeys();
+    }
+    window._setOsmKbdMode = _setOsmKbdMode;
+
         // Tuşları oluştur
     function _buildKbdKeys() {
+        if (_kbdMode === 'abc') { _buildAbcKeys(); return; }
         for (var r = 1; r <= 3; r++) { var rowEl = document.getElementById('okr' + r); if (rowEl) rowEl.innerHTML = ''; }
         _KBD_ROWS.forEach(function(row, i) {
             var el = document.getElementById('okr' + (i+1));
@@ -8289,6 +8347,7 @@
         });
         // dual tuşlar setTimeout'ta işleniyor
         setTimeout(function() {
+            if (_kbdMode === 'abc') return;   // bu arada alfabetik düzene geçildiyse etiketler _DUAL ile eşleşmesin
             document.querySelectorAll('.osm-key').forEach(function(d) {
                 var latEl = d.querySelector('.ok-l');
                 if (!latEl) return;
@@ -8353,10 +8412,15 @@
             });
         }, 0);
     }
+    function _initOsmKbd() {
+        i18nOriginals.kbdAbcOn  = i18nOriginals.kbdAbcOn  || 'Alphabetical order (elif, be, te\u2026)';
+        i18nOriginals.kbdAbcOff = i18nOriginals.kbdAbcOff || 'Back to keyboard layout';
+        if (_kbdMode === 'abc') _setOsmKbdMode('abc'); else _buildKbdKeys();
+    }
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', _buildKbdKeys);
+        document.addEventListener('DOMContentLoaded', _initOsmKbd);
     } else {
-        _buildKbdKeys();
+        _initOsmKbd();
     }
 
     function _osmInsert(char) {
@@ -8449,6 +8513,12 @@
     document.getElementById('osmKbdX').addEventListener('pointerdown', function(e) {
         e.preventDefault(); osmKbdHide();
     });
+    (function () {
+        var btn = document.getElementById('osmKbdAbc');
+        function gecis(e) { e.preventDefault(); e.stopPropagation(); _setOsmKbdMode(_kbdMode === 'abc' ? 'qwerty' : 'abc'); input.focus(); }
+        btn.addEventListener('pointerdown', gecis);
+        btn.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') gecis(e); });
+    })();
     document.getElementById('osmKbdBS').addEventListener('pointerdown', function(e) {
         e.preventDefault();
         var s = input.selectionStart, en = input.selectionEnd;
@@ -8468,7 +8538,15 @@
     // ALT kombinasyonları ekrandaki klavyenin etiketinden okunur (_DUAL[x][3]),
     // böylece EN ve TR düzeni kendi Alt atamalarıyla birebir çalışır.
 
-    function _echoKey(lat, mod) {
+    function _echoKey(lat, mod, ch) {
+        if (_kbdMode === 'abc' && ch) {
+            // Alfabetik düzende tuşlar Latin etiketle değil harfle bulunur; ye'nin iki biçimi tek tuş
+            var abcKey = document.querySelector('#osmKbd .osm-key[data-ch="' + (ch === '\u0649' ? '\u064A' : ch) + '"]');
+            if (abcKey) { abcKey.classList.add('kbd-echo'); setTimeout(function () { abcKey.classList.remove('kbd-echo'); }, 170); }
+            var hd0 = document.getElementById('osmKbdHintDrag');
+            if (hd0) { hd0.classList.add('kbd-learned'); if (hd0.parentElement) hd0.parentElement.classList.add('kbd-learned'); }
+            return;
+        }
         var keys = document.querySelectorAll('#osmKbd .osm-key');
         for (var i = 0; i < keys.length; i++) {
             var l = keys[i].querySelector('.ok-l');
@@ -8522,15 +8600,16 @@
             var altLat = _DUAL[lowerKey] ? lowerKey
                 : (/^Key[A-Z]$/.test(e.code || '') ? e.code.slice(3).toLowerCase() : lowerKey);
             var altCfg = _DUAL[altLat];
-            if (altCfg && altCfg[3]) { e.preventDefault(); _osmInsert(altCfg[3]); _echoKey(altLat, 'alt'); }
+            if (altCfg && altCfg[3]) { e.preventDefault(); _osmInsert(altCfg[3]); _echoKey(altLat, 'alt', altCfg[3]); }
             else if (e.key.length === 1 && _LATIN.test(e.key)) e.preventDefault();
             return;
         }
         var key = e.shiftKey ? e.key.toUpperCase() : lowerKey;
         if (_OSM_MAP[key]) {
             e.preventDefault();
-            _osmInsert((key === 'y' || key === 'i') ? _resolveYe() : _OSM_MAP[key]);
-            _echoKey(lowerKey, e.shiftKey ? 'shift' : null);
+            var ch = (key === 'y' || key === 'i') ? _resolveYe() : _OSM_MAP[key];
+            _osmInsert(ch);
+            _echoKey(lowerKey, e.shiftKey ? 'shift' : null, ch);
         } else if (e.key.length === 1 && !_OSM_ALLOWED.test(e.key)) { e.preventDefault(); window._osmWarn();   // karşılığı olmayan Latin harf Osmanlıca tarafa girmez
         }
     });
