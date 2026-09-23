@@ -3302,10 +3302,9 @@
         .osm-kbd .abc-when-abc { display:none; }
         .osm-kbd.abc .abc-when-abc { display:inline; }
         .osm-kbd.abc .abc-when-qwerty { display:none; }
-        /* Alfabetik düzen: satırlar sağdan sola (elif sağ üstte), Latin karşılık küçük harf */
+        /* Alfabetik düzen: satırlar sağdan sola (elif sağ üstte); üstteki etiket fiziksel tuş */
         .osm-kbd.abc .osm-kbd-row { direction:rtl; }
-        .osm-kbd.abc .osm-key .ok-l { text-transform:none; font-size:10px; letter-spacing:0; }
-        .osm-kbd.abc .osm-key .ok-l-mod { font-size:15px; line-height:9px; color:#64748b; }
+        .osm-kbd.abc .osm-key .ok-l { letter-spacing:0; }
         .lam-row { justify-content: space-between; }
         .lam-row .gk-gelismis-cell { margin-right: auto; }
 
@@ -8274,14 +8273,26 @@
         }
     }
 
-    // ---- Alfabetik düzen: fiziksel klavyeden bağımsız, elif-be-te sırası ----
-    // Her tuş [harf, Latin karşılık]; satırlar CSS ile sağdan sola dizilir.
+    // ---- Alfabetik düzen: elif-be-te sırası, satırlar CSS ile sağdan sola ----
+    // Her tuşun üstünde, klavye dizilişindeki gibi, o harfi yazan fiziksel tuş
+    // gösterilir (Q, SHF+T, ALT+S...); etiket geçerli dizilişten (_OSM_MAP/_DUAL)
+    // türetilir, bu yüzden EN/TR değişince kendiliğinden değişir.
     // ي tuşu ye kuralına uyar (_osmInsert '_ye_' -> _resolveYe).
     var _OSM_ABC_ROWS = [
-        [['\u0627','a'],['\u0628','b'],['\u067E','p'],['\u062A','t'],['\u062B','s\u0331'],['\u062C','c'],['\u0686','\u00E7'],['\u062D','\u1E25'],['\u062E','\u1E2B'],['\u062F','d'],['\u0630','\u1E95'],['\u0631','r']],
-        [['\u0632','z'],['\u0698','j'],['\u0633','s'],['\u0634','\u015F'],['\u0635','\u1E63'],['\u0636','\u017C'],['\u0637','\u1E6D'],['\u0638','\u1E93'],['\u0639','\u02BF'],['\u063A','\u0121'],['\u0641','f'],['\u0642','\u1E33']],
-        [['\u0643','k'],['\u06AF','g'],['\u06AD','\u00F1'],['\u0644','l'],['\u0645','m'],['\u0646','n'],['\u0648','v'],['\u0647','h'],['\u06D5','e'],['_ye_','y'],['\u0621','\u02BE'],['\u0629','t']]
+        ['\u0627','\u0628','\u067E','\u062A','\u062B','\u062C','\u0686','\u062D','\u062E','\u062F','\u0630','\u0631'],
+        ['\u0632','\u0698','\u0633','\u0634','\u0635','\u0636','\u0637','\u0638','\u0639','\u063A','\u0641','\u0642'],
+        ['\u0643','\u06AF','\u06AD','\u0644','\u0645','\u0646','\u0648','\u0647','\u06D5','_ye_','\u0621','\u0629']
     ];
+    // Harfi yazan fiziksel tuşun etiketi. Önce düz tuş (و için w, u, o, v'den
+    // ilki: w), sonra dual tuşun shift/alt etiketi, en son yalnız büyük harfle
+    // erişilen tuş. Geçerli dizilişte karşılığı olmayan harf (EN'de ە) boş kalır.
+    function _physicalLabel(ch) {
+        var lang = document.documentElement.lang || 'en', k;
+        for (k in _OSM_MAP) { if (_OSM_MAP[k] === ch && k === k.toLowerCase()) return k.toLocaleUpperCase(lang); }
+        for (k in _DUAL) { if (_DUAL[k][1] === ch) return _DUAL[k][2]; if (_DUAL[k][3] === ch) return _DUAL[k][4]; }
+        for (k in _OSM_MAP) { if (_OSM_MAP[k] === ch) return 'SHF+' + k.toLocaleUpperCase(lang); }
+        return '';
+    }
     var _kbdMode = 'qwerty';
     try { if (localStorage.getItem('lqOsmKbdMode') === 'abc') _kbdMode = 'abc'; } catch (e) {}
     function _buildAbcKeys() {
@@ -8289,14 +8300,12 @@
         _OSM_ABC_ROWS.forEach(function(row, i) {
             var el = document.getElementById('okr' + (i+1));
             if (!el) return;
-            row.forEach(function(k) {
-                var ch = k[0], lat = k[1], shown = ch === '_ye_' ? '\u064A' : ch;
+            row.forEach(function(ch) {
+                var shown = ch === '_ye_' ? '\u064A' : ch;
                 var d = document.createElement('div');
                 d.className = 'osm-key';
                 d.dataset.ch = shown;
-                // ʿ (ayn) ve ʾ (hemze) değiştirici harfleri 10px'te silik kalıyor; biraz büyük
-                var latCls = /^[\u02BF\u02BE]$/.test(lat) ? 'ok-l ok-l-mod' : 'ok-l';
-                d.innerHTML = '<span class="' + latCls + '">' + lat + '</span><span class="ok-a">' + shown + '</span>';
+                d.innerHTML = '<span class="ok-l">' + _physicalLabel(ch) + '</span><span class="ok-a">' + shown + '</span>';
                 d.addEventListener('pointerdown', function(e) { e.preventDefault(); _osmInsert(ch); });
                 el.appendChild(d);
             });
