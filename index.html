@@ -1145,6 +1145,9 @@
 #lqStory .ic-auth{ font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; color: var(--ic-text-color); margin-top: 5px; }
 #lqStory .ic-vol-box{ margin-top: 20px; padding: 5px 0; width: 60%; border-top: 1px solid rgba(0,0,0,0.2); border-bottom: 1px solid rgba(0,0,0,0.2); }
 #lqStory .ic-vol{ font-family: 'Playfair Display', serif; font-size: 0.65rem; letter-spacing: 2px; color: var(--ic-text-color); text-transform: uppercase; }
+/* İç sayfa dar: cilt yazısı tek satırda kalır, böylece yıl satırına basmaz */
+#lqStory .ic-vol{ white-space: nowrap; }
+#lqStory .ic-vol-box.vol-multi{ padding-left: 6px; padding-right: 6px; }
 #lqStory .ic-year{ position: absolute; bottom: 15px; font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: #444; }
 #lqStory .book-deco-border{ position: absolute; top: 12px; bottom: 12px; left: 12px; right: 20px; border: 2px solid rgba(251, 191, 36, 0.3); border-radius: 8px 2px 2px 8px; z-index: 5; }
 #lqStory .approved-stamp{ position: absolute; top: 15px; left: 10px; width: 18px; height: 18px; background: #22c55e; color: #052e16; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; z-index: 12; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
@@ -1417,6 +1420,8 @@
         #lqStory .kitap-8 .kapak-arka { background: #14532d; }
         #lqStory .kitap-8 .kapak-arka::after { background-image: url('assets/story/gelgit1.jpg'); }
         #lqStory .kitap-9 .bk-title, #lqStory .kitap-9 .ic-title { font-size: 15px !important; line-height: 1.2 !important; }
+        /* Türkçeden Almancaya: yazarı iç sayfada iki satıra kırılır; başlık ona biraz yaklaşır ki cilt yılı ezmesin */
+        #lqStory .kitap-8 .ic-title { margin-bottom: 6px; }
         #lqStory .kitap-9 .kapak-arka { background: #7f1d1d; }
         #lqStory .kitap-9 .kapak-arka::after { background-image: url('assets/story/battal6.jpg'); }
         #lqStory .sahne { overflow: visible; }
@@ -4387,7 +4392,7 @@
 </div>
 <div class="ic-sayfa">
 <div class="ic-title">Turkish &amp;<br/>English<br/>Lexicon</div>
-<div class="ic-auth">James W.<br/>Redhouse</div>
+<div class="ic-auth">James W. Redhouse</div>
 <div class="ic-vol-box"><div class="ic-vol" data-i18n="storyVol9b" data-i18n-html><b class="vol-n">1</b> VOLUME</div></div>
 <div class="ic-year">1890</div>
 </div>
@@ -4409,7 +4414,7 @@
 </div>
 <div class="ic-sayfa">
 <div class="ic-title">Ahterî-i<br/>Kebîr</div>
-<div class="ic-auth">Muslihiddin<br/>Mustafa</div>
+<div class="ic-auth">Muslihiddin Mustafa</div>
 <div class="ic-vol-box vol-multi"><div class="ic-vol" data-i18n="story18" data-i18n-html><b class="vol-n">2</b> VOLUMES</div></div>
 <div class="ic-year">1892</div>
 </div>
@@ -4451,7 +4456,7 @@
 </div>
 <div class="ic-sayfa">
 <div class="ic-title">Lehçe-i<br/>Osmanî</div>
-<div class="ic-auth">Ahmed Vefik<br/>Paşa</div>
+<div class="ic-auth">Ahmed Vefik Paşa</div>
 <div class="ic-vol-box vol-multi"><div class="ic-vol" data-i18n="story22" data-i18n-html><b class="vol-n">2</b> VOLUMES</div></div>
 <div class="ic-year">1876</div>
 </div>
